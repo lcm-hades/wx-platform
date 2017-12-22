@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <script type="text/javascript" src="../../script/jquery-1.11.1.min.js"></script>
+       <style>
+
+
+
+.z-col{
+  text-align: center;
+}
+h2{
+  margin-top: 8.2%;
+  margin-bottom: 5.5%
+}
+p{
+font-family: 'PingFang-SC';
+font-size: 0.8rem;
+font-weight: 500;
+text-align: justify;
+color: #333333;
+width: 80%;
+margin: auto;
+line-height: 1.9
+}
+
+
+.hol .wrap {
+        padding-top: 20px;
+    }
+    .hol .wrap > div {
+        width: 135px;
+        display: inline-block;
+        /*margin-left: 155px;*/
+        padding: 10px;
+    }
+
+    .hol .wrap > div span {
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        height: 30px;
+        line-height: 30px;
+        color: #01A8A1;
+        font-weight: 500;
+    }
+
+    .hol .wrap ul {
+
+        width: 135px;
+        float: left;
+
+    }
+
+    .hol .wrap ul li {
+        display: block;
+        height: 38px;
+        line-height: 38px;
+        margin-top: 5px;
+        text-align: center;
+        border: 1px solid #39c89d;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        font-weight: 300;
+
+    }
+
+    .xiayibu{
+      text-align: center;
+      margin: 13px auto;
+      width: 80%;
+      height: 33px;
+      line-height: 33px;
+      border-radius: 16.5px;
+      background-color: #6666ff;
+      color:#fff;
+      margin-bottom: 0.5rem;
+      /*box-shadow: 0px 5px 16px 0 rgba(102, 103, 255, 0.6);*/
+      border: solid 0 #14155a;
+      }
+p{
+  text-indent: 1.5rem
+}
+       </style>
+</head>
+
+<body style="background:#fff">
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con z-col" >
+
+          <h2>第四部分 你的能力类型</h2>
+
+          <p>下面列出了两列各六项职业能力，请你根据自身情况，对自己的各项能力由强到弱、从上往下依次拖动排序。(拖动下方的小方块即可排序)</p>
+
+<!-- <div class="container" style="overflow: hidden;">
+		<div data-force="30" class="layer block" style="left: 14.5%; top: 0; width: 37%; float: left;">
+			<div class="layer title">职业技能</div>
+			<ul id="foo" class="block__list block__list_words">
+				<li>机械操作能力</li>
+				<li>科学研究能力</li>
+				<li>艺术创作能力</li>
+				<li>解释表达能力</li>
+				<li>商业洽谈能力</li>
+				<li>事务执行能力</li>
+
+			</ul>
+		</div>
+    <div data-force="30" class="layer block" style="left: 14.5%; top: 0; width: 37%; float: right;">
+			<div class="layer title">个人特长</div>
+			<ul id="foo1" class="block__list block__list_words">
+				<li>体力技能</li>
+				<li>学习技能</li>
+				<li>音乐技能</li>
+				<li>交际技能</li>
+				<li>领导技能</li>
+				<li>办公技能</li>
+
+			</ul>
+		</div>
+  </div> -->
+
+
+  <div class="hol">
+
+          <div class="wrap clearFix">
+              <div class="biaoA clearFix">
+                  <span>职业技能</span>
+                  <ul id="foo" class="sort-one">
+                      <li class="R">机械操作能力<input type="hidden" name="R" value="R"></li>
+                      <li class="I">科学研究能力<input type="hidden" name="I" value="I"></li>
+                      <li class="A">艺术创造能力<input type="hidden" name="A" value="A"></li>
+                      <li class="S">解释表达能力<input type="hidden" name="S" value="S"></li>
+                      <li class="E">商业洽谈能力<input type="hidden" name="E" value="E"></li>
+                      <li class="C">事务执行能力<input type="hidden" name="C" value="C"></li>
+                  </ul>
+              </div>
+              <div class="biaoB clearFix">
+                  <span>个人特长</span>
+                  <ul id="foo1" class="sort-two">
+                      <li class="R">体力技能<input type="hidden" name="RR" value="R"></li>
+                      <li class="I">数学技能<input type="hidden" name="II" value="I"></li>
+                      <li class="A">音乐技能<input type="hidden" name="AA" value="A"></li>
+                      <li class="S">交际技能<input type="hidden" name="SS" value="S"></li>
+                      <li class="E">领导技能<input type="hidden" name="EE" value="E"></li>
+                      <li class="C">办公技能<input type="hidden" name="CC" value="C"></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      </div>
+<div class='xiayibu' tapmode onclick='tijiao()'>提交</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/Sortable.js"></script>
+	<script type="text/javascript">
+
+  apiready=function(){
+    api.parseTapmode();
+    Sortable.create(foo, {
+      group: "words",
+      animation: 150,
+      store: {
+        get: function (sortable) {
+          var order = localStorage.getItem(sortable.options.group);
+          return order ? order.split('|') : [];
+        },
+        set: function (sortable) {
+          var order = sortable.toArray();
+          localStorage.setItem(sortable.options.group, order.join('|'));
+        }
+      },
+      onAdd: function (evt){ },
+      onUpdate: function (evt){ console.log('onUpdate.foo:', [evt.item, evt.from]); },
+      onRemove: function (evt){  },
+      onStart:function(evt){ },
+      onSort:function(evt){ },
+      onEnd: function(evt){ }
+    });
+
+    Sortable.create(foo1, {
+      group: "words1",
+      animation: 150,
+      store: {
+        get: function (sortable) {
+          var order = localStorage.getItem(sortable.options.group);
+          return order ? order.split('|') : [];
+        },
+        set: function (sortable) {
+          var order = sortable.toArray();
+          localStorage.setItem(sortable.options.group, order.join('|'));
+        }
+      },
+      onAdd: function (evt){ console.log('onAdd.foo1:', [evt.item, evt.from]); },
+      onUpdate: function (evt){ console.log('onUpdate.foo1:', [evt.item, evt.from]); },
+      onRemove: function (evt){ console.log('onRemove.foo1:', [evt.item, evt.from]); },
+      onStart:function(evt){ console.log('onStart.foo1:', [evt.item, evt.from]);},
+      onSort:function(evt){ console.log('onStart.foo1:', [evt.item, evt.from]);},
+      onEnd: function(evt){ console.log('onEnd.foo1:', [evt.item, evt.from]);}
+    });
+  }
+
+  var paixu1=["z"];
+  var paixu2=["z"];
+  function tijiao() {
+    var huanhuijieguo={}
+    var huizong = $api.strToJson(localStorage.arr);
+    for (var i = 0; i < huizong.length; i++) {
+        for (var key in huizong[i]) {
+            huanhuijieguo[key] = huizong[i][key];
+        }
+    }
+
+    var tijiaoshuzu1 = document.getElementById('foo').getElementsByTagName('input')
+    var tijiaoshuzu2 = document.getElementById('foo1').getElementsByTagName('input')
+    for (var i = 0; i < tijiaoshuzu1.length; i++) {
+        paixu1.push(tijiaoshuzu1[i].value)
+    }
+    for (var i = 0; i < tijiaoshuzu2.length; i++) {
+        paixu2.push(tijiaoshuzu2[i].value)
+    }
+
+    api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力提交中...',
+      text: '先喝杯茶...',
+      modal: true
+    });
+
+    api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Hollander/result.html',
+      method: 'post',
+      data: {
+          values: {
+            studentid: $api.getStorage('studentid'),
+            data1:huanhuijieguo,
+            data2:paixu1,
+            data3:paixu2,
+          },
+      }
+    },function(ret, err){
+        api.hideProgress();
+        if (ret) {
+          if (ret.status == 100) {
+            api.openWin({
+                name: 'zhiyexingqu_report_win',
+                url: './zhiyexingqu_report_win.html',
+                pageParam: {
+                    data:ret.data
+                }
+            });
+          }else {
+            api.toast({
+                msg: ret.data,
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+        } else {
+          api.toast({
+              msg: "网络错误",
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+  }
+
+
+	</script>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style type="text/css">
+        #classify {
+            color: #ffffff !important;
+        }
+
+        span {
+            vertical-align: top;
+        }
+
+        .pinglunneirong {
+            font-family: 'PingFang-SC';
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #333333;
+            margin: auto;
+            margin-left: 50px;
+            margin-right: 10px;
+        }
+
+        .xuehao {
+            font-family: 'PingFang-SC';
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #6666ff;
+        }
+
+        .xuehaoneirong {
+            font-family: ' PingFang-SC';
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: left;
+            color: #333333;
+        }
+
+        .bottom_fix {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .search-input {
+            height: 1.6rem!important;
+            line-height: 1.6rem!important;
+            background: #f5f5f5!important;
+            border-radius: 30px!important;
+            position: relative;
+            font-family: "aui_iconfont" !important;
+            text-align: left;
+            padding-left: 1.5rem!important;
+            color: #999999;
+        }
+
+        .search-input:after {
+            position: absolute;
+            left: 0;
+            padding-left: 0.5rem;
+            content: "\e615";
+        }
+
+        section {
+            /* main绝对定位，进行内部滚动 */
+            position: absolute;
+            top:0px;
+            bottom: 54px;
+            /* 使之可以滚动 */
+            overflow-y: scroll;
+            /* 增加该属性，可以增加弹性 */
+            /*-webkit-overflow-scrolling: touch;*/
+            height: auto;
+        }
+
+        .fasong {
+            width: 2.5rem;
+            height: 1.3rem;
+            background: #3ec234;
+            border: 1px solid #219718;
+            color: #fff;
+            font-family: "PingFang-SC";
+            font-size: 0.8rem;
+            display: inline-block;
+            line-height: 1.3rem;
+            position: fixed;
+            bottom: 0.65rem;
+            right: 0.75rem;
+            border-radius: 5px;
+        }
+
+        #textarea {
+            display: block;
+            margin: 0 auto;
+            overflow: hidden;
+            width: 100%;
+            font-size: 14px;
+            height: 18px;
+            line-height: 24px;
+            margin-bottom: 0.75rem;
+            margin-top: 0.75rem;
+            /*padding:2px;*/
+        }
+
+        textarea {
+            outline: 0 none;
+            border:1px solid #e5e5e5;
+
+        }
+
+        .huifuneirong{
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          color: #333333;
+          margin: auto;
+          margin-left: 50px;
+          margin-right: 30px;
+          border-radius: 2px;
+          margin-top: 4px;
+          background-color: #e5e5e5;
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+
+        .huifuneirong li{
+          padding: 0 8px;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 20px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+            float: left;
+        }
+        .section_title {
+            color: #333333;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            margin-left: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        #lunti p {
+          color:#fff
+        }
+        .biaoti {
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          color: #666666;
+          position: relative;
+          top: 0.3rem
+        }
+        .pingxi {
+  font-family: 'PingFang-SC';
+  font-size: 0.8rem;
+  /*line-height: 1.59;*/
+  text-align: justify;
+  color: #6666ff;
+}
+.neirong{
+
+  font-family: 'PingFang-SC';
+  font-size: 0.8rem;
+  line-height: 1.59;
+  text-align: justify;
+  color: #333333;
+}
+.pingxineirong {
+  font-family: 'PingFang-SC';
+  font-size: 0.8rem;
+  line-height: 1.59;
+  text-align: justify;
+  color: #666666;
+}
+    </style>
+</head>
+
+<body style="background:#fff" id="neir_body">
+      <script id="tuijianzc" type="text/x-dot-template">
+        <div style="width:90%;margin:auto;">
+          <div class="" style="padding-top:0.5rem;border-bottom:1px solid #a1a1a1;line-height: 2.5rem;">
+            <img  id="toux" style="width:1.1rem;height:1.1rem;border-radius:50%" align = absmiddle>
+            <span style="position: relative;top: 3px;">{{=it.info.studentname}}</span>
+          </div>
+          <h3 style="margin-top:0.5rem">{{=it.info.handline}}</h3>
+          <div style="margin-top:0.5rem" class="neirong">
+            {{=it.info.content}}
+          </div>
+          {{for (var i = 0; i < it.comment.length; i++) {}}
+                  <div style="margin-top:0.5rem;width:100%;overflow: hidden;">
+                      <div style="width:20%;float:left">
+                        <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it.comment[i].touxiang}}" style='width:2.5rem;height:2.5rem;border-radius:50%' alt="">
+                      </div>
+                        <div style="width:80%;float:left">
+                          <div class="" style="margin-top:0.2rem">
+                            {{=it.comment[i].teachername}}
+                          </div>
+                          <div>
+                            {{=it.comment[i].content}}
+                          </div>
+                        </div>
+                    </div>
+
+        {{}}}
+        </div>
+      </script>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+        // console.log(JSON.stringify(api.pageParam.data));
+        var zizhuzhaosheng1 = doT.template(document.getElementById('tuijianzc').innerHTML);
+        document.getElementById('neir_body').innerHTML = zizhuzhaosheng1(api.pageParam.data);
+        $api.byId('toux').src = api.pageParam.img;
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=O4JBZ-QNWKP-VMSDT-LMYQA-A6AYH-PAFQR"></script>
+    <style>
+        .aui-tab-item.aui-active {
+              color: #6666ff;
+              border-bottom: 2px solid #6666ff;
+          }
+        .cut-line{
+          background-color: #f5f5f5;
+          width: 100%;
+          height: 4px;
+        }
+        .tou{
+            /*height: 104px;*/
+            width: 100%;
+            margin-top: 20px;
+          }
+          .logo{
+            width: 71px;
+            height: 71px;
+            border-radius: 11px;
+            margin: auto;
+          }
+          .daxueming {
+            width: 100%;
+            font-family: "PingFang-SC";
+            font-size: 22px;
+            text-align: center;;
+            padding-top: 10px;
+          }
+
+          .logo img{
+            width: 61.5px;
+            height: 61.5px;
+            margin: auto;
+          }
+
+          .intro{
+            width:80%;
+            margin:auto;
+            display:block;
+            margin-top:10px;
+            margin-bottom: 10px;
+          }
+          .intro p{
+              margin-top: 10px;
+          }
+          .title1{
+              text-align: right;
+              width: 84px;
+          }
+          .title2{
+              margin-left: 20px;
+              font-size: 0.6rem;
+          }
+          .left_line {
+              background-color: #6666ff;
+              height: 40px;
+              width: 4px;
+              margin-top: auto;
+              margin-bottom: auto;
+              float: left;
+          }
+          .section_title {
+              color: #333333;
+              font-size: 16px;
+              font-family: "PingFang-SC";
+              margin-left: 10px;
+              margin-top: auto;
+              margin-bottom: auto;
+          }
+          .zhaoshengdiqu{
+              display: inline-block;
+              width: 80px;
+              height: 14.5px;
+              font-family: "PingFang-SC";
+              font-size: 16px;
+              line-height: 1.25;
+              text-align: left;
+              color: #666666;
+          }
+          .zhaoshengdiqu1{
+              width: 69.5px;
+              height: 23px;
+              border-radius: 5px;
+              background: url("../../../image/41-8.png") no-repeat scroll 45px center transparent;
+              background-size: 15px;
+              line-height: 19px;
+              border: solid 1px #6666ff;
+          }
+
+          .left_line {
+              background-color: #6666ff;
+              height: 18px;
+              width: 4px;
+              margin-top: auto;
+              margin-bottom: auto;
+
+          }
+
+          .section_title {
+              color: #333333;
+              font-size: 16px;
+              font-family: "PingFang-SC";
+              font-weight: bold;
+              margin-left: 4px;
+              margin-top: auto;
+              margin-bottom: auto;
+          }
+          .part_c{
+            text-indent: 2em;
+            width: 90%;
+            margin: auto;
+            margin-bottom: 10px;
+          }
+          .yuanxi{
+            height: 50px;
+            width: 100%;
+          }
+          .pos_right{
+            float: right;
+            margin: auto;
+            margin-right: 10px;
+            line-height: 50px;
+          }
+          .yuanxi_title{
+            line-height: 50px;
+            margin-left: 5%;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            color: #333333;
+          }
+
+          .main .important .list li {
+              float: left;
+              height: 36px;
+              width: 140px;
+              color: #555;
+              font-size: 16px;
+              line-height: 36px;
+              padding: 0 10px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+          }
+
+          .box h3{
+            font-weight: bold;
+            font-size: 16px;
+            text-align: left;
+            line-height: 38px;
+            position: relative;
+            padding-left: 7%;
+            font-family: "PingFang-SC";
+          }
+
+          .box h3:before {
+              content: "";
+              display: block;
+              height: 20px;
+              width: 4px;
+              background-color: #6666ff;
+              position: absolute;
+              top: 10px;
+              left: 5%;
+          }
+
+           .list li {
+             margin-left: 5%;
+                float: left;
+                height: 36px;
+                width: 140px;
+                color: #555;
+                font-size: 16px;
+                line-height: 36px;
+                padding: 0 10px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            #zhanshengzhangcheng_id .text{
+              width: 90%;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            .zzzsjz_c p{
+              width: 90%;
+              margin-left: auto;
+              margin-right: auto;
+            }
+
+            .zzzsjz_c table{
+              width: 90%;
+              margin-left: auto;
+              margin-right: auto;
+              border:solid 1px #58bef9;
+            }
+            .zzzsjz_c table tr{
+              padding-left: 4px;
+              border-bottom:solid 1px #58bef9;
+            }
+
+            .zzzsjz_c table td{
+              padding-left: 4px;
+              border-right:solid 1px #58bef9;
+            }
+    </style>
+</head>
+
+<body style="background-color:white;">
+
+    <div class="flex-wrap flex-vertical" >
+      <div style="height:auto;">
+        <div id="tou_div" class="tou">
+          <script id="tou_s" type="text/x-dot-template">
+            <div class="logo">
+                <img src="http://www.yxke12.com/Public/Home/images/schools/{{=it.logo}}" alt="">
+            </div>
+            <span class="daxueming">
+              {{=it.dxmc}}
+            </span>
+          </script>
+        </div>
+      </div>
+
+    <div id="jieshao_div" class="intro">
+      <script id="jieshao_s" type="text/x-dot-template">
+          <p><span class="title1">院校类型</span> <span class="title2">{{=it.yxlx}}</span></p>
+          <p><span class="title1">院校层次</span> <span class="title2">{{=it.xlcc}}</span></p>
+          <p><span class="title1">建校时间</span> <span class="title2">{{=it.cbsj}}</span></p>
+          <p><span class="title1">隶属</span> <span class="title2">{{=it.zgbm}}</span></p>
+          <p><span class="title1">硕士点</span> <span class="title2">{{=it.ssd}}</span></p>
+          <p><span class="title1">博士点</span> <span class="title2">{{=it.bsd}}</span></p>
+          <p><spna class="title1">国家重点学科</spna> <span class="title2">{{=it.gjzdxk}}</span></p>
+          <p><span class="title1">官网链接</span> <span class="title2">{{=it.xxwz}}</span></p>
+          <p><span class="title1">电话</span> <span class="title2">{{=it.lxdh}}</span></p>
+          <p><span class="title1">学校地址</span> <span id="dizhi" class="title2">{{=it.xxdz}}</span></p>
+      </script>
+    </div>
+    <div class="cut-line"></div>
+    <div class="aui-tab" id="tab" style="width:90%;margin:auto;color:#6666ff;">
+        <div class="aui-tab-item aui-active">概况</div>
+        <div class="aui-tab-item">重点学科</div>
+        <div class="aui-tab-item">招生章程</div>
+        <div class="aui-tab-item">全景校园</div>
+    </div>
+
+<!--start 概况 -->
+    <div id="intro_id">
+      <script id="intro_s" type="text/x-dot-template">
+      <div class="cut-line"></div>
+      <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+          <div class="left_line"></div>
+          <div class="section_title">发展历程</div>
+      </div>
+      <p class="part_c">{{=it.gxjj}}</p>
+
+      <div class="cut-line"></div>
+      <div style="margin-left:5%;height:auto;display: inline-flex;">
+          <div class="left_line"></div>
+          <span class="section_title">师资力量</span>
+      </div>
+      <p class="part_c">{{=it.szll}}</p>
+
+      <div class="cut-line"></div>
+      <div class="yuanxi" tapmode onclick="openThird(1)"><span class="yuanxi_title">院系设置</span><i class="aui-iconfont aui-icon-right pos_right"></i></div>
+
+      <div class="cut-line"></div>
+      <div style="margin-left:5%;height:auto;display: inline-flex;">
+          <div class="left_line"></div>
+          <span class="section_title">收费标准</span>
+      </div>
+      <p class="part_c">{{=it.sfbz}}</p>
+
+      <div class="cut-line"></div>
+      {{if (it.jobstat != null && it.jobstat != "") {}}
+          <div style="margin-left:5%;height:auto;display: none;">
+              <div class="left_line"></div>
+              <span class="section_title">就业报告</span>
+          </div>
+          <p style="display:none;" class="part_c">{{=it.jobstat}}</p>
+      {{}}}
+
+      </script>
+    </div>
+
+<!-- end 概况 -->
+
+<!--start 重点学科 -->
+    <div id="zhongdianxueke_id" style="display:none;">
+      <script id="zhongdianxueke_s" type="text/x-dot-template">
+        <div class="cut-line"></div>
+
+        {{=it.zdxk}}
+        <div class="cut-line"></div>
+        <div class="yuanxi" tapmode onclick="openThird(2)"><span class="yuanxi_title">学科排名</span><i class="aui-iconfont aui-icon-right pos_right"></i></div>
+      </script>
+    </div>
+<!-- end 重点学科 -->
+
+<!--start 招生章程 -->
+    <div id="zhanshengzhangcheng_id" style="display:none;">
+      <script id="zhanshengzhangcheng_s" type="text/x-dot-template">
+          <div class="cut-line"></div>
+          <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+              <div class="left_line"></div>
+              <span class="section_title">招生章程</span>
+          </div>
+          <p class="part_c">{{=it.zszc}}</p>
+
+          <div class="cut-line"></div>
+          <div style="margin-left:5%;height:auto;display: inline-flex;">
+              <div class="left_line"></div>
+              <span class="section_title">自主招生章程</span>
+          </div>
+      <div class="zzzsjz_c"><p class="part_c">{{=it.zzzsjz}}</p></div>
+      </script>
+    </div>
+<!-- end 招生章程 -->
+
+<!--start 全景校园 -->
+    <div id="quanjingxiaoyuan_id" style="display:none;">
+      <div class="cut-line"></div>
+      <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+          <div class="left_line"></div>
+          <span class="section_title">全景校园</span>
+      </div>
+      <div class="part_c"style="text-align:center;height:250px;display:none;align-items:center;justify-content: center;" id="quanjing"></div>
+      <div class="part_c"style="text-align:center;height:250px;display:flex;align-items:center;justify-content: center;" id="quanjing1"></div>
+
+      <div class="cut-line"></div>
+    </div>
+<!-- end 全景校园 -->
+
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    var total_data = {};
+    var xkpm_data = {};
+    apiready = function() {
+      api.parseTapmode();
+
+      loadData();
+
+    };
+var tou = doT.template(document.getElementById('tou_s').innerHTML);
+var jieshao = doT.template(document.getElementById('jieshao_s').innerHTML);
+var intro = doT.template(document.getElementById('intro_s').innerHTML);
+var zhongdianxueke = doT.template(document.getElementById('zhongdianxueke_s').innerHTML);
+var zhanshengzhangcheng = doT.template(document.getElementById('zhanshengzhangcheng_s').innerHTML);
+    function loadData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Apa/Yuanxiaoku/infos.html',
+          method: 'post',
+          data: {
+              values: {
+                  name: api.pageParam.title
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          // console.log(JSON.stringify(ret));
+          if (ret) {
+            if (ret.status == 100) {
+                // 基本信息
+                total_data = ret.data.info;
+                xkpm_data = ret.data.xkpm;
+
+                document.getElementById('tou_div').innerHTML = tou(ret.data.info);
+
+
+                document.getElementById('jieshao_div').innerHTML = jieshao(ret.data.info);
+
+                document.getElementById('intro_id').innerHTML = intro(ret.data.info);
+
+                document.getElementById('zhongdianxueke_id').innerHTML = zhongdianxueke(ret.data.info);
+
+                document.getElementById('zhanshengzhangcheng_id').innerHTML = zhanshengzhangcheng(ret.data.info);
+            }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function openThird(index) {
+        // index 1 院系设置
+        // index 2 学科排名
+        var url = "";
+        var data = {};
+        if(index == 1) {
+          url = "school_storage_third_win";
+          data = total_data;
+        }else if (index == 2) {
+          url = "school_storage_xueke_rank_win";
+          data = xkpm_data;
+        }
+
+        api.openWin({
+            name: url,
+            url: './' + url + '.html',
+            pageParam: {
+                data:data,
+            }
+        });
+    }
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      if (ret.index==1) {
+          document.getElementById('intro_id').style.display = "block"
+          document.getElementById('zhongdianxueke_id').style.display = "none"
+          document.getElementById('zhanshengzhangcheng_id').style.display = "none"
+          document.getElementById('quanjingxiaoyuan_id').style.display = "none"
+      }else if (ret.index == 2) {
+        document.getElementById('intro_id').style.display = "none"
+        document.getElementById('zhongdianxueke_id').style.display = "block"
+        document.getElementById('zhanshengzhangcheng_id').style.display = "none"
+        document.getElementById('quanjingxiaoyuan_id').style.display = "none"
+      }else if (ret.index == 3) {
+        document.getElementById('intro_id').style.display = "none"
+        document.getElementById('zhongdianxueke_id').style.display = "none"
+        document.getElementById('zhanshengzhangcheng_id').style.display = "block"
+        document.getElementById('quanjingxiaoyuan_id').style.display = "none"
+      }else {
+        document.getElementById('intro_id').style.display = "none"
+        document.getElementById('zhongdianxueke_id').style.display = "none"
+        document.getElementById('zhanshengzhangcheng_id').style.display = "none"
+        document.getElementById('quanjingxiaoyuan_id').style.display = "block"
+        init()
+      }
+    });
+
+
+    function createScreen(lat,lng){
+          // 经纬度组合成的点
+            // document.getElementById('quanjing').innerHTML='';
+          var point = new qq.maps.LatLng(lat,lng);
+          var radius;
+          var pano;
+
+    //如果反复在同一个div里面显示街景，则设置改div的html为空。
+
+
+          pano_service = new qq.maps.PanoramaService();
+          pano_service.getPano(point, radius, function (result){
+
+    //这就是result.svid了。
+    var pano_id=result.svid;
+    //创建街景
+    var pano = new qq.maps.Panorama(document.getElementById('quanjing1'), {
+                  pano: result.svid,
+
+              });
+          });
+
+      }
+
+
+
+      var init = function() {
+var address = document.getElementById("dizhi").innerHTML;
+          //通过getLocation();方法获取位置信息值
+          var center = new qq.maps.LatLng(39.916527,116.397128);
+          map = new qq.maps.Map(document.getElementById('quanjing'),{
+              center: center,
+              zoom: 15
+          });
+          //调用地址解析类
+          geocoder = new qq.maps.Geocoder({
+              complete : function(result){
+                  map.setCenter(result.detail.location);
+                  var marker = new qq.maps.Marker({
+                      map:map,
+                      position: result.detail.location
+                  });
+                console.log(marker.position)
+                createScreen(marker.position.lat,marker.position.lng)
+                // document.getElementById('quanjing').innerHTML='';
+              }
+          });
+
+        geocoder.getLocation(address);
+      }
+</script>
+
+</html>

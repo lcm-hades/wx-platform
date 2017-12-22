@@ -1,0 +1,308 @@
+<!doctype html>
+<html style="background:#f5f5f5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        .ic-message{
+                background-image: url(../../image/career.png);
+                float: right;}
+
+
+                #footer{  background-color: #f2f2f2; }
+                #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 10px; background-size: auto 22px; text-align: center;font-size: 10px;font-family: "PingFang-SC";color: #a1a1a1;}
+                #footer ul li.active{ color: #6666ff; }
+                #footer ul li:nth-child(1){ background-image: url(../../../image/jiazhanggaokao.png); }
+                #footer ul li:nth-child(2){ background-image: url(../../../image/jiayoukaosheng.png); }
+                #footer ul li:nth-child(3){ background-image: url(../../../image/jiazhangxuexiao.png); }
+                #footer ul li:nth-child(4){ background-image: url(../../../image/jiaoliuhudong.png); }
+                #footer ul li:nth-child(1).active{ background-image: url(../../../image/jiazhanggaokao_1.png); }
+                #footer ul li:nth-child(2).active{ background-image: url(../../../image/jiayoukaosheng_1.png); }
+                #footer ul li:nth-child(3).active{ background-image: url(../../../image/jiazhangxuexiao_1.png); }
+                #footer ul li:nth-child(4).active{ background-image: url(../../../image/jiaoliuhudong_1.png); }
+
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../../../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+
+        .bottom_fix{
+            position: fixed;
+            width: 100%;
+                background: #000;
+            bottom:0;
+        }
+        .btn{
+          width: 32%;
+          border: solid 1px #a1a1a1;
+          background-color: #fff;
+          border-radius: 4px;
+           font-family: 'PingFang-SC';
+           color: #a1a1a1;
+        }
+        .btn1{
+
+          border: solid 1px #6666ff;
+           color: #6666ff;
+        }
+        .queding {
+          width: 9.4rem;
+          height: 1.95rem;
+          border-radius: 18px;
+          background-color: #6666ff;
+          position: absolute;
+          margin: auto;
+          left: 0;
+          right: 0;
+          font-family: 'PingFang-SC';
+          color: #f5f5f5;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+        .shizi{
+          width:22%;
+          height: 20%;
+
+          /*margin-right: 0.2rem;*/
+          display: inline-block;
+
+        }
+
+        .shizitu{
+          width: 22%;
+          height: 3.6rem;
+          /*margin-left: 0.2rem;*/
+          margin-right: 0.3rem;
+          display: inline-block;
+
+        }
+
+        .aui-iconfont {
+              position: relative;
+              font-family: "aui_iconfont" !important;
+              font-size: 2rem;
+              font-style: normal;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+          }
+          .shizizhong{
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            line-height: 2.9rem;
+          }
+          img {
+              width: 100%;
+              height: 3.6rem;
+          }
+          .biaotineirong{
+            height: 3.55rem!important;
+            position: absolute!important;
+            margin: auto!important;
+            top:0;
+            bottom:0;
+            width: 95%!important;
+            left: 0!important;
+            right: 0!important;
+          }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+  <a class="aui-pull-left aui-btn" tapmode onclick= 'api.closeWin();'>
+      <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+  </a>
+  <div id="title" class="aui-title">发表自我陈述报告</div>
+
+  <a class="aui-pull-right aui-btn aui-btn-outlined" tapmode="hover" onclick="fabiao()">
+
+        <span style="color:#a1a1a1">发表</span>
+
+    </a>
+</header>
+<body style="background:#f5f5f5;height:auto">
+<div  style="margin-top:3.3rem;">
+
+      <div style="height:3.55rem;line-height:3.55rem;border-bottom: solid 1px #a1a1a1;border-top: solid 1px #a1a1a1;position: relative;">
+        <input type="text" name="" value="" placeholder="请输入标题" id="biaoti" class="biaotineirong">
+      </div>
+      <div style="margin-top:0.5rem">
+          <textarea id="content" name="name" rows="80" cols="80" style="height:10rem;width: 95%;margin:auto"  placeholder="请输入内容" ></textarea>
+      </div>
+
+      <div style="margin: auto;margin-top:0.5rem;width: 90%;display:none;">
+          <div class="shizi" id="jia" tapmode onclick="tianjiatu()">
+            <img src="../../image/jiahao.png"  alt="">
+          </div>
+
+      </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+var UIMediaScanner;
+var path1=[];
+var one,two;
+    apiready = function(){
+        // $api.byId('title').innerHTML = api.pageParam.title;
+
+        api.parseTapmode();
+        $api.fixStatusBar($api.byId('aui-header'));
+        UIMediaScanner = api.require('UIMediaScanner');
+        one =  api.pageParam.one
+        two =  api.pageParam.two
+        // $api.byId('dabankuai').innerHTML = api.pageParam.titlea
+        // $api.byId('zilanm').innerHTML = api.pageParam.titleb
+    };
+    function tianjiatu() {
+      UIMediaScanner.open({
+          type: 'picture',
+          column: 4,
+          classify: true,
+          max: 9,
+          sort: {
+              key: 'time',
+              order: 'desc'
+          },
+          texts: {
+              stateText: '已选择*项',
+              cancelText: '取消',
+              finishText: '完成'
+          },
+          styles: {
+              bg: '#fff',
+              mark: {
+                  icon: '',
+                  position: 'bottom_left',
+                  size: 20
+              },
+              nav: {
+                  bg: '#eee',
+                  stateColor: '#000',
+                  stateSize: 18,
+                  cancelBg: 'rgba(0,0,0,0)',
+                  cancelColor: '#000',
+                  cancelSize: 18,
+                  finishBg: 'rgba(0,0,0,0)',
+                  finishColor: '#000',
+                  finishSize: 18
+              }
+          },
+          // scrollToBottom: {
+          //     intervalTime: 3,
+          //     anim: true
+          // },
+          exchange: true,
+          rotation: true
+      }, function(ret) {
+          if (ret.eventType == 'confirm') {
+              // alert(JSON.stringify(ret));
+              for (var i = 0; i < ret.list.length; i++) {
+
+                UIMediaScanner.transPath({
+                    path:ret.list[i].path
+                    }, function(ret, err) {
+                        if (ret) {
+                          path1.push(ret.path)
+                          $api.before($api.byId('jia'),'<div class="shizitu" id="'+ret.path+'" style=""><img src='+ret.path+' alt="" style="position: relative;"><img src="../../../../image/shanchu.png" style="position: absolute;margin-left: -1rem;width:1rem;height:1rem;" alt="" tapmode onclick=shanchu("'+ret.path+'") ></div>');
+                            // console.log(JSON.stringify(ret));
+                            if (path1.length >= 3) {
+                              $api.byId('jia').style.display = "none"
+                            }
+                        } else {
+                          api.toast({
+                              msg: JSON.stringify(err.msg),
+                              duration: 2000,
+                              location: 'bottom'
+                          });
+                        }
+                    });
+              }
+
+
+
+          }else {
+
+          }
+      });
+
+    }
+
+    function fabiao() {
+      if ($api.byId('biaoti').value.length <= 0) {
+        alert("请输入标题!")
+        return;
+      }
+      if ($api.byId('content').value .length <= 0) {
+        alert("请输入标题!")
+        return;
+      }
+      var params = {values: {}};
+      params.values.studentid = $api.getStorage('studentid');
+      params.values.studentname = $api.getStorage('studentname');
+      params.values.classid = $api.getStorage('classid');
+      params.values.title = $api.byId('biaoti').value;
+      params.values.content = $api.byId('content').value;
+      // params.values.aid = null;
+      zhc.post('http://www.yxke12.com/index.php/App/Selfreport/addziwochenshu.html',
+      params,function(data) {
+            api.toast({
+                msg: data,
+                duration: 2000,
+                location: 'bottom'
+            });
+            api.closeWin();
+        }, null, true);
+
+    }
+
+
+    function shanchu(url) {
+      var a = $api.byId(url)
+      for (var i = 0; i < path1.length; i++) {
+        if (url == path1[i]) {
+            path1.splice(i, 1);
+            $api.remove(a);
+            if (path1.length <= 9) {
+              $api.byId('jia').style.display = "block"
+            }
+        }
+      }
+    }
+</script>
+</html>

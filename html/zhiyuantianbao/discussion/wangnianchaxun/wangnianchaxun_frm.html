@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/z.css" />
+    <script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+    <script src="../../../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../../../script/doT.js"></script>
+    <script src="../../../../script/demo.js"></script>
+    <style>
+        .wenzi {
+            font-family: 'PingFang-SC';
+            font-size: 0.65rem;
+            text-align: center;
+            color: #6666ff;
+            background: #fff;
+        }
+
+        .aui-bar-btn-item.aui-active {
+            background-color: #6666ff;
+            color: #ffffff;
+        }
+
+        .aui-bar-btn-item {
+            display: table-cell;
+            position: relative;
+            width: 1%;
+            line-height: 1.6rem;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 0;
+            position: relative;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #6666ff;
+            border-left-width: 0;
+        }
+
+        .aui-list .aui-list-item-label,
+        .aui-list .aui-list-item-label-icon {
+            color: #212121;
+            width: 40%;
+            min-width: 1.5rem;
+            margin: 0;
+            padding: 0;
+            padding-right: 0.25rem;
+            line-height: 2.2rem;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .aui-list {
+            border: none;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-image: linear-gradient(0, #dddddd, #dddddd 0%, transparent 0%);
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .aui-list .aui-list-item {
+            border: none;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-image: linear-gradient(0, #dddddd, #dddddd 0%, transparent 0%);
+            background-image: -webkit-linear-gradient(90deg, #dddddd, #dddddd 0%, transparent 0%);
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .aui-list .aui-list-item {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-left: 1rem;
+            color: #212121;
+            border-bottom: 1px solid #dddddd;
+            position: relative;
+            min-height: 2.2rem;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+        }
+
+        input {
+            display: inline-block!important;
+            width: 30%!important;
+        }
+
+        .titleC {
+            font-family: ' PingFang-SC';
+            font-size: 0.8rem!important;
+            text-align: left;
+            color: #8e8eb2!important;
+        }
+
+        input::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder {
+            color: #cccccc;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        select {
+            font-family: 'PingFang-SC';
+            font-size: 0.8rem!important;
+            text-align: left!important;
+            color: #222222!important;
+        }
+
+        .cx {
+            width: 85.3%;
+            margin: auto;
+            border-radius: 4px;
+            background-color: #6666ff;
+            margin-top: 2.875rem;
+            color: #fff;
+            line-height: 7px;
+        }
+
+        .aui-btn-block.aui-btn-sm {
+            font-size: 0.8rem;
+            height: 2.1rem;
+            line-height: 2.15rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main" class="flex-con">
+        <div class="aui-bar aui-bar-btn" style="width:92.8%;padding-top:1.1rem">
+            <div class="aui-bar-btn-item aui-active wenzi">按位次查询</div>
+            <div class="aui-bar-btn-item wenzi">按分数查询</div>
+            <div class="aui-bar-btn-item wenzi">按专业查询</div>
+            <div class="aui-bar-btn-item wenzi">按院校查询</div>
+        </div>
+
+        <div class="aui-content aui-margin-b-15" style="margin-top:2rem" id="wccx">
+            <ul class="aui-list aui-form-list">
+              <div id="pchnf">
+                <script id="pcnf" type="text/x-dot-template">
+                  <li class="aui-list-item">
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-label titleC">
+                              报考年份：
+                          </div>
+                          <div class="aui-list-item-input">
+                              <select id="nf">
+                               <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                              {{for (var i = 0; i < it.date.length; i++) {}}
+                                <option>{{=it.date[i]}}</option>
+                              {{}}}
+
+                              </select>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="aui-list-item">
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-label titleC">
+                              报考批次：
+                          </div>
+                          <div class="aui-list-item-input">
+                              <select id="pc">
+                                  <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                                  {{for (var i = 0; i < it.pici.length; i++) {}}
+                                    <option>{{=it.pici[i]}}</option>
+                                  {{}}}
+
+                              </select>
+                          </div>
+                      </div>
+                  </li>
+                  </script>
+              </div>
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC" style="width: 14.5rem;">
+                            请输入省排名范围：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="number" pattern="[0-9]*" name="" value="" id="xiaofen" placeholder="请输入">
+                            <span>-</span>
+                            <input type="number" pattern="[0-9]*" name="" value="" id="dafen"   placeholder="请输入">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-block aui-btn-sm cx" tapmode onclick="chaxun(1)">查询</div>
+            </div>
+        </div>
+
+
+        <div class="aui-content aui-margin-b-15" style="margin-top:2rem;display:none" id="fscx">
+            <ul class="aui-list aui-form-list">
+              <div id="afscx">
+                <script id="fscxD" type="text/x-dot-template">
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label titleC">
+                                    报考年份：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <select id="fscxnf">
+                                        <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                                        {{for (var i = 0; i < it.date.length; i++) {}}
+                                          <option>{{=it.date[i]}}</option>
+                                        {{}}}
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-label titleC">
+                                    报考批次：
+                                </div>
+                                <div class="aui-list-item-input">
+                                    <select id="fscxpc">
+                                          <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                                          {{for (var i = 0; i < it.pici.length; i++) {}}
+                                            <option>{{=it.pici[i]}}</option>
+                                          {{}}}
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                </script>
+              </div>
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC" style="width: 17.5rem;">
+                            请输入高考分数范围：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="number" pattern="[0-9]*" name="" value="" id="fscxxf" placeholder="请输入">
+                            <span>-</span>
+                            <input type="number" pattern="[0-9]*" name="" value="" id="fscxdf" placeholder="请输入">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-block aui-btn-sm cx" tapmode onclick="chaxun(2)">查询</div>
+            </div>
+        </div>
+
+
+        <div class="aui-content aui-margin-b-15" style="margin-top:2rem;display:none" id="zycx">
+            <ul class="aui-list aui-form-list" id="zhuanyechaxun">
+              <script id="zhuanye" type="text/x-dot-template">
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC">
+                            报考年份：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <select id="zynf">
+                              <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                              {{for (var i = 0; i < it.date.length; i++) {}}
+                                <option>{{=it.date[i]}}</option>
+                              {{}}}
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC">
+                            报考批次：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <select id="zypc">
+                              <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                              {{for (var i = 0; i < it.pici.length; i++) {}}
+                                <option>{{=it.pici[i]}}</option>
+                              {{}}}
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC" style="width: 11.5rem;">
+                            请输入专业名称：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input  type="text" name="" id="zy" value="" style="width:100%!important" placeholder="请输入专业">
+                        </div>
+                    </div>
+                </li>
+              </script>
+            </ul>
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-block aui-btn-sm cx" tapmode onclick="chaxun(3)">查询</div>
+            </div>
+        </div>
+
+
+        <div class="aui-content aui-margin-b-15" style="margin-top:2rem;display:none" id="xxcx">
+            <ul class="aui-list aui-form-list" id="daxuechaxun">
+              <script id="dxcx" type="text/x-dot-template">
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC">
+                            报考年份：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <select id="dxnf">
+                              <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                              {{for (var i = 0; i < it.date.length; i++) {}}
+                                <option>{{=it.date[i]}}</option>
+                              {{}}}
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC">
+                            报考批次：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <select id="dxpc">
+                              <option value="1" style="color: #b6b6b6" disabled selected>请选择</option>
+                              {{for (var i = 0; i < it.pici.length; i++) {}}
+                                <option>{{=it.pici[i]}}</option>
+                              {{}}}
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-label titleC" style="width: 11.5rem;">
+                            请输入院校名称：
+                        </div>
+                        <div class="aui-list-item-input">
+                            <input type="text" name="" value="" id="dx" style="width:100%!important" placeholder="请输入大学名称">
+                        </div>
+                    </div>
+                </li>
+              </script>
+            </ul>
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-block aui-btn-sm cx" tapmode onclick="chaxun(4)">查询</div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+var pcnf1 = doT.template(document.getElementById('pcnf').innerHTML);
+var fscx1 = doT.template(document.getElementById('fscxD').innerHTML);
+var zhuanye1 = doT.template(document.getElementById('zhuanye').innerHTML);
+var dxcx1 = doT.template(document.getElementById('dxcx').innerHTML);
+    apiready = function() {
+      api.parseTapmode();
+      nianfenpici(1)
+    };
+
+    var bar = document.querySelectorAll(".aui-bar-btn");
+    if (bar) {
+        for (var i = 0; i < bar.length; i++) {
+            var d = bar[i];
+            var tab = new auiTab({
+                element: bar[i],
+                repeatClick: true
+            }, function(ret) {
+                if (ret.index == 1) {
+                    $api.byId('wccx').style.display = 'block';
+                    $api.byId('fscx').style.display = 'none';
+                    $api.byId('zycx').style.display = 'none';
+                    $api.byId('xxcx').style.display = 'none';
+                    nianfenpici(1)
+
+                } else if (ret.index == 2) {
+                    $api.byId('wccx').style.display = 'none';
+                    $api.byId('fscx').style.display = 'block';
+                    $api.byId('zycx').style.display = 'none';
+                    $api.byId('xxcx').style.display = 'none';
+                    nianfenpici(2)
+                } else if (ret.index == 3) {
+                    $api.byId('wccx').style.display = 'none';
+                    $api.byId('fscx').style.display = 'none';
+                    $api.byId('zycx').style.display = 'block';
+                    $api.byId('xxcx').style.display = 'none';
+                    nianfenpici(3)
+                } else {
+                    $api.byId('wccx').style.display = 'none';
+                    $api.byId('fscx').style.display = 'none';
+                    $api.byId('zycx').style.display = 'none';
+                    $api.byId('xxcx').style.display = 'block';
+                    nianfenpici(4)
+                }
+
+            });
+
+        }
+    }
+
+
+    function nianfenpici(index) {
+      var parames = {values:{}}
+      zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/wangnianluquyap.html',
+          parames,function(data) {
+            // console.log(JSON.stringify(data));
+            api.refreshHeaderLoadDone();
+            if (index == 1) {
+              document.getElementById('pchnf').innerHTML = pcnf1(data);
+            }else if (index == 2) {
+              document.getElementById('afscx').innerHTML = fscx1(data);
+            }else if (index == 3) {
+              document.getElementById('zhuanyechaxun').innerHTML = zhuanye1(data);
+            }else if (index == 4) {
+              document.getElementById('daxuechaxun').innerHTML = dxcx1(data);
+            }
+
+          },null, true);
+    }
+
+    function chaxun(index) {
+      if (index == 1 ) {
+        var parames = {values:{}}
+        if ($api.byId('nf').value == 1) {
+          alert("请选择年份！")
+          return;
+        }
+        else if ($api.byId('pc').value == 1) {
+          alert("请选择批次！")
+          return;
+        }
+        else if ($api.byId('xiaofen').value == "" || $api.byId('dafen').value == "") {
+          alert("请正确填写分数范围！")
+          return;
+        }else {
+          parames.values.type = $api.getStorage('type');
+          parames.values.year = $api.byId('nf').value;
+          parames.values.pici = $api.byId('pc').value;
+          parames.values.maxInp = $api.byId('xiaofen').value;
+          parames.values.minInp = $api.byId('dafen').value;
+          parames.values.provinceid = $api.getStorage('provinceid');
+          parames.values.studentid = $api.getStorage('studentid');
+          console.log(JSON.stringify(parames));
+          zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/wangnianluquweici.html',
+              parames,function(data) {
+                localStorage.data = JSON.stringify(data)
+                console.log(JSON.stringify(data));
+                api.refreshHeaderLoadDone();
+                if (data == null) {
+                  api.toast({
+                      msg: "未查询到相关位次",
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }else {
+                  api.openWin({
+                      name: 'chaxunjieguo_win',
+                      url: './chaxunjieguo_win.html',
+                      pageParam: {
+                          // data: data,
+                          title:"位次查询"
+                      }
+                  });
+
+                }
+              },null, true);
+        }
+      }else if (index == 2) {
+        var parames = {values:{}}
+        if ($api.byId('fscxnf').value == 1) {
+          alert("请选择年份！")
+          return;
+        }
+        else if ($api.byId('fscxpc').value == 1) {
+          alert("请选择批次！")
+          return;
+        }
+        else if ($api.byId('fscxxf').value == "" || $api.byId('fscxdf').value == "") {
+          alert("请正确填写分数范围！")
+          return;
+        }else {
+          parames.values.type = $api.getStorage('type');
+          parames.values.year = $api.byId('fscxnf').value;
+          parames.values.pici = $api.byId('fscxpc').value;
+          parames.values.maxInp = $api.byId('fscxxf').value;
+          parames.values.minInp = $api.byId('fscxdf').value;
+          parames.values.provinceid = $api.getStorage('provinceid');
+          // parames.values.studentid = $api.getStorage('studentid');
+          zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/wangnianluqufenshu.html',
+              parames,function(data) {
+                localStorage.data = JSON.stringify(data)
+                console.log(JSON.stringify(data));
+                api.refreshHeaderLoadDone();
+                if (data == null) {
+                  api.toast({
+                      msg: "未查询到相关位次",
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }else {
+                  api.openWin({
+                      name: 'chaxunjieguo_win',
+                      url: './chaxunjieguo_win.html',
+                      pageParam: {
+                          // data: data,
+                          title:"分数查询"
+                      }
+                  });
+
+                }
+              },null, true);
+        }
+      }else if (index == 3) {
+        var parames = {values:{}}
+        if ($api.byId('zynf').value == 1) {
+          alert("请选择年份！")
+          return;
+        }
+        else if ($api.byId('zypc').value == 1) {
+          alert("请选择批次！")
+          return;
+        }
+        else if ($api.byId('zy').value == "" ) {
+          alert("请填写专业！")
+          return;
+        }else {
+          parames.values.type = $api.getStorage('type');
+          parames.values.year = $api.byId('zynf').value;
+          parames.values.pici = $api.byId('zypc').value;
+          parames.values.majorname = $api.byId('zy').value;
+          parames.values.provinceid = $api.getStorage('provinceid');
+          // parames.values.studentid = $api.getStorage('studentid');
+          zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/wangnianluquzhuanye.html',
+              parames,function(data) {
+                localStorage.data = JSON.stringify(data)
+                console.log(JSON.stringify(data));
+                api.refreshHeaderLoadDone();
+                if (data == null) {
+                  api.toast({
+                      msg: "未查询到相关位次",
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }else {
+                  api.openWin({
+                      name: 'zhuanyechaxun_win',
+                      url: './zhuanyechaxun_win.html',
+                      pageParam: {
+                          // data: data,
+                          title:"专业查询"
+                      }
+                  });
+
+                }
+              },null, true);
+        }
+      }
+      else if (index == 4) {
+        var parames = {values:{}}
+        if ($api.byId('dxnf').value == 1) {
+          alert("请选择年份！")
+          return;
+        }
+        else if ($api.byId('dxpc').value == 1) {
+          alert("请选择批次！")
+          return;
+        }
+        else if ($api.byId('dx').value == "" ) {
+          alert("请填写专业！")
+          return;
+        }else {
+          parames.values.type = $api.getStorage('type');
+          parames.values.year = $api.byId('dxnf').value;
+          parames.values.pici = $api.byId('dxpc').value;
+          parames.values.schoolname = $api.byId('dx').value;
+          parames.values.provinceid = $api.getStorage('provinceid');
+          // parames.values.studentid = $api.getStorage('studentid');
+          zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/wangnianluquyuanxiao.html',
+              parames,function(data) {
+                localStorage.data = JSON.stringify(data)
+                console.log(JSON.stringify(data));
+                api.refreshHeaderLoadDone();
+                if (data == null) {
+                  api.toast({
+                      msg: "未查询到相关位次",
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }else {
+                  api.openWin({
+                      name: 'daxuechaxun_win',
+                      url: './daxuechaxun_win.html',
+                      pageParam: {
+                          // data: data,
+                          title:"大学查询"
+                      }
+                  });
+
+                }
+              },null, true);
+        }
+      }
+    }
+
+    
+</script>
+
+</html>

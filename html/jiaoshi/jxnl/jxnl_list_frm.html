@@ -1,0 +1,321 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <script type="text/javascript" src="../../../script/pdfobject.min.js"></script>
+    <style>
+    .zizhuzhaosheng {
+      font-family: 'PingFang-SC';
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+    .biaoqian {
+      border-radius: 2px;
+      background-color: #eeeeee;
+      display: inline-block!important;
+      text-align: center!important;
+      color: #666666;
+      border-radius: 2px;
+      }
+
+      .biaoqian-color{
+        background-color: #ffbc10;
+        color: white;
+      }
+
+      .biaoti {
+        font-family: 'PingFang-SC';
+        font-size: 16px;
+        color: #333333;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+      }
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+      .play_c{
+          width: 100%;
+          height: 160px;
+          background: url("../../../image/play_bg.png") no-repeat;
+          background-size: 100%;
+          display: flex;
+          align-items: center;
+          align-self: center;
+          position: relative;
+          margin-bottom: 10px;
+      }
+
+      .play_btn{
+        height:40px;width:40px;
+        background:url(../../../image/bofangtu.png);
+        background-size:100%;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+      /*li样式*/
+            .aui-list .aui-list-item-media {
+                 width: 3.6rem;
+                position: relative;
+                padding: 0.5rem 0;
+                padding-right: 0.75rem;
+                display: inherit;
+                -webkit-flex-shrink: 0;
+                flex-shrink: 0;
+                -webkit-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+                -webkit-box-align: center;
+                -webkit-align-items: flex-start;
+                align-items: flex-start;
+            }
+            .h-92{
+              height: 92px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab" id="tab" style="z-index:99;position: fixed;width: 100%;border-bottom: 1px solid #ccc;">
+          <div class="aui-tab-item aui-active">学科素养</div>
+          <div class="aui-tab-item">教学技术</div>
+          <div class="aui-tab-item" >论文专著</div>
+      </div>
+      <section id="banzhuren" style="margin-top:44px;">
+      <ul class="aui-list aui-media-list" id="zixun_ul">
+        <script id="tuijianzc" type="text/x-dot-template">
+            {{for (var i = 0; i< it.length; i++) {}}
+                <li class="aui-list-item" tapmode onclick="xiangqing({{=it[i].id}},'http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/xuekesuyangcon.html',1)">
+                    <div class="aui-media-list-item-inner" style="">
+                        <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                            </div>
+                            <div class="aui-info" style="padding-top:30px;padding-bottom:0.5rem;">
+                                <div class="aui-info-item biaoqian biaoqian-color">
+                                  <span class="zizhuzhaosheng">科学素养</span>
+                                </div>
+                                <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                            </div>
+                        </div>
+                        {{if (it[i].pict != null) {}}
+                          <div class="aui-list-item-media" style="padding-left:10px;">
+                              <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                          </div>
+                        {{}}}
+                    </div>
+                </li>
+                {{}}}
+        </script>
+      </ul>
+    </section>
+
+    <section id="renkejiaoshi" style="display:none;margin-top:46px;">
+    <div class="play_c" tapmode onclick="onVideoClick();">
+        <div class="play_btn"></div>
+    </div>
+    <ul class="aui-list aui-media-list" id="jxjs_ul">
+      <script id="jxjs_js" type="text/x-dot-template">
+          {{for (var i = 0; i< it.length; i++) {}}
+              <li class="aui-list-item" tapmode onclick="xiangqing({{=it[i].id}},'http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuejishucon.html',2)">
+                  <div class="aui-media-list-item-inner" style="">
+                      <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                          </div>
+                          <div class="aui-info" style="padding-top:30px;padding-bottom:0.5rem;">
+                              <div class="aui-info-item biaoqian biaoqian-color">
+                                <span class="zizhuzhaosheng">教学技术</span>
+                              </div>
+                              <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                          </div>
+                      </div>
+                      {{if (it[i].pict != null) {}}
+                        <div class="aui-list-item-media" style="padding-left:10px;">
+                            <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                        </div>
+                      {{}}}
+                  </div>
+              </li>
+              {{}}}
+      </script>
+    </ul>
+  </section>
+
+  <section id="yishengyidao" style="display:none;margin-top:44px;">
+  <ul class="aui-list aui-media-list" id="lw_ul">
+    <script id="lw_js" type="text/x-dot-template">
+        {{for (var i = 0; i< it.length; i++) {}}
+            <li class="aui-list-item" tapmode onclick="xiangqing({{=it[i].id}},'http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/lunwenzhuanzhucon.html',3)">
+                <div class="aui-media-list-item-inner" style="">
+                    <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                        </div>
+                        <div class="aui-info" style="padding-top:30px;padding-bottom:0.5rem;">
+                            <div class="aui-info-item biaoqian biaoqian-color">
+                              <span class="zizhuzhaosheng">论文专著</span>
+                            </div>
+                            <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                        </div>
+                    </div>
+                    {{if (it[i].pict != null) {}}
+                      <div class="aui-list-item-media" style="padding-left:10px;">
+                          <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                      </div>
+                    {{}}}
+                </div>
+            </li>
+            {{}}}
+    </script>
+  </ul>
+</section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript">
+var zizhuzhaosheng1 = doT.template(document.getElementById('tuijianzc').innerHTML);
+var zizhuzhaosheng2 = doT.template(document.getElementById('jxjs_js').innerHTML);
+var zizhuzhaosheng3 = doT.template(document.getElementById('lw_js').innerHTML);
+    apiready = function() {
+      api.parseTapmode();
+      var parames={values:{}}
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/xuekesuyang.html',parames,function(data) {
+        document.getElementById('zixun_ul').innerHTML = zizhuzhaosheng1(data);
+
+      },null,true)
+
+    };
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+        index:1
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('banzhuren').style.display = "block";
+          document.getElementById('renkejiaoshi').style.display = "none";
+          document.getElementById('yishengyidao').style.display = "none";
+        }else if (ret.index == 2) {
+          document.getElementById('banzhuren').style.display = "none";
+          document.getElementById('renkejiaoshi').style.display = "block";
+          document.getElementById('yishengyidao').style.display = "none";
+          jiaoxuejishu()
+        }else{
+          document.getElementById('banzhuren').style.display = "none";
+          document.getElementById('renkejiaoshi').style.display = "none";
+          document.getElementById('yishengyidao').style.display = "block";
+          lunwenzhuanzhu()
+        }
+    });
+
+    function onItemClick() {
+        api.openWin({
+            name: 'jxnl_details_win',
+            url: './jxnl_details_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+
+    function onVideoClick() {
+        // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+        //   api.toast({
+        //       msg: "该功能付费用户才能使用",
+        //       duration: 2000,
+        //       location: 'bottom'
+        //   });
+        //   return;
+        // }
+        api.openWin({
+            name: 'kecheng_win',
+            url: './kecheng_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+      
+            
+    
+    function jiaoxuejishu() {
+      var parames={values:{}}
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuejishu.html',parames,function(data) {
+        document.getElementById('jxjs_ul').innerHTML = zizhuzhaosheng2(data);
+      },null,true)
+    }
+function lunwenzhuanzhu() {
+  var parames={values:{}}
+  zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/lunwenzhuanzhu.html',parames,function(data) {
+    document.getElementById('lw_ul').innerHTML = zizhuzhaosheng3(data);
+
+  },null,true)
+}
+    function xiangqing(id,url,index) {
+      if (index==1) {
+        var parames = {values:{}}
+        parames.values.aid =id;
+        zhc.post(url,parames,function(data) {
+          localStorage.data = JSON.stringify(data)
+              api.openWin({
+                  name: 'zzzs_zxfl_details_win',
+                  url: '../tuijianxiangqing/zzzs_zxfl_details_win.html',
+                  pageParam: {
+                      data: data,
+                      title:'科学素养'
+                  }
+              });
+            },null, true);
+      }
+      if (index==2) {
+        var parames = {values:{}}
+        parames.values.aid =id;
+        zhc.post(url,parames,function(data) {
+           localStorage.data = JSON.stringify(data)
+              api.openWin({
+                  name: 'zzzs_zxfl_details_win',
+                  url: '../tuijianxiangqing/zzzs_zxfl_details_win.html',
+                  pageParam: {
+                      data: data,
+                      title:'教学技术'
+                  }
+              });
+            },null, true);
+      }
+      if (index==3) {
+        var parames = {values:{}}
+        parames.values.aid =id;
+        zhc.post(url,parames,function(data) {
+
+          console.log(JSON.stringify(data))
+          // document.getElementById("pdf").src = "http://www.yxke12.com/Public/Teacher/images/pic/'+data.content"
+          // var pdfReader = api.require('pdfReader');
+    
+          // pdfReader.open({
+          //     path: 'http://www.yxke12.com/Public/Teacher/images/pic/'+data.content
+          // });
+            },null, true);
+      }
+    }
+
+</script>
+
+</html>

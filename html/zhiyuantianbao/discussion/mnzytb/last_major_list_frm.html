@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/demo.css" />
+    <style>
+      div.screening>ul {
+          height: 40px;
+          margin: 0;
+          padding: 0;
+          list-style-type: none;
+          border-bottom: none;
+          overflow: hidden;
+      }
+      div.screening>ul>li {
+          width: 100%;
+          position: relative;
+
+      }
+
+      div.screening>ul>li:after {
+
+          content: '';
+          display: inline-block;
+          width:20px;
+          height: 20px;
+          position: absolute;
+          right: 10px;
+          top:10px;
+          background: url("../../../../image/on_1.png") no-repeat 100% center;
+          transition: 0.5s;
+          background-position-x: 50%;
+      }
+
+      div.screening>ul>li.current:after{
+        -webkit-transform: rotate(180deg);
+      }
+
+      .biaoqian{
+        display:inline-block;
+        margin-left:0.5em;
+        line-height: 1.0;
+        padding: 4px 12px;
+        color: #333333;
+      }
+
+      .act_biaoqian{
+        line-height: 1.0;
+        /*padding: 4px 12px;*/
+        background-color: #6666ff;
+        border-radius: 12px;
+        color: white;
+      }
+
+      .choose{
+        display:inline-flex;
+        margin-left:10px;
+        color:#6666ff;
+      }
+
+      .hot_select{
+        display:inline-flex;
+        /*border-bottom:2px solid #6666ff;*/
+        color:#6666ff;font-size:16px;
+        margin-right: 10px;
+      }
+
+      .hot{
+        color: #a1a1a1;
+        border-bottom:0px;
+        font-size:16px;
+        display:inline-flex;
+        margin-right: 10px;
+      }
+
+      .item{
+        border-radius:4px;
+        background:white;
+        width:95%;
+        margin:auto;
+        border:1px solid #e5e5e5;
+        margin-top: 10px;
+      }
+
+      .mid span{
+        color: #222222;
+        font-size: 18px;
+        margin-top: 10px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        width: 50%;
+      }
+
+      .mid p{
+        color: #8e8eb2;
+        font-size: 14px;
+        float: right;
+        margin-top: 10px;
+      }
+
+      .mid{
+        /*background-color: white;*/
+        padding-left: 16px;
+        padding-right: 16px;
+        overflow: hidden;
+      }
+
+      .mid div{
+        padding: 2px 8px;
+        color: white;
+        margin-left: 4px;
+        border-radius: 4px;
+        display: inline;
+        font-size: 12px;
+      }
+
+      .bottom{
+        /*background: white;*/
+        padding: 16px 0px;
+        text-align: center;
+      }
+
+      .bottom div{
+        display: inline-block;
+        padding-left: 16px;
+        padding-right: 16px;
+        border-left: 1px solid #e5e5e5;
+      }
+
+      .bottom span{
+        text-align: center;
+        display: block;
+        font-size: 12px;
+      }
+
+      .b-color{
+        color: #34b3fd;
+      }
+      .y-color{
+        color: #ffbc10;
+      }
+      .g-color{
+        color: #666666;
+        margin-top: 4px;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="screening" style="display:inline-block;background:white;" onclick="toggleFilter(event)">
+        <ul>
+            <li style="display:inline-flex; border: none;padding-left: 20px;text-align: left;" class="Regional" id="PJSD">
+              <div class="hot_select" id="hot_div">
+                2016年
+              </div>
+              <div class="choose" id="selected_grade"></div>
+              <div style="position:fixed;right:34px;">筛选</div>
+            </li>
+        </ul>
+      </div>
+      <div class="grade-eject" id="yincang3" onclick="yincang()">
+          <ul  style="background-color:white;"class="grade-w" id="gradew3">
+              <li style="background-color:white;border-bottom:0px;">
+                <div style="display:inline-block;min-width: 3em;">
+                    年份：
+                </div>
+                <div style="display:inline-block;" id="gradeChoose_div">
+                  <div  class="biaoqian" tapmode onclick="gradeItemClick(event, 0);">
+                      2016
+                  </div>
+                  <div  class="biaoqian" tapmode onclick="gradeItemClick(event, 1);">
+                      2015
+                  </div>
+
+                </div>
+              </li>
+          </ul>
+      </div>
+      <div style="height:40px;width:100%;"></div>
+      <ul id="major_ul">
+        <script id="major_s" type="text/x-dot-template">
+        {{for (var i = 0; i < it.length; i++) {}}
+            <div class="item">
+              <div class="mid">
+                  <span>{{=it[i].major_name}}</span>
+                  <p>录取人数：{{=it[i].enrolled}}</p>
+              </div>
+
+              <div class="bottom">
+                  <div style="border-left: none">
+                    {{if (it[i].low_score == null) {}}
+                        <span class="b-color">暂无/暂无</span>
+                    {{}else {}}
+                        <span class="b-color">{{=it[i].low_score}}/{{=it[i].low_score_rank}}</span>
+                    {{}}}
+                    <span class="g-color">最低分/排名</span>
+                  </div>
+                  <div>
+                  {{if (it[i].average_score == null) {}}
+                    <span class="y-color">暂无/暂无</span>
+                  {{}else {}}
+                    <span class="y-color">{{=it[i].average_score}}/{{=it[i].average_score_rank}}</span>
+                  {{}}}
+                    <span class="g-color">平均分/排名</span>
+                  </div>
+                  <div>
+                    {{if (it[i].high_score == null) {}}
+                      <span class="b-color">暂无/暂无</span>
+                    {{}else {}}
+                      <span class="b-color">{{=it[i].high_score}}/{{=it[i].high_score_rank}}</span>
+                    {{}}}
+                    <span class="g-color">最高分/排名</span>
+                  </div>
+              </div>
+            </div>
+          {{}}}
+        </script>
+      </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript" src="../../../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var filter = [2016, 2015];
+    var major_dot;
+    apiready = function() {
+        major_dot = doT.template(document.getElementById('major_s').innerHTML);
+        lastMajorList(2016);
+        api.parseTapmode();
+    };
+
+    function toggleFilter(e) {
+        var yc = $api.byId('yincang3');
+        var p = $api.byId('PJSD');
+        if ($api.hasCls(yc, "grade-w-roll")) {
+            $api.removeCls(yc, "grade-w-roll");
+            $api.removeCls(p, "current");
+        }else {
+            $api.addCls(yc, "grade-w-roll");
+            $api.addCls(p, "current");
+        }
+    }
+
+    function yincang() {
+      toggleFilter();
+    }
+
+    function gradeItemClick(e, index) {
+      // e.cancelBubble = true;
+      var arr = document.getElementById("gradeChoose_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+        //
+        if (i == index) {
+            $api.addCls(arr[i], 'act_biaoqian');
+        }else {
+            $api.removeCls(arr[i], 'act_biaoqian');
+        }
+      }
+      hot_div.innerHTML = arr[index].innerHTML+"年";
+
+      // cur_grade = grade_arr[index];
+      // loadData();
+      lastMajorList(filter[index]);
+    }
+
+    function lastMajorList(year) {
+      var parames = {values:{}};
+      parames.values.year = year;
+      parames.values.schoolname = api.pageParam.univ_name;
+      parames.values.type = $api.getStorage('type');
+      parames.values.provinceid = $api.getStorage('provinceid');
+      parames.values.batchid = api.pageParam.batchid;
+      parames.values.rank = api.pageParam.rank;
+      zhc.post("http://www.yxke12.com/index.php/App/Zhiyuantianbao/getwangnian.html",
+          parames,function(_data) {
+            document.getElementById('major_ul').innerHTML = major_dot(_data);
+          },function() {
+              flag = true;
+          }, true);
+    }
+</script>
+
+</html>

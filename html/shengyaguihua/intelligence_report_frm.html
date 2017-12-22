@@ -1,0 +1,597 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+
+    <style>
+        .auto {
+            height: auto;
+        }
+
+        p {
+            text-indent: 2em;
+            font-size: 16px;
+            padding-left: 5%;
+            padding-right: 10px;
+            font-family: "PingFang-SC";
+            color: #666666;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 18px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_title {
+            color: #6666ff;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .four_panel {
+            margin: 10px;
+            margin-left: 5%;
+            margin-bottom: 0px;
+        }
+
+        .four_tile {
+            font-family: "PingFang-SC";
+            font-size: 18px;
+        }
+
+        .content_font {
+            font-family: "PingFang-SC";
+            font-size: 16px;
+            color: #666666;
+            margin-top: 10px;
+        }
+
+        .img_bg {
+            height: 40px;
+            width: 90%;
+            background-image: url("../../image/four_bg.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 10px auto;
+        }
+
+        .img_tile {
+            color: white;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+        }
+
+        .left {
+            float: left;
+            display: inline-block;
+            line-height: 40px;
+            margin-left: 10px;
+        }
+
+        .right {
+            float: right;
+            display: inline-block;
+            line-height: 40px;
+            margin-right: 10px;
+        }
+
+        .font_title {
+            font-weight: bold;
+        }
+
+        .xingge_analyze {
+            height: auto;
+            width: 90%;
+            border-radius: 10px;
+            border: 1px dashed #6666ff;
+            margin: 10px auto;
+            padding-bottom: 12px;
+        }
+
+        .margin-5 {
+            margin: 5%;
+            margin-top: 10px;
+            margin-bottom: 2px;
+        }
+
+        .last-panel {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            padding: 8px;
+            margin: 10px;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .operation-panel {
+            height: 45px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .z-btn {
+            background: #6666ff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            /*border: 1px solid #6666ff !important;*/
+            color: #ffffff;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .white-btn {
+            background: #ffffff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            border: 1px solid #a1a1a1 !important;
+            color: #a1a1a1;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .margin-left-10 {
+            margin-left: 10px;
+        }
+        /*测试结果*/
+
+        .top_result {
+            width: 90%;
+            height: auto;
+            background-color: #6666ff;
+            border-radius: 3px;
+            margin: 10px auto;
+            padding: 10px 0px;
+        }
+
+        .result_miaoshu {
+            color: white;
+            font-family: "PingFang-SC";
+            text-indent: 0em;
+        }
+
+        .result_text {
+            font-size: 18px;
+            color: white;
+            font-family: "PingFang-SC";
+            text-indent: 0em;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .pic {
+            margin: 0 auto;
+            width: 80%;
+            height: 400px;
+            /*border: 1px solid #eeeeee;*/
+        }
+
+        .pic p {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .pic .bei_zhu {
+            line-height: 18px;
+        }
+
+        .pic .li_tu {
+            border: 1px solid #ABD8F7;
+            /*width: 580px;*/
+            height: 250px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        .pic .li_tu .box {
+            width: 50%;
+            height: 50px;
+            float: left;
+            border-right: 1px solid #ABD8F7;
+            border-bottom: 1px solid #ABD8F7;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .pic .li_tu .box:nth-child(2n) {
+            border-right: none;
+        }
+
+        .pic .li_tu .rt span {
+            display: inline-block;
+            /*line-height: 50px;*/
+            padding: 0px 10px;
+            position: absolute;
+            right: -32px;
+            top: 0px;
+        }
+
+        .pic .li_tu .lt span {
+            display: inline-block;
+            /*line-height: 50px;*/
+            padding: 0px 10px;
+            position: absolute;
+            left: -32px;
+            top: 0px;
+        }
+
+        .pic .li_tu .box .left {
+            width: 100%;
+            height: 35px;
+            margin-left: 3px;
+            margin-top: 7px;
+            /*background-color: red;*/
+            /*float: right;*/
+        }
+
+        .pic .li_tu .box .left .bian {
+            width: 30%;
+            height: 80%;
+            background-color: #FD8E41;
+            margin-top: 4px;
+            float: right;
+        }
+
+        .pic .li_tu .box .right .bian {
+            width: 30%;
+            height: 80%;
+            background-color: #FD8E41;
+            margin-top: 4px;
+            float: left;
+        }
+
+        .pic .li_tu .box .right {
+            width: 100%;
+            height: 35px;
+            margin-right: 3px;
+            margin-top: 7px;
+            /*background-color: yellow;*/
+        }
+
+        .pic .li_tu .f_duan {
+            width: 100%;
+            height: 50px;
+            /*background-color: pink;*/
+        }
+
+        .pic .li_tu .f_duan div {
+            /*line-height: 50px;*/
+            text-align: center;
+            float: left;
+        }
+
+        .pic .li_tu .f_duan .rt {
+            width: 45px;
+            border-right: none;
+        }
+
+        .pic .li_tu .f_duan .mingxian {
+            width: 7%;
+            height: 50px;
+            font-size: 12px;
+        }
+
+        .right-line {
+            border-right: 1px solid #ABD8F7!important;
+        }
+
+        .pic .li_tu .f_duan .bijiaomingxian {
+            width: 10%;
+            height: 50px;
+            border-right: 1px solid #ABD8F7;
+            font-size: 12px;
+        }
+
+        .pic .li_tu .f_duan .yiban {
+            width: 17%;
+            height: 50px;
+            border-right: 1px solid #ABD8F7;
+            font-size: 12px;
+        }
+
+        .pic .li_tu .f_duan .qingwei {
+            width: 28%;
+            height: 50px;
+            border-right: 1px solid #ABD8F7;
+            font-size: 12px;
+        }
+        p{
+          text-indent: 1.5rem
+        }
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div id="report" class="flex-wrap flex-vertical">
+        <script id="interpolationtmpl" type="text/x-dot-template">
+            <div style="margin-left:5%;"><span style="color:#6666ff;font-size:16px;font-weight:bold;font-family: 'PingFang-SC';">{{=it.studentname}}</span><span style="color:#666666;font-size:16px;font-family: " PingFang-SC ";">同学：</span></div>
+            <p>您好！</p>
+            <p>非常感谢你选择我们的系统进行多元智能测试，多元智能测试旨在帮助你了解自身的潜能，并通过你的优势智能组合为你匹配出你所擅长的职业，最终为高中生在高中阶段的学科选择、高考志愿填报以及未来职业生涯规划提供参考。</p>
+            <p>根据多元智能理论，几乎每个人都有自己的优势所在，只是体现的方面不同。本报告是根据你的实际作答情况，对你的多元智能结构、职业能力做出评价，为你制定具有科学指导意义的个性化评估报告。所有测评结果的得分仅代表你本人各指标之间的相对水平，而不代表你的这些指标在人群总体中的相对水平。</p>
+            <p>报告结果没有“好”与“坏”之分，但存在“合适 ”与“不合适”的区别，可以根据多元智能测评的结果，结合自身的情况选择你适合的职业，不断地规划自己前进的方向。</p>
+
+            <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+                <div class="left_line"></div>
+                <span class="section_title">测试方法</span>
+            </div>
+            <p>世界著名教育心理学家霍华德·加德纳博士指出，人类的智能是多元化而非单一的，主要是由语言智能、数学逻辑智能、空间智能、身体运动智能、音乐智能、人际智能、自我认知智能、自然认知智能八项组成，本测试则从以上八个维度对你的多元智能进行了测评。最后计算每个智能方面的得分，得分高者，即为智能优势最强项，以得分前三名的智能项作为你的优势组合。</p>
+
+            <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+                <div class="left_line"></div>
+                <span class="section_title">测试结果</span>
+            </div>
+            <div class="top_result">
+                <p class="result_miaoshu">根据你的答题情况，你的优势智能组合为：</p>
+                <p class="result_text">{{=it.zuhe1}}、{{=it.zuhe2}}、{{=it.zuhe3}}</p>
+            </div>
+            <div id="result" style="width: 100%;height:470px;margin: 0px 0 20px 0;"></div>
+
+
+            <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+                <div class="left_line"></div>
+                <span class="section_title">职业能力分析</span>
+            </div>
+
+            <div class="xingge_analyze">
+                <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+                    <span class="section_title margin-5">
+              {{=it.zuhe1}}
+            </span>
+                    <p style="text-indent:0em;">
+                        <b>智能特点：</b>{{=it.tedian1}}</br>
+                        <b>适合的职业：</b>{{=it.zhiye1}}
+                    </p>
+                </div>
+
+                <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+                    <span class="section_title margin-5">
+              {{=it.zuhe2}}
+            </span>
+                    <p style="text-indent:0em;">
+                        <b>智能特点：</b>{{=it.tedian2}}</br>
+                        <b>适合的职业：</b>{{=it.zhiye2}}
+                    </p>
+                </div>
+                <span class="section_title margin-5">
+              {{=it.zuhe3}}
+          </span>
+                <p style="text-indent:0em;">
+                    <b>智能特点：</b>{{=it.tedian3}}</br>
+                    <b>适合的职业：</b>{{=it.zhiye3}}
+                </p>
+            </div>
+            <div class="last-panel">
+                <p>
+                    我们真心希望，通过我们的测评报告，能帮助你发现平常从未知晓的自己，并帮助你进行自己的职业生涯规划，为你开启一扇智慧的大门。
+                </p>
+            </div>
+
+            <div class="operation-panel">
+                <div id="st_id" class="aui-btn aui-btn-primary aui-btn-block white-btn " tapmode onclick="sendTeacher()">发送老师</div>
+                <div class="aui-btn aui-btn-primary aui-btn-block z-btn margin-left-10" tapmode onclick="continueTest()">继续测试</div>
+            </div>
+        </script>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/echart.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+var data;
+    apiready = function() {
+      // console.log("api.pageParam.data = " + api.pageParam.data);
+        data = $api.strToJson(api.pageParam.data);
+        console.log(JSON.stringify(data));
+        var conText = doT.template(document.getElementById('interpolationtmpl').innerHTML);
+        document.getElementById('report').innerHTML = conText(data);
+
+        var teacher = data.teacher;
+        if (teacher == 1) {
+          var st = $api.byId('st_id');
+          st.disabled = true;
+        }
+var score;
+        if (data.score == null) {
+          score = [];
+        }else{
+          score = data.score.split(",");
+        }
+
+        if(score == null){
+          return;
+        }
+        var myChart = echarts.init($api.byId('result'));
+        option = {
+            //        color: ['#3398DB'],
+            title: {
+                textStyle: {
+                    fontSize: 15
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            grid: {
+                left: '5%',
+                right: '5%',
+                bottom: '8%',
+                containLabel: true
+                    //            y2: 10
+            },
+            xAxis: [{
+                type: 'category',
+                data: data.text,// ["人际智能", "自我认知智能", "音乐智能", "身体运动智能", "数学逻辑智能", "空间智能", "语言智能", "自然认知智能", ],
+
+                boundaryGap: [0, 0.01],
+                axisTick: {
+                    alignWithLabel: true,
+                    show: false
+                },
+                axisLabel: {
+                    interval: 0,
+                    rotate: 45,
+                    textStyle: {
+                        fontSize: 14
+                    },
+                    // formatter:function(val){
+                    //     return val.split("").join("\n");
+                    // }
+                },
+                //                去掉轴线
+                axisLine: {
+                    show: false
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                name: '百分比',
+                min: 0,
+                max: 100,
+                interval: 20,
+                formatter: '{value}%',
+                axisTick: {
+                    alignWithLabel: true
+
+                },
+                axisLabel: {
+                    textStyle: {
+                        fontSize: 14
+                    }
+                },
+                //                去掉轴线
+                axisLine: {
+                    show: false
+                }
+
+            }],
+            series: [{
+                    name: '结果',
+                    type: 'bar',
+                    barWidth: '100%',
+                    show: false,
+                    data:  score // [67, 67, 67, 67, 67, 67, 67, 56]
+                },
+
+            ],
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    formatter: '{c}'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    //                color:['#36f8e3', '#f1d937', '#f6166a']
+                    color: function(params) {
+                        var colorList = ['#fec126', '#fc8a8c', '#f96c5e', '#6666ff', '#b699ea', '#51bbe0', '#9fd45b', '#e7f458'];
+                        //                    if (params.data > 0 && params.data <= 60) {
+                        //                        return colorList[0];
+                        //                    } else if (params.data > 60 && params.data <= 80) {
+                        //                        return colorList[1];
+                        //                    }
+                        //                    else if (params.data > 80) {
+                        //                        return colorList[2];
+                        //                    }
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+        };
+        myChart.setOption(option);
+
+    };
+
+    function sendTeacher() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Baogao/result.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  num:data.num,
+                  type:"duoyuan",
+                  value:data.zuhe1 + "," + data.zuhe2 + "," + data.zuhe3
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+                // data = ret.data;
+                var st = $api.byId('st_id');
+                st.disabled = true;
+                api.toast({
+                    msg: ret.data.infos,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+
+                // console.log(JSON.stringify(ret.data));
+            }else {
+              api.toast({
+                  msg: JSON.stringify( ret.message),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+              console.log(JSON.stringify( ret ));
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function continueTest() {
+      api.openWin({
+          name: 'zhuanYe_win',
+          url: './zhuanYe_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+</script>
+
+</html>

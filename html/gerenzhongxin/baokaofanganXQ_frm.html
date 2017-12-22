@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+    th{
+      width: 25%;
+    }
+    table{
+      width: 95%;
+      margin: auto;
+      margin-top: 0.5rem
+    }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+  <div style="width:95%;margin:auto;line-height:1.2rem;background:#eabe87;border:1px solid #f79112;margin-top:0.5rem">
+    <div><span>填报批次：</span><span>本科普通批 2017年批次线：</span><span id="mingci" style="color:#f53b03">433</span></div>
+    <div><span>批次说明：</span><span>本科普通批 2017年批次线：</span></div>
+  </div>
+
+  <div class="aui-content aui-margin-b-15" id="jianzhang"  style="display:block;">
+        <script id="jianzhang_s" type="text/x-dot-template">
+        <table id="jianzhang_tb" border="1">
+
+          <tr>
+            <th></th>
+            <th>院校</th>
+            <th>专业</th>
+            <th>服从调剂</th>
+          </tr>
+
+              {{for (var i = 0; i< it.ins.length; i++) {}}
+                <tr>
+                  <td>志愿{{=it.ins[i].univ_seq}}</td>
+                  <td >{{=it.ins[i].univ_name}}</td>
+                  <td >{{=it.ins[i].major_name}}</td>
+                  {{if ({{=it.ins[i].obey}} == 0) {}}
+                      <td >不服从调剂</td>
+                  {{}else {}}
+                      <td >服从调剂</td>
+                  {{}}}
+
+
+                </tr>
+              {{}}}
+
+
+        </table>
+        {{for (var i = 0; i < it.comment.length; i++) {}}
+                <div style="margin-top:0.5rem;width:100%;overflow: hidden;">
+                    <div style="width:20%;float:left">
+                      <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it.comment[i].touxiang}}" style='width:2.5rem;height:2.5rem;border-radius:50%' alt="">
+                    </div>
+                      <div style="width:80%;float:left">
+                        <div class="" style="margin-top:0.2rem">
+                          {{=it.comment[i].teachername}}
+                        </div>
+                        <div>
+                          {{=it.comment[i].content}}
+                        </div>
+                      </div>
+                  </div>
+
+      {{}}}
+      </script>
+
+  </div>
+</div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<!-- <script type="text/javascript" src="../../script/aui-list-swipe.js"></script> -->
+<script type="text/javascript" src="../../script/aui-list-swipe-backup.js"></script>
+<script type="text/javascript">
+// var listHD = doT.template(document.getElementById('HDlist').innerHTML);
+  var  jianzhang1 = doT.template(document.getElementById('jianzhang_s').innerHTML);
+    apiready = function(){
+        api.parseTapmode();
+        getJianZhang()
+
+    };
+
+    // 初次打开招生简章
+    function getJianZhang() {
+      var  jianzhangData = api.pageParam.data
+      console.log("aaaaa-------"+JSON.stringify(jianzhangData));
+
+
+        document.getElementById('jianzhang').innerHTML = jianzhang1(jianzhangData);
+          document.getElementById('mingci').innerHTML=api.pageParam.batch_score
+    }
+
+</script>
+</html>

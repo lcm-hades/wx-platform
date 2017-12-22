@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/z.css"/>
+    <script type="text/javascript" src="../../script/aui-tab.js"></script>
+    <script src="../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../script/doT.js"></script>
+    <script src="../../script/demo.js"></script>
+    <style>
+.title_nm{
+  width: 34%;
+  font-size: 0.8rem;
+  font-family: 'PingFang-SC';
+}
+.cont_pjb{
+  width: 64%;
+  white-space:nowrap;
+ text-overflow:ellipsis;
+ -o-text-overflow:ellipsis;
+ overflow: hidden;
+ font-family: 'PingFang-SC';
+}
+.title_con{
+  margin-bottom: 1rem
+  /*width: 50%;*/
+  /*float: left;*/
+}
+.left_line {
+    background-color: #6666ff;
+    height: 18px;
+    width: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.section_title {
+    color: #6666ff;
+    font-size: 18px;
+    font-family: "PingFang-SC";
+    font-weight: bold;
+    margin-left: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+    </style>
+</head>
+
+<body style="height:auto;background:#fff">
+  <div style="width:95%;margin:auto;margin-top:1rem;" id="gyhdcon">
+    <script id="gyhd_biao" type="text/x-dot-template">
+          <div class="title_con">
+            <span class="title_nm">课题名称:</span>
+            <span class="cont_pjb">{{=it.info.handline}}</span>
+          </div>
+          <div class="title_con">
+            <span class="title_nm">参与者:</span>
+            <span class="cont_pjb">{{=it.info.name}}</span>
+          </div>
+          <div class="title_con">
+            <span class="title_nm">指导老师:</span>
+            <span class="cont_pjb">{{=it.info.certifier}}</span>
+          </div>
+          <div class="title_con">
+            <span class="title_nm">学习课时:</span>
+            <span class="cont_pjb">{{=it.info.at_time}}</span>
+          </div>
+          <div class="title_con">
+            <span class="title_nm">学分:</span>
+            <span class="cont_pjb">{{=it.info.member}}</span>
+          </div>
+          <div class="title_con">
+            <span class="title_nm">体验与收获(自评):</span>
+            <span class="cont_pjb">{{=it.info.content}}</span>
+          </div>
+          <div class="title_con">
+            <span class="title_nm">对指导老师的评语:</span>
+            <span class="cont_pjb">{{=it.info.opinion}}</span>
+          </div>
+          <div style="margin-left:10px;margin-top:1rem;height:auto;display: inline-flex;">
+              <div class="left_line"></div>
+              <span class="section_title">评价</span>
+          </div>
+          <div style="width:100%;height:1px;background:#f5f5f5;margin-top0.5rem"></div>
+            {{for (var i = 0; i < it.comment.length; i++) {}}
+                    <div style="margin-top:0.5rem;width:100%;overflow: hidden;">
+                        <div style="width:20%;float:left">
+                          <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it.comment[i].touxiang}}" style='width:2.5rem;height:2.5rem;border-radius:50%' alt="">
+                        </div>
+                          <div style="width:80%;float:left">
+                            <div class="" style="margin-top:0.2rem">
+                              {{=it.comment[i].teachername}}
+                            </div>
+                            <div>
+                              {{=it.comment[i].content}}
+                            </div>
+                          </div>
+                      </div>
+
+          {{}}}
+        </div>
+    </script>
+    <!-- {{for (var i = 0; i < it.picture.length; i++) {}} -->
+      <!-- <img class="top_img" src="http://www.yxke12.com/Public/Home/images/huodong/{{=it.picture[i]}}"  > -->
+    <!-- {{}}} -->
+  </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+var gyhd = doT.template(document.getElementById('gyhd_biao').innerHTML);
+apiready = function(){
+    api.parseTapmode();
+    var data = api.pageParam.data
+  document.getElementById('gyhdcon').innerHTML = gyhd(data);
+};
+
+</script>
+</html>

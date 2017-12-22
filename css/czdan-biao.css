@@ -1,0 +1,317 @@
+.fasong{
+    text-align: center;
+}
+.fasong input{
+    text-align: center;
+    font-size: 18px;
+    color: #FFFFff;
+    line-height: 38px;
+    width: 104px;
+    height: 38px;
+    cursor: pointer;
+    background-color: #2f9cd6;
+    outline: none;
+    border: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.czdan_tables .titles{
+    font-size: 36px;
+    text-align: center;
+    height: 120px;
+    line-height: 120px;
+
+}
+.czdan_tables .con{
+    padding: 0 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.czdan_tables .con .tianxie {
+    padding: 0 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.czdan_tables .con .tianxie p{
+    display: inline-block;
+    font-size: 18px;
+}
+.czdan_tables .con .tianxie input{
+    border: none;
+    border-bottom: 1px solid #000000;
+    outline: none;
+    font-size: 16px;
+    padding: 0 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.czdan_tables .con .tianxie p:nth-child(1) input{
+    width: 100px;
+}
+.czdan_tables .con .tianxie p:nth-child(2){
+    float: right;
+
+}
+.czdan_tables .biao1 {
+
+}
+.czdan_tables .biao1 .biao_title{
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 30px;
+}
+.czdan_tables .biao1 table {
+    width: 100%;
+    border: 1px solid #000000;
+
+}
+.czdan_tables .biao1 table tr {
+
+}
+.czdan_tables .biao1 table tr td{
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    text-align: center;
+    height: 40px;
+    font-size: 16px;
+
+}
+.czdan_tables .biao1 table tr td input{
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+
+
+
+}
+.czdan_tables .biao1 table tr td textarea{
+    /*resize: none;*/
+    width: 99%;
+    height: 99%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+
+}
+/*表格二*/
+.czdan_tables .biao2 .biao_title{
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 30px;
+}
+.czdan_tables .biao2 table {
+    width: 100%;
+    border: 1px solid #000000;
+
+}
+.czdan_tables .biao2 table tr {
+
+}
+.czdan_tables .biao2 table tr td{
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    text-align: center;
+    height: 40px;
+    font-size: 16px;
+    width: 108px;
+
+}
+.czdan_tables .biao2 table tr td:nth-child(1){
+
+}
+
+.czdan_tables .biao2 table tr td input[type=text]{
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+
+
+
+}
+.czdan_tables .biao2 table tr td textarea{
+    resize: none;
+    width: 99%;
+    height: 98%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+
+}
+/*.czdan_tables .biao2 table tr td input[type=checkbox]{*/
+
+
+/*}*/
+/*.czdan_tables .biao2 table tr td input[type=checkbox]:nth-child(2){*/
+/*margin-left: 20px;*/
+/*}*/
+/*.czdan_tables .biao2 table tr td input[type=checkbox]:nth-child(3){*/
+/*margin-left: 20px;*/
+/*}*/
+.czdan_tables .zhushi p{
+    font-size: 16px;
+    line-height: 35px;
+}
+.czdan_tables .xiazai {
+    font-size: 18px;
+}
+.czdan_tables .xiazai a{
+    display: inline-block;
+    line-height: 38px;
+
+}
+.czdan_tables .xiazai .cur{
+    text-decoration: underline;
+    color: red;
+}
+.shis{
+    /*width: 1200px;*/
+    width: 100%;
+    height: 180px;
+    /* border: 1px black solid;*/
+    display: inline-block;
+    cursor: pointer;
+    /* margin-left: 100px;*/
+    position: relative;
+    /*background-image: url("../images/student/timg.jpg");*/
+    background-size: 100% 100%;
+
+}
+.shang_tu{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    padding-left: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #999;
+}
+.shang_tu b{
+    display: inline-block;
+    width: 28px;
+    height: 23px;
+    background: url("../images/student/l-sprite.png") no-repeat;
+    background-position: -90px -30px;
+    position: absolute;
+    left: 0px;
+    top: -3px;
+}
+.shang_tus{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    display: inline-block;
+    padding-left: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+}
+.shang_tus b{
+    display: inline-block;
+    width: 28px;
+    height: 23px;
+    background: url("../images/student/l-sprite.png") no-repeat;
+    background-position: -90px -30px;
+    position: absolute;
+    left: 0px;
+    top: -3px;
+}
+#head{
+    opacity: 0;
+    width: 100%;
+    height: 240px;
+    cursor: pointer;
+    font-size: 0;
+    position: absolute;
+    /*left: 101px;*/
+    left: 0px;
+    top: 0;
+
+}
+#tu{
+    opacity: 0;
+    width: 100%;
+    height: 180px;
+    cursor: pointer;
+    font-size: 0;
+    position: absolute;
+    /*left: 101px;*/
+    left: 0px;
+    top: 0;
+
+}
+fieldset {
+    float: left;
+}
+.tupian{
+    /*width: 180px;*/
+    /*height: 180px;*/
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+.file_tou{
+    width: 100%;
+    height: 100%;
+    /*-webkit-border-radius: 10px;*/
+    /*-moz-border-radius: 10px;*/
+    /*border-radius: 10px;*/
+    /*border: 3px solid #FFFFff;*/
+    overflow: hidden;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.file_tou img{
+    width: 180px;
+    height: 250px;
+    outline: none;
+    position: relative;
+}
+.shadows{
+    display: block;
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: -90px;
+    left:-45px;
+    background-color:rgba(0,0,0,0.5);
+
+}

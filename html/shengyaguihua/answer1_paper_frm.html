@@ -1,0 +1,588 @@
+<!doctype html>
+<html>
+
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+      <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+      <title>底部导航</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+      <style>
+        .center {
+            display: flex;
+            align-items: center;
+        }
+        .my-progress{
+          margin-top: 10px;
+          border-radius: 4px;
+          background-color: #a1a1a1;
+          width: 90%;
+        }
+        .my-progress-bar{
+          background-color: #6666ff;
+          border-radius: 4px;
+        }
+        .paper-item{
+          margin-bottom: 15px;
+        }
+        .z-title{
+          text-align: left;
+          width: 90%;
+          margin-top: 37.5px;
+          margin-bottom: 30px;
+        }
+        .z-ti{
+          width: 90%;
+
+
+        }
+        .aui-list {
+          border: none;
+          background-size: 100% 1px;
+          background-repeat: no-repeat;
+          background-position: top;
+          background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 0%);
+          /*width: 90%;*/
+      }
+      .z-d-n{
+        display: none;
+      }
+      .z-d-b{
+        display: block;;
+      }
+      .xiayibu{
+        text-align: center;
+      margin: 13px 0;
+  /*width: 80%;*/
+  height: 33px;
+  line-height: 33px;
+  border-radius: 16.5px;
+  background-color: #6666ff;
+  color:#fff;
+  /*box-shadow: 0px 5px 16px 0 rgba(102, 103, 255, 0.6);*/
+  border: solid 0 #14155a;
+}
+.aui-list-item-title {
+    font-size: 0.7rem!important;
+
+}
+.aui-list .aui-list-item-inner {
+  position: relative;
+  min-height: 2.2rem;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+      </style>
+  </head>
+
+  <body style="background:#fff">
+      <div id="" class="flex-wrap flex-vertical center">
+
+        <!-- <script id="evaluationtmpl" type="text/x-dot-template"> -->
+        <div class="aui-progress aui-progress-xs my-progress">
+            <div class="aui-progress-bar my-progress-bar" id='jindu' style="width: 38.85%;"></div>
+        </div>
+        <div style="margin-top:10px;"><p style="display:inline-block;color:#6666ff;" ><span id="biaoji">7</span>/18</p><p style="display:inline-block;margin-left:4px;">现实型</p></div>
+          <div class="z-title">
+            你所感兴趣的活动！
+          </div>
+
+
+            <div class="z-ti">
+              <ul class="aui-list aui-list-in" id="xianshi">
+                <script id="evaluationtmpl" type="text/x-dot-template">
+                 {{ for(var i=0;i<it.length;i++) { }}
+                  {{if (it[i].h_answercode=='R') {}}
+                       <li class="" tapmode  onclick=xuanze({{=it[i].h_qid}}) name='qiuzhiR'>
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-title" id={{=it[i].h_qid}}>{{=i+1}}、{{= it[i].h_questions}}</div>
+                              <div class="aui-list-item-right">
+                               <i class="aui-iconfont aui-icon-correct" id='ti{{=it[i].h_qid}}' style='display:none'></i>
+
+                              </div>
+                          </div>
+                      </li>
+                  {{}}}
+                {{ } }}
+                <div class='xiayibu'  tapmode onclick='next()'>下一步</div>
+                 </script>
+                  </ul>
+
+              <ul class="aui-list aui-list-in" id="xianshi1" style="display:none">
+                <script id="evaluationtmpl1" type="text/x-dot-template" >
+                {{ for(var i=0;i<it.length;i++) { }}
+                  {{if (it[i].h_answercode=='I') {}}
+                  <li class="" tapmode  onclick=xuanze1({{=it[i].h_qid}}) name='qiuzhiR'>
+                     <div class="aui-list-item-inner">
+                         <div class="aui-list-item-title" id={{=it[i].h_qid}}>{{=i+1}}、{{= it[i].h_questions}}</div>
+                         <div class="aui-list-item-right">
+                          <i class="aui-iconfont aui-icon-correct" id='ti{{=it[i].h_qid}}' style='display:none'></i>
+
+                         </div>
+                     </div>
+                 </li>
+                  {{}}}
+                {{ } }}
+                  <div class='xiayibu'  tapmode onclick='next1()'>下一步</div>
+                </script>
+                  </ul>
+
+              <ul class="aui-list aui-list-in" id="xianshi2"  style="display:none">
+                <script id="evaluationtmpl2" type="text/x-dot-template" >
+                {{ for(var i=0;i<it.length;i++) { }}
+                  {{if (it[i].h_answercode=='A') {}}
+                  <li class="" tapmode  onclick=xuanze2({{=it[i].h_qid}}) name='qiuzhiR'>
+                     <div class="aui-list-item-inner">
+                         <div class="aui-list-item-title" id={{=it[i].h_qid}}>{{=i+1}}、{{= it[i].h_questions}}</div>
+                         <div class="aui-list-item-right">
+                          <i class="aui-iconfont aui-icon-correct" id='ti{{=it[i].h_qid}}' style='display:none'></i>
+
+                         </div>
+                     </div>
+                 </li>
+                  {{}}}
+                {{ } }}
+                  <div class='xiayibu' tapmode  onclick='next2()'>下一步</div>
+                </script>
+                  </ul>
+
+              <ul class="aui-list aui-list-in" id="xianshi3"  style="display:none">
+                <script id="evaluationtmpl3" type="text/x-dot-template" >
+                {{ for(var i=0;i<it.length;i++) { }}
+                  {{if (it[i].h_answercode=='S') {}}
+                  <li class="" tapmode  onclick=xuanze3({{=it[i].h_qid}}) name='qiuzhiR'>
+                     <div class="aui-list-item-inner">
+                         <div class="aui-list-item-title" id={{=it[i].h_qid}}>{{=i+1}}、{{= it[i].h_questions}}</div>
+                         <div class="aui-list-item-right">
+                          <i class="aui-iconfont aui-icon-correct" id='ti{{=it[i].h_qid}}' style='display:none'></i>
+
+                         </div>
+                     </div>
+                 </li>
+                  {{}}}
+                {{ } }}
+                  <div class='xiayibu' tapmode  onclick='next3()'>下一步</div>
+                </script>
+                  </ul>
+
+              <ul class="aui-list aui-list-in" id="xianshi4"  style="display:none">
+                <script id="evaluationtmpl4" type="text/x-dot-template" >
+                {{ for(var i=0;i<it.length;i++) { }}
+                  {{if (it[i].h_answercode=='E') {}}
+                  <li class=""  tapmode  onclick=xuanze4({{=it[i].h_qid}}) name='qiuzhiR'>
+                     <div class="aui-list-item-inner">
+                         <div class="aui-list-item-title" id={{=it[i].h_qid}}>{{=i+1}}、{{= it[i].h_questions}}</div>
+                         <div class="aui-list-item-right">
+                          <i class="aui-iconfont aui-icon-correct" id='ti{{=it[i].h_qid}}' style='display:none'></i>
+
+                         </div>
+                     </div>
+                 </li>
+                  {{}}}
+                {{ } }}
+                  <div class='xiayibu' tapmode  onclick='next4()'>下一步</div>
+                </script>
+                  </ul>
+
+              <ul class="aui-list aui-list-in" id="xianshi5"  style="display:none">
+                <script id="evaluationtmpl5" type="text/x-dot-template" >
+                {{ for(var i=0;i<it.length;i++) { }}
+                  {{if (it[i].h_answercode=='C') {}}
+                  <li class="" tapmode   onclick=xuanze5({{=it[i].h_qid}}) name='qiuzhiR'>
+                     <div class="aui-list-item-inner">
+                         <div class="aui-list-item-title" id={{=it[i].h_qid}}>{{=i+1}}、{{= it[i].h_questions}}</div>
+                         <div class="aui-list-item-right">
+                          <i class="aui-iconfont aui-icon-correct" id='ti{{=it[i].h_qid}}' style='display:none' ></i>
+
+                         </div>
+                     </div>
+                 </li>
+                  {{}}}
+                {{ } }}
+                  <div class='xiayibu' tapmode  onclick='next5()'>下一步</div>
+                </script>
+                  </ul>
+            </div>
+      </div>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/doT.js"></script>
+  <script   src="../../script/jquery-1.8.3.min.js"  integrity="sha256-dW19+sSjW7V1Q/Z3KD1saC6NcE5TUIhLJzJbrdKzxKc="   crossorigin="anonymous"></script>
+  <script type="text/javascript">
+
+apiready=function(){
+  api.parseTapmode();
+  aaaa()
+}
+var huizong=[]
+function aaaa() {
+
+console.log($api.strToJson(localStorage.arr));
+  var     dierti=[];
+
+  dierti =$api.strToJson(localStorage.dierti)
+
+huizong=$api.strToJson(localStorage.arr)
+
+            //  for (var i = 0; i <dierti.length; i++) {
+
+
+
+
+                    // alert(JSON.stringify(dierti1))
+                  //  dierti =  localStorage.deerti
+                  //  console.log(JSON.stringify(localStorage.deerti));
+                    // localstorage.disanti = disanti
+                    var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+                    var evalText1 = doT.template(document.getElementById('evaluationtmpl1').innerHTML);
+                    var evalText2 = doT.template(document.getElementById('evaluationtmpl2').innerHTML);
+                    var evalText3 = doT.template(document.getElementById('evaluationtmpl3').innerHTML);
+                    var evalText4 = doT.template(document.getElementById('evaluationtmpl4').innerHTML);
+                    var evalText5 = doT.template(document.getElementById('evaluationtmpl5').innerHTML);
+                    document.getElementById('xianshi').innerHTML = evalText(dierti);
+                    document.getElementById('xianshi1').innerHTML = evalText1(dierti);
+                    document.getElementById('xianshi2').innerHTML = evalText2(dierti);
+                    document.getElementById('xianshi3').innerHTML = evalText3(dierti);
+                    document.getElementById('xianshi4').innerHTML = evalText4(dierti);
+                    document.getElementById('xianshi5').innerHTML = evalText5(dierti);
+                  // }
+      //  });
+}
+
+
+
+  var zongjie=[]
+    var zongjie1=[]
+      var zongjie2=[]
+        var zongjie3=[]
+          var zongjie4=[]
+            var zongjie5=[]
+function xuanze(id) {
+  // alert("aaa")
+  var jieguo = {};
+  // var wenzi = $api.byId(id);
+  // var duigou = $api.byId('ti'+id)
+  var wenzi = document.getElementById(id);
+  var qiuzhiR = document.getElementsByName('qiuzhiR');
+  var duigou = document.getElementById('ti'+id)
+  if (duigou.style.display =='block') {
+              duigou.style.display = 'none'
+              duigou.style.color="#6666ff"
+                wenzi.style.color='#333'
+            for (var i = 0; i < zongjie.length; i++) {
+              for (var key in zongjie[i]) {
+                if (key == id) {
+                  zongjie.splice(i, 1)
+                  console.log(JSON.stringify(zongjie));
+                  return
+                }
+              }
+            }
+
+              return
+        }
+              if (duigou.style.display == 'none') {
+                jieguo[id]=1;
+                // jieguo.fenshu=1;
+                zongjie.push(jieguo)
+                console.log(JSON.stringify(jieguo));
+                duigou.style.display = 'block'
+                duigou.style.color="#6666ff"
+                  wenzi.style.color='#6666ff'
+                return
+              }
+      }
+
+
+      function xuanze1(id) {
+        var jieguo = {};
+        // var wenzi = $api.byId(id);
+        // var duigou = $api.byId('ti'+id)
+        var wenzi = document.getElementById(id);
+        var qiuzhiR = document.getElementsByName('qiuzhiR');
+        var duigou = document.getElementById('ti'+id)
+        if (duigou.style.display =='block') {
+                    duigou.style.display = 'none'
+                    duigou.style.color="#6666ff"
+                      wenzi.style.color='#333'
+                  for (var i = 0; i < zongjie1.length; i++) {
+                    for (var key in zongjie1[i]) {
+                      if (key == id) {
+                        zongjie1.splice(i, 1)
+                        console.log(JSON.stringify(zongjie1));
+                        return
+                      }
+                    }
+                  }
+
+                    return
+              }
+                    if (duigou.style.display == 'none') {
+                      jieguo[id]=1;
+                      // jieguo.fenshu=1;
+                      zongjie1.push(jieguo)
+                      console.log(zongjie1);
+
+                      duigou.style.display = 'block'
+                      duigou.style.color="#6666ff"
+                        wenzi.style.color='#6666ff'
+                      return
+                    }
+            }
+            function xuanze2(id) {
+              var jieguo = {};
+              // var wenzi = $api.byId(id);
+              // var duigou = $api.byId('ti'+id)
+              var wenzi = document.getElementById(id);
+              var qiuzhiR = document.getElementsByName('qiuzhiR');
+              var duigou = document.getElementById('ti'+id)
+              if (duigou.style.display =='block') {
+                          duigou.style.display = 'none'
+                          duigou.style.color="#6666ff"
+                            wenzi.style.color='#333'
+                        for (var i = 0; i < zongjie2.length; i++) {
+                          for (var key in zongjie2[i]) {
+                            if (key == id) {
+                              zongjie2.splice(i, 1)
+                              console.log(JSON.stringify(zongjie2));
+                              return
+                            }
+                          }
+                        }
+
+                          return
+                    }
+                          if (duigou.style.display == 'none') {
+                            jieguo[id]=1;
+                            // jieguo.fenshu=1;
+                            zongjie2.push(jieguo)
+                            console.log(zongjie2);
+
+                            duigou.style.display = 'block'
+                            duigou.style.color="#6666ff"
+                              wenzi.style.color='#6666ff'
+                            return
+                          }
+                  }
+                  function xuanze3(id) {
+                    var jieguo = {};
+                    // var wenzi = $api.byId(id);
+                    // var duigou = $api.byId('ti'+id)
+                    var wenzi = document.getElementById(id);
+                    var qiuzhiR = document.getElementsByName('qiuzhiR');
+                    var duigou = document.getElementById('ti'+id)
+                    if (duigou.style.display =='block') {
+                                duigou.style.display = 'none'
+                                duigou.style.color="#6666ff"
+                                  wenzi.style.color='#333'
+                              for (var i = 0; i < zongjie3.length; i++) {
+                                for (var key in zongjie3[i]) {
+                                  if (key == id) {
+                                    zongjie3.splice(i, 1)
+                                    console.log(JSON.stringify(zongjie3));
+                                    return
+                                  }
+                                }
+                              }
+
+                                return
+                          }
+                                if (duigou.style.display == 'none') {
+                                  jieguo[id]=1;
+                                  // jieguo.fenshu=1;
+                                  zongjie3.push(jieguo)
+                                  console.log(zongjie3);
+
+                                  duigou.style.display = 'block'
+                                  duigou.style.color="#6666ff"
+                                    wenzi.style.color='#6666ff'
+                                  return
+                                }
+                        }
+                        function xuanze4(id) {
+                          var jieguo = {};
+                          // var wenzi = $api.byId(id);
+                          // var duigou = $api.byId('ti'+id)
+                          var wenzi = document.getElementById(id);
+                          var qiuzhiR = document.getElementsByName('qiuzhiR');
+                          var duigou = document.getElementById('ti'+id)
+                          if (duigou.style.display =='block') {
+                                      duigou.style.display = 'none'
+                                      duigou.style.color="#6666ff"
+                                        wenzi.style.color='#333'
+                                    for (var i = 0; i < zongjie4.length; i++) {
+                                      for (var key in zongjie4[i]) {
+                                        if (key == id) {
+                                          zongjie4.splice(i, 1)
+                                          console.log(JSON.stringify(zongjie4));
+                                          return
+                                        }
+                                      }
+                                    }
+
+                                      return
+                                }
+                                      if (duigou.style.display == 'none') {
+                                        jieguo[id]=1;
+                                        // jieguo.fenshu=1;
+                                        zongjie4.push(jieguo)
+                                        console.log(zongjie4);
+
+                                        duigou.style.display = 'block'
+                                        duigou.style.color="#6666ff"
+                                          wenzi.style.color='#6666ff'
+                                        return
+                                      }
+                              }
+                              function xuanze5(id) {
+                                var jieguo = {};
+                                // var wenzi = $api.byId(id);
+                                // var duigou = $api.byId('ti'+id)
+                                var wenzi = document.getElementById(id);
+                                var qiuzhiR = document.getElementsByName('qiuzhiR');
+                                var duigou = document.getElementById('ti'+id)
+                                if (duigou.style.display =='block') {
+                                            duigou.style.display = 'none'
+                                            duigou.style.color="#6666ff"
+                                              wenzi.style.color='#333'
+                                          for (var i = 0; i < zongjie5.length; i++) {
+                                            for (var key in zongjie5[i]) {
+                                              if (key == id) {
+                                                zongjie5.splice(i, 1)
+                                                console.log(JSON.stringify(zongjie5));
+                                                return
+                                              }
+                                            }
+                                          }
+
+                                            return
+                                      }
+                                            if (duigou.style.display == 'none') {
+                                              jieguo[id]=1;
+                                              // jieguo.fenshu=1;
+                                              zongjie5.push(jieguo)
+                                              console.log(zongjie5);
+
+                                              duigou.style.display = 'block'
+                                              duigou.style.color="#6666ff"
+                                                wenzi.style.color='#6666ff'
+                                              return
+                                            }
+                                    }
+
+function next() {
+  if (zongjie == []|| zongjie == '') {
+      alert("最少选中一项！")
+      return
+  }
+document.getElementById('biaoji').innerHTML=8
+  document.getElementById('xianshi').style.display='none'
+  document.getElementById('xianshi1').style.display='block'
+  document.getElementById('jindu').style.width='44.4%'
+    huizong.push.apply(huizong,zongjie);
+    console.log(huizong);
+}
+function next1() {
+  if (zongjie1 == []|| zongjie1 == '') {
+      alert("最少选中一项！")
+      return
+  }
+document.getElementById('biaoji').innerHTML=9
+  document.getElementById('xianshi1').style.display='none'
+  document.getElementById('xianshi2').style.display='block'
+  document.getElementById('jindu').style.width='49.95%'
+    huizong.push.apply(huizong,zongjie1);
+    console.log(huizong);
+
+}
+function next2() {
+  if (zongjie2 == []|| zongjie2 == '') {
+      alert("最少选中一项！")
+      return
+  }
+document.getElementById('biaoji').innerHTML=10
+  document.getElementById('xianshi2').style.display='none'
+  document.getElementById('xianshi3').style.display='block'
+  document.getElementById('jindu').style.width='55.5%'
+    huizong.push.apply(huizong,zongjie2);
+    console.log(huizong);
+
+}
+function next3() {
+  if (zongjie3 == []|| zongjie3 == '') {
+      alert("最少选中一项！")
+      return
+  }
+document.getElementById('biaoji').innerHTML=11
+  document.getElementById('xianshi3').style.display='none'
+  document.getElementById('xianshi4').style.display='block'
+  document.getElementById('jindu').style.width='61.05%'
+    huizong.push.apply(huizong,zongjie3);
+    console.log(huizong);
+
+}
+function next4() {
+  if (zongjie4 == []|| zongjie4 == '') {
+      alert("最少选中一项！")
+      return
+  }
+document.getElementById('biaoji').innerHTML=12
+  document.getElementById('xianshi4').style.display='none'
+  document.getElementById('xianshi5').style.display='block'
+  document.getElementById('jindu').style.width='66.6%'
+    huizong.push.apply(huizong,zongjie4);
+    console.log(huizong);
+
+}
+
+function next5() {
+  if (zongjie5 == []|| zongjie5 == '') {
+      alert("最少选中一项！")
+      return
+  }
+
+// document.getElementById('biaoji').innerHTML=13
+  // huizong.concat(zongjie,zongjie1,zongjie2,zongjie3,zongjie4,zongjie5)
+  huizong.push.apply(huizong,zongjie5);
+  localStorage.arr = $api.jsonToStr(huizong);
+
+  console.log(localStorage.arr);
+  document.getElementById('xianshi5').style.display='none'
+  document.getElementById('jindu').style.width='72.15%'
+  api.openWin({
+      name: 'occupation3_win',
+      url: './occupation3_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+  // console.log(JSON.stringify(huizong))
+  // document.getElementById('xianshi1').style.display='block'
+
+
+}
+
+      // function aaa(tag, index) {
+      //   mycars.push(dataEval[index]);
+      //   alert(mycars);
+      // }
+
+
+
+
+  </script>
+</html>

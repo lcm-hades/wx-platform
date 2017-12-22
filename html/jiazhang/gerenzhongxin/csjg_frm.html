@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .left{
+        float: left;
+      }
+      .right{
+        float: right;
+        text-align:right;
+      }
+      .biaoqian{
+        display: inline-block;
+        padding: 2px 14px;
+        background-color: white;
+        border-radius: 12px;
+        border: 1px solid #a1a1a1;
+        font-size: 12px;
+        color: #333333;
+        margin-top:14px;
+      }
+      .time{
+        color: #999999;
+        font-size: 12px;
+      }
+
+      .student{
+        color: #666666;
+        font-size: 12px;
+        margin-top:14px;
+      }
+
+      .biaoti{
+        color: #333333;
+        font-size: 16px;
+      }
+
+      ul li{
+        overflow:hidden;
+        padding:10px;
+        background-color:white;
+        border-bottom:1px solid #e5e5e5;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <ul id="cepingjieguo_con">
+          <script id="cepingjieguo" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li tapmode onclick="itemClick({{=it[i].studentid}},{{=it[i].numbers}},{{=it[i].id}})">
+                <div class="left">
+                  <div class="biaoti">专业倾向报告</div>
+                  <div class="student">学生：{{=it[i].studentname}}</div>
+                </div>
+
+                <div class="right">
+                  <div class="time">测评时间：{{=it[i].time}}</div>
+
+                </div>
+              </li>
+            {{}}}
+
+        </script>
+
+      </ul>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+      var ceping=doT.template(document.getElementById('cepingjieguo').innerHTML)
+    apiready = function() {
+          api.parseTapmode();
+          if (api.pageParam.data !=''||api.pageParam.data !=null) {
+              document.getElementById('cepingjieguo_con').innerHTML = ceping(api.pageParam.data);
+          }else {
+            api.toast({
+                msg:'暂无报告',
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+          // console.log(JSON.stringify(api.pageParam.data));
+
+    };
+
+    function itemClick(studentid,num,id) {
+      api.showProgress({
+        title: '努力加载中...',
+        text: '先喝杯茶...',
+        modal: false
+    });
+      api.ajax({
+          url: 'http://http://www.yxke12.com/index.php/Ate/Member/teacher_parentcon.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: studentid,
+                  num:num,
+                  zid:id,
+              },
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+            if (ret.status==100) {
+              api.openWin({
+                  name: 'zhuanye_report_win',
+                  url: './zhuanye_report_win.html',
+                  pageParam: {
+                      data:ret.data
+                  }
+              });
+            }
+              // console.log( JSON.stringify( ret ) );
+          } else {
+            api.hideProgress();
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+    }
+
+</script>
+
+</html>

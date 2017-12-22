@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+    .aui-list .aui-list-item-title {
+        font-size: 0.8rem;
+        position: relative;
+        max-width: 100%;
+        color: #333333;
+        margin-left: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+  <section class="aui-content">
+      <ul class="aui-list aui-list-in aui-margin-b-15">
+          <li class="aui-list-item" template onclick="xiugaimima()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">修改密码</div>
+              </div>
+          </li>
+          <li class="aui-list-item" template onclick="yijianfankui()">
+
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">意见反馈</div>
+              </div>
+          </li>
+
+      </ul>
+      <ul class="aui-list aui-list-in">
+          <li class="aui-list-item" template onclick="guanyuwomen()">
+
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">关于我们</div>
+
+              </div>
+          </li>
+          <li class="aui-list-item" tapmode onclick="api.clearCache(function() {api.toast({msg: '清除完成'});});">
+
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">清除缓存</div>
+
+              </div>
+          </li>
+      </ul>
+  </section>
+
+
+  <div class="aui-content-padded" style="margin-top: 75.5px;">
+    <div class="aui-btn aui-btn-danger aui-btn-block aui-btn-sm" tapmode onclick="loginOut();">退出登录</div>
+</div>
+  </div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+
+        api.parseTapmode();
+
+
+    };
+function xiugaimima() {
+  api.openWin({
+      name: 'xiugaimima_win',
+      url: './xiugaimima_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
+
+
+function yijianfankui() {
+  api.openWin({
+      name: 'yijianfankui_win',
+      url: './yijianfankui_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
+
+function guanyuwomen() {
+  api.openWin({
+      name: 'guanyuwomen_win',
+      url: './guanyuwomen_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function loginOut() {
+  $api.clearStorage ();
+    api.closeToWin({
+        name: 'root'
+    });
+    $api.setStorage('tiyan', '1');
+}
+</script>
+</html>

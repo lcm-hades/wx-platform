@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style type="text/css">
+      .btn{
+        width: 32%;
+        border: solid 1px #a1a1a1;
+        background-color: #fff;
+        border-radius: 4px;
+         font-family: 'PingFang-SC';
+         color: #a1a1a1;
+      }
+      .btn1{
+
+        border: solid 1px #6666ff;
+         color: #6666ff;
+      }
+      .queding {
+        width: 9.4rem;
+        height: 1.95rem;
+        border-radius: 18px;
+        background-color: #6666ff;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        font-family: 'PingFang-SC';
+        color: #f5f5f5;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      .shizi{
+        width:22%;
+        height: 20%;
+
+        /*margin-right: 0.2rem;*/
+        display: inline-block;
+
+      }
+
+      .shizitu{
+        width: 22%;
+        height: 3.6rem;
+        /*margin-left: 0.2rem;*/
+        margin-right: 0.3rem;
+        display: inline-block;
+
+      }
+
+      .aui-iconfont {
+            position: relative;
+            font-family: "aui_iconfont" !important;
+            font-size: 2rem;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .shizizhong{
+          position: absolute;
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          text-align: center;
+          line-height: 2.9rem;
+        }
+        img {
+            width: 100%;
+            height: 3.6rem;
+        }
+    </style>
+</head>
+
+<body>
+  <header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+    <a class="aui-pull-left aui-btn" tapmode onclick= 'api.closeWin();'>
+        <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+    </a>
+    <div id="title" class="aui-title">发表1</div>
+
+    <!-- <a class="aui-pull-right aui-btn aui-btn-outlined" tapmode="hover">
+
+          <div class="aui-dot dot-pos"></div>
+          <img src="../../../image/message.png" style="width:18px;height:18px">
+      </a> -->
+  </header>
+  <div id="" class="flex-wrap flex-vertical">
+
+      <div style="height:3.55rem;line-height:3.55rem;border-bottom: solid 1px #a1a1a1;">
+        <button type="button" name="button" class="btn" >家长-家长</button>
+        <button type="button" name="button" class="btn" >家长私语</button>
+
+      </div>
+      <div style="height:3.55rem;line-height:3.55rem;border-bottom: solid 1px #a1a1a1;position: relative;">
+        <input type="text" name="" value="" placeholder="请输入标题" style="position: absolute;margin: auto;top: 0;bottom: 0;width: 95%;left: 0;right: 0;">
+      </div>
+      <div style="margin-top:0.5rem">
+          <textarea name="name" rows="80" cols="80" style="height:10rem;width: 95%;margin:auto"  placeholder="请输入内容" ></textarea>
+      </div>
+      <div style="margin: auto;margin-top:0.5rem;width: 90%;">
+
+
+
+
+          <div class="shizi" id="jia" tapmode onclick="tianjiatu()">
+            <img src="../../../../image/jiahao.png"  alt="">
+          </div>
+
+
+
+
+      </div>
+
+
+  </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript">
+  var a;
+  var b;
+  var UIMediaScanner;
+  var path=[];
+    apiready = function() {
+       UIMediaScanner = api.require('UIMediaScanner');
+    }
+
+function tianjiatu() {
+  UIMediaScanner.open({
+      type: 'picture',
+      column: 4,
+      classify: true,
+      max: 9,
+      sort: {
+          key: 'time',
+          order: 'desc'
+      },
+      texts: {
+          stateText: '已选择*项',
+          cancelText: '取消',
+          finishText: '完成'
+      },
+      styles: {
+          bg: '#fff',
+          mark: {
+              icon: '',
+              position: 'bottom_left',
+              size: 20
+          },
+          nav: {
+              bg: '#eee',
+              stateColor: '#000',
+              stateSize: 18,
+              cancelBg: 'rgba(0,0,0,0)',
+              cancelColor: '#000',
+              cancelSize: 18,
+              finishBg: 'rgba(0,0,0,0)',
+              finishColor: '#000',
+              finishSize: 18
+          }
+      },
+      // scrollToBottom: {
+      //     intervalTime: 3,
+      //     anim: true
+      // },
+      exchange: true,
+      rotation: true
+  }, function(ret) {
+      if (ret.eventType == 'confirm') {
+          // alert(JSON.stringify(ret));
+          for (var i = 0; i < ret.list.length; i++) {
+
+            UIMediaScanner.transPath({
+                path:ret.list[i].path
+                }, function(ret, err) {
+                    if (ret) {
+                      path.push(ret.path)
+                      $api.before($api.byId('jia'),'<div class="shizitu" style=""><img src='+ret.path+' alt=""></div>');
+                        // console.log(JSON.stringify(ret));
+                    } else {
+                      api.toast({
+                          msg: JSON.stringify(err.msg),
+                          duration: 2000,
+                          location: 'bottom'
+                      });
+                    }
+                });
+          }
+
+
+
+      }else {
+
+      }
+  });
+}
+
+
+function xuanze(index){
+ a = index
+}
+function xuanze1(index1){
+b = index1
+}
+function qued() {
+    api.openWin({
+        name: 'page1',
+        url: './page1.html',
+        pageParam: {
+            one:a,
+            tow:b
+        }
+    });
+
+}
+</script>
+
+</html>

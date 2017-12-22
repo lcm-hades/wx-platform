@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        .empty {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .top_img {
+            width: 100%;
+            height: 150px;
+        }
+
+        .top_bar {
+            width: 100%;
+            overflow: hidden;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: white;
+            border-bottom: 1px solid #d2d2d2;
+        }
+
+        .top_inner {
+            width: 49.4%;
+            height: auto;
+            ;
+            float: left;
+            text-align: center;
+            position: relative;
+            background-color: white;
+        }
+
+        .top_inner_right {
+            border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img {
+            vertical-align: middle;
+            width: 35px;
+            height: 35px;
+        }
+
+        .xing_text {
+            display: inline;
+            font-size: 15px;
+            font-family: "PingFang-SC";
+            color: #333333
+        }
+
+        .mid_text {
+            font-size: 10px;
+            font-family: "PingFang-SC";
+            color: #333333
+        }
+
+        .mid_img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .mid_padding_8 {
+            padding-top: 9px!important;
+            padding-bottom: 9px!important;
+            line-height: 1.0;
+        }
+
+        .title_panel {
+            width: 100%;
+            height: auto;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-top: 8px solid #f2f2f2;
+            background-color: white;
+        }
+
+        .list_title {
+            margin-left: 8px;
+            color: black;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+            color: #333333
+        }
+
+        .occupation {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .occupationText {
+            font-family: 'PingFang-SC';
+            font-size: 35px;
+            font-weight: 500;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .text-style-1 {
+            font-weight: 900;
+            color: #169fd6;
+        }
+
+        .shashibiya {
+            text-align: right!important;
+        }
+
+        .mingyan {
+            text-align: left;
+            font-family: 'PingFang-SC';
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #333333;
+            margin-top: 12.5px;
+        }
+
+        .yanyu {
+            width: 90%;
+            margin: auto;
+        }
+
+        .shuoming {
+            width: 90%;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        .shuoming p {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            font-weight: 500;
+            text-align: justify;
+            color: #333333;
+            line-height: 2
+        }
+
+        .z-t {
+            margin-top: 20px
+        }
+
+        .z-margin-t-35 {
+            margin-top: 35px
+        }
+
+        .z-col {
+            background: #f5f5f5;
+        }
+
+        img {
+            height: 100%!important;
+            width: 100%!important;
+        }
+
+        .z-w {
+            width: 100%;
+            line-height: 4;
+            overflow: hidden;
+        }
+
+        .z-r {
+            /*text-align: right;*/
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 61px;
+        }
+
+        ul {
+            width: 85%;
+            margin: auto;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        /*ul li{
+        display: inline-block;
+        width: 49%;
+      }*/
+
+        ul li .textZ {
+            font-family: 'PingFang-SC';
+            font-size: 0.75rem;
+            color: #666666;
+            width: 49%;
+        }
+
+        ul li .font-gray{
+          color: #a1a1a1;
+        }
+
+        ul li{
+          padding-left: 10px;
+        }
+
+
+        .textZ-c {
+            color: #a1a1a1;
+            font-family: 'PingFang-SC';
+            font-size: 0.75rem;
+            width: 49%;
+        }
+
+        ul li .dayZ {
+            font-size: 0.7rem;
+            text-align: right;
+        }
+
+        .z-width-1 {
+            height: 38px!important;
+            width: 33px!important;
+            margin-left: 20px;
+        }
+
+        .z-width-2 {
+            width: 31px!important;
+            height: 2rem!important;
+        }
+
+        .z-width-3 {
+            width: 30px!important;
+            height: 2rem!important;
+        }
+
+        .z-col-xs-85 {
+            width: 85%;
+            margin: 25px auto;
+        }
+
+        .v-t {
+            width: 20%;
+            font-size: 17px;
+            font-weight: 600;
+            vertical-align: top;
+            font-family: 'PingFang-SC';
+            color: #666666;
+        }
+
+        .z-text-shuoming {
+            width: 80%;
+            font-family: 'PingFang-SC';
+            color: #999999;
+        }
+        .aui-col-xs-20 {
+        	width: 13%;
+        }
+        .aui-col-xs-80 {
+        	width: 87%;
+        }
+    </style>
+</head>
+
+<body style="background:#f5f5f5">
+    <!-- <div class="empty"> -->
+    <div id="main" class="flex-con z-col">
+        <script id="evaluationtmpl" type="text/x-dot-template">
+        <div>
+            <img class="top_img" src="../../image/zhuanye.png">
+        </div>
+          {{for (var i = 0; i < it.max; i++) {}}
+          {{if (i < it.data.length) {}}
+                  <div class="z-w" tapmode onclick="lookReportDetails({{=i}})">
+                      <div class="aui-col-xs-20 z-r">
+                        <img class='z-width-1' src="../../image/light{{=i+1}}.png" alt="">
+                  {{}else{}}
+                    <div class="z-w">
+                      <div class="aui-col-xs-20 z-r">
+                          <img class='z-width-1' src="../../image/gray{{=i+1}}.png" alt="">
+                  {{}}}
+                  </div>
+                  <div class="aui-col-xs-80">
+                      <ul>
+                        <li>
+                            {{if (i < it.data.length) {}}
+                              <span class="textZ ">专业倾向报告{{=it.data[i].numbers}}</span>
+                              <span class="textZ dayZ ">{{=it.data[i].time}}</span>
+                            {{}else{}}
+                              <span class="textZ font-gray">专业倾向报告{{=i+1}}</span>
+                            {{}}}
+                        </li>
+                      </ul>
+                  </div>
+              </div>
+          {{}}}
+          <div class="z-col-xs-85">
+              <span class="v-t">备注：</span><span class="z-text-shuoming">请完成职业兴趣测试、职业性格测试两项测试之后生成专业倾向报告</span>
+          </div>
+        </script>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    var data, max, total = {};
+	  var conText;
+    apiready = function() {
+      api.parseTapmode();
+        data = $api.strToJson(localStorage.zonghebaogao);
+        max = api.pageParam.max;
+        total.data = data;
+        total.max = max;
+
+        conText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+        document.getElementById('main').innerHTML = conText(total);
+    };
+
+
+    function getReportData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zhuanye/zhuanye.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid')
+              },
+          }
+      },function(ret, err){
+          api.refreshHeaderLoadDone();
+          api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+                // data = ret.data;
+                // showUI();
+                // var s = {};
+                // var fn = 'refreshUI('+s+');';
+                // api.execScript({
+                //     script: fn
+                // });
+                // console.log(JSON.stringify(ret.data));
+                total.data = ret.data.zonghebaogao;
+                total.max = ret.data.max;
+                // var conText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+                document.getElementById('main').innerHTML = conText(total);
+
+            }else {
+              api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+              // console.log(JSON.stringify( ret ));
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+
+    }
+
+    function lookReportDetails(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Ate/Member/teacher_parentcon.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  num:data[index].numbers,
+                  zid:data[index].id
+              },
+          }
+      },function(ret, err){
+          api.refreshHeaderLoadDone();
+          api.hideProgress();
+          console.log(JSON.stringify( ret ));
+          if (ret) {
+            if (ret.status == 100) {
+                // ret.data;
+                console.log(JSON.stringify( ret ));
+                localStorage.data = $api.jsonToStr(ret.data);
+                api.openWin({
+                    name: 'zhuanye_report_win',
+                    url: './zhuanye_report_win.html',
+                    pageParam: {
+                        // data: ret.data,
+                        source:0
+                    }
+                });
+
+            }else {
+              api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+
+    }
+</script>
+
+</html>

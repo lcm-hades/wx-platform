@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .filter_item{
+        width: 100%;
+        height: 40px;
+        background-color: white;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .filter_item .ic{
+          width:12px;
+          height: 12px;
+          margin-top: 14px;
+          margin-left: 10px;
+      }
+
+      .filter_item .left{
+
+      }
+
+      .filter_item .right{
+          float: right;
+          height: 8px;
+          width: 12px;
+          margin-top: 16px;
+          margin-right: 10px;
+          transition: 0.5s;
+
+
+      }
+
+      .ani_r{
+        -webkit-transform: rotate(-90deg);
+      }
+
+
+      @-webkit-keyframes fadeIn {
+        0% {
+          opacity: 0; /*初始状态 透明度为0*/
+          width: 0%;
+          height: 0%;
+        }
+        50% {
+          opacity: 0; /*中间状态 透明度为0*/
+          width: 50%;
+          height: 50%;
+        }
+        100% {
+          opacity: 1; /*结尾状态 透明度为1*/
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .score_show{
+        -webkit-animation-name: fadeIn; /*动画名称*/
+        -webkit-animation-duration: 0.5s; /*动画持续时间*/
+        -webkit-animation-iteration-count: 1; /*动画次数*/
+        -webkit-animation-delay: 0s; /*延迟时间*/
+      }
+
+      section .item{
+        background-color: white;
+        height: 36px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      section .score_name{
+          line-height: 36px;
+          margin-left: 10px;
+      }
+
+      section .score{
+          float: right;
+          line-height: 36px;
+          margin-right: 10px;
+      }
+      
+      .no_data{
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 120px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <img class="no_data" src="../../../../image/bull.png">
+
+      </img>
+      <div class="filter_item" tapmode onclick="onTopClick()" style="display:none">
+        <img src="../../../../image/ic_cj.png" class="ic"></img>
+        <span class="left">石健</span>
+        <span>2017004055658</span>
+        <img src="../../../../image/on_1.png" class="right ani_r" id="right_ic"></img>
+      </div>
+      <section id="score_sc" style="display:none">
+        <div class="item">
+          <span class="score_name">总分</span>
+          <span class="score">690分</span>
+        </div>
+        <div class="item">
+          <span class="score_name">总分</span>
+          <span class="score">690分</span>
+        </div>
+        <div class="item">
+          <span class="score_name">总分</span>
+          <span class="score">690分</span>
+        </div>
+        <div class="item">
+          <span class="score_name">总分</span>
+          <span class="score">690分</span>
+        </div>
+        <div class="item">
+          <span class="score_name">总分</span>
+          <span class="score">690分</span>
+        </div>
+        <div class="item">
+          <span class="score_name">总分</span>
+          <span class="score">690分</span>
+        </div>
+
+      </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      api.parseTapmode();
+    };
+
+    function onTopClick() {
+      var a = $api.byId("right_ic");
+      if ($api.hasCls(a, "ani_r")) {
+        $api.removeCls(a, 'ani_r');
+        score_sc.style.display = "block";
+        $api.addCls(score_sc, 'score_show');
+
+      }else {
+        $api.addCls(a, 'ani_r');
+
+        score_sc.style.display = "none";
+        $api.removeCls(score_sc, 'score_show');
+      }
+
+
+    }
+</script>
+
+</html>

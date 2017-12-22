@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+
+      body{
+      }
+
+      .linear{
+          width:100%;
+          background:-webkit-gradient(linear, center top, center bottom,from(#66aaff), to(#6666ff));
+      }
+
+      .real_tou{
+        height: 130px;
+        width: 130px;
+        position: absolute;
+        top:0px;
+        left:0px;
+        right:0px;
+        bottom: 0px;
+        border-radius: 65px;
+      }
+      .tou_icon{
+        height: 130px;
+        width: 130px;
+        /*background-image: url("../../image/tou_icon.png");*/
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        margin: 0 auto;
+        margin-top: 10%;
+        position: relative;
+
+      }
+
+      .input_pos{
+        padding: 10px 0px;
+        background-color: #ddd;
+        width:90%;
+        border-radius: 30px;
+        margin: 10px auto;
+        margin-top: 7%;
+        box-shadow:0px 0px 10px #fff
+      }
+      .aui-searchbar-input input {
+          color: #666666;
+          width:90%;
+          padding: 0;
+          margin: 0;
+          height: 20px;
+          line-height: 20px;
+          border: 0;
+          text-align: center;
+          -webkit-appearance: none;
+          font-size: 16px;
+      }
+
+      .my_input{
+        height: 30px;
+        display: flex;
+        align-items: center;
+        background: #ddd!important;
+      }
+
+
+      .img_c{
+        height: 32px;
+        width: 32px;
+        margin: 0px auto;
+        margin-top: 7%;
+        position: absolute;;
+        bottom: 0px;
+        right: 0px;
+      }
+
+      .sex{
+        width: 90px;
+        height: 90px;
+        margin: 0px 10px;
+        display: inline-block;
+      }
+
+      .sex_img{
+        width: 90px;
+        height: 90px;
+      }
+
+      .sex span{
+        margin-top:4px;
+      }
+
+      .sex_pos{
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .login_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 100%;
+        margin: 0px auto;
+        border-radius: 0px;
+        position: absolute;
+        font-size: 18px;
+        bottom: 0px;
+      }
+
+    </style>
+</head>
+
+<body >
+    <div class="flex-wrap flex-vertical ">
+      <div  class="tou_icon" tapmode onclick="touClick()">
+        <img id="tou_img" class="real_tou" src="../../image/tou_icon.png"></img>
+        <img class="img_c" src="../../image/camera.png"></img>
+      </div>
+      <div class="sex_pos">
+        <div class="sex">
+          <img id="sex_man" class="sex_img"  src="../../image/man_unselect.png" tapmode onclick="selectSex(1)"></img>
+          <span>男</span>
+        </div>
+        <div class="sex">
+          <img id="sex_wm" class="sex_img" src="../../image/wm_unselect.png" tapmode onclick="selectSex(0)"></img>
+          <span>女</span>
+        </div>
+      </div>
+
+      <div class="input_pos">
+          <div class="aui-searchbar-input my_input">
+                <input type="search" placeholder="输入你的姓名" id="name_in">
+          </div>
+      </div>
+        <div id='next_step' class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">下一步</div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var uploadData = {};
+    var sex_value = -1; // 未选择
+    var cur_pic;
+    apiready = function() {
+        uploadData = api.pageParam.data;
+        api.parseTapmode();
+    };
+
+    function selectSex(sex) {
+        var man = $api.byId('sex_man');
+        var wm = $api.byId('sex_wm');
+
+        if (sex == 0) {
+          // 女
+          sex_value = 0;
+          man.src = "../../image/man_unselect.png";
+          wm.src = "../../image/wm_select.png";
+        }else {
+          sex_value = 1;
+          man.src = "../../image/man_select.png";
+          wm.src = "../../image/wm_unselect.png";
+        }
+    }
+
+    function touClick() {
+      api.getPicture({
+        sourceType: 'album',
+        encodingType: 'png',
+        mediaValue: 'pic',
+        destinationType: 'url',
+        allowEdit: true,
+        quality: 100,
+        targetWidth: 130,
+        targetHeight: 130,
+        saveToPhotoAlbum: false
+      }, function(ret, err) {
+        if (ret) {
+            // alert(JSON.stringify(ret));
+            var tou_img = $api.byId('tou_img');
+            if(ret.data == "")
+              return;
+            tou_img.src = ret.data;
+            cur_pic = ret.data;
+        } else {
+            // alert(JSON.stringify(err));
+        }
+      });
+    }
+
+    function bindClick() {
+      var name = $api.byId('name_in').value;
+      // 未选择性别
+      if (sex_value == -1) {
+        api.toast({
+          msg: '你是GG还是MM?'
+        });
+      }else if (name == '') {
+        api.toast({
+          msg: '请填写姓名'
+        });
+      }else{
+        checkInfos(cur_pic, sex_value, name);
+      }
+    }
+
+    function checkInfos(pic, sex, name) {
+      var sex_str = sex == 0 ? "女" : "男";
+      uploadData.studentname = name;
+      uploadData.sex = sex_str;
+      uploadData.touxiang = pic;
+      api.openWin({
+          name: 'register_sixth_win',
+          url: './register_sixth_win.html',
+          pageParam: {
+              data: uploadData
+          }
+      });
+    }
+
+    function clearCardPWD() {
+      $api.byId('name_in').blur();
+    }
+</script>
+
+</html>

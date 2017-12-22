@@ -1,0 +1,116 @@
+<!doctype html>
+<html style="background:#f5f5f5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/z.css"/>
+
+    <style>
+      .flex-box{
+        width:100%;
+        height:3.5rem;
+        background:rgba(255,255,255,1);
+        border-bottom: 1px solid #d3d3d3;
+      }
+      .bag-bg{
+        width: 2.25rem;
+        height: 2.25rem;
+        float: left;
+        margin:0.65rem 0.75rem;
+      }
+      .bag-left{
+        float: left;
+        height: 3.5rem;
+      }
+      .bag-left span{
+        line-height: 1rem;
+        margin-top: 0.7rem;
+        font-size:0.8rem;
+        color: #333;
+      }
+      .bag-left p{
+        line-height: 1rem;
+        margin-top: 0.3rem;
+        font-size:0.6rem;
+        color: #8E8E8E;
+      }
+      .bag-right{
+        float: right;
+        margin: 0.65rem 0.75rem;
+      }
+      .bag-right span{
+        font-size: 0.4rem;
+        color: #cc3e3a;
+        display: block;
+        text-align: right;
+        margin-top: 0.2rem;
+      }
+      .bag-right p{
+        font-size: 0.8rem;
+        color: #333;
+        margin-top: 0.2rem;
+        text-align: right;
+      }
+    </style>
+</head>
+
+<body style="height:auto;">
+
+    <div class="flex-wrap flex-vertical" style="background:#f5f5f5" id="redbag_id">
+      <script id="redbaglist" type="text/x-dot-template">
+        {{for (var i = 0; i < it.length; i++) {}}
+
+       <div class="flex-box">
+         <div class="bag-bg">
+           <img src="../../../image/redbag.png"/>
+         </div>
+         <div class="bag-c">
+           <div class="bag-left">
+             <span>专业倾向报告{{=it[i].times}}的红包</span>
+             <p>{{=it[i].submit_time}}</p>
+           </div>
+           <div class="bag-right">
+           {{if (it.is_send==0) {}}
+             <span>已领取,待发放</span>
+              {{}else{}}
+                 <span>已领取,已发放</span>
+              {{}}}
+             <p>+{{=it[i].money}}</p>
+           </div>
+         </div>
+       </div>
+       {{}}}
+</script>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script src="../../../script/jquery-1.8.3.min.js"></script>
+<script src="../../../script/demo.js"></script>
+<script src="../../../script/network.js"></script>
+<script type="text/javascript" src="../../../script/aui-collapse.js" ></script>
+<script type="text/javascript">
+    var listHD_dot = doT.template(document.getElementById('redbaglist').innerHTML);
+    apiready = function() {
+      redbaglistFn();
+    };
+
+
+function redbaglistFn() {
+  var parames = {values:{}}
+  parames.values.studentid=$api.getStorage('studentid');
+  zhc.newpost('api/redpacket/lists',parames,function(data) {
+  // console.log('哈哈哈这里'+listHD_dot(data));
+  document.getElementById('redbag_id').innerHTML = listHD_dot(data);
+    api.parseTapmode();
+  },null,true)
+}
+</script>
+</html>

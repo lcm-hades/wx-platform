@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <script type="text/javascript" src="../../../script/api.js"></script>
+    <script type="text/javascript" src="../../../script/doT.js"></script>
+    <style>
+      body{
+
+      }
+
+      .grade{
+        font-size: 24px;
+        margin: 10px auto;
+        text-align: center;
+      }
+
+      .grade_show{
+
+        padding-left: 25px;
+        line-height: 50px;
+        font-size: 20px;
+        background-color: #ddd;
+        width: 80%;
+        margin: 0px auto;
+        height: 50px;
+        border-radius:25px;
+        position: relative;
+      }
+
+      .login_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 100%;
+        margin: 0px auto;
+        border-radius: 0px;
+        position: absolute;
+        font-size: 18px;
+        bottom: 0px;
+      }
+
+      .kaoshi{
+          margin: 10px auto;
+          width: 90%;
+          height: 100px;
+          text-align: center;
+      }
+
+      .ke{
+        display: inline-block;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 1px solid #6666ff;
+        line-height: 80px;
+        font-size: 22px;
+        margin: 0px 10px;
+      }
+
+      .select{
+        background-color: #6666ff!important;
+        color: white;
+      }
+      .grade_show select{
+        /*font-family: "PingFang-SC";*/
+        height: 50px;
+      }
+      .grade_show select option{
+        /*font-family: "PingFang-SC";*/
+      }
+      .pos_right{
+        position:absolute;
+        right:20px;
+        top:0px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+        <div class="grade">教室角色</div>
+        <div id="grade_id" class="aui-list-item-input grade_show" >
+            <select onchange="jiaose(this.value)" id="Tjiaose">
+                  <option value="1">班主任</option>
+                  <option value="2">任课老师</option>
+            </select>
+            <div class="aui-list-item-right pos_right" >
+                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+            </div>
+        </div>
+
+
+        <div id="panduanjiaose">
+          <div class="grade">年级</div>
+          <div id="grade_id" class="aui-list-item-input grade_show" >
+
+
+
+              <select id="Tbanji">
+
+                    <option value="高一">高一</option>
+                    <option value="高二">高二</option>
+                    <option value="高三">高三</option>
+
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+
+
+
+          </div>
+
+
+
+          <div class="grade">班级</div>
+
+            <div id="class_id" class="aui-list-item-input grade_show" >
+              <!-- <select>
+                  <option>安阳县</option>
+
+              </select> -->
+              <script id="class_s" type="text/x-dot-template">
+                <select id = "Tban">
+                {{for (var i = 1; i <= it; i++) {}}
+                    <option value = '{{=i}}'>{{=i}}班</option>
+                {{}}}
+                </select>
+                <div class="aui-list-item-right pos_right" >
+                    <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                </div>
+              </script>
+            </div>
+        </div>
+
+
+          <div class="grade">任课科目</div>
+            <div id="class_id" class="aui-list-item-input grade_show" >
+                <select id="Tkemu">
+                    <option>无</option>
+                    <option>数学</option>
+                    <option>语文</option>
+                    <option>英语</option>
+                    <option>物理</option>
+                    <option>化学</option>
+                    <option>生物</option>
+                    <option>政治</option>
+                    <option>地理</option>
+                    <option>历史</option>
+                    <option>音乐</option>
+                    <option>体育</option>
+                    <option>美术</option>
+                    <option>信息技术</option>
+                    <option>通用技术</option>
+                </select>
+                <div class="aui-list-item-right pos_right" >
+                    <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                </div>
+
+            </div>
+
+
+
+
+        <div id="next_step" class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">完成绑定</div>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    var banTypes = ["文科", "理科", "文理不分科"]
+
+    apiready = function() {
+
+
+    };
+
+
+
+    window.onload=function(){
+      // var _delta = 2;
+      // api.parseTapmode();
+      // var now = new Date();
+      // var year = now.getFullYear();       //年
+      //
+      // var grade_arr = [];
+      // for (var i = year - _delta; i <= year + _delta; i++) {
+      //   grade_arr.push(i);
+      // }
+
+      var class_count = doT.template(document.getElementById('class_s').innerHTML);
+      document.getElementById('class_id').innerHTML = class_count(50);
+    }
+
+    function gradeSelected(value) {
+        console.log(value);
+    }
+    function jiaose(value) {
+        if (value == "2") {
+          $api.byId('panduanjiaose').style.display="none";
+        }else {
+          $api.byId('panduanjiaose').style.display="block";
+        }
+    }
+
+    function classSelected(value) {
+        console.log(value);
+    }
+
+    function selectBranch(e, value) {
+      var ke = document.querySelectorAll(".ke");
+      for (var i = 0; i < ke.length; i++) {
+        if ($api.hasCls(ke[i], "select")) {
+            $api.removeCls(ke[i], "select");
+        }
+      }
+      $api.addCls(e, "select");
+
+    }
+
+    function bindClick() {
+      if ($api.byId('Tjiaose').value=='2') {
+        var jiaoseV = "任课教师"
+        var data= {}
+        data.phone= api.pageParam.shoujihao,
+        data.cardnumber= api.pageParam.cardnumber,
+        data.cid=api.pageParam.cid,
+        data.loginuser=api.pageParam.loginuser,
+        data.password=api.pageParam.password,
+        data.sex=api.pageParam.sex,
+        data.teachername=api.pageParam.parentname,
+        data.kemu = $api.byId('Tkemu').value;
+        data.classid = "暂无";
+        data.jiaose = jiaoseV;
+        data.schoolid=api.pageParam.schoolid,
+        data.xianid=api.pageParam.xianid
+      }else {
+        var jiaoseV = "班主任"
+        var data= {}
+        data.phone= api.pageParam.shoujihao,
+        data.cardnumber= api.pageParam.cardnumber,
+        data.cid=api.pageParam.cid,
+        data.loginuser=api.pageParam.loginuser,
+        data.password=api.pageParam.password,
+        data.sex=api.pageParam.sex,
+        data.teachername=api.pageParam.parentname,
+        data.kemu = $api.byId('Tkemu').value;
+        data.classid = $api.byId('Tban').value;
+        data.jiaose = jiaoseV;
+        data.schoolid=api.pageParam.schoolid,
+        data.xianid=api.pageParam.xianid
+      }
+console.log(JSON.stringify(data))
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '保存中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Ate/Teacher/addinfo.html',
+          method: 'post',
+          data: {
+              values: data,
+              files: {
+                  file: api.pageParam.pic
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                api.toast({
+                    msg: ret.data,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                api.openWin({
+                    name: 'login_win',
+                    url: './login_win.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+
+              }else {
+                api.toast({
+                    msg: ret.data,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+
+    }
+</script>
+
+</html>

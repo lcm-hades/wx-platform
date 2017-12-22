@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+
+    .top_img{
+      width: 100%;
+      height: 210px;
+      position: absolute;
+    }
+    .boimg{
+      width: 0.5rem;
+      height: 0.65rem
+    }
+    .keTitle{
+      font-family: 'PingFang-SC';
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #666666;
+    }
+    .boTitle{
+      color: #6666ff!important;
+    }
+    .kechengjieshaoTitle{
+       font-family: 'PingFang-SC';
+       font-weight: 500;
+       color: #333333;
+    }
+    .biaotu{
+      width: 11.5rem;
+      height: 6.5rem;
+      margin: 0.55rem auto;
+    }
+    .cont{
+      width: 90%;
+      margin: auto;
+      text-align: left;
+      font-family: "PingFang-SC";
+      font-size: 0.7rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #333333;
+    }
+    .zhujiaoimg{
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      text-align: center;
+    }
+    .timg{
+      width: 2.7rem;
+      height: 2.7rem;
+      vertical-align: middle;
+    }
+    .zhujiang{
+      font-family: 'PingFang-SC';
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: left;
+      color: #333333;
+      padding-left: 1rem;
+    }
+    </style>
+</head>
+<body>
+    <div id="sykt_div" class="aui-content aui-margin-b-15"  >
+      <div style="width:100%;position: fixed;z-index:100;background:#000">
+          <video style="width:100%;height:10.55rem;" autoplay="autoplay" id="shipin" onwebkitendfullscreen="onVideoPlaying();" ></video>
+      </div>
+
+        <ul class="aui-list aui-list-in" id="mulu" style="margin-top:10.55rem">
+
+           <script id="evaluationtmpl" type="text/x-dot-template">
+               {{for (var i = 0; i < it.length; i++) {}}
+                       <li class="aui-list-item" tapmode onclick="onItemPlayClick({{=i}})">
+                           <div class="aui-list-item-label-icon">
+                               <img src="../../../image/weibofang.png" id='shipin_img{{=i}}' class="boimg"  alt="">
+                           </div>
+                           <div class="aui-list-item-inner keTitle " id="shipin_name{{=i}}">
+                               {{=it[i].name}}
+                               <div class="aui-list-item-right " style="width:12%">第{{=it[i].id}}讲</div>
+                           </div>
+                       </li>
+               {{}}}
+
+         </script>
+     </ul>
+    </div>
+
+
+
+
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/aui-tab.js" ></script>
+<script type="text/javascript" src="../../../script/doT.js" ></script>
+<script type="text/javascript" src="../../../script/network.js" ></script>
+<script type="text/javascript">
+    var index;
+    var data;
+    var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+    apiready = function(){
+
+        api.parseTapmode();
+        var parames={values:{}}
+        zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuejishuvedio.html',parames,function(data) {
+          $api.byId("shipin").src = 'http://www.yxke12.com/Public/Teacher/images/flv/001.mp4';
+          document.getElementById('mulu').innerHTML = evalText(data.list);
+          var a =  document.getElementsByTagName('li')
+          for (var i = 0; i < a.length; i++) {
+            if (i == 0) {
+              $api.byId('shipin_img'+i).src = '../../../image/bofang.png'
+              $api.addCls($api.byId('shipin_name'+i), 'boTitle');
+            }
+          }
+        },null,true)
+
+        // playVideo();
+    }
+
+
+    function onItemPlayClick(index) {
+      // cur_index = index;
+      var a =  document.getElementsByTagName('li')
+      for (var i = 0; i < a.length; i++) {
+        if (i == index) {
+          $api.byId('shipin_img'+i).src = '../../../image/bofang.png'
+          $api.addCls($api.byId('shipin_name'+i), 'boTitle');
+        }else {
+          $api.byId('shipin_img'+i).src = '../../../image/weibofang.png'
+          $api.removeCls($api.byId('shipin_name'+i), 'boTitle');
+        }
+      }
+      // cur_paixu = cur_data_list[index].paixu;
+      getPlayAddress(index);
+    }
+
+  function getPlayAddress(index) {
+    var parames={values:{}}
+    zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuejishuvedio.html',parames,function(data) {
+      var sp = data.list[index].flv;
+      var spstr = sp.split('.')
+      var spfilst = spstr.shift()
+      $api.byId("shipin").src = 'http://www.yxke12.com/Public/Teacher/images/flv/'+spfilst+'.mp4';
+
+    },null,true)
+  }
+
+    var fullscreen = function(elem) {
+        var prefix = 'webkit';
+          if ( elem[prefix + 'EnterFullScreen'] ) {
+            return prefix + 'EnterFullScreen';
+          } else if( elem[prefix + 'RequestFullScreen'] ) {
+            return prefix + 'RequestFullScreen';
+          };
+        return false;
+    };
+
+    function autoFullScrenn(v){
+        var ua   = navigator.userAgent.toLowerCase();
+        var Android = String(ua.match(/android/i)) == "android";
+        if(!Android) return;//非android系统不使用;
+        var video  = v,doc = document;
+        var fullscreenvideo = fullscreen(doc.createElement("video"));
+        if(!fullscreen) {
+            alert("不支持全屏模式");
+            return;
+        }
+        video.addEventListener("webkitfullscreenchange",function(e){
+            if(doc.webkitIsFullScreen){//退出全屏暂停视频
+                // this.pause();
+                // alert("aaaa")
+                api.setScreenOrientation({
+                    orientation: 'auto'
+                });
+                // this.pause();
+            };
+        }, false);
+        video.addEventListener("click", function(){
+            this.play();
+            video[fullscreenvideo]();
+        }, false);
+
+
+        video.addEventListener('ended',function(){
+            doc.webkitCancelFullScreen(); //播放完毕自动退出全屏
+        },false);
+
+    };
+
+    function playVideo() {
+      if (data[index].videocsrc == null || data[index].videocsrc == '') {
+        api.toast({
+            msg: '数据错误',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+      var connectionType = api.connectionType;  //比如： wifi
+      if (connectionType == "wifi") {
+        // api.openVideo({
+        //     url: 'http://www.yxke12.com/Public/Home/images/video/' + data[index].videocsrc// data[index].video
+        // });
+
+        // $api.byId('load_id').style.display = "none";
+        // $api.byId('shipin').style.display = "block";
+        $api.byId("shipin").autoplay = "autoplay";
+        $api.byId("shipin").src = 'http://www.yxke12.com/Public/Home/images/video/' + data[index].videocsrc;
+
+        var v = document.getElementById("shipin")
+        autoFullScrenn(v)
+      }else if (connectionType == 'none') {
+          api.toast({
+              msg: '无网络',
+              duration: 2000,
+              location: 'bottom'
+          });
+
+      }else {
+        api.confirm({
+            title:"提示",
+            msg:"您当前为"+connectionType+"网络 是否继续观看",
+            buttons: ['退出观看', '继续观看']
+        }, function(ret, err) {
+            var index = ret.buttonIndex;
+            if(index == 2){
+              // api.openVideo({
+              //     url: 'http://www.yxke12.com/Public/Home/images/video/' + data[index].videocsrc// data[index].video
+              // });
+              // $api.byId('load_id').style.display = "none";
+              // $api.byId('shipin').style.display = "block";
+              $api.byId("shipin").src = 'http://www.yxke12.com/Public/Home/images/video/' + data[index].videocsrc;
+              var v = document.getElementById("shipin")
+              autoFullScrenn(v)
+            }
+        });
+      }
+    }
+
+    function onVideoPlaying() {
+      api.setFullScreen({
+        fullScreen: false
+      });
+    }
+</script>
+</html>

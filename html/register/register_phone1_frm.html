@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+      .p{
+        border: 1px solid #c9c9c9;
+        border-radius: 4px;
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+      }
+
+      .p .tel{
+        display: block;
+        border-bottom: 1px solid #c9c9c9;
+      }
+      .p .tel .ic{
+        width: 17px;
+        height: 24px;
+        display: inline;
+        margin-left: 10px;
+        vertical-align:bottom;
+        vertical-align:middle;
+        vertical-align:top;
+        margin-top: 20px;
+      }
+
+      .p .tel input{
+        display: inline;
+        height: 65px;
+        width: 9em;
+        padding-left: 4px;
+
+      }
+
+      .p .tel .del{
+        display: inline;
+        width: 16px;
+        height: 16px;
+        float: right;
+        margin-top: 24px;
+        margin-right: 10px;
+      }
+
+      .p .tel .yan_dis{
+        width: 66px;
+        height: 33px;
+        display: inline;
+        background: #dfe0e1;
+        border-radius: 4px;
+        border: 1px solid #dddddd;
+        text-align: center;
+        line-height: 33px;
+        color: #b6b6b6;
+        float: right;
+        margin-top: 15px;
+        margin-right: 10px;
+      }
+
+      .p .tel .yan{
+        width: 66px;
+        height: 33px;
+        display: inline;
+        background: #6666ff;
+        border-radius: 4px;
+        border: 1px solid #6666ff;
+        text-align: center;
+        line-height: 33px;
+        color: white;
+        float: right;
+        margin-top: 15px;
+        margin-right: 10px;
+      }
+
+
+      .p .pwd{
+        display: block;
+      }
+
+      .p .pwd .ic{
+        width: 17px;
+        height: 20px;
+        display: inline;
+        margin-left: 10px;
+        vertical-align:bottom;
+        vertical-align:middle;
+        vertical-align:top;
+        margin-top: 22px;
+      }
+      .p .pwd input{
+        display: inline;
+        height: 65px;
+        padding-left: 4px;
+        width: 10em;
+      }
+
+      .next_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff;
+        width: 90%;
+        margin: 0px auto;
+        margin-top: 20px;
+        border-radius: 4px;
+        text-align: center;
+        color: white;
+      }
+ .tip{
+      margin-top: 10px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      color: #999999;
+      font-size: 14px;
+      text-align: center;
+    }
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div class="flex-wrap flex-vertical">
+      <div class="p">
+        <div class="tel">
+          <img class="ic" src="../../image/ic_ph.png"></img>
+          <input id="ph" type="number" placeholder="请输入手机号"></input>
+          <div id="yan" class="yan" tapmode onclick="yanClick();">验证码</div>
+          <img id="del" class="del" src="../../image/ic_del.png" tapmode onclick="delClick();"></img>
+
+        </div>
+
+        <div class="pwd">
+          <img class="ic" src="../../image/ic_pwd.png"></img>
+          <input id="code_i" type="number" placeholder="请输入收到的验证码"></input>
+        </div>
+
+        <div class="pwd" style="border-top: 1px solid #dddddd">
+          <img class="ic" src="../../image/ic_pwd.png"></img>
+          <input  type="password"  id="password" placeholder="请输入密码"></input>
+        </div>
+        <div class="pwd" style="border-top: 1px solid #dddddd">
+          <img class="ic" src="../../image/ic_pwd.png"></img>
+          <input  type="password"  id="password_in1" placeholder="请再次输入密码"></input>
+        </div>
+      </div>
+      <div class="tip">密码为8-16位数字、字母或者下划线，建议混合使用</div>
+      <div class="next_btn" tapmode onclick="nextClick();">下一步</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/tools.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+
+<script type="text/javascript">
+var MAX_TIME = 60;
+var count = MAX_TIME;
+var timer;
+var yan;
+var phoneNum;
+var uploadData = {};
+var reg = /^[A-Za-z][A-Za-z0-9]{0,}$/;
+var ph = document.getElementById('ph')
+apiready = function() {
+  uploadData = api.pageParam.data;
+  // ph.innerHTML = tools.hidePhone("18612699026");
+  yan = $api.byId('yan');
+};
+
+// 验证码btn 点击回调
+function yanClick() {
+    if (tools.isPhone(ph.value)) {
+      yan.disabled = true;
+      count = MAX_TIME;
+      $api.removeCls(yan, 'yan');
+      $api.addCls(yan, 'yan_dis');
+      yan.innerHTML = "(" + count + ")秒";
+      timer = window.setInterval(timeCall,1000);
+      getAuthCode();
+    }else {
+      api.toast({
+          msg: '请输入正确的手机号',
+          duration: 2000,
+          location: 'bottom'
+      });
+    }
+}
+
+function timeCall() {
+  count--;
+  yan.innerHTML = "(" + count + ")秒";
+  if (count == 0 && timer != null) {
+      window.clearInterval(timer);
+      yan.disabled = false;
+      yan.innerHTML = "验证码";
+      $api.removeCls(yan, 'yan_dis');
+      $api.addCls(yan, 'yan');
+  }
+}
+
+function getAuthCode() {
+
+  // 服务器获取验证码
+  var parames = {values:{}};
+  phoneNum = ph.value;
+  parames.values.shoujihao = ph.value;
+  parames.values.type = c.MSG_REGI;
+  parames.values.leixing = 'student';
+  zhc.post("http://www.yxke12.com/index.php/App/Sms/send.html",
+      parames,function(data) {
+        api.toast({
+            msg: '验证码'+data,
+            duration: 2000,
+            location: 'bottom'
+        });
+      },null, true);
+}
+
+function nextClick() {
+ var password1 = document.getElementById("password").value; 
+
+ var password_in1 = document.getElementById('password_in1').value
+ localStorage.password1 = password1
+  localStorage.phoneNum = ph.value
+    if (phoneNum == null){
+      api.toast({
+          msg: '请填写手机号再操作',
+          duration: 2000,
+          location: 'bottom'
+      });
+      return;
+    }
+        if (!reg.test(password1)) {
+
+                api.toast({
+                  msg: '"密码格式不正确，只能填写字母、数字和下划线，不能以数字开头"'
+                });
+                return ;
+            }
+            if (password1 != password_in1) {
+                api.toast({
+                  msg: '"请输入相同密码"'
+                });
+                return ;
+
+            }
+    
+    compareACode();
+}
+
+function compareACode() {
+
+ var code_i = document.getElementById("code_i"); 
+
+  
+  var parames = {values:{}};
+  parames.values.yanzhengma = code_i.value;
+  parames.values.shoujihao = phoneNum;
+
+  // alert(JSON.stringify(parames))
+  zhc.post("http://www.yxke12.com/index.php/App/Sms/checkhao.html",
+      parames,function(data) {
+        // uploadData.phoneNumber = phoneNum;
+        api.openWin({
+            name: 'register_fourth1_win',
+            url: './register_fourth1_win.html',
+            pageParam: {
+                // data: uploadData
+            }
+        });
+      },null, true);
+}
+
+function delClick() {
+    ph.value = '';
+}
+</script>
+
+</html>

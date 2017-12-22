@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .aui-tab-item {
+        width: 100%;
+        height: 2.2rem;
+        line-height: 2.2rem;
+        position: relative;
+        font-size: 0.7rem;
+        text-align: center;
+        color: #886e91;
+        margin-left: -1px;
+        -webkit-box-flex: 1;
+        box-flex: 1;
+      }
+
+      .tab-other{
+        width: 100%;
+        position: fixed;
+        z-index: 5;
+      }
+
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+
+      section{
+        margin-top: 56px;
+      }
+
+      ul li{
+        height: 56px;
+        background: white;
+        border-bottom: 1px solid #f5f5f5;
+      }
+
+      ul li .title_p{
+        display: inline-block;
+        margin-left: 8px;
+      }
+      .title_p .t_first{
+        display:block;
+        font-size: 18px;
+      }
+      .title_p .t_second{
+        display:block;
+        font-size: 10px;
+        color: #999999;
+        margin-top: 8px;
+      }
+
+      ul li .ic{
+          width: 44px;
+          height: 44px;
+          margin-top: 6px;
+          margin-left: 10px;
+      }
+
+      ul li .right_s{
+        float: right;
+        margin-right: 10px;
+        color: #886e91;
+        line-height: 56px;
+      }
+
+      .add_group{
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        width: 44px;
+        height: 44px;
+      }
+      /*****************************分割线***********************************/
+      ul .t_item{
+        height:55px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      ul li .t_top{
+          display: block;
+          height: 30px;
+      }
+
+      ul li .t_bottom{
+          display: block;
+          height: 25px;
+      }
+
+      ul li .t_top .t_sign{
+        width: 14px;
+        height: 14px;
+        border-radius: 7px;
+        background-color: #886e91;
+        float: left;
+        margin-left: 10px;
+      }
+      ul li .t_top .t_name{
+        color: #666666;
+        float: left;
+        margin-left: 4px;
+      }
+      ul li .t_top .t_time{
+        color: #666666;
+        float: right;
+        margin-right: 10px;
+      }
+
+      ul li .t_bottom .t_r_name{
+        color: #333333;
+        font-size: 18px;
+        margin-left: 10px;
+        float: left;
+      }
+
+      ul li .t_bottom .t_r_op{
+        color: white;
+        background-color: #6666ff;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-right: 10px;
+        float: right;
+        padding: 4px 16px;
+      }
+
+      ul li .t_bottom .t_r_unop{
+        color: white;
+        background-color: #cccccc;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-right: 10px;
+        float: right;
+        padding: 4px 16px;
+      }
+      /************************************分割线********************************/
+      .aui-list .aui-list-item-media {
+          width: 4.5rem;
+          position: relative;
+          padding: 0.5rem 0;
+          padding-right: 0.75rem;
+          display: block;
+          -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+          -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          -webkit-box-align: center;
+          -webkit-align-items: flex-start;
+          align-items: flex-start;
+      }
+      .aui-list .aui-list-item-text {
+          font-size: 10px;
+          color: #757575;
+          position: relative;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: justify;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-align-items: center;
+          align-items: center;
+      }
+      .biaoqian{
+        /*width: 2rem;
+        height: 1rem;*/
+        padding: 2px 4px;
+        border-radius: 5px;
+        background-color: #6f47b6;
+        color: #fff!important;
+        margin-left: 4px;
+        font-family: 'PingFang-SC';
+      }
+      .biaoqian-orange{
+        background-color: #ef5b1f;
+      }
+
+      .biaoqian-blue{
+        background-color: #2cb3eb;
+      }
+
+      .biaoqian-green{
+        background-color: #32c785;
+      }
+
+      .margin-t-14{
+           margin-top: 14px;
+      }
+
+      .aui-list-item-media .gray_color{
+        color: #a1a1a1;
+      }
+
+      .aui-list-item-media .text_color{
+        color: #a1a1a1;
+        /*font-family: ''*/
+        /*font-family: 'PingFang-SC' !important;*/
+      }
+
+      .shoucang{
+        color: #6666ff;
+        /*background-color: #6666ff;*/
+      }
+
+      .no_data{
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 120px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab tab-other" id="tab">
+          <div class="aui-tab-item aui-active">我的论文</div>
+          <div class="aui-tab-item">我的收藏</div>
+          <div class="aui-tab-item">我的征文</div>
+      </div>
+
+      <section id="subject_sc">
+        <img id="no-data" class="no_data" src="../../../../image/bull.png">
+
+        </img>
+        <ul id="subject_ul">
+          <script id="subject_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="t_item" tapmode onclick="onSubjectItemClick({{=i}});">
+                <div class="t_top">
+                  <div class="t_sign"></div>
+                  <span class="t_name">{{=it[i].studentname}}</span>
+                  <span class="t_time">选科时间：{{=it[i].time}}</span>
+                </div>
+
+                <div class="t_bottom">
+                    <span class="t_r_name">{{=it[i].xname1}}&nbsp{{=it[i].xname2}}&nbsp{{=it[i].xname3}}</span>
+                    {{if (it[i].status == 1) {}}
+                        <div class="t_r_unop">已评价</div>
+                    {{}else {}}
+                        <div class="t_r_op" tapmode onclick="onSubjectCommentClick(event, {{=i}});">待评价</div>
+                    {{}}}
+                </div>
+              </li>
+            {{}}}
+          </script>
+        </ul>
+
+      </section>
+
+      <section id="major_sc" style="display:none">
+        <img id="no-data" class="no_data" src="../../../../image/bull.png">
+
+        </img>
+        <ul id="major_ul" style="display:none">
+          <script id="major_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="t_item" tapmode onclick="onMajorItemClick({{=i}});">
+                <div class="t_top">
+                  <div class="t_sign"></div>
+                  <span class="t_name">{{=it[i].studentname}}</span>
+                  <span class="t_time">关注时间：{{=it[i].time}}</span>
+                </div>
+
+                <div class="t_bottom">
+                    <span class="t_r_name">专业倾向报告</span>
+                    {{if (it[i].status == 1) {}}
+                        <div class="t_r_unop">已评价</div>
+                    {{}else {}}
+                        <div class="t_r_op" tapmode onclick="onMajorCommentClick(event, {{=i}});">待评价</div>
+                    {{}}}
+                </div>
+              </li>
+              {{}}}
+            </script>
+        </ul>
+        <img><img>
+      </section>
+
+      <section id="univ_sc" style="display:none"> <!--style="display:none"-->
+        <img id="no-data" class="no_data" src="../../../../image/bull.png">
+
+        </img>
+        <ul id="univ_ul"class="aui-list aui-media-list" style="margin-top:0px;">
+
+          <script id="univ_s" type="text/x-dot-template">
+          {{for (var i = 0; i < it.length; i++) {}}
+            <li class="aui-list-item aui-list-item-middle" style="height:80px;" tapmode onclick="onUnivItemClick({{=i}})">
+                   <div class="aui-media-list-item-inner">
+                       <div class="aui-list-item-media" style="width: 3rem;">
+                           <img src="http://www.yxke12.com/Public/Home/images/schools/{{=it[i].logo}}" class="aui-img-round aui-list-img-sm">
+                       </div>
+                       <div class="aui-list-item-inner ">
+                           <div class="aui-list-item-text" style="display: flex;justify-content: initial;">
+                               <div class="aui-list-item-title aui-font-size-18">{{=it[i].dxmc}}</div>
+                                {{if (it[i].is985 != null) {}}
+                                    <div class="aui-list-item-text biaoqian biaoqian-orange">985</div>
+                                {{}else {}}
+                                    <div class="aui-list-item-text biaoqian biaoqian-orange" style="display:none;">985</div>
+                                {{}}}
+                                {{if (it[i].is211 != null) {}}
+                                   <div class="aui-list-item-text biaoqian biaoqian-blue">211</div>
+                                {{}else {}}
+                                    <div class="aui-list-item-text biaoqian biaoqian-blue" style="display:none;">211</div>
+                                {{}}}
+                                {{if (it[i].iszizhu != null) {}}
+                                   <div class="aui-list-item-text biaoqian biaoqian-green">自</div>
+                                 {{}else {}}
+                                   <div class="aui-list-item-text biaoqian biaoqian-green" style="display:none;">自</div>
+                                 {{}}}
+                           </div>
+                           <div class="aui-list-item-media gray_color" style="width:auto;">
+                             <i class="aui-iconfont aui-icon-location text_color" style="font-family:'PingFang-SC!important';">{{=it[i].province}}</i>
+                             <!--<span class="text_color" style="display:inline;" style="font-family:'PingFang-SC!important';">综合排名：{{=it[i].rank}}</span>-->
+                         </div>
+                       </div>
+                       <div class="aui-list-item-media" style="text-align:right;width:auto;padding-left:16px;" tapmode onclick="itemShouCang(event, {{=i}})">
+                         <img id="shoucang_id{{=i}}" src="../../../../image/shoucang_select.png" style="height:16px;width:18px;">
+                     </div>
+                   </div>
+               </li>
+             {{}}}
+           </script>
+        </ul>
+      </section>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/aui-tab.js" ></script>
+<script type="text/javascript">
+    var flag_arr = [1, 0, 0];
+    var subject_dot, major_dot, univ_dot;
+    var subjectList = [];
+    var majorList = [];
+    var univList = [];
+    apiready = function() {
+        subject_dot = doT.template(document.getElementById('subject_s').innerHTML);
+        major_dot = doT.template(document.getElementById('major_s').innerHTML);
+        univ_dot = doT.template(document.getElementById('univ_s').innerHTML);
+        // getSubjectList();
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('subject_sc').style.display = "block"
+          document.getElementById('major_sc').style.display = "none"
+          document.getElementById('univ_sc').style.display = "none"
+        }else if (ret.index == 2) {
+          document.getElementById('subject_sc').style.display = "none"
+          document.getElementById('major_sc').style.display = "block"
+          document.getElementById('univ_sc').style.display = "none"
+          if (flag_arr[ret.index - 1] == 0) {
+              // getMajorList();
+              flag_arr[ret.index - 1] = 1;
+          }
+
+        }else if (ret.index == 3){
+          document.getElementById('subject_sc').style.display = "none"
+          document.getElementById('major_sc').style.display = "none"
+          document.getElementById('univ_sc').style.display = "block"
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              // getUnivList();
+          }
+        }
+    });
+
+    function getUnivList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/guanzhuyuanxiao.html",
+          parames,function(_data) {
+          univList = _data;
+          document.getElementById('univ_ul').innerHTML = univ_dot(univList);
+      },null, true);
+    }
+
+    function getMajorList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_parent.html",
+          parames,function(_data) {
+          majorList = _data;
+          document.getElementById('major_ul').innerHTML = major_dot(majorList);
+      },null, true);
+    }
+
+    function getSubjectList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_xuankejilu.html",
+          parames,function(_data) {
+          subjectList = _data;
+          document.getElementById('subject_ul').innerHTML = subject_dot(subjectList);
+      },null, true);
+    }
+
+</script>
+</html>

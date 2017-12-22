@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html style="background-color:#f5f5f5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/z.css"/>
+    <script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+    <script src="../../../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../../../script/doT.js"></script>
+    <script src="../../../../script/demo.js"></script>
+    <style>
+        .empty{ text-align: center; padding: 120px 0;}
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+        .top_bar{
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          background-color: white;
+          border-bottom: 1px solid #d2d2d2;
+        }
+        .top_inner{
+          width: 49.4%;
+          height: auto;;
+          float: left;
+          text-align: center;
+          position: relative;
+          background-color: white;
+        }
+
+        .top_inner_right{
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img{
+          vertical-align: middle;
+          width: 35px;
+          height: 35px;
+        }
+
+        .xing_text{
+            display: inline;
+            font-size: 0.8rem;
+            font-family: "PingFang-SC";
+        }
+        .xing_textC{
+          color: #34b3fd;
+        }
+        .xing_textC1{
+          color: #ffbc10;
+        }
+        .mid_text{
+          font-size: 0.7rem;
+          font-family: "PingFang-SC";
+          color: #666666
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+        .mid_padding_8{
+          padding-top: 9px!important;
+          padding-bottom: 9px!important;
+          line-height: 1.0;
+        }
+        .title_panel{
+          width: 100%;
+          height: auto;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          border-top: 8px solid #f2f2f2;
+          background-color: white;
+
+        }
+        .list_title{
+          margin-left: 8px;
+          color: black;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+        .aui-tab-item {
+            width: 100%;
+            height: 2.2rem;
+            line-height: 2.2rem;
+            position: relative;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #666666;
+            margin-left: -1px;
+            -webkit-box-flex: 1;
+            box-flex: 1;
+        }
+        .aui-tab-item.aui-active {
+            color: #6666ff;
+            border-bottom: none;
+        }
+        .xiahuaxian{
+          border-bottom: 1px solid #6666ff;
+        }
+        .quxiaoxiahuaxian{
+          border-bottom:none;
+        }
+        .zcText {
+          font-family: 'PingFang-SC';
+          font-size: 14px;
+          font-weight: 500;
+          /*color: #666666;*/
+        }
+        div.screening>ul {
+            height: 35px;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            border-bottom: none;
+            overflow: hidden;
+        }
+        div.screening>ul>li {
+            float: left;
+            width: 100%;
+            text-align: center;
+            line-height: 1.7rem;
+            border-left: solid 1px #d3d3d3;
+            background: url(../../../image/on_1.png) no-repeat 85% center;
+        }
+
+        .m-t-45{
+            margin-top: 45px;
+        }
+
+        .shuoming {
+          font-family: 'PingFang-SC';
+          font-size: 16px;
+          color: #666666;
+          width: 80%;
+          padding: 10px;
+        }
+        .nianfen {
+          font-family: 'PingFang-SC';
+          font-size: 16px;
+          line-height: 1.25;
+          color: #666666;
+          width: 20%;
+          height: 23px;
+         border-radius: 5px;
+         border: solid 1px #6666ff;
+         background: url(../../image/41-8.png) no-repeat scroll 90% center transparent;
+         background-size: 14px;
+        }
+        .zizhuzhaoshengkuan {
+          font-size: 12px;
+          border-radius: 2px;
+          background-color: #eeeeee;
+          padding: 1px 4px;
+          display: inline-block!important;
+          text-align: center!important;
+          }
+          .first-color{
+              background-color: #9f69ff;
+              color: white;
+          }
+          .second-color{
+              background-color: #95de31;
+              color: white;
+          }
+          .third-color{
+              background-color: #36c7fa;
+              color: white;
+          }
+          table{
+            width: 95%;
+            margin: auto;
+            font-family:' PingFang-SC';
+            font-size: 0.55rem;
+            text-align: center;
+            /*border-color: #e5e5e5;*/
+            border: 1px solid #e5e5e5;
+          }
+          th{
+           background-color: #6666ff;
+           color: #ffffff;
+          }
+          td{
+            background-color: #ffffff;
+            line-height: 2.3;
+            border: solid 1px #e5e5e5
+          }
+          .aui-col-xs-4 {
+            width: 33%!important;
+          }
+          .no{
+            font-family: 'PingFang-SC';
+             font-size: 0.8rem;
+             font-weight: bold;
+             text-align: justify;
+             color: #6666ff;
+             padding: 0.8rem 0.7rem;
+          }
+          .one{
+            font-size: 1.05rem;
+            font-family: 'PingFang-SC';
+            font-weight: bold;
+            text-align: justify;
+            color: #6666ff;
+          }
+          .diqu{
+             padding: 0rem 0.7rem;
+             line-height: 3.1rem;
+             font-family: 'PingFang-SC';
+             font-size: 0.55rem;
+             float: right;
+             color: #666666;
+          }
+          .daxue{
+            font-family: 'PingFang-SC';
+            font-size: 0.7rem;
+            color: #222222;
+            text-align: justify;
+          }
+    </style>
+</head>
+
+<body >
+      <div id="main" class="flex-con" >
+        <div class="aui-tab" id="tab" style=" position: fixe;width: 100%;z-index: 99;top:0px;display:none">
+            <div class="aui-tab-item "><span class="zcText xiahuaxian" id="gzc">ESI全球学科</span></div>
+
+            <div class="aui-tab-item"><span class='zcText' id="szc">武书连</span></div>
+
+            <div class="aui-tab-item"><span class='zcText' id="zybk">校友会</span></div>
+        </div>
+        <div style="padding-top:0.5rem" id="qqxk">
+          <table border='1' border="" id="esipaiming" >
+              <script id="esi" type="text/x-dot-template">
+                    <tr>
+                      <th style="width:22%">院校名称</th>
+                      <th style="width:38%">录取专业</th>
+                      <th style="width:10%">录取人数</th>
+                      <th style="width:15%">专业最低录取分数/位次</th>
+
+                    </tr>
+                    {{for (var i = 0; i < it.length; i++) {}}
+                      <tr >
+                        <td tapmode onclick="xuexiaoname('{{=it[i].univ_name}}')">{{=it[i].univ_name}}</td>
+                        <td >{{=it[i].major_name}}</td>
+                        {{if (it[i].enrolled == null) {}}
+                          <td >--</td>
+                        {{}else {}}
+                          <td >{{=it[i].enrolled}}</td>
+                        {{}}}
+                        <td >{{=it[i].low_score}}/{{=it[i].low_score_rank}}</td>
+                      </tr>
+                    {{}}}
+                </script>
+          </table>
+        </div>
+
+        <div style="width:95%;margin:auto;position: relative;top: 2.2rem;overflow: hidden;display:none" id="wsl">
+            <script id="wushu" type="text/x-dot-template">
+                {{for (var i = 0; i < it.length; i++) {}}
+                <div class="" style="background:#fff;margin-top:0.7rem">
+                  <div>
+                    <span class="no">NO.<span class="one">{{=it[i].rank}}</span></span>
+                    <span class="daxue">{{=it[i].univ_name}}</span>
+                    <span class="diqu">所在地：{{=it[i].province}}</span>
+                  </div>
+                  <div style="width: 80%;margin: auto;margin-bottom:0.5rem;overflow: hidden;">
+                    <div class="aui-col-xs-4 " tapmode onclick="nextPage('school_storage_win');" style="    text-align: center;">
+                          <div><span class="xing_text xing_textC">{{=it[i].value1}}</span></div>
+                        <div><span class="mid_text">总 分</span></div>
+                    </div>
+                    <div class="aui-col-xs-4 " tapmode onclick="nextPage('school_storage_win');" style=" text-align: center;border-left:1px solid #e5e5e5;border-right:1px solid #e5e5e5">
+                        <div><span class="xing_text xing_textC1">{{=it[i].value2}}</span></div>
+                        <div><span class="mid_text">人才培养</span></div>
+                    </div>
+                    <div class="aui-col-xs-4 " tapmode onclick="nextPage('school_storage_win');" style="    text-align: center;">
+                        <div><span class="xing_text xing_textC">{{=it[i].value3}}</span></div>
+                        <div><span class="mid_text">科学研究</span></div>
+                    </div>
+                  </div>
+                </div>
+                {{}}}
+              </script>
+        </div>
+
+        <div style="padding-top:2.9rem;display:none" id="xyh">
+          <table border='1'; id="xy">
+              <script id="xiaoyouhui" type="text/x-dot-template">
+                      <tr>
+                        <th style="width:20%">排名</th>
+                        <th style="width:20%">院校名称</th>
+                        <th style="width:20%">总分</th>
+                        <th style="width:20%">所在地</th>
+                        <th style="width:20%">类型</th>
+                      </tr>
+                      {{for (var i = 0; i < it.length; i++) {}}
+                        <tr>
+                          <td>{{=it[i].rank}}</td>
+                          <td>{{=it[i].univ_name}}</td>
+                          <td>{{=it[i].value1}}</td>
+                          <td>{{=it[i].province}}</td>
+                          <td>{{=it[i].yxlx}}</td>
+                        </tr>
+                      {{}}}
+                </script>
+          </table>
+        </div>
+      </div>
+
+
+
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+var esi1 = doT.template(document.getElementById('esi').innerHTML);
+var wushu1 = doT.template(document.getElementById('wushu').innerHTML);
+var xiaoyouhui1 = doT.template(document.getElementById('xiaoyouhui').innerHTML);
+    apiready = function(){
+      api.parseTapmode();
+      document.getElementById('esipaiming').innerHTML = esi1(JSON.parse(localStorage.data));
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      console.log(ret.index);
+        var gzc = document. getElementById('gzc');
+        var szc = document. getElementById('szc');
+        var zybk = document. getElementById('zybk');
+        var qqxk = document. getElementById('qqxk');
+        var wsl = document. getElementById('wsl');
+        var xyh = document. getElementById('xyh');
+        if (ret.index ==1) {
+          gzc.className="zcText xiahuaxian";
+          szc.className="zcText";
+          zybk.className="zcText";
+          qqxk.style.display = 'block'
+          wsl.style.display = 'none'
+          xyh.style.display = 'none'
+
+        }else if (ret.index == 2) {
+          gzc.className="zcText";
+          zybk.className="zcText";
+          szc.className="zcText xiahuaxian";
+          qqxk.style.display = 'none'
+          wsl.style.display = 'block'
+          xyh.style.display = 'none'
+          paiming("wushu")
+        }else {
+          szc.className="zcText";
+          gzc.className="zcText";
+          zybk.className="zcText xiahuaxian";
+          qqxk.style.display = 'none'
+          wsl.style.display = 'none'
+          xyh.style.display = 'block'
+          paiming("xiao")
+      }
+    });
+
+
+function paiming(type) {
+  var parames = {values:{}}
+  parames.values.type = type
+  zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/daxuepaiming.html',
+      parames,function(data) {
+        // console.log(JSON.stringify(data));
+        api.refreshHeaderLoadDone();
+        if (type == "esi") {
+          document.getElementById('esipaiming').innerHTML = esi1(data);
+        }else if (type == "wushu") {
+          document.getElementById('wsl').innerHTML = wushu1(data);
+        }else {
+          document.getElementById('xy').innerHTML = xiaoyouhui1(data);
+        }
+
+      },null, true);
+
+}
+
+
+
+function xuexiaoname(name) {
+  var parames = {values:{}}
+  parames.values.name = name
+  zhc.post('http://www.yxke12.com/index.php/App/Yuanxiaoku/infos.html',
+      parames,function(data) {
+        // console.log(JSON.stringify(data));
+        api.refreshHeaderLoadDone();
+        api.openWin({
+            name: 'school_storage_details_win',
+            url: '../../../shengyaguihua/school_storage_details_win.html',
+            pageParam: {
+                title: name
+            }
+        });
+
+
+      },null, true);
+
+}
+</script>
+</html>

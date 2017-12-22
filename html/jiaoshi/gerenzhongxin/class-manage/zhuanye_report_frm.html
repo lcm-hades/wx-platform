@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+
+    <style>
+        .auto {
+            height: auto;
+        }
+
+        p {
+            text-indent: 2em;
+            font-size: 16px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: "PingFang-SC";
+            color: #666666;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 18px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_title {
+            color: #6666ff;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            font-weight: bold;
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .four_panel {
+            margin: 10px;
+            margin-bottom: 0px;
+        }
+
+        .four_tile {
+            font-family: "PingFang-SC";
+            font-size: 18px;
+        }
+
+        .content_font {
+            font-family: "PingFang-SC";
+            font-size: 16px;
+            color: #666666;
+            margin-top: 10px;
+        }
+
+        .img_bg {
+            height: 40px;
+            width: 90%;
+            background-image: url("../../../../image/four_bg.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 10px auto;
+        }
+
+        .img_tile {
+            color: white;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+        }
+
+        .left {
+            float: left;
+            display: inline-block;
+            line-height: 40px;
+            margin-left: 10px;
+        }
+
+        .right {
+            float: right;
+            display: inline-block;
+            line-height: 40px;
+            margin-right: 10px;
+        }
+
+        .font_title {
+            font-weight: bold;
+        }
+
+        .xingge_analyze {
+            height: auto;
+            width: 90%;
+            border-radius: 10px;
+            border: 1px dashed #6666ff;
+            margin: 10px auto;
+            padding-bottom: 12px;
+        }
+
+        .margin-12 {
+            margin: 12px;
+        }
+
+        .operation-panel {
+            height: 45px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .z-btn {
+            background: #6666ff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            /*border: 1px solid #6666ff !important;*/
+            color: #ffffff;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .white-btn {
+            background: #ffffff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            border: 1px solid #a1a1a1 !important;
+            color: #a1a1a1;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .margin-left-10 {
+            margin-left: 10px;
+        }
+
+        .result_first{
+          color: #333333;
+        }
+        .result_sec{
+          color: #666666;
+        }
+        .suit_job_tip{
+          color: #333333;
+          font-weight: bold;
+          font-family: "PingFang-SC";
+          text-indent: 0em;
+        }
+        .suit_job_content{
+          color: #666666;
+          font-family: "PingFang-SC";
+          text-indent: 0em;
+        }
+        .the_end{
+          color: #666666;
+          font-family: "PingFang-SC";
+          text-indent: 0em;
+          font-size: 14px;
+          margin: 10px;
+        }
+
+        .stu_icon{
+          height: 50px;
+          width: 50px;
+          border-radius: 25px;
+          /*align-items: center;
+          align-self: center;*/
+        }
+
+        ul li{
+          padding: 10px;
+          border-bottom: 1px solid #f5f5f5;
+          display: flex;
+        }
+
+        ul li .panel{
+          display: inline-block;
+          margin-left: 10px;
+          -webkit-box-sizing:border-box;
+          width: 45%;
+        }
+
+        ul li .panel span{
+            display: block;
+        }
+
+        ul li .panel p{
+            display: block;
+            text-align: left;
+            text-indent: 0em;
+            padding-left: 0px;
+            padding-right: 0px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .time_c{
+            float: right;
+        }
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div class="flex-wrap flex-vertical" id="xingquceshi">
+      <script id="evaluationtmpl" type="text/x-dot-template">
+        <div style="margin-left:10px;padding-top:10px;"><span style="color:#6666ff;font-size:16px;font-weight:bold;font-family: 'PingFang-SC';">{{=it.zhuanye.studentname}}</span><span style="color:#666666;font-size:16px;font-family: " PingFang-SC ";">同学：</span></div>
+        <!-- <p>您好！</p> -->
+        <p>你好！恭喜你完成了此次性向系统测试。本测评系统根据国际权威的霍兰德SDS职业兴趣量表和MBTI职业性格量表，深度剖析你的职业兴趣和人格特质，帮助你清晰地认识自我。</p>
+        <p>为了最终解决学生在报考和选择学科时的核心问题，智慧程.优生涯根据最新的《中华人民共和国职业分类大典（2015版）》和《普通高等学校本科专业目录（2012版）》开发出了职业-专业对照表，推出你适合的专业，为你高中阶段选择学科提供有力的参考。 报告的产生过程有着科学的理论依据和数据支撑，具有很高的参考价值。</p>
+
+
+        <span class="section_title" style="margin-left:10px;">适合的职业</span>
+        <p class="suit_job_tip">通过职业兴趣测试，你感兴趣的职业为：</p>
+        <p class="suit_job_content">{{=it.chldinfo}}</p>
+
+
+        <span class="section_title" style="margin-left:10px;margin-top:10px;">根据职业-专业对照表进行匹配，你所适合的专业有：</span>
+        <p class="suit_job_content">{{=it.zhuanyeinfo}}</p>
+
+
+        <div style="margin-left:10px;margin-top:10px;height:auto;display: inline-flex;">
+            <div class="left_line"></div>
+            <span class="section_title">结语</span>
+        </div>
+        <p class="the_end">选择的专业决定了你未来所从事的职业。但是“对口工作”不感兴趣，感兴趣的工作不对口，这种窘境并不少见。归根结底，都是盲目选择造成的。一味地追求热门专业，或者完全听从父母的安排，根本没有考虑专业对口的职业是什么，是否感兴趣等等。该专业倾向报告为你提供了一个有力的参考依据，但最终的选择还应结合自己的实际情况而定。</p>
+        <div style="margin-left:10px;margin-top:10px;height:auto;display: inline-flex;">
+            <div class="left_line"></div>
+            <span class="section_title">评论</span>
+        </div>
+        <ul>
+            {{for (var i = 0; i < it.commenture.length; i++) {}}
+              <li>
+                  <img src="http://www.yxke12.com/Public/Teacher/images/touxiang/{{=it.commenture[i].touxiang}}" class="stu_icon"></img>
+                  <div class="panel">
+                      <span>{{=it.commenture[i].teachername}}<span>
+                      <p>{{=it.commenture[i].content}}</p>
+                  </div>
+                  <span class="time_c">{{=it.commenture[i].time}}</span>
+              </li>
+            {{}}}
+        </ul>
+
+</script>
+    </div>
+
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/echart.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript">
+    var data;
+    apiready = function() {
+        data = api.pageParam.data;
+        console.log(JSON.stringify(data));
+        var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+        document.getElementById('xingquceshi').innerHTML = evalText(data);
+        var teacher = data.teacher;
+        if (teacher == 1) {
+          var st = $api.byId('st_id');
+          st.disabled = true;
+        }
+
+    };
+
+</script>
+
+</html>

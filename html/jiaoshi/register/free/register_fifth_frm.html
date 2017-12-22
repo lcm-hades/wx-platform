@@ -1,0 +1,678 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <script type="text/javascript" src="../../../../script/api.js"></script>
+    <script type="text/javascript" src="../../../../script/doT.js"></script>
+    <style>
+      body{
+
+      }
+
+      .grade{
+        font-size: 16px;
+        margin: 10px auto;
+        text-align: center;
+      }
+
+      .input_pos{
+        padding: 5px 0px;
+        background-color: #ddd;
+        width:85%;
+        border-radius: 30px;
+        margin: 10px auto;
+        margin-top: 7%;
+        box-shadow:0px 0px 10px #fff;
+        position: relative;
+      }
+      .aui-searchbar-input input {
+          color: #666666;
+          width:90%;
+          padding: 0;
+          margin: 0;
+          height: 20px;
+          line-height: 20px;
+          border: 0;
+          text-align: center;
+          -webkit-appearance: none;
+          font-size: 16px;
+      }
+
+      .my_input{
+        height: 30px;
+        display: flex;
+        align-items: center;
+        background: #ddd!important;
+      }
+
+      .grade_show{
+
+        padding-left: 25px;
+        line-height: 40px;
+        font-size: 20px;
+        background-color: #ddd;
+        width: 80%;
+        margin: 0px auto;
+        height: 40px;
+        border-radius:20px;
+        position: relative;
+      }
+
+      .login_btn{
+        height: 40px;
+        line-height: 40px;
+        background-color: #6666ff!important;
+        width: 85% !important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        margin: 10px auto;
+        border-radius: 20px;
+        font-size: 16px;
+      }
+
+      .kaoshi{
+          margin: 10px auto;
+          width: 90%;
+          height: 100px;
+          text-align: center;
+      }
+
+      .ke{
+        display: inline-block;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 1px solid #6666ff;
+        line-height: 80px;
+        font-size: 22px;
+        margin: 0px 10px;
+      }
+
+      .select{
+        background-color: #6666ff!important;
+        color: white;
+      }
+      .grade_show select{
+        /*font-family: "PingFang-SC";*/
+        height: 40px;
+      }
+      .grade_show select option{
+        /*font-family: "PingFang-SC";*/
+      }
+      .pos_right{
+        position:absolute;
+        right:20px;
+        top:0px;
+      }
+      .margin-top-10{
+        margin-top: 10px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+        <div class="input_pos">
+            <div class="aui-searchbar-input my_input">
+                  <input type="search" placeholder="请输入你的名字" id="name_in">
+            </div>
+        </div>
+
+        <div class="grade">地区</div>
+        <div id="province_div" class="aui-list-item-input grade_show" >
+            <script id="province_s" type="text/x-dot-template">
+              <select onchange="selectProvince(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+        </div>
+        <div id="city_div" class="aui-list-item-input grade_show margin-top-10" >
+            <script id="city_s" type="text/x-dot-template">
+              <select onchange="selectCity(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+        </div>
+        <div id="qu_div" class="aui-list-item-input grade_show margin-top-10" >
+            <script id="qu_s" type="text/x-dot-template">
+              <select onchange="selectQu(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+        </div>
+        <div id="school_div" class="aui-list-item-input grade_show margin-top-10" >
+            <script id="school_s" type="text/x-dot-template">
+              <select onchange="selectSchool(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].schoolname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+        </div>
+
+        <div class="grade">教室角色</div>
+        <div id="grade_id" class="aui-list-item-input grade_show" >
+            <select onchange="jiaose(this.value)" id="Tjiaose">
+                  <option value="请选择">请选择</option>
+                  <option value="1">班主任</option>
+                  <option value="2">任课教师</option>
+            </select>
+            <div class="aui-list-item-right pos_right" >
+                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+            </div>
+        </div>
+
+
+        <div id="panduanjiaose">
+          <div class="grade">年级</div>
+          <div id="grade_id" class="aui-list-item-input grade_show" >
+              <select onchange="selectGrade(this.value)" id="Tbanji">
+                    <option value="请选择">请选择</option>
+                    <option value="高一">高一</option>
+                    <option value="高二">高二</option>
+                    <option value="高三">高三</option>
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+
+
+
+          </div>
+
+
+
+          <div class="grade">班级</div>
+
+            <div id="class_id" class="aui-list-item-input grade_show" >
+              <!-- <select>
+                  <option>安阳县</option>
+
+              </select> -->
+              <script id="class_s" type="text/x-dot-template">
+                <select onchange="selectClass(this.value)" id = "Tban">
+                  <option value="请选择">请选择</option>
+                {{for (var i = 1; i <= it; i++) {}}
+                    <option value = '{{=i}}'>{{=i}}班</option>
+                {{}}}
+                </select>
+                <div class="aui-list-item-right pos_right" >
+                    <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                </div>
+              </script>
+            </div>
+        </div>
+
+
+          <div class="grade">任课科目</div>
+            <div id="class_id" class="aui-list-item-input grade_show" >
+                <select onchange="selectSubject(this.value)" id="Tkemu">
+                    <option>请选择</option>
+                    <option>数学</option>
+                    <option>语文</option>
+                    <option>英语</option>
+                    <option>物理</option>
+                    <option>化学</option>
+                    <option>生物</option>
+                    <option>政治</option>
+                    <option>地理</option>
+                    <option>历史</option>
+                    <option>音乐</option>
+                    <option>体育</option>
+                    <option>美术</option>
+                    <option>信息技术</option>
+                    <option>通用技术</option>
+                </select>
+                <div class="aui-list-item-right pos_right" >
+                    <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                </div>
+
+            </div>
+
+
+
+
+        <div id="next_step" class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">完成绑定</div>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    var banTypes = ["文科", "理科", "文理不分科"]
+    var uploadData = {};
+    var province_dot, city_dot, qu_dot, school_dot, class_count_dot;
+
+
+    var provinceList = [];
+    var cityList = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+    var quList = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+    var schoolList = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+    var cur_province, cur_city, cur_qu, cur_school, cur_jiaose, cur_grade, cur_class, cur_kemu;
+
+    apiready = function() {
+      uploadData = $api.strToJson(api.pageParam.data);
+      province_dot = doT.template(document.getElementById('province_s').innerHTML);
+      
+      if(city_dot == null){
+        city_dot = doT.template(document.getElementById('city_s').innerHTML);
+      }
+      document.getElementById('city_div').innerHTML = city_dot(cityList);
+
+      if(qu_dot == null){
+        qu_dot = doT.template(document.getElementById('qu_s').innerHTML);
+      }
+      document.getElementById('qu_div').innerHTML = qu_dot(quList);
+
+      if(school_dot == null){
+        school_dot = doT.template(document.getElementById('school_s').innerHTML);
+      }
+
+      class_count_dot = doT.template(document.getElementById('class_s').innerHTML);
+      document.getElementById('school_div').innerHTML = school_dot(schoolList);
+      document.getElementById('class_id').innerHTML = class_count_dot(50);
+      getProvinceData();
+    };
+
+    function getProvinceData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/address.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                provinceList = ret.data.provinces;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                provinceList.unshift(first);
+                
+                document.getElementById('province_div').innerHTML = province_dot(provinceList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getCityList(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getshi.html',
+          method: 'post',
+          data: {
+              values: {
+                  shengid: provinceList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                cityList = ret.data.shi;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                cityList.unshift(first);
+                if(city_dot == null){
+                  city_dot = doT.template(document.getElementById('city_s').innerHTML);
+                }
+                document.getElementById('city_div').innerHTML = city_dot(cityList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getQu(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getxian.html',
+          method: 'post',
+          data: {
+              values: {
+                  shiid: cityList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                quList = ret.data.xian;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                quList.unshift(first);
+                if(qu_dot == null){
+                  qu_dot = doT.template(document.getElementById('qu_s').innerHTML);
+                }
+                document.getElementById('qu_div').innerHTML = qu_dot(quList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getSchool(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getschool.html',
+          method: 'post',
+          data: {
+              values: {
+                  xianid: quList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                schoolList = ret.data.school;
+                var first = {schoolname:"请选择",pid:"0",schoolid:"0"};
+                schoolList.unshift(first);
+                if(school_dot == null){
+                  school_dot = doT.template(document.getElementById('school_s').innerHTML);
+                }
+                document.getElementById('school_div').innerHTML = school_dot(schoolList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function selectProvince(value) {
+        cur_province = provinceList[value].provincesid;
+        cur_city = null;
+        cur_qu = null;
+        cur_school = null;
+        var first = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+        quList = first;
+        document.getElementById('qu_div').innerHTML = qu_dot(quList);
+        schoolList = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+        document.getElementById('school_div').innerHTML = school_dot(schoolList);
+        getCityList(value);
+    }
+
+    function selectCity(value) {
+      cur_city = cityList[value].provincesname == "请选择" ? "请选择" : cityList[value].provincesid;
+      cur_qu = null;
+      cur_school = null;
+
+
+      var first = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+      schoolList = first;
+      document.getElementById('school_div').innerHTML = school_dot(schoolList);
+      
+      if (cur_city == "请选择") {
+        var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+        quList = [];
+        quList.unshift(first);
+        document.getElementById('qu_div').innerHTML = qu_dot(quList);
+      }else{
+        getQu(value);
+      }
+    }
+
+    function selectQu(value) {
+      cur_qu = quList[value].provincesid;
+      cur_school = null;
+      getSchool(value);
+    }
+
+    function selectSchool(index) {
+      cur_school = schoolList[index].schoolid;
+
+    }
+
+    function selectGrade(value) {
+        cur_grade = value;
+        cur_class = null;
+    }
+
+    function selectClass(value) {
+      cur_class = value;
+    }
+
+    function selectSubject(value) {
+      cur_kemu = value;
+    }
+
+    function jiaose(value) {
+        if (value == "2") {
+          cur_jiaose = '任课教师';
+          cur_class = null;
+          cur_grade = null;
+          $api.byId('panduanjiaose').style.display="none";
+        }else if (value == "1"){
+          cur_jiaose = '班主任';
+          $api.byId('panduanjiaose').style.display="block";
+        }else{
+          cur_jiaose = null;
+          $api.byId('panduanjiaose').style.display="none";
+        }
+    }
+
+    function bindClick() {
+      if (name_in.value == '') {
+        api.toast({
+            msg: "请输入你的名字",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if (cur_province == null || cur_province == '请选择') {
+        api.toast({
+            msg: "请选择省份",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if (cur_city == null || cur_city == '请选择') {
+        api.toast({
+            msg: "请选择城市",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if (cur_qu == null || cur_qu == '请选择') {
+        api.toast({
+            msg: "请选择区县",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if (cur_school == null || cur_school == '请选择') {
+        api.toast({
+            msg: "请选择学校",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if (cur_jiaose == null || cur_jiaose == '请选择') {
+        api.toast({
+            msg: "请选择角色",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+
+      if (cur_jiaose == "班主任") {
+          if (cur_grade == null || cur_grade == '请选择') {
+            api.toast({
+                msg: "请选择年级",
+                duration: 2000,
+                location: 'bottom'
+            });
+            return;
+          }
+
+          if (cur_class == null || cur_class == '请选择') {
+            api.toast({
+                msg: "请选择班级",
+                duration: 2000,
+                location: 'bottom'
+            });
+            return;
+          }
+        }
+
+        if (cur_kemu == null || cur_kemu == '请选择') {
+          api.toast({
+              msg: "请选择教学科目",
+              duration: 2000,
+              location: 'bottom'
+          });
+          return;
+        }
+      sendServer();
+    }
+
+
+    function sendServer() {
+      getParames();
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '保存中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Ate/Teacher/register.html',
+          method: 'post',
+          data: {
+              values: uploadData,
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                api.toast({
+                    msg: ret.data,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                api.openWin({
+                    name: 'login_win',
+                    url: '../login_win.html',
+                    pageParam: {
+                        name: 'test'
+                    }
+                });
+
+              }else {
+                api.toast({
+                    msg: ret.data,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getParames() {
+      uploadData.teachername = name_in.value;
+      uploadData.schoolid = cur_school;
+      uploadData.xianid = cur_qu;
+      uploadData.kemu = cur_kemu;
+      uploadData.jiaose = cur_jiaose;
+      if ($api.byId('Tjiaose').value=='1') {
+        uploadData.classid = cur_class;
+      }
+    }
+</script>
+
+</html>

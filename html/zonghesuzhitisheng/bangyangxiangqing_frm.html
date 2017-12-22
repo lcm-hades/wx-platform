@@ -1,0 +1,618 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style type="text/css">
+        #classify {
+            color: #ffffff !important;
+        }
+
+        span {
+            vertical-align: top;
+        }
+
+        .pinglunneirong {
+            font-family: 'PingFang-SC';
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #333333;
+            margin: auto;
+            margin-left: 50px;
+            margin-right: 10px;
+        }
+
+        .xuehao {
+            font-family: 'PingFang-SC';
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #6666ff;
+        }
+
+        .xuehaoneirong {
+            font-family: ' PingFang-SC';
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-align: left;
+            color: #333333;
+        }
+
+        .bottom_fix {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .search-input {
+            height: 1.6rem!important;
+            line-height: 1.6rem!important;
+            background: #f5f5f5!important;
+            border-radius: 30px!important;
+            position: relative;
+            font-family: "aui_iconfont" !important;
+            text-align: left;
+            padding-left: 1.5rem!important;
+            color: #999999;
+        }
+
+        .search-input:after {
+            position: absolute;
+            left: 0;
+            padding-left: 0.5rem;
+            content: "\e615";
+        }
+
+        section {
+            /* main绝对定位，进行内部滚动 */
+            position: absolute;
+            top:0px;
+            bottom: 54px;
+            /* 使之可以滚动 */
+            overflow-y: scroll;
+            /* 增加该属性，可以增加弹性 */
+            /*-webkit-overflow-scrolling: touch;*/
+            height: auto;
+        }
+
+        .fasong {
+            width: 2.5rem;
+            height: 1.3rem;
+            background: #3ec234;
+            border: 1px solid #219718;
+            color: #fff;
+            font-family: "PingFang-SC";
+            font-size: 0.8rem;
+            display: inline-block;
+            line-height: 1.3rem;
+            position: fixed;
+            bottom: 0.65rem;
+            right: 0.75rem;
+            border-radius: 5px;
+        }
+
+        #textarea {
+            display: block;
+            margin: 0 auto;
+            overflow: hidden;
+            width: 100%;
+            font-size: 14px;
+            height: 18px;
+            line-height: 24px;
+            margin-bottom: 0.75rem;
+            margin-top: 0.75rem;
+            /*padding:2px;*/
+        }
+
+        textarea {
+            outline: 0 none;
+            border-color: rgba(82, 168, 236, 0.8);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+        }
+
+        .huifuneirong{
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          color: #333333;
+          margin: auto;
+          margin-left: 50px;
+          margin-right: 30px;
+          border-radius: 2px;
+          margin-top: 4px;
+          background-color: #e5e5e5;
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+
+        .huifuneirong li{
+          padding: 0 8px;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 20px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+            float: left;
+        }
+        .section_title {
+            color: #333333;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            margin-left: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .pinglunneirong p{
+          text-indent: 1.5rem!important
+        }
+        .pinglunneirong span{
+          text-indent: 20px!important;
+          margin-left: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="gundong" style="width:100%;background:white;"class="aui-content " onclick="aaa()" ontouchmove='bbb(event)'>
+        <h3 style="text-align:center;margin:0.5rem auto" id="title"></h3>
+        <p style="margin:auto;width:90%;" id="content">
+
+        </p>
+
+
+        <ul id="contpinlun">
+
+          <script id="contpinluntext" type="text/x-dot-template">
+          <div style="margin-left:0.5rem;height:auto;display: inline-flex; margin-top:10px;">
+              <div class="left_line"></div>
+              <span class="section_title">评论区</span>
+          </div>
+              {{ for(var i=0;i<it.length;i++) { }}
+                <li style="margin-bottom: 1px; background:white;padding-top:10px;padding-bottom:10px;">
+                    <div style="width: 95%;margin:auto">
+
+                        <div class="" style="display:inline-block;width:40px;height:40px;">
+                            <img src="http://www.yxke12.com//Public/Home/images/touxiang/{{=it[i].touxiang}}" style="width:40px;height:40px;border-radius:20px;" alt="">
+                        </div>
+                            <div style="display:inline-block;vertical-align: top;width:83%;height:40px;">
+                                <span style="color:#6666ff;font-size:16px;line-height:40px;">{{=it[i].studentname}}</span>
+                                <span style="color:#a1a1a1;font-size:12px;line-height:40px;">{{=it[i].time}}</span>
+
+                                <span tapmode onclick="huifu({{=i}});" style="line-height:40px;float:right;"><i id="comment{{=i}}"style="color: #a1a1a1;" class="aui-iconfont aui-icon-comment">&nbsp{{=it[i].comment}}</i></span>
+                                <span style="line-height:40px;margin-right:10px;float:right;"><i class="aui-iconfont aui-icon-laud" style="color: #a1a1a1;" tapmode onclick="dianzan(this, {{=i}});">&nbsp{{=it[i].likes}}</i></span>
+                            </div>
+                        <div style="display:inline-block;">
+                          <div class="pinglunneirong">
+                            {{=it[i].content}}
+                          </div>
+                        </div>
+                        <ul class="huifuneirong" id="huifucont{{=[i]}}" style="display:none;">
+
+                        </ul>
+                    </div>
+                </li>
+                {{}}}
+            </script>
+        </ul>
+    </section>
+
+    <footer class="aui-bar aui-bar-tab aui-margin-t-15 ">
+        <div class="aui-bar-tab-item aui-padded-l-15 aui-padded-r-15" tapmode style="width: auto;">
+            <textarea id="textarea" placeholder="评论内容"></textarea>
+            <!-- <input id='your-input-id' class="search-input" type="text" name="" value=""> -->
+        </div>
+        <!-- <div class="aui-bar-tab-item" tapmode style="width: 2.2rem;">
+            <i class="aui-iconfont aui-icon-comment"></i>
+        </div>
+        <div class="aui-bar-tab-item" tapmode style="width: 2.2rem;">
+            <i class="aui-iconfont aui-icon-star"></i>
+        </div> -->
+        <div class="aui-bar-tab-item" tapmode style="width: 2.6rem;padding-right:1rem">
+            <!-- <i class="aui-iconfont aui-icon-share"></i> -->
+            <span id="fasong1" class="fasong" tapmode onclick="fasongbtn(1)" style="display:block">发送</span>
+            <span id="fasong2" class="fasong" tapmode onclick="fasongbtn(2)" style="display:none">发送</span>
+        </div>
+    </footer>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    var cont = [];
+    var huifucont = [];
+    var pinglunListData = [];
+    var paperData = {};
+    var contpinluntext_dot = doT.template(document.getElementById('contpinluntext').innerHTML)
+    function fasongbtn(index) {
+      var value = $api.byId("textarea").value;
+        if (index == 1) {
+            if (value != '') {
+                sendComunit(value);
+            }
+        }else if (index == 2) {
+            if (value != '') {
+                sendHuifu(value);
+            }
+        }
+    }
+
+    var cur_index = -1;
+
+    function huifu(index) {
+        cur_index = index;
+        var pinglun = pinglunListData[index];
+        document.getElementById("fasong1").style.display = "none";
+        document.getElementById("fasong2").style.display = "block";
+        document.getElementById("textarea").placeholder = '回复: ' + pinglun.studentname;
+        getHFData(index);
+    }
+
+    function aaa(obj) {
+        var input = document.getElementById("textarea");
+        input.blur();
+    }
+
+    function bbb(e) {
+        if (e.touches[0].clientY > 0) {
+            var input = document.getElementById("textarea");
+            input.blur();
+        }
+    }
+
+    var autoTextarea = function(elem, extra, maxHeight) {
+        extra = extra || 0;
+        var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+            isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+            addEvent = function(type, callback) {
+                elem.addEventListener ?
+                    elem.addEventListener(type, callback, false) :
+                    elem.attachEvent('on' + type, callback);
+            },
+            getStyle = elem.currentStyle ? function(name) {
+                var val = elem.currentStyle[name];
+
+                if (name === 'height' && val.search(/px/i) !== 1) {
+                    var rect = elem.getBoundingClientRect();
+                    return rect.bottom - rect.top -
+                        parseFloat(getStyle('paddingTop')) -
+                        parseFloat(getStyle('paddingBottom')) + 'px';
+                };
+
+                return val;
+            } : function(name) {
+                return getComputedStyle(elem, null)[name];
+            },
+            minHeight = parseFloat(getStyle('height'));
+
+        elem.style.resize = 'none';
+
+        var change = function() {
+            var scrollTop, height,
+                padding = 0,
+                style = elem.style;
+
+            if (elem._length === elem.value.length) return;
+            elem._length = elem.value.length;
+
+            if (!isFirefox && !isOpera) {
+                padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+            };
+            scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+            elem.style.height = minHeight + 'px';
+            if (elem.scrollHeight > minHeight) {
+                if (maxHeight && elem.scrollHeight > maxHeight) {
+                    height = maxHeight - padding;
+                    style.overflowY = 'auto';
+                } else {
+                    height = elem.scrollHeight - padding;
+                    style.overflowY = 'hidden';
+                };
+                style.height = height + extra + 'px';
+                scrollTop += parseInt(style.height) - elem.currHeight;
+                document.body.scrollTop = scrollTop;
+                document.documentElement.scrollTop = scrollTop;
+                elem.currHeight = parseInt(style.height);
+            };
+        };
+
+        addEvent('propertychange', change);
+        addEvent('input', change);
+        addEvent('focus', change);
+        change();
+    };
+
+    var text = document.getElementById("textarea");
+    autoTextarea(text); // 调用
+    apiready = function() {
+        // api.parseTapmode();
+        // 文章id
+        var id = api.pageParam.data;
+        var url = api.pageParam.url;
+        var faurl = api.pageParam.faurl;
+        var hurl = api.pageParam.hurl;
+        getPaperData(id, url);
+    }
+
+    function getPaperData(id, url) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: url,
+          method: 'post',
+          data: {
+              values: {
+                  id: id
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+        console.log( JSON.stringify( ret ) );
+          if (ret) {
+              if (ret.status == 100) {
+                  $api.byId('content').innerHTML = ret.data.info.content;
+                  $api.byId('title').innerHTML = ret.data.info.name;
+                  pinglunListData = ret.data.comment;
+                  paperData = ret.data.info;
+                  document.getElementById('contpinlun').innerHTML = contpinluntext_dot(pinglunListData);
+              }else {
+
+              }
+          } else {
+            api.hideProgress();
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function sendComunit(value) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '发表中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: api.pageParam.faurl,
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  studentname: $api.getStorage('studentname'),
+                  img: $api.getStorage('img'),
+                  id: paperData.id,
+                  title: paperData.name,
+                  content: value
+              }
+          }
+      },function(ret, err){
+          api.hideProgress();
+            console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              $api.byId("textarea").value = '';
+              var data = ret.data;
+              var pinglun = {};
+              pinglun.touxiang = data.touxiang;
+              pinglun.studentname = data.studentname;
+              pinglun.content = data.content;
+              pinglun.id = data.pid;
+              pinglun.time = data.time;
+              pinglun.likes = 0;
+              pinglun.comment = 0;
+              pinglunListData.unshift(pinglun);
+              document.getElementById('contpinlun').innerHTML = contpinluntext_dot(pinglunListData);
+              api.toast({
+                  msg: '发表成功',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }else{
+              api.toast({
+                  msg: '发表失败',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+var cur_hf_data = [];
+    function getHFData(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '获取中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: api.pageParam.hqurl,
+          method: 'post',
+          data: {
+              values: {
+                  pid: pinglunListData[index].id,
+              }
+          }
+      },function(ret, err){
+          api.hideProgress();
+            console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              var e = $api.byId('huifucont' + index);
+
+
+              clearli(e);
+              var str = '';
+              cur_hf_data = ret.data;
+              if (cur_hf_data != null && cur_hf_data.length != 0) {
+                e.style.display = "block";
+              }
+              for (var i = 0; i < cur_hf_data.length; i++) {
+                str += '<li><span class="xuehao">' + cur_hf_data[i].studentname + ':</span><span class="xuehaoneirong">' + cur_hf_data[i].reply + '</span></li>';
+              }
+              $api.append(e, str);
+            }else{
+              api.toast({
+                  msg: '获取失败',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function clearli(e) {
+        var arr = $api.domAll(e, "li");
+        for (var i = 0; i < arr.length; i++) {
+          $api.remove(arr[i]);
+        }
+    }
+
+    function dianzan(e, index) {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '点赞中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: api.pageParam.durl,
+            method: 'post',
+            data: {
+                values: {
+                    studentid:$api.getStorage("studentid"),
+                    studentname:$api.getStorage("studentname"),
+                    pid: pinglunListData[index].id,
+                    num: pinglunListData[index].comment
+                }
+            }
+        },function(ret, err){
+            api.hideProgress();
+              console.log( JSON.stringify( ret ) );
+            if (ret) {
+              if (ret.status == 100) {
+                pinglunListData[index].likes = ret.data.num;
+                e.innerHTML = ret.data.num;
+              }else{
+                api.toast({
+                    msg: '获取失败',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+              }
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+    }
+
+    function sendHuifu(value) {
+        if (cur_index == -1) {
+          return;
+        }
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '回复中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+// console.log(api.pageParam.hurl)
+        api.ajax({
+            url: api.pageParam.hurl,
+            method: 'post',
+            data: {
+                values: {
+                    studentid: $api.getStorage('studentid'),
+                    studentname: $api.getStorage('studentname'),
+                    img:$api.getStorage('img'),
+                    cid: pinglunListData[cur_index].id,
+                    reply: value
+                }
+            }
+        },function(ret, err){
+            api.hideProgress();
+              console.log(  );
+            if (ret) {
+              if (ret.status == 100) {
+                resetUI(cur_index);
+                var count = pinglunListData[cur_index].comment -0;
+                pinglunListData[cur_index].comment = count + 1;
+                var comment = $api.byId('comment' + cur_index);
+                comment.innerHTML = "&nbsp" + pinglunListData[cur_index].comment;
+                var e = $api.byId('huifucont' + cur_index);
+                var data = ret.data;
+                var str = '<li><span class="xuehao">' + data.studentname + ':</span><span class="xuehaoneirong">' + data.reply + '</span></li>';
+                $api.append(e, str);
+                cur_index = -1;
+              }else{
+                console.log(JSON.stringify( ret ));
+                // api.toast({
+                //     msg: ret.data,
+                //     duration: 2000,
+                //     location: 'bottom'
+                // });
+              }
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+    }
+
+    function resetUI(index) {
+      var e = $api.byId('huifucont' + index);
+      if (e.style.display == 'none') {
+          e.style.display = "block";
+      }
+
+      $api.byId("textarea").value = '';
+      $api.byId("textarea").placeholder = '回复内容';
+      document.getElementById("fasong1").style.display = "block";
+      document.getElementById("fasong2").style.display = "none";
+    }
+</script>
+
+</html>

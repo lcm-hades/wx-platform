@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .first-part-left{
+        color: #333333;
+        margin-left:10px;
+        float:left;
+        line-height:40px;
+        font-size: 18px;
+        font-family: "PingFang-SC";
+      }
+      .first-part-right{
+        margin-right:10px;
+        float:right!important;
+        line-height:40px!important;
+        color: #666666;
+        font-size: 18px;
+        font-family: "PingFang-SC";
+      }
+      .second-part-left{
+        color: #333333;
+        margin-left:10px;
+        float:left;
+        line-height:40px;
+        font-size: 16px;
+        font-family: "PingFang-SC";
+      }
+      .second-part-right{
+        margin-right:10px;
+        float:right!important;
+        line-height:40px!important;
+        color: #666666;
+        font-size: 16px;
+        font-family: "PingFang-SC";
+
+      }
+
+      .part_title{
+        margin-top:10px;
+        height:auto;
+        display: inline-flex;
+        background: white;
+        padding:10px;
+      }
+      .left_line {
+          background-color: #6666ff;
+          height: 18px;
+          width: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+
+      .section_title {
+          color:#333333;
+          font-size: 14px;
+          font-family: "PingFang-SC";
+          margin-left: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+      p{
+        font-size: 14px;
+        font-family: "PingFang-SC";
+        color: #666666;
+        background-color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+      }
+
+      .m-t-0{
+        margin-top: 0px;
+      }
+
+      .z-option{
+        width: 48px;
+        height: 48px;
+        margin-left: 10px;
+        padding-right: 10px;
+      }
+
+      .option_c{
+        width: 100%;
+        /* align-items: center; */
+        padding-top: 20px;
+        background: white;
+        align-self: center;
+        text-align: center;
+        display: inline-block;
+      }
+
+      .login_btn{
+        height: 45px;
+        line-height: 45px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 90%;
+        margin: 0px auto;
+        border-radius: 4px;
+        font-size: 18px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div style="height:40px;background-color:white;">
+        <div class="first-part-left">品德操守</div>
+        <div class="first-part-right">一级指标</div>
+      </div>
+      <div style="height:40px;background-color:white;">
+        <div class="second-part-left">热爱祖国</div>
+        <div class="second-part-right">二级指标</div>
+      </div>
+
+      <div class="part_title">
+          <div class="left_line"></div>
+          <span class="section_title">要素</span>
+      </div>
+      <p>
+        热爱祖国，维护国家荣誉，热爱人民，热爱中国共产党。尊敬国旗、国徽，会唱国歌；升国旗、奏国歌时肃立，脱帽，行注目礼。
+      </p>
+
+      <div class="part_title m-t-0">
+          <div class="left_line"></div>
+          <span class="section_title">评价指标</span>
+      </div>
+      <p>
+        1.热爱祖国，热爱人民，热爱中国共产党。</br>
+        2.了解党史国情，关注时事政治，勿忘国耻，振兴中华。</br>
+        3.维护国家荣誉、利益和安全，尊敬国旗、国徽，会唱国歌；升降国旗、奏唱国歌时要肃立、脱帽、行注目礼。</br>
+        4.爱惜名誉，拾金不昧，抵制不良诱惑，不做有损人格的事；尊重他人的人格、宗教信仰、民族风俗习惯。
+      </p>
+
+
+      <div class="option_c">
+          <img class="z-option" src="../../../image/pj1.png" tapmode onclick="optionSelected(1)"><img>
+          <img class="z-option" src="../../../image/pj2.png" tapmode onclick="optionSelected(2)"><img>
+          <img class="z-option" src="../../../image/pj3.png" tapmode onclick="optionSelected(3)"><img>
+          <img class="z-option" src="../../../image/pj4.png" tapmode onclick="optionSelected(4)"><img>
+      </div>
+
+      <div style="width:100%;background:white;padding-top:30px; padding-bottom:10px;display:flex;">
+        <div id="next_step" class="aui-btn aui-btn-info login_btn" tapmode onclick="nextStep()">下一步</div>
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+
+    function optionSelected(index) {
+      var bar = document.querySelectorAll(".z-option");
+      if (bar) {
+        for (var i = 0; i < bar.length; i++) {
+          if (i == index - 1) {
+            bar[i].src = "../../../image/pj_s_" + (i+1) + ".png";
+          }else{
+            bar[i].src = "../../../image/pj" + (i+1) + ".png";
+          }
+        }
+      }
+    }
+
+    function nextStep() {
+        var jsfun = 'zpNextStep();';
+        api.execScript({
+            script: jsfun
+        });
+        api.closeFrame();
+
+    }
+</script>
+
+</html>

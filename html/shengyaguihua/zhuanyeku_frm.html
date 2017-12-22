@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+
+    <style>
+        .auto {
+            height: auto;
+        }
+
+        p {
+            text-indent: 2em;
+            font-size: 16px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: "PingFang-SC";
+            color: #666666;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 18px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_title {
+            color: #6666ff;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            font-weight: bold;
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .four_panel {
+            margin: 10px;
+            margin-bottom: 0px;
+        }
+
+        .four_tile {
+            font-family: "PingFang-SC";
+            font-size: 18px;
+        }
+
+        .content_font {
+            font-family: "PingFang-SC";
+            font-size: 16px;
+            color: #666666;
+            margin-top: 10px;
+        }
+
+        .img_bg {
+            height: 40px;
+            width: 90%;
+            background-image: url("../../image/four_bg.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 10px auto;
+        }
+
+        .img_tile {
+            color: white;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+        }
+
+        .left {
+            float: left;
+            display: inline-block;
+            line-height: 40px;
+            margin-left: 10px;
+        }
+
+        .right {
+            float: right;
+            display: inline-block;
+            line-height: 40px;
+            margin-right: 10px;
+        }
+
+        .font_title {
+            font-weight: bold;
+        }
+
+        .xingge_analyze {
+            height: auto;
+            width: 90%;
+            border-radius: 10px;
+            border: 1px dashed #6666ff;
+            margin: 10px auto;
+            padding-bottom: 12px;
+        }
+
+        .margin-12 {
+            margin: 12px;
+        }
+
+        .operation-panel {
+            height: 45px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .z-btn {
+            background: #6666ff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            /*border: 1px solid #6666ff !important;*/
+            color: #ffffff;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .white-btn {
+            background: #ffffff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            border: 1px solid #a1a1a1 !important;
+            color: #a1a1a1;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .margin-left-10 {
+            margin-left: 10px;
+        }
+
+        .result_first{
+          color: #333333;
+        }
+        .result_sec{
+          color: #666666;
+        }
+        .suit_job_tip{
+          color: #333333;
+          font-weight: bold;
+          font-family: "PingFang-SC";
+          text-indent: 0em;
+        }
+        .suit_job_content{
+          color: #666666;
+          font-family: "PingFang-SC";
+          text-indent: 0em;
+        }
+        .the_end{
+          color: #666666;
+          font-family: "PingFang-SC";
+          text-indent: 0em;
+          font-size: 14px;
+          margin: 10px;
+        }
+        p{
+          text-indent: 1.5rem
+        }
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div class="flex-wrap flex-vertical" id="xingquceshi">
+      <script id="evaluationtmpl" type="text/x-dot-template">
+        <div style="margin-left:10px;"><span style="color:#6666ff;font-size:16px;font-weight:bold;font-family: 'PingFang-SC';">{{=it.studentname}}</span><span style="color:#666666;font-size:16px;font-family: " PingFang-SC ";">同学：</span></div>
+        <!-- <p>您好！</p> -->
+        <p>你好！恭喜你完成了此次性向测试。三个测试从不同的角度得出了你感兴趣的职业、你适合的职业、你擅长的职业，但你还是无法把职业与专业联系起来。为了最终解决你在选择学科和报考时的核心问题，我们的团队根据国家最新公布的职业数据和院校开设专业的数据研发出了职业到专业的匹配表，从而帮你快速准确地找到与职业匹配的专业。再通过专业与学科的对照表，为你高中阶段选择学科提供有力的参考。</p>
+        <p>性向测试是以科学的心理学理论为依据，通过标准化的手段得到的客观结果，对你确定专业倾向和选择学科具有重要的参考价值。而人生的选择是个复杂的过程，除了客观的测评结果，一个人的主观意愿对于职业选择起着决定性的作用。当你在性向测试结果中去掉你最不想从事的职业时，决定选择结果的就是你的职业价值观。</p>
+        <p>职业价值观是影响人生选择的一项重要因素，它是一个人的理想、信念、世界观对于职业的影响，高中阶段培养正确的职业价值观对未来的选择和发展起着重要的作用。</p>
+        <div style="margin-left:10px;margin-top:10px;height:auto;display: inline-flex;">
+            <div class="left_line"></div>
+            <span class="section_title">性向测试结果</span>
+        </div>
+        <div class="xingge_analyze">
+            <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+                <p style="text-indent:0em;color:#666666;">
+                    <b class="result_first">通过职业兴趣测试，你的职业兴趣类型为：</b></br><b class="result_sec">典型职业：</b>
+                    {{=it.huolande}}}
+                </p>
+            </div>
+
+            <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+                <p style="text-indent:0em;color:#666666;">
+                  <b class="result_first">通过职业性格测试，你的性格特征类型为：</b></br><b class="result_sec">典型职业：</b>
+                  {{=it.mbti}}}
+                </p>
+            </div>
+            <p style="text-indent:0em;color:#666666;">
+              <b class="result_first">通过多元智能测试，你的智能优势组合为：</b></br><b class="result_sec">典型职业：</b>
+              {{=it.duoyuan}}}
+            </p>
+        </div>
+
+        <span class="section_title" style="margin-left:10px;">适合的职业</span>
+        <p class="suit_job_tip">综合以上3个测试结果和你的主观意愿，未来你适合的职业群为：</p>
+        <p class="suit_job_content">{{=it.zhiye}}</p>
+
+
+        <span class="section_title" style="margin-left:10px;margin-top:10px;">根据我们团队研发得到的职业-专业对照表进行匹配，你所适合的专业有：</span>
+        <p class="suit_job_content">{{=it.zhuanye}}</p>
+
+
+        <div style="margin-left:10px;margin-top:10px;height:auto;display: inline-flex;">
+            <div class="left_line"></div>
+            <span class="section_title">结语</span>
+        </div>
+        <p class="the_end">选择的专业决定了你未来所从事的职业，但是“对口工作”不感兴趣，感兴趣的工作不对口，这种窘境并不少见。归根结底，都是盲目选择造成的。一味地追求热门专业，或者完全听从父母的安排，根本没有考虑专业对口的职业是什么，是否感兴趣等等。
+这份专业倾向报告综合了性向测评客观结果和你的主观意愿，报告的产生过程有着科学的理论依据和数据支撑，具有很高的参考价值，但最终的选择还应结合自己的实际情况而定。</p>
+
+
+
+        <div class="operation-panel">
+            <div id="st_id" class="aui-btn aui-btn-primary aui-btn-block white-btn " tapmode onclick="sendTeacher()">发送老师</div>
+            <div class="aui-btn aui-btn-primary aui-btn-block z-btn margin-left-10" tapmode onclick="againTest()">重新测试</div>
+        </div>
+</script>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/echart.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    var data;
+    apiready = function() {
+        data = api.pageParam.data;
+        var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+        document.getElementById('xingquceshi').innerHTML = evalText(data);
+    };
+
+
+      // 发送老师
+      function sendTeacher() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Baogao/result.html',
+            method: 'post',
+            data: {
+                values: {
+                    studentid: $api.getStorage('studentid'),
+                    num:data.num,
+                    type:"zonghe",
+                },
+            }
+        },function(ret, err){
+            api.hideProgress();
+            if (ret) {
+              if (ret.status == 100) {
+                  // data = ret.data;
+                  var st = $api.byId('st_id');
+                  st.disabled = true;
+                  api.toast({
+                      msg: ret.data.infos,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                  // console.log(JSON.stringify(ret.data));
+              }else {
+                api.toast({
+                msg: JSON.stringify(ret.message),
+                duration: 2000,
+                location: 'bottom'
+            });
+              }
+                console.log(JSON.stringify( ret ));
+            } else {
+              api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+        });
+      }
+
+    // 重新测试
+    function againTest() {
+        api.closeToWin({
+            name: 'xingxiang_list_win'
+        });
+
+    }
+</script>
+
+</html>

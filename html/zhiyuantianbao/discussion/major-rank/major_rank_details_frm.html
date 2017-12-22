@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .top_tip{
+        height: 44px;
+        background: white;
+
+      }
+
+      .top_tip span{
+        color: #333333;
+        font-size: 14px;
+        line-height: 44px;
+        margin-left: 10px;
+      }
+
+      table{
+        width: 95%;
+        margin: auto;
+
+      }
+
+      tr th{
+          background: #6666ff;
+          height: 40px;
+          width: 25%;
+          line-height: 40px;
+          color: white;
+          font-size: 14px;
+          font-family: "PingFang-SC";
+          text-align: center;
+
+      }
+
+      tr td{
+          background: white;
+          height: 40px;
+          width: 25%;
+          line-height: 40px;
+          color: #222222;
+          font-size: 14px;
+          font-family: "PingFang-SC";
+          text-align: center;
+
+      }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="top_tip">
+        <span>注：专业等级A以下的高校不做排名区分</span>
+      </div>
+
+      <table id="zy">
+        <script id="zhuanye" type="text/x-dot-template">
+                  <tr>
+                    <th>专业名称</th>
+                    <th>开设院校</th>
+                    <th>专业等级</th>
+                    <th>专业排名</th>
+                  </tr>
+            {{for (var i = 0; i < it.length; i++) {}}
+                  <tr>
+                    <td>{{=it[i].major}}</td>
+                    <td>{{=it[i].univ_name}}</td>
+                    <td>{{=it[i].grade}}</td>
+                    <td>{{=it[i].rank}}</td>
+                  </tr>
+              {{}}}
+        </script>
+      </table>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+var zhuanye1 = doT.template(document.getElementById('zhuanye').innerHTML);
+    apiready = function() {
+      var parames = {values:{}}
+      parames.values.major = api.pageParam.name
+      zhc.post('http://www.yxke12.com/index.php/App/Zhiyuantianbao/zhuanyepaiming.html',
+          parames,function(data) {
+            // console.log(JSON.stringify(data));
+            api.refreshHeaderLoadDone();
+              document.getElementById('zy').innerHTML = zhuanye1(data);
+          },null, true);
+    };
+</script>
+
+</html>

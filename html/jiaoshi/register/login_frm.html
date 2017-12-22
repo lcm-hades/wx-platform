@@ -1,0 +1,252 @@
+<!doctype html>
+<html class="linear1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+    body{
+
+    }
+    .linear{
+        /*font-family: 'PingFang-SC';*/
+        width:100%;
+        background:-webkit-gradient(linear, center top, center bottom,from(#66aaff), to(#6666ff));
+    }
+    .linear1{
+        /*font-family: 'PingFang-SC';*/
+        width:100%;
+        background:#6666ff;
+    }
+    .input_pos{
+      padding: 10px 0px;
+      background-color:white;
+      width:90%;
+      border-radius: 10px;
+      margin: 10px auto;
+      margin-top: 15%;
+      box-shadow:0px 0px 10px #fff
+    }
+    .aui-searchbar-input input {
+        color: #666666;
+        width:90%;
+        padding: 0;
+        margin: 0;
+        height: 30px;
+        line-height: 30px;
+        border: 0;
+        -webkit-appearance: none;
+        font-size: 16px;
+        /*font-family: "PingFang-SC";*/
+    }
+
+    .black_line{
+      width: 100%;
+      height: 1px;
+      background-color: #eee;
+    }
+    .my_input{
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .left_img{
+      line-height: 50px;
+      margin-right: 8px;
+    }
+    .img_c{
+      height: 33px;
+      width: 220px;
+      margin: 0px auto;
+      margin-top: 15%;
+    }
+    .login_btn{
+      height: 50px;
+      line-height: 50px;
+      background-color: white!important;
+      opacity: 0.6;
+      color: #6666ff!important;
+      width: 90%;
+      margin: 0px auto;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    .z-zhaohuimima{
+      width: 85%;
+      margin: auto;
+      margin-top: 28px;
+    }
+    .z-zhaohuimima span{
+        font-family: 'PingFang-SC';
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        opacity: 0.8;
+    }
+
+      .z-r{
+        float: right;
+      }
+
+      .aui-icon-lock:before {
+          content: "\e6ef";
+          font-size: 18px;
+      }
+      .aui-icon-my:before {
+          content: "\e610";
+          font-size: 18px;
+      }
+    </style>
+</head>
+
+<body class="linear">
+    <div class="flex-wrap flex-vertical ">
+      <img class="img_c" src="../../../image/parent_logo.png"></img>
+      <div class="input_pos">
+          <div class="aui-searchbar-input my_input">
+              <i class="aui-iconfont aui-icon-my left_img"></i>
+                <input type="search" placeholder="输入用户名" id="username_in" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+          </div>
+          <div class="black_line"></div>
+          <div class="aui-searchbar-input my_input">
+              <i class="aui-iconfont aui-icon-lock left_img"></i>
+                <input type="password" placeholder="输入密码" id="password_in" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+          </div>
+        </div>
+        <div class="aui-btn aui-btn-info login_btn" tapmode onclick="loginClick()">登录</div>
+        <div class="z-zhaohuimima" >
+
+          <span onclick="freeRegisterClick();">注册账号</span>
+          <span onclick="forgetPWD();" style="margin-left: 3rem">忘记密码</span>
+          <span class="z-r" onclick="registerClick();">卡号激活</span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+    };
+    var password;
+    function loginClick() {
+      var username = $api.byId('username_in');
+      password = $api.byId('password_in');
+      username.blur();
+      password.blur();
+      if (username.value == '') {
+        api.toast({
+           msg: '请输入用户名'
+       });
+        return;
+      }
+      if (password.value == '') {
+        api.toast({
+           msg: '请输入密码'
+       });
+        return;
+      }
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Ate/Teacher/login.html',
+          method: 'post',
+          data: {
+              values: {
+                  loginuser: username.value, // 'lichengming1',
+                  password: password.value // "123456"
+              }
+          }
+      },function(ret, err){
+          api.hideProgress();
+          console.log(JSON.stringify(ret));
+          if (ret) {
+            if (ret.status == 100) {
+              var infos = ret.data;
+              if (infos != null) {
+                for (var key in infos) {
+                  if (infos.hasOwnProperty(key)) {
+                    console.log(key + "-------" + JSON.stringify(infos[key]));
+                      $api.setStorage(key, infos[key]);
+                  }
+                }
+                $api.setStorage('password', password.value);
+
+                api.openWin({
+                    name: 'frame1_win',
+                    url: '../shouye/frame1_win.html',
+                    pageParam: {
+                        name: 'test'
+                    },
+                    slidBackEnabled:false
+                });
+              }
+
+
+            }else {
+              // console.log( JSON.stringify( ret ) );
+              $api.clearStorage ();
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+
+          } else {
+            $api.clearStorage();
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function registerClick() {
+      api.openWin({
+          name: 'register_second_win',
+          url: './register_second_win.html',
+          pageParam: {
+              name: 'test'
+          },
+          slidBackEnabled:false
+      });
+    }
+
+    function forgetPWD() {
+      api.openWin({
+          name: 'forget_pwd_win',
+          url: './forget_pwd_win.html',
+          pageParam: {
+              title: '验证手机号',
+              type:"6"
+          }
+      });
+    }
+
+    function freeRegisterClick() {
+      api.openWin({
+          name: 'free_register_auth_win',
+          url: './free/free_register_auth_win.html',
+          pageParam: {
+              name: 'test'
+          },
+          slidBackEnabled:false
+      });
+    }
+</script>
+
+</html>

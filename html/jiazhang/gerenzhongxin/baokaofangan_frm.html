@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+
+.chakan{
+    width: 2rem;
+    background: #26b0f8;
+    text-align: center;
+    line-height: 0.8rem;
+    color: #fff;
+    margin: 0.5rem 0.5rem;
+    border-radius: 5rem
+}
+td{
+  text-align: center;
+  font-size: 0.5rem
+}
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+  <div class="aui-content aui-margin-b-15" id="jianzhang"  style="display:block;">
+
+        <table id="jianzhang_tb" border="1">
+          <script id="jianzhang_s" type="text/x-dot-template">
+          <tr>
+            <th>创建时间</th>
+            <th>考生信息</th>
+            <th>成绩信息</th>
+            <th>填报批次</th>
+            <th>填报类型</th>
+            <th>操作</th>
+          </tr>
+
+              {{for (var i = 0; i < it.length; i++) {}}
+                <tr>
+                  <td>{{=it[i].newdate}}</td>
+                  <td  id="child{{=i}}"></td>
+                  <td >{{=it[i].score}}</td>
+                  <td >{{=it[i].name}}</td>
+                  {{if (it[i].bm_time == null) {}}
+                    <td >--</td>
+                  {{}else{}}
+                    <td >{{=it[i].bm_time}}</td>
+                  {{}}}
+                  <td  tapmode onclick="checkJZDetails({{=it[i].id}},{{=it[i].score}})"><span class="chakan">查看</span></td>
+                </tr>
+              {{}}}
+          </script>
+        </table>
+      </ul>
+  </div>
+</div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<!-- <script type="text/javascript" src="../../script/aui-list-swipe.js"></script> -->
+<script type="text/javascript" src="../../../script/aui-list-swipe-backup.js"></script>
+<script type="text/javascript">
+// var listHD = doT.template(document.getElementById('HDlist').innerHTML);
+    apiready = function(){
+        api.parseTapmode();
+        getJianZhang()
+    };
+
+    // 初次打开招生简章
+    function getJianZhang() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Apa/Member/simulate.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage("studentid")
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+
+          if (ret) {
+
+            if (ret.status==100) {
+              jianzhangData = ret.data;
+              // yearList = ret.data.year;
+  // console.log( JSON.stringify( jianzhangData ) );
+              jianzhang = doT.template(document.getElementById('jianzhang_s').innerHTML);
+              document.getElementById('jianzhang_tb').innerHTML = jianzhang(jianzhangData);
+              for (var i = 0; i < jianzhangData.length; i++) {
+                var child = "child"+i
+                document.getElementById(child).innerHTML = $api.getStorage("child")
+              }
+            }
+
+
+
+            // var years = doT.template(document.getElementById('years_s').innerHTML);
+            // document.getElementById('years_sl').innerHTML = years(yearList);
+          } else {
+            api.hideProgress();
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+
+
+    function checkJZDetails(id,score) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/Apa/Member/simulatecon.html',
+        method: 'post',
+        data: {
+            values: {
+                parentid: $api.getStorage("parentid"),
+                id:id
+            },
+        }
+    },function(ret, err){
+      api.hideProgress();
+        if (ret) {
+          // console.log(JSON.stringify(ret));
+            if (ret.status == 100) {
+                api.openWin({
+                    name: 'baokaofanganXQ_win',
+                    url: './baokaofanganXQ_win.html',
+                    pageParam: {
+                        data: ret.data.plannedUnivs,
+                        batch_score:ret.data.plannedData[0].batch_score
+                    }
+                });
+
+            }
+        } else {
+          api.hideProgress();
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
+    }
+
+</script>
+</html>

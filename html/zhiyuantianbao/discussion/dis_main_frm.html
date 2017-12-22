@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .mid_text{
+        font-size: 12px;
+        font-family: "PingFang-SC";
+        color: #222222
+      }
+      .mid_img{
+        width: 45px;
+        height: 45px;
+      }
+      .mid_padding_8{
+        padding-top: 9px!important;
+        padding-bottom: 9px!important;
+        line-height: 1.0;
+      }
+      .do_p{
+        margin: 10px 10px;
+        background:-webkit-gradient(linear, center top, center bottom,from(#336bff), to(#6666ff));
+        border-radius: 25px;
+        height: 50px;
+      }
+
+      .do_img{
+        width: 30px;
+        height: 30px;
+        margin-top: 10px;
+        margin-left: 35px;
+      }
+
+      .do_title_p{
+        display: inline-block;
+        margin-left: 20px;
+        font-family: "PingFang-SC";
+      }
+
+      .do_title{
+        font-size: 18px;
+        color: white;
+        display: block;
+      }
+
+      .do_subti{
+        font-size: 10px;
+        color: white;
+        display: block;
+      }
+
+      .do_r_img{
+        float: right;
+        width: 10px;
+        height: 18px;
+        margin-right: 25px;
+        margin-top: 16px;
+      }
+
+      .aui-col-xs-6{
+        width: 100%;
+      }
+
+      .aui-margin-t-1{
+        border-top: 1px solid #f5f5f5;
+      }
+
+      .part-img{
+        width: 36px;
+        height: 36px;
+        margin-left: 10px;
+      }
+
+      .part-title-p{
+        display: inline-block;
+        font-family: "PingFang-SC";
+        margin-left: 12px;
+      }
+      .part-title{
+        font-size: 16px;
+        color: #222222;
+        display: block;
+      }
+
+      .part-subti{
+        margin-top: 8px;
+        font-size: 12px;
+        color: #8e8eb2;
+        display: block;
+      }
+
+      .t-l{
+        text-align: left!important;
+        /*border-left: 1px solid #f5f5f5;*/
+        margin-left: 20px;
+      }
+      .part-padding-16{
+        padding-top: 16px!important;
+        padding-bottom: 16px!important;
+        line-height: 1.0;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <img class="top_img" src="../../../image/zytb_banner.png" tapmode onclick="" >
+      <div class="do_p" tapmode onclick="doVoluntaryClick();">
+        <img class="do_img" src="../../../image/light.png"></img>
+        <div class="do_title_p">
+          <span class="do_title">模拟志愿填报</span>
+          <span class="do_subti">精准推荐最合适您的高校和专业</span>
+        </div>
+        <img class="do_r_img"src="../../../image/do_right.png">
+      </div>
+
+      <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;">
+        <div class="aui-row" style="margin-left:12px;margin-right:12px;">
+            <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="nextPage('school_storage_win');" >
+                <!-- <i class="aui-iconfont aui-icon-home"></i> -->
+                <img class="mid_img" src="../../../image/school.png" alt="">
+                <div><span class="mid_text">院校大全</span></div>
+            </div>
+            <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="nextPage('zhuanye_storage_win');">
+                <!-- <i class="aui-iconfont aui-icon-gear"></i> -->
+                <img class="mid_img" src="../../../image/major.png" alt="">
+                <div><span class="mid_text">专业大全</span></div>
+            </div>
+            <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="nextPage('zhiye_storage_win');">
+                <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                <img class="mid_img" src="../../../image/job.png" alt="">
+                <div><span class="mid_text">职业大全</span></div>
+            </div>
+            <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="daxuepaiming()">
+                <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                <img class="mid_img" src="../../../image/ic_cs.png" alt="">
+                <div><span class="mid_text">大学排名</span></div>
+            </div>
+            <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="onMajorClick();">
+                <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                <img class="mid_img" src="../../../image/s_xuanke.png" alt="">
+                <div><span class="mid_text">专业排名</span></div>
+            </div>
+          </div>
+      </section>
+
+      <section class="aui-grid">
+        <div class="aui-row" >
+            <div class="aui-col-xs-6 part-padding-16 t-l" tapmode onclick="wangnian()" >
+                <img class="part-img" src="../../../image/old_admit.png" alt="">
+                <div class="part-title-p">
+                  <span class="part-title">往年录取查询</span>
+                  <span class="part-subti">了解意向高校历年录取情况</span>
+                </div>
+            </div>
+            <div class="aui-col-xs-6 part-padding-16 t-l aui-margin-t-1" tapmode onclick="onSubjectClick();">
+                <img class="part-img" src="../../../image/subject_rank.png" alt="">
+                <div class="part-title-p">
+                  <span class="part-title">学科排名查询</span>
+                  <span class="part-subti">最新教育部学科评估结果</span>
+                </div>
+            </div>
+          </div>
+        <div class="aui-row">
+            <div class="aui-col-xs-6 part-padding-16 t-l aui-margin-t-1" tapmode onclick="onSectionClick();" >
+                <img class="part-img" src="../../../image/score_rank.png" alt="">
+                <div class="part-title-p">
+                  <span class="part-title">分段排名查询</span>
+                  <span class="part-subti">查看分数和排名的对应关系</span>
+                </div>
+            </div>
+            <!-- <div class="aui-col-xs-6 part-padding-16 t-l aui-margin-t-1" tapmode onclick="cidian()">
+                <img class="part-img" src="../../../image/volunteer_dire.png" alt="">
+                <div class="part-title-p">
+                  <span class="part-title">志愿词典</span>
+                  <span class="part-subti">志愿填报相关名词解释</span>
+                </div>
+            </div> -->
+          </div>
+        </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+
+    function wangnian() {
+      localStorage.url = "http://www.yxke12.com/index.php/App/Gaokaoxinxi/quanguozixun.html"
+      api.openWin({
+          name: 'wangnianchaxun',
+          url: './wangnianchaxun/wangnianchaxun_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+    function doVoluntaryClick() {
+      api.openWin({
+          name: 'mnzytbSM_win',
+          url: './mnzytb/mnzytbSM_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+
+    function onMajorClick() {
+      api.openWin({
+          name: 'major_rank_first_win',
+          url: './major-rank/major_rank_first_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+
+    function onSubjectClick() {
+        api.openWin({
+            name: 'subject_rank_win',
+            url: './subject-rank/subject_rank_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+
+    function onSectionClick() {
+      api.openWin({
+          name: 'section_rank_win',
+          url: './section-rank/section_rank_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+    function cidian() {
+      api.openWin({
+          name: 'zhiyuancidian_win',
+          url: './zhiyuancidian/zhiyuancidian_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+    function daxuepaiming() {
+      api.openWin({
+          name: 'daxuepaiming_win',
+          url: './daxuepaiming/daxuepaiming_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+
+    function nextPage(url) {
+      api.openWin({
+          name: url,
+          url: '../../shengyaguihua/' + url + '.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+</script>
+
+</html>

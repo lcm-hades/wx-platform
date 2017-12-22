@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        .center {
+            display: flex;
+            align-items: center;
+            /*justify-content:center;*/
+        }
+
+        .content_item {
+            background-color: #9f69ff;
+            border-radius: 10px;
+            width: 90%;
+            height: 90px;
+            overflow: hidden;
+            /*display:flex;*/
+            /*align-items:center;*/
+            /*justify-content:center;*/
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .left {
+            bottom: 23px;
+            float: left;
+        }
+
+        .left_img {
+            width: 44px;
+            height: 33px;
+            /*max-width: 44px;*/
+            float: left;
+            margin-left: 8px;
+            position: absolute;
+            bottom: 10px
+        }
+
+        .title {
+            font-size: 22px;
+            /*display: inline-block;*/
+            font-family: "PingFang-SC";
+            color: #ffffff;
+        }
+
+        .text_pos {
+            width: auto;
+            overflow: hidden;
+            height: 90px;
+            margin-left: 56px;
+            display: inline-flex;
+            align-items: center;
+            /*justify-content:center;*/
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            /*justify-content:center;*/
+            float: right;
+        }
+
+        .right_arrow {
+            width: 10px;
+            height: 18px;
+        }
+
+        .right_icon {
+            width: 59px;
+            height: 54px;
+        }
+        .xingge_bg{
+          background-color: #95de31;
+        }
+        .duoyuan_bg{
+          background-color: #36c7fa;
+        }
+        .zhuanye_bg{
+          background-color: #ffbc10;
+        }
+        .zhongwai_bg{
+          background-color: #ff4d50;
+        }
+        .danzhao_bg{
+          background-color: #886e91;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="" class="flex-wrap flex-vertical center">
+
+        <div class="content_item " tapmode="hover" onclick="itemClick1('hexinjiazhi_list_win')">
+            <img class="left_img" src="../../image/xingxiang_left.png" />
+            <div class="text_pos">
+                <p class="title">核心价值观</p>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><img src="../../image/dengpao.png" class="right_icon"></li>
+                    <li style="text-align:center;"><img src="../../image/arrow.png" class="right_arrow"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content_item xingge_bg" tapmode="hover" onclick="itemClick1('xinlijiankang_list_win')">
+            <img class="left_img" src="../../image/xingxiang_left.png" />
+            <div class="text_pos">
+                <p class="title">心理健康</p>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><img src="../../image/xin.png" class="right_icon"></li>
+                    <li style="text-align:center;"><img src="../../image/arrow.png" class="right_arrow"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content_item duoyuan_bg" tapmode="hover" onclick="itemClick1('bangyang_list_win')">
+            <img class="left_img" src="../../image/xingxiang_left.png" />
+            <div class="text_pos">
+                <p class="title">榜样力量</p>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><img src="../../image/bang.png" class="right_icon"></li>
+                    <li style="text-align:center;"><img src="../../image/arrow.png" class="right_arrow"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+
+    function itemClick1(url) {
+        api.openWin({
+            name: url,
+            url: './'+ url +'.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        header {
+            background-color: #f2f2f2;
+        }
+
+        header ul li {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            display: none;
+            color: #323237;
+            position: relative;
+            font-size: 18px;
+        }
+
+        header ul li.active {
+            display: block;
+        }
+
+        .aui-bar-mystyle {
+            color: #333333;
+            font-family: "PingFang-SC";
+            background-color: #ffffff;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .left_btn_c_b {
+            color: #a1a1a1!important;
+        }
+
+        .linear{
+            width:100%; height:100%; border:1px solid green; padding:10px; background:-webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff));
+        }
+
+    </style>
+</head>
+<body>
+    <header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+        <a class="aui-pull-left aui-btn" tapmode onclick='api.closeWin();'>
+            <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+        </a>
+        <div class="aui-title">心理健康</div>
+    </header>
+
+    <div id="content" class="flex-wrap flex-vertical linear" >
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+        $api.fixStatusBar($api.byId('aui-header'));
+        var headerh = $api.offset($api.byId('aui-header')).h;
+        api.openFrame({
+            name: 'xinlijiankang_list_frm',
+            url: './xinlijiankang_list_frm.html',
+            rect: {
+                x: 0,
+                y: headerh,
+                w: 'auto',
+                h: 'auto'
+            },
+            pageParam: {
+                name: 'test'
+            },
+            bounces: false,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false
+        });
+    };
+</script>
+
+</html>

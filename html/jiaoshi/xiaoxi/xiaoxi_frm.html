@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+  <section class="aui-content">
+    <ul class="aui-list aui-media-list" id="sykt_ul">
+        <script id="HDlist" type="text/x-dot-template">
+            <li class="aui-list-item" tapmode onclick="xiaoxilistd('http://www.yxke12.com/index.php/Ate/Member/message.html','{{=it[0].type}}');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                        <img src="../../../image/csjg.png" >
+                    </div>
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">测试结果</div>
+                        </div>
+                        {{if (it[0].count == '暂无最近动态') {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[0].count}}
+                          </div>
+                        {{}else {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[0].count}}条动态
+                          </div>
+                        {{}}}
+
+                    </div>
+                </div>
+            </li>
+            </script>
+          </ul>
+            <ul class="aui-list aui-media-list" id="sykt_ul1">
+            <script id="HDlist1" type="text/x-dot-template">
+            <li class="aui-list-item" tapmode onclick="xiaoxilistd('http://www.yxke12.com/index.php/Ate/Member/message.html','{{=it[1].type}}');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                        <img src="../../../image/xkjl.png" >
+                    </div>
+                    <div class="aui-list-item-inner">
+
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">选科记录</div>
+                        </div>
+                        {{if (it[1].count == '暂无最近动态') {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[1].count}}
+                          </div>
+                        {{}else {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[1].count}}条待评价
+                          </div>
+                        {{}}}
+
+                    </div>
+
+                </div>
+            </li>
+            </script>
+            </ul>
+            <ul class="aui-list aui-media-list" id="sykt_ul2">
+            <script id="HDlist2" type="text/x-dot-template">
+            <li class="aui-list-item" tapmode onclick="xiaoxilistd('http://www.yxke12.com/index.php/Ate/Member/message.html','{{=it[2].type}}');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                        <img src="../../../image/hdjl.png" >
+                    </div>
+                    <div class="aui-list-item-inner">
+
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">活动记录</div>
+                        </div>
+                        {{if (it[2].count == '暂无最近动态') {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[2].count}}
+                          </div>
+                        {{}else {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[2].count}}条待评价
+                          </div>
+                        {{}}}
+
+                    </div>
+
+                </div>
+            </li>
+            </script>
+            </ul>
+            <ul class="aui-list aui-media-list" id="sykt_ul3" style="display:none">
+            <script id="HDlist3" type="text/x-dot-template">
+            <li class="aui-list-item" tapmode onclick="xiaoxilistd('http://www.yxke12.com/index.php/Ate/Member/message.html','{{=it[3].type}}');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                        <img src="../../../image/czda.png" >
+                    </div>
+                    <div class="aui-list-item-inner">
+
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">成长档案</div>
+                        </div>
+                        {{if (it[3].count == '暂无最近动态') {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[3].count}}
+                          </div>
+                        {{}else {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[3].count}}条待评价
+                          </div>
+                        {{}}}
+
+                    </div>
+
+                </div>
+            </li>
+            </script>
+            </ul>
+
+            <ul class="aui-list aui-media-list" id="sykt_ul5">
+            <script id="HDlist5" type="text/x-dot-template">
+            <li class="aui-list-item" tapmode onclick="xiaoxilistd('http://www.yxke12.com/index.php/Ate/Member/message.html','{{=it[4].type}}');">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                        <img src="../../../image/csbg.png" >
+                    </div>
+                    <div class="aui-list-item-inner">
+
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">陈述报告</div>
+                        </div>
+                        {{if (it[4].count == '暂无最近动态') {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[4].count}}
+                          </div>
+                        {{}else {}}
+                          <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[4].count}}条待评价
+                          </div>
+                        {{}}}
+
+                    </div>
+
+                </div>
+            </li>
+
+          </script>
+    </ul>
+    <ul class="aui-list aui-media-list" id="sykt_ul6">
+    <script id="HDlist6" type="text/x-dot-template">
+    <li class="aui-list-item" tapmode onclick="xiaoxilistd('http://www.yxke12.com/index.php/Ate/Member/message.html','{{=it[5].type}}');">
+        <div class="aui-media-list-item-inner">
+            <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                <img src="../../../image/baokaofangan.png" >
+            </div>
+            <div class="aui-list-item-inner">
+
+                <div class="aui-list-item-text">
+                    <div class="aui-list-item-title">报考方案</div>
+                </div>
+                {{if (it[5].count == '暂无最近动态') {}}
+                  <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                        {{=it[5].count}}
+                  </div>
+                {{}else {}}
+                  <div class="aui-list-item-text" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                        {{=it[5].count}}条待评价
+                  </div>
+                {{}}}
+
+            </div>
+
+        </div>
+    </li>
+
+  </script>
+</ul>
+</section>
+
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/doT.js" ></script>
+<script type="text/javascript" src="../../../script/network.js" ></script>
+<script type="text/javascript">
+
+
+    var listHD = doT.template(document.getElementById('HDlist').innerHTML);
+    var listHD1 = doT.template(document.getElementById('HDlist1').innerHTML);
+    var listHD2 = doT.template(document.getElementById('HDlist2').innerHTML);
+    var listHD3 = doT.template(document.getElementById('HDlist3').innerHTML);
+    var listHD5 = doT.template(document.getElementById('HDlist5').innerHTML);
+    var listHD6 = doT.template(document.getElementById('HDlist6').innerHTML);
+
+    apiready=function(){
+      api.parseTapmode();
+      var parames = {values:{}}
+      var parames1 = {values:{}}
+      var parames2 = {values:{}}
+      var parames3 = {values:{}}
+      var parames4 = {values:{}}
+      var parames5 = {values:{}}
+          parames.values.teacherid = $api.getStorage('teacherid')
+
+          zhc.post('http://www.yxke12.com/index.php/Ate/Member/count.html',parames,function(data) {
+            document.getElementById('sykt_ul').innerHTML = listHD(data);
+            document.getElementById('sykt_ul1').innerHTML = listHD1(data);
+            document.getElementById('sykt_ul2').innerHTML = listHD2(data);
+            document.getElementById('sykt_ul3').innerHTML = listHD3(data);
+            document.getElementById('sykt_ul5').innerHTML = listHD5(data);
+            document.getElementById('sykt_ul6').innerHTML = listHD6(data);
+
+          },null,false)
+
+    }
+    function xiaoxilist(url) {
+      api.openWin({
+          name: 'xiaoxiliebiao_win',
+          url: './xiaoxiliebiao_win.html',
+          pageParam: {
+              url: url
+          }
+      });
+
+    }
+    function xiaoxilistd(url,type) {
+
+
+          if (type == '测试结果') {
+            var parames = {values:{}}
+            parames.values.teacherid = $api.getStorage('teacherid')
+            parames.values.type = type
+              zhc.post(url,parames,function(data) {
+
+                api.openWin({
+                    name: 'csjg_win',
+                    url: '../gerenzhongxin/csjg_win.html',
+                    pageParam: {
+                        data: data
+                    }
+                });
+              },null,true)
+          }
+          if (type == '活动记录') {
+              var parames = {values:{}}
+            parames.values.teacherid = $api.getStorage('teacherid')
+            parames.values.type = type
+              zhc.post(url,parames,function(data) {
+
+                api.openWin({
+                    name: 'huodongjilu_win',
+                    url: '../gerenzhongxin/huodongjilu_win.html',
+                    pageParam: {
+                        data: data
+                    }
+                });
+              },null,true)
+          }
+          if (type == '陈述报告') {
+              var parames = {values:{}}
+            parames.values.teacherid = $api.getStorage('teacherid')
+            parames.values.type = type
+              zhc.post(url,parames,function(data) {
+
+                api.openWin({
+                    name: 'chenshubaogao_win',
+                    url: '../gerenzhongxin/chenshubaogao_win.html',
+                    pageParam: {
+                        data: data
+                    }
+                });
+              },null,true)
+          }
+          if (type == '报考方案') {
+              var parames = {values:{}}
+            parames.values.teacherid = $api.getStorage('teacherid')
+            parames.values.type = type
+              zhc.post(url,parames,function(data) {
+
+                api.openWin({
+                    name: 'baokaofangan_win',
+                    url: '../gerenzhongxin/baokaofangan_win.html',
+                    pageParam: {
+                        data: data
+                    }
+                });
+              },null,true)
+          }
+          if (type == '选科记录') {
+              var parames = {values:{}}
+            parames.values.teacherid = $api.getStorage('teacherid')
+            parames.values.type = type
+              zhc.post(url,parames,function(data) {
+                console.log(JSON.stringify(data));
+                api.openWin({
+                    name: 'xuankejilu_win',
+                    url: '../gerenzhongxin/xuankejilu_win.html',
+                    pageParam: {
+                        data: data
+                    }
+                });
+              },null,true)
+          }
+    }
+</script>
+</html>

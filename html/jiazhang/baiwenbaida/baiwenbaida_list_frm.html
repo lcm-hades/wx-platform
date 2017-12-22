@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+    .aui-content-padded {
+         margin: 0rem;
+        position: relative;
+        word-break: break-all;
+        -webkit-overflow-scrolling: touch;
+    }
+
+.aui-border {
+    border: none;
+    background-image: -webkit-linear-gradient(270deg, #dddddd, #dddddd 0%, transparent 0%), -webkit-linear-gradient(180deg, #dddddd, #dddddd 0%, transparent 0%), -webkit-linear-gradient(90deg, #dddddd, #dddddd 0%, transparent 0%), -webkit-linear-gradient(0, #dddddd, #dddddd 50%, transparent 0%);
+    background-image: linear-gradient(180deg, #dddddd, #dddddd 0%, transparent 0%), linear-gradient(270deg, #dddddd, #dddddd 0%, transparent 0%), linear-gradient(0deg, #dddddd, #dddddd 0%, transparent 0%), linear-gradient(90deg, #dddddd, #dddddd 0%, transparent 0%);
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+    background-repeat: no-repeat;
+    background-position: top, right top, bottom, left top;
+}
+  .title_zi{
+      font-family: 'PingFang-SC';
+      font-size: 0.7rem!important;
+      text-align: left;
+      color: #333333;
+      padding-bottom: 20px;
+      padding-top: 20px;
+      padding-left: 10px;
+  }
+.title_neirong{
+  font-family: 'PingFang-SC';
+ font-size: 0.7rem;
+ text-align: left;
+ color: #333333;
+ margin: 0.5rem;
+}
+
+    </style>
+</head>
+<body>
+  <section class="aui-content-padded">
+    <div class="aui-content aui-margin-b-15" id="bwbd">
+        <ul class="aui-list aui-list-in">
+
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="itemClick(1)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">一、基本情况</div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(2)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">二、普通类志愿填报及投档录取</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(3)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">三、艺术类志愿填报及投档录取</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(4)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">四、体育类志愿填报及投档录取</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(5)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">五、多元选拔及特殊类型招生</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(6)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">六、网上填报志愿注意事项</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(7)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">七、心理</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(8)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title aui-padded-10">八、生活</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+  </section>
+
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/aui-tab.js" ></script>
+<script type="text/javascript" src="../../../script/doT.js" ></script>
+<script type="text/javascript" src="../../../script/aui-collapse.js" ></script>
+<script type="text/javascript" src="../../../script/network.js" ></script>
+
+<script type="text/javascript">
+    var arr_title = ["基本情况", "普通类志愿填报及投档录取", "艺术类志愿填报及投档录取",
+                "体育类志愿填报及投档录取","多元选拔及特殊类型招生","网上填报志愿注意事项","心理","生活"];
+    apiready = function(){
+    }
+
+    function itemClick(index) {
+      api.openWin({
+          name: 'baiwenbaida_neirong_win',
+          url: '../baiwenbaida/baiwenbaida_neirong_win.html',
+          pageParam: {
+              title: arr_title[index - 1],
+              index: index
+          }
+      });
+    }
+</script>
+</html>

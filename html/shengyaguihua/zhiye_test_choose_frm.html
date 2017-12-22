@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        .center {
+            display: flex;
+            align-items: center;
+        }
+
+        .z-title {
+            text-align: left;
+            width: 90%;
+            margin-top: 12px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .z-ti {
+            width: 90%;
+        }
+
+        .aui-list {
+            border: none;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-image: linear-gradient(0, #dddddd, #dddddd 0%, transparent 0%);
+            /*width: 90%;*/
+        }
+
+        .z-d-n {
+            display: none;
+        }
+
+        .z-d-b {
+            display: block;
+            ;
+        }
+
+        .xiayibu {
+            text-align: center;
+            margin: 13px 0;
+            /*width: 80%;*/
+            height: 33px;
+            line-height: 33px;
+            border-radius: 16.5px;
+            background-color: #6666ff;
+            /*box-shadow: 0px 5px 16px 0 rgba(102, 103, 255, 0.6);*/
+            border: solid 0 #14155a;
+        }
+
+        .zibiaoti {
+            width: 90%;
+            font-family: 'PingFang-SC';
+            font-size: 14px;
+            color: #666666;
+            margin: auto;
+        }
+
+        .wenzishuoming {
+            width: 100%;
+            font-family: "PingFang-SC";
+            font-size: 14px;
+            margin: auto;
+            color: #666666;
+        }
+    </style>
+</head>
+
+<body style="background:#fff">
+    <div id="" class="flex-wrap flex-vertical center">
+            <div class="z-title">
+                请去掉你最不想从事的职业：
+            </div>
+            <div class="zibiaoti">
+                以下是综合职业兴趣、职业性格、多元智能3个测试得出的你最适合的职业群：
+            </div>
+            <div class="z-ti">
+                <ul class="aui-list aui-list-in" id="xianshi">
+                    <script id="evaluationtmpl" type="text/x-dot-template">
+                        {{ for(var i=0;i<it.length;i++) { }}
+                            <li class="" tapmode onclick=xuanze({{=i}}) name='qiuzhiR'>
+                                <div class="aui-list-item-inner">
+                                    <div style='color:#6666ff' class="aui-list-item-title" id={{=i}}>{{= it[i].jobname}}</div>
+                                    <div class="aui-list-item-right">
+                                        <i class="aui-iconfont aui-icon-correct" id='ti{{=i}}' style='display:block;color:#6666ff;'></i>
+                                    </div>
+                                </div>
+                            </li>
+                        {{}}}
+                        <div class='wenzishuoming'>
+                            性向测试是以科学的心理学理论为依据，通过标准化的手段得到的客观结果。但是由于价值倾向方面的原因，或许你会觉得有些职业并不适合你。请你按照主观意愿勾掉你最不想从事的职业。
+                        </div>
+                        <div class='xiayibu' tapmode onclick='madeReport()' style='color:#fff'>提交</div>
+                  </script>
+                </ul>
+            </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    var data;
+    var zongjie = []
+    var uploadJobs = [];
+    var numbers;
+    apiready = function() {
+        data = api.pageParam.data;
+        numbers = api.pageParam.numbers;
+        var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+        document.getElementById('xianshi').innerHTML = evalText(data);
+        for (var i = 0; i < data.length; i++) {
+            zongjie.push(1);
+        }
+    };
+
+    function xuanze(index) {
+        var wenzi = document.getElementById(index);
+        var qiuzhiR = document.getElementsByName('qiuzhiR');
+        var duigou = document.getElementById('ti' + index)
+        if (duigou.style.display == 'block') {
+            duigou.style.display = 'none';
+            duigou.style.color = "#6666ff";
+            wenzi.style.color = '#a1a1a1';
+            zongjie[index] = 0;
+        }else if (duigou.style.display == 'none') {
+            duigou.style.display = 'block'
+            duigou.style.color = "#6666ff"
+            wenzi.style.color = '#6666ff'
+            zongjie[index] = 1;
+        }
+    }
+
+    function madeReport() {
+      uploadJobs.splice(0, uploadJobs.length);
+      for (var i = 0; i < zongjie.length; i++) {
+        if (zongjie[i] == 1) {
+          uploadJobs.push(data[i].id);
+        }
+      }
+      if (uploadJobs.length == 0) {
+          alert("最少选中一项！")
+          return
+      }
+      console.log(uploadJobs);
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zhuanye/result.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  number: numbers,
+                  checks: uploadJobs
+              }
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+              console.log(JSON.stringify( ret ));
+              if (ret.status == 100) {
+                  api.openWin({
+                      name: 'zhuanye_report_win',
+                      url: './zhuanye_report_win.html',
+                      pageParam: {
+                          data: ret.data
+                      }
+                  });
+              }else {
+                console.log( JSON.stringify( err ) );
+              }
+          } else {
+              console.log( JSON.stringify( err ) );
+          }
+      });
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .con {
+          width: 100%;
+          margin: auto;
+          position: relative;
+          background: #ffdada;
+      }
+      .tishi{
+        font-family: 'PingFang-SC';
+        font-size: 0.5rem;
+        color: #de3f3f;
+        margin-left: 1rem;
+      }
+      .univ_top{
+        background-color: #6666ff;
+        padding: 14px;
+      }
+
+      .univ_top span{
+        color: white;
+        font-size: 16px;
+        display: block;
+      }
+      ul{
+        margin-top: 8px;
+      }
+
+      ul li{
+          border-bottom: 1px solid #e5e5e5;
+      }
+
+      li .top{
+        overflow: hidden;
+        padding: 8px 16px;
+        color: #8e8eb2;
+        background: white;
+      }
+
+      .top .left{
+        float: left;
+      }
+
+      .top .right{
+        float: right;
+      }
+
+      .mid span{
+        color: #222222;
+        font-size: 18px;
+      }
+
+      .mid{
+        background-color: white;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .mid div{
+        padding: 1px 4px;
+        color: white;
+        margin-left: 4px;
+        border-radius: 4px;
+        display: inline-block;
+        font-size: 10px;
+      }
+
+      .bg985{
+        background: #ef5b1f;
+      }
+
+      .bg211{
+        background: #2cb3eb;
+      }
+
+      .bgzi{
+        background: #32c785;
+      }
+
+      .bgbx{
+        background: #ffbc10;
+      }
+
+      .bgyx{
+        background: #9f69ff;
+      }
+
+      .bottom{
+        background: white;
+        padding: 16px 0px !important;
+        text-align: center;
+      }
+
+      .bottom div{
+        display: inline-block;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-left: 1px solid #e5e5e5;
+      }
+
+      .bottom span{
+        text-align: center;
+        display: block;
+        font-size: 12px;
+      }
+
+      .b-color{
+        color: #34b3fd;
+      }
+      .y-color{
+        color: #ffbc10;
+      }
+      .g-color{
+        color: #666666;
+        margin-top: 4px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="con">
+        <div style="width:80%;margin:auto">
+          <!-- <img src="../../../../image/tishi.png" alt=""> -->
+          <span class="tishi">根据你的成绩和排名，智能推荐适合你的学校</span>
+        </div>
+      </div>
+
+      <div class="univ_top">
+          <span id="na"></span>
+          <span id="score"></span>
+          <span id="rank"></span>
+      </div>
+      <ul id="school_ul">
+        <script id="school_s" type="text/x-dot-template">
+          {{for (var i = 0; i < it.length; i++) {}}
+            <li tapmode onclick="onItemClick({{=i}})">
+              <div class="top">
+                <span class="left">所在地：{{=it[i].province}}-{{=it[i].city}}</span>
+                <span class="right">招生人数：{{=it[i].plan}}</span>
+              </div>
+
+              <div class="mid">
+                  <span>{{=it[i].univ_name}}</span>
+                    {{if (it[i].is985) {}}
+                      <div class="bg985">985</div>
+                    {{}}}
+
+                    {{if (it[i].is211) {}}
+                      <div class="bg211">211</div>
+                    {{}}}
+
+                    {{if (it[i].syl) {}}
+                    <div class="bgzi">双一流</div>
+                    {{}}}
+
+                    <div class="bgbx">{{=it[i].bxxz}}</div>
+                    <div class="bgyx">{{=it[i].yxlx}}</div>
+              </div>
+
+              <div class="bottom">
+                  <div style="border-left: none">
+                    {{if (it[i].rank2017) {}}
+                      <span class="b-color">{{=it[i].rank2017}}/{{=it[i].enroll2017}}</span>
+                    {{}else {}}
+                      <span class="b-color">暂无/暂无</span>
+                    {{}}}
+                    <span class="g-color">17年最低排名</br>/录取人数</span>
+                  </div>
+                  <div>
+                  {{if (it[i].rank2016) {}}
+                    <span class="y-color">{{=it[i].rank2016}}/{{=it[i].enroll2016}}</span>
+                  {{}else {}}
+                    <span class="y-color">暂无/暂无</span>
+                  {{}}}
+                    <span class="g-color">16年最低排名</br>/录取人数</span>
+                  </div>
+                  <div>
+                    <span class="b-color">{{=it[i].rank2015}}/{{=it[i].enroll2015}}</span>
+                    <span class="g-color">15年最低排名</br>/录取人数</span>
+                  </div>
+              </div>
+            </li>
+          {{}}}
+        </script>
+      </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript">
+    var school_dot;
+    var data_list = [];
+    apiready = function() {
+      na.innerHTML = "考生信息：" + $api.getStorage('studentname') + "/" + $api.getStorage('sheng');
+      rank.innerHTML = "高考排名：" + api.pageParam.rank+"名";
+      score.innerHTML = "高考总分：" + api.pageParam.score+"分";
+      school_dot = doT.template(document.getElementById('school_s').innerHTML);
+      getUniversityData();
+    };
+
+    function getUniversityData() {
+      var parames = {values:{}};
+      parames.values.type = $api.getStorage('type');
+      parames.values.provinceid = $api.getStorage('provinceid');
+      parames.values.score = api.pageParam.score;
+      parames.values.lowrank = api.pageParam.rank;
+      parames.values.batchid = api.pageParam.batchid;
+      zhc.post("http://192.168.1.247/index.php/App/Zhiyuantianbao/selectschool.html",
+          parames,function(_data) {
+            // console.log(JSON.stringify(_data));
+            data_list = _data.result;
+            document.getElementById('school_ul').innerHTML = school_dot(data_list);
+          }, null, true);
+    }
+
+    function onItemClick(index) {
+        localStorage.univ_data = $api.jsonToStr(data_list[index]);
+
+        api.execScript({
+            name: 'zytb_win',
+            frameName: 'zytb_frm',
+            script: 'winBackResult();'
+        });
+        api.closeWin();
+    }
+</script>
+
+</html>

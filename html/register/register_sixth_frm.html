@@ -1,0 +1,408 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+      body{
+        font-family: "PingFang-SC";
+      }
+
+      .grade{
+        font-size: 24px;
+        margin: 10px auto;
+        text-align: center;
+      }
+
+      .grade_show{
+        font-family: "PingFang-SC"!important;
+        padding-left: 25px;
+        line-height: 50px;
+        font-size: 20px;
+        background-color: #ddd;
+        width: 80%;
+        margin: 0px auto;
+        height: 50px;
+        border-radius:25px;
+        position: relative;
+      }
+
+      .login_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 100%;
+        margin: 0px auto;
+        border-radius: 0px;
+        position: absolute;
+        font-size: 18px;
+        bottom: 0px;
+      }
+
+      .kaoshi{
+          margin: 10px auto;
+          width: 90%;
+          height: 100px;
+          text-align: center;
+      }
+
+      .ke{
+        display: inline-block;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 1px solid #6666ff;
+        line-height: 80px;
+        font-size: 22px;
+        margin: 0px 10px;
+      }
+
+      .select{
+        background-color: #6666ff!important;
+        color: white;
+      }
+
+      .grade_show select{
+        font-family: "PingFang-SC";
+        height: 50px;
+      }
+
+      .margin-t-20{
+        margin-top: 20px;
+      }
+
+      .pos_right{
+        position:absolute;
+        right:20px;
+        top:0px;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+
+        <div class="grade">所在地区</div>
+          <!-- 省 -->
+          <div class="aui-list-item-input grade_show" id="province_div">
+            <script id="province_s" type="text/x-dot-template">
+              <select onchange="selectProvince(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+              </script>
+          </div>
+            <!-- 市 -->
+          <div class="aui-list-item-input grade_show margin-t-20" id="city_div">
+            <script id="city_s" type="text/x-dot-template">
+              <select onchange="selectCity(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+          </div>
+          <!-- 县 -->
+          <div class="aui-list-item-input grade_show margin-t-20" id="qu_div">
+            <script id="qu_s" type="text/x-dot-template">
+              <select onchange="selectQu(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+          </div>
+
+          <div class="grade margin-t-20">学校</div>
+          <div class="aui-list-item-input grade_show margin-t-20" id="school_div">
+            <script id="school_s" type="text/x-dot-template">
+              <select onchange="selectSchool(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].schoolname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+              </script>
+          </div>
+        <div id="next_step" class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">下一步</div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    var uploadData = {};
+    var provinceList = [];
+    var cityList = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+    var quList = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+    var schoolList = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+    var city_dot, qu_dot, school_dot;
+    var cur_province, cur_city, cur_qu, cur_school;
+
+    apiready = function() {
+      uploadData = api.pageParam.data;
+        api.parseTapmode();
+        getProvinceData();
+        if(city_dot == null){
+          city_dot = doT.template(document.getElementById('city_s').innerHTML);
+        }
+        document.getElementById('city_div').innerHTML = city_dot(cityList);
+
+        if(qu_dot == null){
+          qu_dot = doT.template(document.getElementById('qu_s').innerHTML);
+        }
+        document.getElementById('qu_div').innerHTML = qu_dot(quList);
+
+        if(school_dot == null){
+          school_dot = doT.template(document.getElementById('school_s').innerHTML);
+        }
+        document.getElementById('school_div').innerHTML = school_dot(schoolList);
+    };
+
+    function getProvinceData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/address.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                provinceList = ret.data.provinces;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                provinceList.unshift(first);
+                var province_dot = doT.template(document.getElementById('province_s').innerHTML);
+                document.getElementById('province_div').innerHTML = province_dot(provinceList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getCityList(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getshi.html',
+          method: 'post',
+          data: {
+              values: {
+                  shengid: provinceList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                cityList = ret.data.shi;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                cityList.unshift(first);
+                if(city_dot == null){
+                  city_dot = doT.template(document.getElementById('city_s').innerHTML);
+                }
+                document.getElementById('city_div').innerHTML = city_dot(cityList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getQu(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getxian.html',
+          method: 'post',
+          data: {
+              values: {
+                  shiid: cityList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                quList = ret.data.xian;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                quList.unshift(first);
+                if(qu_dot == null){
+                  qu_dot = doT.template(document.getElementById('qu_s').innerHTML);
+                }
+                document.getElementById('qu_div').innerHTML = qu_dot(quList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getSchool(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getschool.html',
+          method: 'post',
+          data: {
+              values: {
+                  xianid: quList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                schoolList = ret.data.school;
+                var first = {schoolname:"请选择",pid:"0",schoolid:"0"};
+                schoolList.unshift(first);
+                if(school_dot == null){
+                  school_dot = doT.template(document.getElementById('school_s').innerHTML);
+                }
+                document.getElementById('school_div').innerHTML = school_dot(schoolList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function selectProvince(value) {
+        cur_province = provinceList[value].provincesid;
+        cur_city = null;
+        cur_qu = null;
+        cur_school = null;
+        var first = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+        quList = first;
+        document.getElementById('qu_div').innerHTML = qu_dot(quList);
+        schoolList = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+        document.getElementById('school_div').innerHTML = school_dot(schoolList);
+        getCityList(value);
+    }
+
+    function selectCity(value) {
+      cur_city = cityList[value].provincesid;
+      cur_qu = null;
+      cur_school = null;
+      var first = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+      schoolList = first;
+      document.getElementById('school_div').innerHTML = school_dot(schoolList);
+      getQu(value);
+    }
+
+    function selectQu(value) {
+      cur_qu = quList[value].provincesid;
+      cur_school = null;
+      getSchool(value);
+    }
+
+    function selectSchool(index) {
+      cur_school = schoolList[index].schoolid;
+      console.log(index);
+    }
+
+    function bindClick() {
+      if (cur_province != null &&
+        cur_city != null &&
+        cur_qu != null &&
+        cur_school != null) {
+          uploadData.schoolid = cur_school;
+          uploadData.xian = cur_qu;
+          console.log("log: "+JSON.stringify(uploadData));
+          api.openWin({
+              name: 'register_fifth_win',
+              url: './register_fifth_win.html',
+              pageParam: {
+                  data: uploadData
+              }
+          });
+      }else {
+        api.toast({
+            msg: '请检查学校信息',
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+
+      // api.openWin({
+      //     name: 'index',
+      //     url: '../../index.html',
+      //     pageParam: {
+      //         name: 'test'
+      //     }
+      // });
+
+    }
+</script>
+
+</html>

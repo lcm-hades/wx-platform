@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <style>
+
+        .zizhuzhaosheng {
+          font-family: 'PingFang-SC';
+          font-size: 10px;
+          color: #666666;
+          line-height: 0.7rem;
+        }
+        .zizhuzhaoshengkuan {
+          width: 50px;
+          height: 14px;
+          border-radius: 2px;
+          background-color: #eeeeee;
+          display: inline-block!important;
+          text-align: center!important;
+          }
+          .biaoti {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            color: #333333;
+          }
+          .shuoming {
+            font-family: 'PingFang-SC';
+            font-size: 10px;
+            color: #666666;
+            width: 80%;
+          }
+          .nianfen {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            line-height: 1.25;
+            color: #666666;
+            width: 20%;
+            height: 23px;
+           border-radius: 5px;
+           border: solid 1px #6666ff;
+          }
+          table{
+            width: 100%;
+            text-align: center;
+          }
+          tr{
+            font-size: 12px;
+          }
+          .chakan{
+            font-family: 'PingFang-SC';
+            color: #0281f9;
+            width: 45%;
+          }
+
+    </style>
+</head>
+<body>
+    <div class="aui-tab" id="tab">
+        <div class="aui-tab-item aui-active">资讯</div>
+        <div class="aui-tab-item"><div></div>方略</div>
+        <div class="aui-tab-item">招生简章</div>
+    </div>
+
+    <div class="aui-content aui-margin-b-15" style="display:none">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title biaoti">上海、浙江2017年要划定自主招生录取参考线</div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item zizhuzhaoshengkuan">
+                      <span class="zizhuzhaosheng">三位一体</span>
+                    </div>
+                    <div class="aui-info-item zizhuzhaosheng">2017-03-02</div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+
+    <div class="aui-content aui-margin-b-15" style="display:none;">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-item">
+                <div class="aui-media-list-item-inner">
+
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title biaoti">常见面试形式解析</div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item zizhuzhaoshengkuan">
+                      <span class="zizhuzhaosheng">三位一体</span>
+                    </div>
+                    <div class="aui-info-item zizhuzhaosheng">2017-03-02</div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-header" style="background: #fff;">
+              <span class="shuoming">
+                  招生地区：
+                  <select class="nianfen" name="" style="display: inline-block;width:30%">
+                      <option value="">全国</option>
+                      <option value="">北京</option>
+                      <option value="">天津</option>
+                    </select>
+              </span>
+
+              <select class="nianfen" name="" style="width:25%">
+                <option value="">2017</option>
+                <option value="">2018</option>
+                <option value="">2019</option>
+              </select>
+
+
+            </li>
+
+          <table border="1">
+            <tr>
+              <th>院校属地</th>
+              <th>院 校</th>
+              <th>招生简章</th>
+              <th>报名时间</th>
+            </tr>
+            <tr>
+              <td>北京</td>
+              <td style="width: 20%;">北京大学</td>
+              <td class="chakan">北京大学2017年“博雅人才培养计划”招生简章</td>
+              <td >3.30-4.15</td>
+            </tr>
+          </table>
+        </ul>
+    </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js" ></script>
+<script type="text/javascript" src="../script/aui-tab.js" ></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+    }
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        console.log(ret)
+    });
+</script>
+</html>

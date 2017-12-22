@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+    .aui-list .aui-list-item-title {
+        font-size: 0.8rem;
+        position: relative;
+        max-width: 100%;
+        color: #333333;
+        margin-left: 5px;
+    }
+
+    .aui-list .aui-list-item-right{
+         max-width: 100%;
+        position: relative;
+        font-size: 0.6rem;
+        color: #757575;
+        margin-left: 0.25rem;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+  <section class="aui-content" id="center_ul">
+    <script id="center_s" type="text/x-dot-template">
+    <ul class="aui-list aui-list-in aui-margin-b-15">
+        <li class="aui-list-item"  tapmode onclick="selectImg();">
+            <div class="aui-list-item-inner aui-list-item-arrow">
+                <div class="aui-list-item-title">头像</div>
+                <div class="aui-list-item-right">
+                  <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it.touxiang}}" style='width:3rem;height:3rem;margin:0.5rem 0;border-radius:1.5rem;' alt="">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+      <ul  class="aui-list aui-list-in aui-margin-b-15">
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">用户名</div>
+                  <div class="aui-list-item-right">{{=it.loginuser}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">姓名</div>
+                  <div class="aui-list-item-right">{{=it.parentname}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item" tapmode onclick = "xiugaishoujihao()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">手机号</div>
+                  <div class="aui-list-item-right">{{=it.phone}}</div>
+              </div>
+          </li>
+      </ul>
+      <ul  class="aui-list aui-list-in aui-margin-b-15">
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">子女</div>
+                  <div class="aui-list-item-right">{{=it.child}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">子女学校</div>
+                  <div class="aui-list-item-right">{{=it.childschool}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">子女年级</div>
+                  <div class="aui-list-item-right">{{=it.studentgrade}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">子女班级</div>
+                  <div class="aui-list-item-right">{{=it.studentclass}}</div>
+              </div>
+          </li>
+      </ul>
+    </script>
+
+  </section>
+</div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/tools.js"></script>
+<script type="text/javascript">
+    var data = {};
+    var cur_pic = null;
+    var cur_type = null;
+    var new_type = null;
+    var center_dot = doT.template(document.getElementById('center_s').innerHTML);
+    apiready = function(){
+        api.parseTapmode();
+        setCurData();
+        getData();
+        api.parseTapmode();
+    };
+
+    function setCurData() {
+        cur_type = data.type;
+        new_type = data.type;
+        // cur_pic = data.img;
+    }
+    function selectImg() {
+        api.getPicture({
+            sourceType: 'album',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            targetWidth: 130,
+            targetHeight: 130,
+            saveToPhotoAlbum: false
+        }, function(ret, err){
+         //  console.log(JSON.stringify(ret));
+            if(ret){
+                if (ret.data != null) {
+                  cur_pic = ret.data;
+                  uploadData();
+                }
+
+            }else{
+                 console.log(JSON.stringify(err));
+            }
+        });
+
+    }
+
+
+    function uploadData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Apa/Member/modifytouxiang.html',
+          method: 'post',
+          data: {
+              values: {
+                  parentid: $api.getStorage('parentid'),
+              },
+              files: {
+                  file: cur_pic
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+        console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              if (ret.data.touxiang != null) {
+                data.touxiang = ret.data.touxiang;
+                cur_pic = ret.data.touxiang;
+                $api.setStorage('touxiang', cur_pic);
+
+              }
+
+            }else {
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+          document.getElementById('center_ul').innerHTML = center_dot(data);
+          api.parseTapmode();
+      });
+
+    }
+
+
+    function getData() {
+      // img
+      data.touxiang = $api.getStorage('touxiang');
+      // loginuser
+      data.loginuser = $api.getStorage('loginuser');
+      // parentname
+      data.parentname = $api.getStorage('parentname');
+      // studentname
+      data.child = $api.getStorage('child');
+      // school
+      data.phone = tools.hidePhone($api.getStorage('phone'));
+      data.studentclass = $api.getStorage('studentclass');
+      data.studentgrade = $api.getStorage('studentgrade');
+      data.childschool = $api.getStorage('childschool');
+      document.getElementById('center_ul').innerHTML = center_dot(data);
+    }
+
+
+function xiugaishoujihao() {
+  api.openWin({
+      name: 'forget_pwd_win',
+      url: '../register/forget_pwd_win.html',
+      pageParam: {
+          title: '验证手机号',
+          type:"7"
+      }
+  });
+}
+
+</script>
+</html>

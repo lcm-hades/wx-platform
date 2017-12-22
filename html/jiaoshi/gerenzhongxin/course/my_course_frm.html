@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .aui-tab-item {
+        width: 100%;
+        height: 2.2rem;
+        line-height: 2.2rem;
+        position: relative;
+        font-size: 0.7rem;
+        text-align: center;
+        color: #886e91;
+        margin-left: -1px;
+        -webkit-box-flex: 1;
+        box-flex: 1;
+      }
+
+      .tab-other{
+        width: 100%;
+        position: fixed;
+        z-index: 5;
+      }
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+      table{
+        width:100%;
+        margin-top: 46px;
+      }
+      tr th{
+        width:18.4%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      tr .th_first{
+        width:8%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      tr .td_first{
+        width:8%;
+        height: 60px;
+        color: #886e91;
+        line-height: 60px;
+        text-align: center;
+        border-bottom: 1px solid white;
+      }
+
+      tr .td_second{
+        width:18.4%;
+        height: 60px;
+        text-align: center;
+        color: white;
+        background-color: #b699ea;
+        border-bottom: 1px solid white;
+      }
+
+      tr .td_third{
+        width:18.4%;
+        height: 60px;
+        text-align: center;
+        color: white;
+        background-color: #9fd45b;
+        border-bottom: 1px solid white;
+      }
+
+      tr .td_fourth{
+        width:18.4%;
+        height: 60px;
+        text-align: center;
+        color: white;
+        background-color: #58bef9;
+        border-bottom: 1px solid white;
+      }
+
+      tr .td_fifth{
+        width:18.4%;
+        height: 60px;
+        text-align: center;
+        color: white;
+        background-color: #fc8a8c;
+        border-bottom: 1px solid white;
+      }
+      tr .td_sixth{
+        width:18.4%;
+        height: 60px;
+        text-align: center;
+        color: white;
+        background-color: #fdbf2d;
+        border-bottom: 1px solid white;
+      }
+
+      .no_data{
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 120px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab tab-other" id="tab">
+          <div class="aui-tab-item aui-active">个人</div>
+          <div class="aui-tab-item">学生</div>
+          <div class="aui-tab-item">教师</div>
+          <div class="aui-tab-item">班级</div>
+      </div>
+
+      <section id="personal_sc">
+          <img class="no_data" src="../../../../image/bull.png">
+
+          </img>
+          <table style="display:none">
+              <tr>
+                  <th class="th_first"></th>
+                  <th>周一</th>
+                  <th>周二</th>
+                  <th>周三</th>
+                  <th>周四</th>
+                  <th>周五</th>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+              <tr>
+                <td class="td_first">1</td>
+                <td class="td_second">语文</td>
+                <td class="td_third">语文</td>
+                <td class="td_fourth">语文</td>
+                <td class="td_fifth">语文</td>
+                <td class="td_sixth">语文</td>
+              </tr>
+          </table>
+      </section>
+
+      <section id="student_sc" style="display:none">
+        <img class="no_data" src="../../../../image/bull.png">
+
+        </img>
+      </section>
+
+      <section id="teacher_sc" style="display:none">
+        <img class="no_data" src="../../../../image/bull.png">
+
+        </img>
+      </section>
+
+      <section id="class_sc" style="display:none">
+        <img class="no_data" src="../../../../image/bull.png">
+
+        </img>
+      </section>
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/aui-tab.js" ></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('personal_sc').style.display = "block"
+          document.getElementById('student_sc').style.display = "none"
+          document.getElementById('teacher_sc').style.display = "none"
+          document.getElementById('class_sc').style.display = "none"
+        }else if (ret.index == 2) {
+          document.getElementById('personal_sc').style.display = "none"
+          document.getElementById('student_sc').style.display = "block"
+          document.getElementById('teacher_sc').style.display = "none"
+          document.getElementById('class_sc').style.display = "none"
+        }else if (ret.index == 3){
+          document.getElementById('personal_sc').style.display = "none"
+          document.getElementById('student_sc').style.display = "none"
+          document.getElementById('teacher_sc').style.display = "block"
+          document.getElementById('class_sc').style.display = "none"
+        }else {
+          document.getElementById('personal_sc').style.display = "none"
+          document.getElementById('student_sc').style.display = "none"
+          document.getElementById('teacher_sc').style.display = "none"
+          document.getElementById('class_sc').style.display = "block"
+        }
+    });
+</script>
+
+</html>

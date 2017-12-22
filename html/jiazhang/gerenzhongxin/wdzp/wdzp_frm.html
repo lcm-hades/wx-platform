@@ -1,0 +1,807 @@
+<!doctype html>
+<html style="background:#f5f5f5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/z.css"/>
+
+    <style>
+    .aui-list .aui-list-item-title {
+        font-size: 0.8rem;
+        position: relative;
+        width: 100%;
+        color: #333333;
+        margin-left: 5px;
+    }
+    .aui-list-item-inner.aui-swipe-handle {
+        overflow-x: hidden;
+        position: relative;
+        z-index: 1;
+        background-color: #ffffff;
+    }
+    .aui-swipe-btn {
+      width: 70px;
+        position: absolute;
+        right: 0;
+        z-index: 0;
+        height: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-flex: 1;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+                justify-content: space-between;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+                align-items: center;
+    }
+    .aui-swipe-btn .aui-btn {
+        width: 100%;
+        border-radius: 0;
+        height: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+                align-items: center;
+        justify-content: center;
+
+    }
+    /*.donghua {
+        -webkit-transition-duration:300ms;
+        transition-duration:300ms;
+    }*/
+
+    .aui-list {
+         background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 50%);
+    }
+    .aui-list .aui-list-item {
+    background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 0%);
+    background-image: -webkit-linear-gradient(90deg,#dddddd,#dddddd 0%,transparent 0%);
+    }
+    .aui-list .aui-list-item-media {
+    width: 4.5rem;
+    position: relative;
+    padding: 0.5rem 0;
+    /* padding-right: 0.75rem; */
+    display: inherit;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    }
+    .huodongjilupingjia{
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.3rem;
+    font-family: 'PingFang-SC';
+    font-size: 0.5rem;
+    color: #666666;
+    }
+    .bgsj{
+    position: absolute;
+    bottom: 0.3rem;
+    left: 0.3rem;
+    font-family: 'PingFang-SC';
+    font-size: 0.5rem;
+    color: #666666;
+    }
+    .huodongjilupingjiaRight{
+    position: absolute;
+    bottom: 0.25rem;
+    right: 0.75rem;
+    font-family: 'PingFang-SC';
+    font-size: 0.5rem;
+    color: #666666;
+    }
+    .wenziyincang{
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    -webkit-line-clamp:2!important;
+    display:-webkit-box!important;
+    -webkit-box-orient: vertical!important;
+    }
+    .right{
+    float: right;
+    text-align:right;
+    position: relative;
+    bottom: -0.5rem;
+    font-size: 0.55rem;
+    color: #886e91;
+    }
+    .rightBG{
+    position: absolute;
+    top: 0.25rem;
+    right: 0.7rem;
+    font-size: 0.55rem;
+    color: #886e91;
+    }
+    .rightBtn{
+    text-align:right;
+    position: absolute;
+    top: 50%;
+    margin-top: -6px;
+    right: 0rem;
+    font-size: 0.55rem;
+    color: #886e91;
+    }
+    .rightBtnBG{
+    text-align:right;
+    position: absolute;
+    top: 50%;
+    margin-top: 0px;
+    right: 0rem;
+    font-size: 0.55rem;
+    color: #886e91;
+    }
+    .biaoqian{
+    display: inline-block;
+    padding: 2px 14px;
+    background-color: #6666ff;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #fff;
+    /*margin-top:14px;*/
+    }
+    .time{
+    color: #999999;
+    font-size: 12px;
+    }
+
+    div.screening>ul {
+      height: 2rem;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      border-bottom: solid 1px #d3d3d3;
+      overflow: hidden;
+     }
+     div.screening>ul>li {
+         float: left;
+         width: 32.99%;
+         text-align: center;
+         line-height: 1.99rem;
+         border-left: solid 0px #d3d3d3;
+         background: url(../image/on_1.png) no-repeat 85% center;
+     }
+     .jiantou{
+         background: url(../../../../image/on_1.png) no-repeat 95% center!important;
+         color: #6666ff;
+         font-size: 0.8rem;
+         font-weight: 500;
+     }
+     .grade-w-roll {
+           top: 4.5rem;
+       }
+       .quanbu{
+         font-size: 0.8rem;
+         font-weight: 500;
+         text-align: left;
+         color: #333333;
+       }
+       .quanbubianse{
+         font-family: "PingFang-SC";
+         font-size: 14px;
+         font-weight: 500;
+         text-align: left;
+         color: #666;
+         border:none;
+       }
+       .mid_img{
+         width: 94%;
+         height: 130px;
+       }
+       .radius{
+         border-radius: 4px;
+       }
+       .shadow{
+         box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.6);
+       }
+       .mid_text{
+         font-size: 16px;
+         font-family: "PingFang-SC";
+         color: #333333;
+         margin-top: 8px;
+         text-align: left;
+       }
+       .mid_padding_8{
+         padding-top: 9px!important;
+         padding-bottom: 9px!important;
+         line-height: 1.0;
+       }
+
+       .aui-content-padded {
+           margin: 0rem;
+           margin-top: 2.1rem;
+          position: relative;
+          word-break: break-all;
+          -webkit-overflow-scrolling: touch;
+      }
+      .timeR{
+        font-size: 0.55rem;
+        color: #886e91;
+        float: right;
+        line-height: 2;
+      }
+      .text_font{
+        font-size: 0.9rem!important;
+        text-align: left;
+        color: #666666!important;
+      }
+
+      .left_line {
+          background-color: #6666ff;
+          height: 20px;
+          width: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+          float: left;
+      }
+      .section_title {
+          color: #333333;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          margin-left: 10px;
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+      .bull{
+        width: 43.9%;
+        height: 31.2%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    </style>
+</head>
+
+<body style="height:auto;">
+  <div class="aui-tab" id="tab" style="width:100%;color:#6666ff;position:fixed;z-index:44">
+      <div class="aui-tab-item aui-active">活动记录</div>
+      <div class="aui-tab-item">陈述报告</div>
+      <div class="aui-tab-item">教师评价</div>
+  </div>
+    <div class="flex-wrap flex-vertical" style="background:#f5f5f5">
+
+
+      <div id="hd" style="margin-top:2.5rem;">
+              <div class="aui-content aui-margin-b-15">
+                  <ul class="aui-list" id="listCon">
+                      <script id="HDlist" type="text/x-dot-template">
+                          {{for (var i = 0; i < it.length; i++) {}}
+                              <li class="aui-list-item" style="border-bottom: 1px solid #ccc;" tapmode onclick="huodongxiangqing({{=it[i].id}},'{{=it[i].url}}')">
+
+                                  <div class="aui-list-item-inner " style=" padding-bottom: 20px;">
+                                    <div class="aui-list-item-title"style=" padding-top: 10px;">
+                                        <span style="width:70%">{{=it[i].handline}}</span>
+                                      <div class="aui-list-item-text wenziyincang" >
+                                          <span class="wenziyincang" style="width:70%">{{=it[i].content}}</span>
+                                      </div>
+                                      <div class="rightBtn">
+                                          {{if (it[i].teacherid !=null) {}}
+                                            <div class="biaoqian" >已发送</div>
+                                          {{}else {}}
+                                            <div class="biaoqian" tapmode onclick="openDialog('textarea',event,{{=it[i].id}})">发送老师</div>
+                                          {{}}}
+                                      </div>
+                                      <div class="right">
+                                      <span style="float:right">评价({{=it[i].countcomment}})</span>
+
+                                      </div>
+                                    </div>
+
+                                    <span class="huodongjilupingjia">
+                                      活动时间:{{=it[i].time}}
+                                    </span>
+
+
+                                  </div>
+
+
+                              </li>
+                          {{}}}
+                      </script>
+                  </ul>
+              </div>
+      </div>
+
+
+      <div id="csbg" style="margin-top:2.5rem;display:none">
+              <div class="aui-content aui-margin-b-15">
+                  <ul class="aui-list" id="listBG">
+                      <script id="BGlist" type="text/x-dot-template">
+                          {{for (var i = 0; i < it.length; i++) {}}
+                              <li class="aui-list-item" style="border-bottom: 1px solid #ccc;" tapmode onclick="BGxiangqing({{=it[i].id}},'{{=it[i].url}}')">
+
+                                  <div class="aui-list-item-inner " style=" padding-bottom: 20px;">
+                                    <div class="aui-list-item-title"style=" padding-top: 5px;">
+                                        <span style="width:70%">{{=it[i].title}}</span>
+                                      <div class="aui-list-item-text wenziyincang" style="margin-bottom:5px">
+                                          <span class="wenziyincang" style="width:70%">{{=it[i].content}}</span>
+                                      </div>
+                                      <div class="rightBtnBG">
+                                          {{if (it[i].status ==1) {}}
+                                            <div class="biaoqian" >已发送</div>
+                                          {{}else {}}
+                                            <div class="biaoqian" tapmode onclick="fasonglaoshi(event,{{=it[i].id}})">发送老师</div>
+                                          {{}}}
+                                      </div>
+
+                                    </div>
+                                    <div class="rightBG">
+                                    {{if (it[i].status ==1) {}}
+                                        {{if (it[i].teacherid ==1) {}}
+                                          <span style="float:right">已评价</span>
+                                        {{}else {}}
+                                          <span style="float:right">未评价</span>
+                                        {{}}}
+                                    {{}else {}}
+                                    <span style="float:right"></span>
+                                    {{}}}
+                                    </div>
+                                    <span class="bgsj">
+                                      填写日期:{{=it[i].time}}
+                                    </span>
+
+
+                                  </div>
+
+
+                              </li>
+                          {{}}}
+                      </script>
+                  </ul>
+              </div>
+      </div>
+
+      <div id="jspj" style="margin-top:2.4rem;display:none">
+              <div class="screening">
+
+              </div>
+              <div class="screening" >
+                <ul>
+                    <li style="width:20%"><span class="quanbu" id="quanbu1"  >类别</span></li>
+                    <li class="Regional jiantou" id="shudu" style="text-align: left;width:79.99%">活动记录</li>
+                </ul>
+            </div>
+            <div class="grade-eject" id="yincang" tapmode onclick="yincang(event)">
+                <ul class="grade-w" id="gradew">
+                    <li tapmode onclick="grade1(this,event)">活动记录</li>
+                    <li tapmode onclick="grade1(this,event)">陈述报告</li>
+                </ul>
+            </div>
+
+            <section class="aui-content-padded" >
+                <ul class="aui-list aui-collapse aui-border" id="jiaoshi_url">
+                    <script id="jiaoshi_s" type="text/x-dot-template"> -->
+                          <!-- {{for (var i = 0; i < it.length; i++) {}}
+                            <div class="aui-collapse-item"  tapmode>
+                                <li class="aui-list-item aui-collapse-header" tapmode>
+                                    <div class="aui-list-item-inner">
+                                        <div class="aui-list-item-title title_name">{{=it[i].vname}} <span class="timeR">{{=it[i].time}}</span></div>
+                                        <div class="aui-list-item-right">
+                                            <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div class="aui-collapse-content ">
+                                  <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+                                      <div class="left_line"></div>
+                                      <div class="section_title">评价内容</div>
+                                  </div>
+                                  <div style="width: 90%;margin:auto">
+                                  {{if (it[i].comment.content == null || it[i].comment.content == "" || it[i].comment.content == undefined) {}}
+                                    "暂无评价"
+                                  {{}else {}}
+                                    {{=it[i].comment.content}}
+                                  {{}}}
+
+                                  </div>
+                                </div>
+                            </div>
+                          {{}}}
+                          {{  if (it==''||it==null || it== undefined) {}}
+
+                                <div class="bull">
+                                    <img src="../../../image/bull.png" alt="">
+                                </div>
+
+                            {{}}}
+                      </script>
+
+
+                </ul>
+            </section>
+      </div>
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script src="../../../../script/jquery-1.8.3.min.js"></script>
+<script src="../../../../script/demo.js"></script>
+<script src="../../../../script/network.js"></script>
+<script type="text/javascript" src="../../../../script/aui-collapse.js" ></script>
+<script type="text/javascript">
+var listHD = doT.template(document.getElementById('HDlist').innerHTML);
+var bg = doT.template(document.getElementById('BGlist').innerHTML);
+var jisoshiS = doT.template(document.getElementById('jiaoshi_s').innerHTML);
+    apiready = function() {
+        api.parseTapmode();
+        huodonglist()
+
+
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+            $api.byId('hd').style.display = "block";
+            $api.byId('csbg').style.display = "none";
+            $api.byId('jspj').style.display = "none";
+            huodonglist()
+        }else if (ret.index == 2) {
+          $api.byId('hd').style.display = "none";
+          $api.byId('csbg').style.display = "block";
+          $api.byId('jspj').style.display = "none";
+          bglist()
+        }else {
+          $api.byId('hd').style.display = "none";
+          $api.byId('csbg').style.display = "none";
+          $api.byId('jspj').style.display = "block";
+          jiaoshipingjia()
+        }
+    });
+
+
+// 活动记录
+var imageId
+  function huodonglist() {
+    api.showProgress({
+        style: 'default',
+        animationType: 'fade',
+        title: '努力加载中...',
+        text: '先喝杯茶...',
+        modal: false
+    });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Member/huodongjilu.html',
+        method: 'post',
+        data: {
+            values: {
+                studentid: $api.getStorage("studentid")
+            },
+        }
+    },function(ret, err){
+      api.hideProgress();
+      // alert( JSON.stringify( ret ) );
+        if (ret) {
+          if (ret.status==100) {
+
+
+            document.getElementById('listCon').innerHTML = listHD(ret.data);
+
+
+          }
+
+
+        } else {
+          api.toast({
+              msg: '暂无活动记录',
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
+
+  }
+
+  function bglist() {
+    api.showProgress({
+        style: 'default',
+        animationType: 'fade',
+        title: '努力加载中...',
+        text: '先喝杯茶...',
+        modal: false
+    });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Member/chenshubaogao.html',
+        method: 'post',
+        data: {
+            values: {
+                studentid: $api.getStorage("studentid")
+            },
+        }
+    },function(ret, err){
+      api.hideProgress();
+        if (ret) {
+          if (ret.status==100) {
+
+
+            document.getElementById('listBG').innerHTML = bg(ret.data);
+
+
+
+          }
+
+            console.log( JSON.stringify( ret ) );
+        } else {
+          api.toast({
+              msg: '暂无活动记录',
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
+
+  }
+// 陈述报告
+function BGxiangqing(id,url) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: false
+  });
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Member/chenshubaogaocon.html',
+      method: 'post',
+      data: {
+          values: {
+              cid:id
+          },
+      }
+  },function(ret, err){
+    api.hideProgress();
+
+      if (ret) {
+// alert( JSON.stringify( ret ) );
+        if (ret.status==100) {
+
+            api.openWin({
+                name: 'huodongjiluXQ_win',
+                url: '../huodongjiluXQ_win.html',
+                pageParam: {
+                    data: ret.data,
+                    title:"陈述报告"
+                }
+            });
+
+        }
+
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+
+// 活动记录
+function huodongxiangqing(id,url) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: false
+  });
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Member/huodongjilucon.html',
+      method: 'post',
+      data: {
+          values: {
+              hid:id
+          },
+      }
+  },function(ret, err){
+    api.hideProgress();
+
+      if (ret) {
+// alert( JSON.stringify( ret ) );
+        if (ret.status==100) {
+          if (url == 'huoquzhuanli') {
+
+              api.openWin({
+                  name: 'hqzl_win',
+                  url: '../../huodongjilubiao/hqzl_win.html',
+                  pageParam: {
+                      data: ret.data
+                  }
+              });
+          }else if (url == 'xuekejingsai') {
+            api.openWin({
+                name: 'xkjs_win',
+                url: '../../huodongjilubiao/xkjs_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else if (url == 'shehui') {
+            api.openWin({
+                name: 'shsj_win',
+                url: '../../huodongjilubiao/shsj_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else if (url == 'yanjiu') {
+            api.openWin({
+                name: 'gzxs_win',
+                url: '../../huodongjilubiao/gzxs_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else if (url == 'gongyi') {
+            api.openWin({
+                name: 'gyhd_win',
+                url: '../../huodongjilubiao/gyhd_win.html',
+                pageParam: {
+                    data:ret.data
+                }
+            });
+          }else if (url == 'shetuan') {
+            api.openWin({
+                name: 'xsst_win',
+                url: '../../huodongjilubiao/xsst_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else if (url == 'lunwenfabiao') {
+            api.openWin({
+                name: 'lwfb_win',
+                url: '../../huodongjilubiao/lwfb_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else if (url == 'kejijingsai') {
+            api.openWin({
+                name: 'kjjs_win',
+                url: '../../huodongjilubiao/kjjs_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else if (url == 'tiyujingsai') {
+            api.openWin({
+                name: 'tyjs_win',
+                url: '../../huodongjilubiao/tyjs_win.html',
+                pageParam: {
+                    data: ret.data
+                }
+            });
+          }else {
+            api.openWin({
+                name: 'huodongjiluXQ_win',
+                url: '../huodongjiluXQ_win.html',
+                pageParam: {
+                    data: ret.data,
+                    title:"活动记录"
+                }
+            });
+          }
+        }
+
+
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+
+
+// 活动发送老师
+var parames = {values:{}}
+  function openDialog(type,e,id){
+                     e.cancelBubble =true
+                     parames.values.hid=id;
+                     parames.values.teacherid=$api.getStorage('teacherid');
+                     zhc.post('http://www.yxke12.com/index.php/App/Member/sendhuodong.html',parames,function(data) {
+                       api.toast({
+                           msg:'发送成功',
+                           duration: 2000,
+                           location: 'bottom'
+                       });
+                     },null,true)
+      huodonglist()
+  }
+
+  // 陈述报告
+  function fasonglaoshi(e,id) {
+    e.cancelBubble =true
+    var parames = {values:{}}
+    parames.values.cid=id;
+    parames.values.teacherid=$api.getStorage('teacherid');
+    zhc.post('http://www.yxke12.com/index.php/App/Member/sendchenshu.html',parames,function(data) {
+      api.toast({
+          msg:'发送成功',
+          duration: 2000,
+          location: 'bottom'
+      });
+      bglist()
+    },null,true)
+  }
+
+  function yincang(e) {
+    e.cancelBubble =true
+    document.getElementById('yincang').className = 'grade-eject'
+    // document.getElementById('yincang1').className = 'Sort-eject Sort-height'
+  }
+
+  //js点击事件监听开始
+ function grade1(wbj,e){
+   var parames = {values:{}}
+   document.getElementById("quanbu1").className = "quanbubianse"
+   $api.byId('shudu').innerHTML = wbj.innerHTML;
+     e.cancelBubble =true
+    var arr = document.getElementById("gradew").getElementsByTagName("li");
+     for (var i = 0; i < arr.length; i++){
+         var a = arr[i];
+         a.style.background = "";
+     };
+     wbj.style.background = "#eee"
+     parames.values.studentid=$api.getStorage('studentid');
+     parames.values.type=$api.byId('shudu').innerHTML;
+     zhc.post('http://192.168.1.247/index.php/App/Member/jiaoshipingjia.html',parames,function(data) {
+       console.log(JSON.stringify(data));
+
+         document.getElementById('jiaoshi_url').innerHTML = jisoshiS(data);
+         var collapse = new auiCollapse({
+             autoHide:false //是否自动隐藏已经展开的容器
+         });
+
+     },null,true)
+     yincang(event)
+ }
+
+
+ function jiaoshipingjia() {
+    var parames = {values:{}}
+    parames.values.type=$api.byId('shudu').innerHTML;
+    parames.values.studentid=$api.getStorage('studentid');
+    zhc.post('http://192.168.1.247/index.php/App/Member/jiaoshipingjia.html',parames,function(data) {
+      console.log(JSON.stringify(data));
+
+        document.getElementById('jiaoshi_url').innerHTML = jisoshiS(data);
+        var collapse = new auiCollapse({
+            autoHide:false //是否自动隐藏已经展开的容器
+        });
+
+    },null,true)
+ }
+</script>
+
+</html>

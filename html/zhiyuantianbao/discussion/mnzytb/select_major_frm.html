@@ -1,0 +1,438 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .con {
+          width: 100%;
+          margin: auto;
+          position: relative;
+          background: #ffdada;
+      }
+      .tishi{
+        font-family: 'PingFang-SC';
+        font-size: 0.5rem;
+        color: #de3f3f;
+        margin-left: 1rem;
+      }
+
+      ul{
+        margin-top: 8px;
+      }
+
+      li .top{
+        overflow: hidden;
+        padding: 8px 16px;
+        color: #8e8eb2;
+        background: white;
+      }
+
+      .top .left{
+        float: left;
+      }
+
+      .top .right{
+        float: right;
+      }
+
+      .mid span{
+        color: #222222;
+        font-size: 18px;
+      }
+
+      .mid{
+        background-color: white;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .mid div{
+        padding: 2px 8px;
+        color: white;
+        margin-left: 4px;
+        border-radius: 4px;
+        display: inline;
+        font-size: 12px;
+      }
+
+      .bg985{
+        background: #ef5b1f;
+      }
+
+      .bg211{
+        background: #2cb3eb;
+      }
+
+      .bgzi{
+        background: #32c785;
+      }
+
+      .bgbx{
+        background: #ffbc10;
+      }
+
+      .bgyx{
+        background: #9f69ff;
+      }
+
+      .bottom{
+        background: white;
+        padding: 16px 0px;
+        text-align: center;
+      }
+
+      .bottom div{
+        display: inline-block;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-left: 1px solid #e5e5e5;
+      }
+
+      .bottom span{
+        text-align: center;
+        display: block;
+        font-size: 12px;
+      }
+
+      .b-color{
+        color: #34b3fd;
+      }
+      .y-color{
+        color: #ffbc10;
+      }
+      .g-color{
+        color: #666666;
+        margin-top: 4px;
+      }
+
+      li .t_bg{
+        overflow: hidden;
+      }
+
+      li .title{
+        color: #6666ff;
+        float: left;
+      }
+
+      li img{
+        width: 24px;
+        height: 24px;
+      }
+      li .desc{
+        margin-top: 4px;
+        display: block;
+      }
+      ul li{
+        background: white;
+        border-bottom: 1px solid #f5f5f5;
+      }
+
+      .selected{
+        margin-left: 40px;
+        padding-bottom: 8px;
+        margin-top: 8px;
+      }
+
+      .selected h2{
+          margin-bottom: 4px;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          width: 50%;
+      }
+
+      .selected span{
+        color: #8e8eb2;
+        font-size: 14px;
+      }
+
+      .op_p{
+        text-align: center;
+        padding-top: 10px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      .op{
+          display: inline-block;
+          margin-left: 20px;
+          margin-right: 20px;
+      }
+
+      .op img{
+          margin-top: 10px;
+      }
+
+      .op span{
+          display: block;
+          margin-top: 4px;
+          color: #222222;
+      }
+
+      .aui-checkbox:checked, .aui-checkbox.aui-checked {
+          background-color: #6666ff;
+          border: solid 1px #6666ff;
+          text-align: center;
+          background-clip: padding-box;
+      }
+
+      .aui-checkbox {
+          border-radius: 0.5rem;
+      }
+
+      .aui-checkbox {
+        width: 1.2rem;
+        height: 1.2rem;
+        background-color: #ffffff;
+        border: solid 1px #8e8eb2;
+        -webkit-border-radius: 0.6rem;
+        border-radius: 0.6rem;
+        font-size: 0.8rem;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        cursor: default;
+        -webkit-appearance: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-transition: background-color ease 0.1s;
+        transition: background-color ease 0.1s;
+    }
+    label{
+      line-height: 25px;
+      color: #222222;
+      font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="con">
+        <div style="width:80%;margin:auto">
+          <!-- <img src="../../../../image/tishi.png" alt=""> -->
+          <span class="tishi">根据你的成绩和排名，智能推荐适合你的学校</span>
+        </div>
+      </div>
+      <ul id="school_ul">
+        <script id="school_s" type="text/x-dot-template">
+          <li>
+            <div class="top">
+              <span class="left">所在地：{{=it.province}}-{{=it.city}}</span>
+              <span class="right">招生人数：{{=it.plan}}</span>
+            </div>
+
+            <div class="mid">
+                <span>{{=it.univ_name}}</span>
+                {{if (it.is985) {}}
+                  <div class="bg985">985</div>
+                {{}}}
+
+                {{if (it.is211) {}}
+                  <div class="bg211">211</div>
+                {{}}}
+
+                {{if (it.syl) {}}
+                <div class="bgzi">双一流</div>
+                {{}}}
+
+                <div class="bgbx">{{=it.bxxz}}</div>
+                <div class="bgyx">{{=it.yxlx}}</div>
+            </div>
+
+            <div class="bottom">
+                <div style="border-left: none">
+                  {{if (it.rank2017) {}}
+                    <span class="b-color">{{=it.rank2017}}/{{=it.enroll2017}}</span>
+                  {{}else {}}
+                    <span class="b-color">暂无/暂无</span>
+                  {{}}}
+                  <span class="g-color">17年最低排名</br>/录取人数</span>
+                </div>
+                <div>
+                {{if (it.rank2016) {}}
+                  <span class="y-color">{{=it.rank2016}}/{{=it.enroll2016}}</span>
+                {{}else {}}
+                  <span class="y-color">暂无/暂无</span>
+                {{}}}
+                  <span class="g-color">16年最低排名</br>/录取人数</span>
+                </div>
+                <div>
+                  {{if (it.rank2015) {}}
+                    <span class="b-color">{{=it.rank2015}}/{{=it.enroll2015}}</span>
+                  {{}else {}}
+                    <span class="b-color">暂无/暂无</span>
+                  {{}}}
+                  <span class="g-color">15年最低排名</br>/录取人数</span>
+                </div>
+            </div>
+          </li>
+        </script>
+      </ul>
+      <ul id="major_ul">
+        <script id="major_s" type="text/x-dot-template">
+        {{for (var i = 0; i < it.num; i++) {}}
+            <li style="padding:16px;">
+              <div class="t_bg">
+                <span class="title">专业{{=i+1}}</span>
+              </div>
+
+              {{if (it.data[i].major_name) {}}
+                <div class="selected" tapmode onclick="onMajorSelect({{=i}})">
+                  <h2>{{=it.data[i].major_name}}</h2>
+                  <span>招生人数：{{=it.data[i].plan}}</span>
+                  <span style="margin-left:8px;">学费：{{=it.data[i].cost}}</span>
+                </div>
+              {{}else {}}
+                <div style="text-align:center;display:block;" tapmode onclick="onMajorSelect({{=i}})">
+                  <img src="../../../../image/add.png"></img>
+                  <span class="desc">添加专业</span>
+                </div>
+              {{}}}
+              {{if (it.editEnable && it.data[i].major_name) {}}
+                <div id="op_id_{{=i}}" class="op_p">
+              {{}else {}}
+                <div id="op_id_{{=i}}" class="op_p" style="display:none;">
+              {{}}}
+                  <div class="op" tapmode onclick="onUpMove({{=i}});">
+                    <img src="../../../../image/m_u.png"></img>
+                    <span>上移</span>
+                  </div>
+
+                  <div class="op" tapmode onclick="onDownMove({{=i}});">
+                    <img src="../../../../image/m_d.png"></img>
+                    <span>下移</span>
+                  </div>
+
+                  <div class="op" tapmode onclick="onDelete({{=i}});">
+                    <img src="../../../../image/d.png"></img>
+                    <span>删除</span>
+                  </div>
+              </div>
+            </li>
+        {{}}}
+        </script>
+      </ul>
+
+      <div style="text-align:center;background-color:white;padding-top:10px;padding-bottom:10px;border-top:1px solid #e5e5e5;">
+        <label><input id="obey" class="aui-checkbox" type="checkbox" name="demo1" checked="">愿意调剂到该校本省计划内未选择的专业</label>
+      </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+    var school_dot, major_dot;
+    var major_data = {};
+    var major_index = 0;
+    var source;
+    apiready = function() {
+        school_dot = doT.template(document.getElementById('school_s').innerHTML);
+        major_dot = doT.template(document.getElementById('major_s').innerHTML);
+        document.getElementById('school_ul').innerHTML = school_dot($api.strToJson(localStorage.m_data));
+        source = api.pageParam.source;
+        setMajors(api.pageParam.major_num);
+        api.parseTapmode();
+
+    };
+
+    function setMajors(num) {
+      major_data.num = num;
+      major_data.data = [];
+      major_data.editEnable = false;
+      var tmp = $api.strToJson(localStorage.m_major_data);
+      if (tmp != null && tmp != []) {
+        major_data.obey = api.pageParam.obey == 1 ? true : false;
+        for (var i = 0; i < num; i++) {
+            if (i < tmp.length) {
+                major_data.data.push(tmp[i]);
+            }else {
+                major_data.data.push({});
+            }
+        }
+      }else {
+        major_data.obey = obey.checked;
+        for (var i = 0; i < num; i++) {
+            major_data.data.push({});
+        }
+      }
+      document.getElementById('major_ul').innerHTML = major_dot(major_data);
+    }
+
+    function onMajorSelect(index) {
+      major_index = index;
+      api.openWin({
+          name: 'select_major_list_win',
+          url: './select_major_list_win.html',
+          pageParam: {
+              univname: $api.strToJson(localStorage.m_data).univ_name,
+              batchid: api.pageParam.batchid,
+              score: api.pageParam.score,
+              planid: api.pageParam.planid,
+              rank: api.pageParam.rank
+          },
+      });
+    }
+
+    function onUpMove(index) {
+        if (index == 0) {
+            return;
+        }
+        var obj = major_data.data[index];
+        var pre_obj = major_data.data[index - 1];
+        major_data.data[index] = pre_obj;
+        major_data.data[index - 1] = obj;
+        document.getElementById('major_ul').innerHTML = major_dot(major_data);
+    }
+
+    function onDownMove(index) {
+        if (index == major_data.data.length - 1) {
+            return;
+        }
+        var obj = major_data.data[index];
+        var after_obj = major_data.data[index + 1];
+        major_data.data[index] = after_obj;
+        major_data.data[index + 1] = obj;
+        document.getElementById('major_ul').innerHTML = major_dot(major_data);
+    }
+
+    function onDelete(index) {
+        major_data.data.splice(index, 1);
+        major_data.data.push({});
+        document.getElementById('major_ul').innerHTML = major_dot(major_data);
+    }
+
+    function winBackResult() {
+        major_data.data[major_index] = $api.strToJson(localStorage.re_major_data);
+        document.getElementById('major_ul').innerHTML = major_dot(major_data);
+    }
+
+    // 返回按钮回调
+    function winCall() {
+      major_data.obey = obey.checked;
+      localStorage.re_major_list = $api.jsonToStr(major_data);
+      api.execScript({
+          name: 'select_major_win',
+          script: 'selfFrmResult();'
+      });
+    }
+
+
+    // win 点击编辑回调
+    function winEditeCall() {
+      major_data.editEnable = !major_data.editEnable;
+      document.getElementById('major_ul').innerHTML = major_dot(major_data);
+    }
+</script>
+
+</html>

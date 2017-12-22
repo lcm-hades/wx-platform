@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css"/>
+    <style>
+
+        /*.zizhuzhaosheng {
+          font-family: 'PingFang-SC';
+          font-size: 10px;
+          color: #666666;
+        }
+        .zizhuzhaoshengkuan {
+          width: 50px;
+          height: 14px;
+          border-radius: 2px;
+          background-color: #eeeeee;
+          display: inline-block!important;
+          text-align: center!important;
+          }
+          .biaoti {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            color: #333333;
+          }
+          .shuoming {
+            font-family: 'PingFang-SC';
+            font-size: 10px;
+            color: #666666;
+            width: 80%;
+          }
+          .nianfen {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            line-height: 1.25;
+            color: #666666;
+            width: 20%;
+            height: 23px;
+           border-radius: 5px;
+           border: solid 1px #6666ff;
+           background: url(../../../image/41-8.png) no-repeat scroll 90% center transparent;
+           background-size: 14px;
+          }
+          table{
+            width: 100%;
+            text-align: center;
+          }
+          tr{
+            font-size: 12px;
+          }
+          .chakan{
+            font-family: 'PingFang-SC';
+            color: #0281f9;
+          }*/
+          .diann{
+            text-align: center;
+            position: absolute;
+            margin: auto;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            width: 253px;
+          }
+          .mid_img{
+            width: 45px;
+            height: 45px;
+            border-radius: 50%
+          }
+          .biaoti {
+            font-family: 'PingFang-SC';
+            font-size: 0.7rem;
+            color: #666666;
+          }
+          .cont{
+
+            display: -webkit-box!important;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+          }
+    </style>
+</head>
+<body style="background:#fff">
+
+
+<!--
+    <div id="" class="flex-wrap flex-vertical">
+
+
+
+        <div id="main" class="flex-con">
+          <div class="diann">
+            <P>功能正在搭建，请先到电脑端使用本功能</P>
+            <a href="http://www.yxke12.com">http://www.yxke12.com</a>
+          </div>
+          </div>
+
+
+    </div> -->
+
+
+    <div class="aui-content aui-margin-b-15" id="zixun" style="display:block">
+
+        <ul class="aui-list aui-media-list" id="zixun_ul">
+
+          <script id="zixun_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+                  <li class="aui-list-item"  tapmode onclick="onZItemClick({{=it[i].id}})">
+                    <div style="padding-top:0.5rem">
+                      <div style="display:inline-block;width:20%">
+                        <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it[i].touxiang}}" class="mid_img"align = absmiddle alt="">
+                      </div>
+
+                      <div style="display:inline-block;width:75%;text-align: right;">
+                        <span class="biaoti">{{=it[i].time}}</span>
+                        <i class="aui-iconfont aui-icon-display"></i>
+                        <span class="biaoti">{{=it[i].looks}}</span>
+                        <img src="../../../../image/message.png" style="width:0.6rem;height:0.6rem" align = absmiddle alt="">
+                          <span class="biaoti">{{=it[i].comments}}</span>
+                      </div>
+
+                    </div>
+                      <div class="aui-media-list-item-inner">
+
+                          <div class="aui-list-item-inner">
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title biaoti">{{=it[i].title}}</div>
+                              </div>
+                              <div class="aui-list-item-text cont" >
+                                    <span id="neirongjiequ{{=i}}"></span>
+                              </div>
+                          </div>
+
+                      </div>
+                      <div class="aui-info" style="padding-top:0">
+                          <div class="aui-info-item zizhuzhaoshengkuan">
+                            <span class="zizhuzhaosheng">家长俗语</span>
+                          </div>
+                          <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                      </div>
+                  </li>
+              {{}}}
+          </script>
+        </ul>
+    </div>
+
+
+
+</body>
+<script type="text/javascript" src="../../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../../script/doT.js" ></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        api.showProgress({
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/Apa/Bbs/jiazhanghuodong.html',
+            method: 'post',
+            data: {
+                // values: {
+                //     name: 'haha'
+                // },
+                // files: {
+                //     file: 'fs://a.gif'
+                // }
+            }
+        },function(ret, err){
+            if (ret) {
+  api.hideProgress();
+              // alert(a)
+
+
+
+              var gkgz_dot = doT.template(document.getElementById('zixun_s').innerHTML);
+              document.getElementById('zixun_ul').innerHTML = gkgz_dot(ret.data);
+              for (var i = 0; i < ret.data.length; i++) {
+                  document.getElementById('neirongjiequ'+i).innerHTML = ret.data[i].content.substring(0, 49)
+              }
+                console.log( JSON.stringify( ret ) );
+            } else {
+              api.hideProgress();
+                api.toast({
+                    msg: JSON.stringify(err.msg),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+        });
+
+    }
+
+    // 资讯item点击回调
+    function onZItemClick(id) {
+
+      api.openWin({
+                name: 'jksh_details_win',
+                url: '../jksh_details_win.html',
+                pageParam: {
+                    data: id,
+                    url: "http://www.yxke12.com/index.php/Apa/Bbs/detail.html",//详情
+                    faurl: "http://www.yxke12.com/index.php/Apa/Bbs/comment.html",//评论
+                    hurl: "http://www.yxke12.com/index.php/Apa/Bbs/replys.html",//回复
+                    hqurl:"http://www.yxke12.com/index.php/Apa/Bbs/getreply.html",//回复列表
+                    durl:"http://www.yxke12.com/index.php/Apa/Jiayoukaosheng/dianzan.html",//点赞
+                    title:"家长私语"
+                }
+            });
+
+    }
+</script>
+</html>

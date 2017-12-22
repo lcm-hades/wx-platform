@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+
+        .zizhuzhaosheng {
+          font-family: 'PingFang-SC';
+          font-size: 10px;
+          color: #fff;
+          line-height: 0.7rem;
+        }
+        .zizhuzhaoshengkuan {
+          width: 50px;
+          height: 14px;
+          border-radius: 2px;
+          background-color: #9f69ff;
+          display: inline-block!important;
+          text-align: center!important;
+          }
+          .biaoti {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            color: #333333;
+          }
+          .shuoming {
+            font-family: 'PingFang-SC';
+            font-size: 10px;
+            color: #666666;
+            width: 80%;
+          }
+          .nianfen {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            line-height: 1.25;
+            color: #666666;
+            width: 20%;
+            height: 23px;
+           border-radius: 5px;
+           border: solid 1px #6666ff;
+           background: url(../../image/41-8.png) no-repeat scroll 90% center transparent;
+           background-size: 14px;
+          }
+          table{
+            width: 100%;
+            text-align: center;
+          }
+          tr{
+            font-size: 12px;
+          }
+          td{
+            border: 1px #000 solid;
+          }
+          th{
+            border: 1px #000 solid;
+          }
+          .chakan{
+            font-family: 'PingFang-SC';
+            color: #0281f9;
+          }
+          .aui-tab-item.aui-active {
+              color: #6666ff;
+              border-bottom: 2px solid #6666ff;
+          }
+          .tab-position{
+            width: 100%;
+            position: fixed;
+            z-index: 3;
+            top: 0px;
+          }
+    </style>
+</head>
+<body>
+    <div class="aui-tab tab-position" id="tab">
+        <div class="aui-tab-item aui-active">资讯</div>
+        <div class="aui-tab-item">方略</div>
+        <div class="aui-tab-item">招生简章</div>
+    </div>
+
+    <div class="aui-content aui-margin-b-15" id="zixun" style="display:block;padding-top:46px;">
+        <ul class="aui-list aui-media-list" id="zizhuzhaosheng_ul">
+          <script id="zizhuzhaosheng_s" type="text/x-dot-template">
+          {{for (var i = 0; i < it.length; i++) {}}
+            <li class="aui-list-item" tapmode onclick="onZItemClick({{=i}})">
+                <div class="aui-media-list-item-inner">
+
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item zizhuzhaoshengkuan">
+                      <span class="zizhuzhaosheng">自主招生</span>
+                    </div>
+                    <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                </div>
+            </li>
+            {{}}}
+          </script>
+        </ul>
+    </div>
+
+
+    <div class="aui-content aui-margin-b-15" id="fangluo" style="display:none;padding-top:46px;">
+        <ul class="aui-list aui-media-list" id="fanglue_ul">
+          <script id="fanglue_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <li class="aui-list-item" tapmode onclick="onFItemClick({{=i}})">
+                    <div class="aui-media-list-item-inner">
+
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="aui-info" style="padding-top:0">
+                        <div class="aui-info-item zizhuzhaoshengkuan">
+                          <span class="zizhuzhaosheng">自主招生</span>
+                        </div>
+                        <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                    </div>
+                </li>
+              {{}}}
+          </script>
+        </ul>
+    </div>
+
+    <div class="aui-content aui-margin-b-15" id="jianzhang"  style="display:none;padding-top:46px;">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-header" style="background: #fff;">
+              <span class="shuoming">
+                  注 : 带 * 的标注为只在本省实行的选拔录取的学校
+              </span>
+              <select class="nianfen" name="" tapmode onchange="nianfenxuan(this.value)" id="years_sl">
+                <script id="years_s" type="text/x-dot-template">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option>{{=it[i]}}</option>
+                  {{}}}
+              </script>
+              </select>
+            </li>
+
+          <table id="jianzhang_tb" border="1">
+            <script id="jianzhang_s" type="text/x-dot-template">
+            <tr>
+              <th>院校属地</th>
+              <th>院 校</th>
+              <th>招生简章</th>
+              <th>报名时间</th>
+            </tr>
+
+                {{for (var i = 0; i < it.length; i++) {}}
+                  <tr>
+                    <td>{{=it[i].province}}</td>
+                    <td style="width: 20%;">{{=it[i].univ_name}}</td>
+                    <td class="chakan" tapmode onclick="checkJZDetails({{=i}})">查看</td>
+                    {{if (it[i].bm_time == null) {}}
+                      <td style="width: 39%;">-</td>
+                    {{}else{}}
+                      <td style="width: 39%;">{{=it[i].bm_time}}</td>
+                    {{}}}
+                  </tr>
+                {{}}}
+            </script>
+          </table>
+        </ul>
+    </div>
+
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/doT.js" ></script>
+<script type="text/javascript" src="../../../script/aui-tab.js" ></script>
+  <script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    var zixunData = [];
+    var fangLueData = [];
+    var flag_arr = [1, 0, 0];
+    var jianzhangData = [];
+    var yearList = [];
+    var jianzhang;
+    apiready = function(){
+          // console.log( JSON.stringify( data ) );
+      getZiXunLV()
+
+        api.parseTapmode();
+    }
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('zixun').style.display = "block"
+          document.getElementById('fangluo').style.display = "none"
+          document.getElementById('jianzhang').style.display = "none"
+        }else if (ret.index == 2) {
+          document.getElementById('zixun').style.display = "none"
+          document.getElementById('fangluo').style.display = "block"
+          document.getElementById('jianzhang').style.display = "none"
+
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getFangLV();
+          }
+
+        }else {
+          document.getElementById('zixun').style.display = "none"
+          document.getElementById('fangluo').style.display = "none"
+          document.getElementById('jianzhang').style.display = "block"
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getJianZhang();
+          }
+        }
+    });
+
+    // 初次打开方略
+    function getZiXunLV() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        $.ajax({
+                  url : "http://www.yxke12.com/index.php/App/Zizhuzhaosheng/zixun.html",
+                  type : "POST",
+                 data : {},
+                 dataType : "json",
+                 success : function(data) {
+                   api.hideProgress();
+
+                   if (data.status == 100) {
+                     zixunData = data.data;
+                     var zizhuzhaosheng = doT.template(document.getElementById('zizhuzhaosheng_s').innerHTML);
+                     document.getElementById('zizhuzhaosheng_ul').innerHTML = zizhuzhaosheng(zixunData);
+                   }
+                 },
+                 error:function(err){
+                   console.log( JSON.stringify( err ) );
+                 }
+               })
+    }
+    // 初次打开方略
+    function getFangLV() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Zizhuzhaosheng/fanglue.html',
+            method: 'post',
+            data: {
+                values: {
+
+                }
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+              if (ret.status == 100) {
+                  // console.log( JSON.stringify( ret ) );
+                  fangLueData = ret.data;
+                  var zizhuzhaosheng = doT.template(document.getElementById('fanglue_s').innerHTML);
+                  document.getElementById('fanglue_ul').innerHTML = zizhuzhaosheng(fangLueData);
+                  api.parseTapmode();
+
+              }
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+    }
+
+    // 初次打开招生简章
+    function getJianZhang() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zizhuzhaosheng/lists.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+
+          if (ret) {
+            console.log( JSON.stringify( ret ) );
+
+            jianzhangData = ret.data.lists;
+            yearList = ret.data.year;
+            jianzhang = doT.template(document.getElementById('jianzhang_s').innerHTML);
+            document.getElementById('jianzhang_tb').innerHTML = jianzhang(jianzhangData);
+
+            var years = doT.template(document.getElementById('years_s').innerHTML);
+            document.getElementById('years_sl').innerHTML = years(yearList);
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    // 资讯item 点击跳转详情界面
+    function onZItemClick(index) {
+      var id = zixunData[index].id;
+      api.openWin({
+          name: 'zzzs_zxfl_details_win',
+          url: './zzzs_zxfl_details_win.html',
+          pageParam: {
+              id: id,
+              title:"自主招生"
+          }
+      });
+    }
+
+    // 方略item 点击跳转详情界面
+    function onFItemClick(index) {
+      var id = fangLueData[index].id;
+      api.openWin({
+          name: 'zzzs_zxfl_details_win',
+          url: './zzzs_zxfl_details_win.html',
+          pageParam: {
+              id: id,
+              title:"自主招生"
+          }
+      });
+    }
+
+    // 年份筛选
+    function nianfenxuan(index) {
+        // alert(index)
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Zizhuzhaosheng/year.html',
+            method: 'post',
+            data: {
+                values: {
+                    year: index
+                }
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+              if (ret.status == 100) {
+                // console.log( JSON.stringify( ret ) );
+                jianzhangData = ret.data;
+                document.getElementById('jianzhang_tb').innerHTML = jianzhang(jianzhangData);
+              }
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+    }
+
+    // 查看招生简章
+    function checkJZDetails(index) {
+      localStorage.m_jz_data = jianzhangData[index].detail;
+      api.openWin({
+          name: 'zzzs_jz_details_win',
+          url: './zzzs_jz_details_win.html',
+          pageParam: {
+              // data: data
+          }
+      });
+    }
+</script>
+</html>

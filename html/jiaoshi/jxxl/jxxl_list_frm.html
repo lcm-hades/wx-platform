@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+    .zizhuzhaosheng {
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+    .biaoqian {
+      border-radius: 2px;
+      background-color: #eeeeee;
+      display: inline-block!important;
+      text-align: center!important;
+      color: #666666;
+      }
+
+      .biaoqian-color{
+        background-color: #ffbc10;
+        color: white;
+      }
+
+      .biaoti {
+        font-family: 'PingFang-SC';
+        font-size: 16px;
+        color: #333333;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+      }
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+
+      .left_line {
+          background-color: #6666ff;
+          height: 18px;
+          width: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: 10px;
+      }
+
+      .section_title {
+          color: #333333;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          margin-left: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+      .aui-list .aui-list-item-media {
+          width: 3.6rem;
+          position: relative;
+          padding: 0.5rem 0;
+          padding-right: 0.75rem;
+          display: inherit;
+          -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+          -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          -webkit-box-align: center;
+          -webkit-align-items: flex-start;
+          align-items: flex-start;
+      }
+
+      .h-92{
+        height: 92px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab" id="tab" style="z-index:99;position: fixed;width: 100%;">
+          <div class="aui-tab-item aui-active">教学心理指导</div>
+          <div class="aui-tab-item">教学心理规律</div>
+      </div>
+      <section id="xuankezhidao" style="margin-top:44px;">
+        <script id="zd_s" type="text/x-dot-template">
+        {{for (var i = 0; i < it.length; i++) {}}
+          <div style="height:10px;width:100%;background:#f5f5f5;"></div>
+          <div style="height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;">
+              <div class="left_line"></div>
+              <span class="section_title">{{=it[i].type}}</span>
+              <!-- <span class="section_gengduo" tapmode onclick="onUKeMore();">更多 <i class="aui-iconfont aui-icon-right"></i></span> -->
+          </div>
+          <ul class="aui-list aui-media-list">
+              {{for (var j = 0; j < it[i].list.length; j++) {}}
+              <li class="aui-list-item h-92" tapmode onclick="onItemClick({{=i}},{{=j}});">
+                  <div class="aui-media-list-item-inner" style="">
+                      <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                          <div class="aui-list-item-text" style="height:36px;">
+                              <div class="aui-list-item-title biaoti">{{=it[i].list[j].name}}</div>
+                          </div>
+                          <div class="aui-info" style="padding-top:20px;padding-bottom:0px;">
+                              <div class="aui-info-item biaoqian biaoqian-color">
+                                <span class="zizhuzhaosheng">教学心理指导</span>
+                              </div>
+                              {{if (it[i].list[j].time != null) {}}
+                                <div class="aui-info-item zizhuzhaosheng">{{=it[i].list[j].time}}</div>
+                              {{}}}
+                          </div>
+                      </div>
+                      {{if (it[i].list[j].pict != null) {}}
+                        <div class="aui-list-item-media" style="padding-left:10px;">
+                            <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].list[j].pict}}">
+                        </div>
+                      {{}}}
+
+                  </div>
+              </li>
+                {{}}}
+          </ul>
+        {{}}}
+      </script>
+    </section>
+
+    <section id="beikaozhidao" style="display:none;margin-top:54px;">
+        <ul class="aui-list aui-media-list" id="gl_ul">
+          <script id="gl_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item h-92" tapmode onclick="onGLItemClick({{=i}});">
+                  <div class="aui-media-list-item-inner" style="">
+                      <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                          <div class="aui-list-item-text" style="height:36px;">
+                              <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                          </div>
+                          <div class="aui-info" style="padding-top:20px;padding-bottom:0px;">
+                              <div class="aui-info-item biaoqian biaoqian-color">
+                                <span class="zizhuzhaosheng">教学心理规律</span>
+                              </div>
+                              <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                          </div>
+                      </div>
+                      {{if (it[i].pict != null) {}}
+                        <div class="aui-list-item-media" style="padding-left:10px;">
+                            <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                        </div>
+                      {{}}}
+                  </div>
+              </li>
+              {{}}}
+            </script>
+        </ul>
+  </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript">
+    var arr_flag = [1,0];
+    var glList = [];
+    var zdList = [];
+    var gl_dot, zd_dot;
+    apiready = function() {
+      gl_dot = doT.template(document.getElementById('gl_s').innerHTML);
+      zd_dot = doT.template(document.getElementById('zd_s').innerHTML);
+      getZDList();
+    };
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('xuankezhidao').style.display = "block";
+          document.getElementById('beikaozhidao').style.display = "none";
+        }else if (ret.index == 2) {
+          document.getElementById('xuankezhidao').style.display = "none";
+          document.getElementById('beikaozhidao').style.display = "block";
+          if (arr_flag[ret.index - 1] == 0) {
+            getGLList();
+            arr_flag[ret.index - 1] = 1;
+          }
+        }
+    });
+
+    function getZDList() {
+      zhc.post("http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuexinlizd.html",
+          {},function(data) {
+            zdList = data;
+            document.getElementById('xuankezhidao').innerHTML = zd_dot(zdList);
+            api.parseTapmode();
+          }, function(err) {
+          }, true);
+    }
+
+    function getGLList() {
+      zhc.post("http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuexinliguilv.html",
+          {},function(data) {
+            glList = data;
+            document.getElementById('gl_ul').innerHTML = gl_dot(glList);
+            api.parseTapmode();
+          }, function(err) {
+          }, true);
+    }
+
+    // function onItemClick() {
+    //     api.openWin({
+    //         name: 'jxxl_details_win',
+    //         url: './jxxl_details_win.html',
+    //         pageParam: {
+    //             name: 'test'
+    //         }
+    //     });
+    // }
+
+    function onGLItemClick(index) {
+      var parames = {values:{}}
+      parames.values.aid = glList[index].id;
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuexinliguilvcon.html',
+          parames,function(data) {
+            localStorage.data = JSON.stringify(data)
+            api.openWin({
+                name: 'jxxl_details_win',
+                url: './jxxl_details_win.html',
+                pageParam: {
+                    // data: data
+                }
+            });
+          },null, true);
+    }
+
+    function onItemClick(i, j) {
+        var id = zdList[i].list[j].id;
+        api.openWin({
+            name: 'jxxlzd_details_win',
+            url: './jxxlzd_details_win.html',
+            pageParam: {
+              data: id,
+              url: "http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuexinlizdcon.html",
+              faurl: "http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoxuexinlizdcomment.html",
+              hurl: "",
+              hqurl: "",
+              durl: "",
+              title:"教学心理指导"
+            }
+        });
+
+    }
+</script>
+
+</html>

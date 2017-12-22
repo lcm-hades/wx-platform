@@ -1,0 +1,467 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style type="text/css">
+        #classify {
+            color: #ffffff !important;
+        }
+        span{
+          vertical-align: top;
+        }
+        .pinglunneirong {
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          color: #333333;
+          margin: auto;
+          width: 70%;
+        }
+        .xuehao {
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          color: #6666ff;
+        }
+        .xuehaoneirong {
+          font-family:' PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          text-align: left;
+          color: #333333;
+        }
+    .bottom_fix{
+        position: fixed;
+        width: 100%;
+        bottom:0;
+    }
+
+    .search-input {
+        height: 1.6rem!important;
+        line-height: 1.6rem!important;
+        background: #f5f5f5!important;
+        border-radius: 30px!important;
+        position: relative;
+        font-family:"aui_iconfont" !important;
+        text-align: left;
+        padding-left: 1.5rem!important;
+        color: #999999;
+    }
+    .search-input:after {
+        position: absolute;
+        left: 0;
+        padding-left: 0.5rem;
+        content: "\e615";
+    }
+    section{
+          /* main绝对定位，进行内部滚动 */
+
+          position: absolute;
+          top: 0;
+          bottom: 54px;
+          /* 使之可以滚动 */
+          overflow-y: scroll;
+          /* 增加该属性，可以增加弹性 */
+          /*-webkit-overflow-scrolling: touch;*/
+          height: auto;
+          width: 100%
+    }
+    .fasong{
+      width: 2.5rem;
+      height: 1.3rem;
+      background: #3ec234;
+      border: 1px solid #219718;
+      color: #fff;
+      font-family: "PingFang-SC";
+      font-size: 0.8rem;
+      display: inline-block;
+      line-height: 1.3rem;
+      position: fixed;
+      bottom: 0.65rem;
+      right: 0.75rem;
+      border-radius: 5px;
+    }
+
+
+    #textarea {
+    display: block;
+    margin:0 auto;
+    overflow: hidden;
+    width: 100%;
+    font-size: 14px;
+    height: 18px;
+    line-height: 24px;
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+    /*padding:2px;*/
+}
+.aui-content::-webkit-scrollbar {display:none}
+textarea {
+    outline: 0 none;
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+    </style>
+</head>
+<body >
+    <section id="gundong" class="aui-content "  onclick="aaa(event)" ontouchmove='bbb(event)' >
+      <div id="contTitle">
+      <script id="contText" type="text/x-dot-template">
+        <h3 style="text-align:center;margin:0.5rem auto" id="titleName">
+          {{=it.name}}
+        </h3>
+        <div style="margin:auto;width:90%" >
+          {{=it.content}}
+        </div>
+        </script>
+      </div>
+
+
+      <div style="margin:1rem 0.7rem">评论区</div>
+      <ul  id="contpinlun">
+        <script id="contpinluntext" type="text/x-dot-template">
+            {{ for(var i=0;i  <it.length;i++) { }}
+                  <li style="margin-bottom: 1rem;" >
+                    <div style="width: 95%;margin:auto">
+                      <div class="" style="display:inline-block;width:13%;margin-top:0.5rem">
+                          <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it[i].touxiang}}" style="width:40px;height:40px"  alt="">
+                      </div>
+
+                      <div class=""style="display:inline-block;vertical-align: top;width:77%">
+                        <div style="display:inline-block;width:77%;font-size:0.65rem">
+                            <span>{{=it[i].parentname}}</span>
+                            <span>{{=it[i].time}}</span>
+                        </div>
+                        <div style="display:inline-block;width:20%; position: absolute; right:0.5rem">
+                          <span style="margin-right:10px; " >
+                          <i class="aui-iconfont aui-icon-laud" style="font-size:0.7rem" tapmode onclick="dianzan({{=it[i].id}},event,this)" id="dianzanshu">({{=it[i].likes}})</i>
+                          </span>
+                          <span tapmode onclick="huifu({{=it[i].id}},event)">  <i class="aui-iconfont aui-icon-comment" style="font-size:0.7rem"></i></span>
+                        </div>
+
+                      </div>
+                      <div class="pinglunneirong" >
+                        {{=it[i].content}}
+                      </div>
+                      <ul class="pinglunneirong huifuC" style="background: #a1a1a1;" id="{{=it[i].id}}">
+
+                      </ul>
+                    </div>
+                  </li>
+            {{}}}
+        </script>
+      </ul>
+
+
+    </section>
+
+
+    <footer class="aui-bar aui-bar-tab aui-margin-t-15 ">
+        <div class="aui-bar-tab-item aui-padded-l-15 aui-padded-r-15" tapmode style="width: auto;">
+          <textarea id="textarea" placeholder="回复内容"></textarea>
+            <!-- <input id='your-input-id' class="search-input" type="text" name="" value=""> -->
+        </div>
+        <!-- <div class="aui-bar-tab-item" tapmode style="width: 2.2rem;">
+            <i class="aui-iconfont aui-icon-comment"></i>
+        </div>
+        <div class="aui-bar-tab-item" tapmode style="width: 2.2rem;">
+            <i class="aui-iconfont aui-icon-star"></i>
+        </div> -->
+        <div class="aui-bar-tab-item" tapmode style="width: 2.6rem;padding-right:1rem" >
+            <!-- <i class="aui-iconfont aui-icon-share"></i> -->
+            <span id="fasong1"  class="fasong" tapmode onclick="fasongbtn(1)" style="display:blocks" >发送</span>
+            <span id="fasong2"  class="fasong" tapmode onclick="fasongbtn(2)"style="display:none" >发送</span>
+        </div>
+    </footer>
+
+
+    <!-- <div id="footer" class="border-t bottom_fix">
+        <ul class="flex-wrap" >
+          <input id='your-input-id' class="search-input" type="text" name="" value="">
+        </ul>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+
+var cont=[];
+var huifucont=[];
+var id1 ;
+var data
+var contData = doT.template(document.getElementById('contText').innerHTML)
+var contpinluntext = doT.template(document.getElementById('contpinluntext').innerHTML)
+
+function dianzan(id,e,obj) {
+
+  e.cancelBubble = true;
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+  // alert("aaaa")
+  var pin = {
+    parentid: $api.getStorage('parentid'),
+    pid:id
+  }
+  console.log(JSON.stringify(pin));
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/Apa/Jiayoukaosheng/dianzan.html',
+      method: 'post',
+      data: {
+          values: pin,
+
+      }
+  },function(ret, err){
+      if (ret) {
+        api.hideProgress();
+        var datas = {};
+        data.comment[0].likes = ret.data.likes
+        // datas.parentname = ret.data.parentname
+        // datas.content = ret.data.content
+        // datas.time = ret.data.time
+        // data.comment.unshift(datas)
+        // console.log( JSON.stringify( ret ) );
+          // console.log( JSON.stringify( data.comment.likes ) );
+            // console.log( JSON.stringify( data.comment ) );
+              obj.innerHTML = '('+ret.data.likes+')'
+
+      } else {
+          console.log( JSON.stringify( err ) );
+      }
+  });
+}
+
+
+
+function fasongbtn(index) {
+  if (index==1) {
+    // alert("sss")
+    if (document.getElementById("textarea").value) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+      var pin = {
+        parentid: $api.getStorage('parentid'),
+        id:data.info.id,
+        title:data.info.name,
+        content:document.getElementById("textarea").value
+      }
+      // console.log(JSON.stringify(pin));
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Apa/Jiayoukaosheng/addcomment.html',
+          method: 'post',
+          data: {
+              values: pin,
+
+          }
+      },function(ret, err){
+          if (ret) {
+            api.hideProgress();
+            var datas = {};
+            datas.touxiang = ret.data.touxiang
+            datas.parentname = ret.data.parentname
+            datas.id = ret.data.pid
+            datas.content = ret.data.content
+            datas.time = ret.data.time
+            data.comment.unshift(datas)
+              // console.log( JSON.stringify( ret ) );
+                // console.log( JSON.stringify( cont ) );
+                  document.getElementById('contpinlun').innerHTML = contpinluntext(data.comment);
+          } else {
+              console.log( JSON.stringify( err ) );
+          }
+      });
+
+
+
+    }
+    document.getElementById("textarea").value = ''
+    // console.log(JSON.stringify(cont))
+
+
+    return
+  }
+  if (index==2) {
+
+    if (document.getElementById("textarea").value) {
+      var datas = {};
+      datas.name1 = '赵111'
+      datas.message1 = document.getElementById("textarea").value
+      huifucont.push(datas)
+
+    }
+    document.getElementById("textarea").value = ''
+    console.log(JSON.stringify(huifucont))
+var a
+var b
+for (var i = 0; i < huifucont.length; i++) {
+a=huifucont[i].name1
+b=huifucont[i].message1
+}
+  $api.prepend(document.getElementById(id1),'  <li><span class="xuehao" id="huifuname">'+a+':</span><span class="xuehaoneirong" id="huifutext">'+b+'</span></li>');
+  }
+
+
+}
+
+function huifu(id,e) {
+  // alert(id)
+  e.cancelBubble = true;
+  id1 = id
+  document.getElementById("fasong1").style.display = "none"
+  document.getElementById("fasong2").style.display = "block"
+  document.getElementById("textarea").placeholder = '回复他'
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/Apa/Jiayoukaosheng/getreply.html',
+      method: 'post',
+      data: {
+          values: {
+              pid:id1
+          },
+
+      }
+  },function(ret, err){
+      if (ret) {
+        api.hideProgress();
+        $api.append(document.getElementById(id2),'  <li><span class="xuehao" id="huifuname">'+ret.data.parentname+':</span><span class="xuehaoneirong" id="huifutext">'+ret.data.reply+'</span></li>');
+          console.log( JSON.stringify( ret ) );
+      } else {
+        api.hideProgress();
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+      }
+  });
+
+}
+
+var zuobiao;
+function aaa(e) {
+    e.cancelBubble = true;
+  var input = document.getElementById("textarea");
+  input.blur();
+  document.getElementById("fasong1").style.display = "block"
+  document.getElementById("fasong2").style.display = "none"
+  document.getElementById("textarea").placeholder = '请输入评价内容..'
+}
+
+function ccc(e) {
+zuobiao = e.touches[0].clientY
+    console.log(e.touches[0].clientY );
+}
+function bbb(e) {
+  if (e.touches[0].clientY >zuobiao) {
+    var input = document.getElementById("textarea");
+    input.blur();
+    console.log(e.touches[0].clientY );
+  }
+}
+
+var autoTextarea = function (elem, extra, maxHeight) {
+        extra = extra || 0;
+        var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+        isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+                addEvent = function (type, callback) {
+                        elem.addEventListener ?
+                                elem.addEventListener(type, callback, false) :
+                                elem.attachEvent('on' + type, callback);
+                },
+                getStyle = elem.currentStyle ? function (name) {
+                        var val = elem.currentStyle[name];
+
+                        if (name === 'height' && val.search(/px/i) !== 1) {
+                                var rect = elem.getBoundingClientRect();
+                                return rect.bottom - rect.top -
+                                        parseFloat(getStyle('paddingTop')) -
+                                        parseFloat(getStyle('paddingBottom')) + 'px';
+                        };
+
+                        return val;
+                } : function (name) {
+                                return getComputedStyle(elem, null)[name];
+                },
+                minHeight = parseFloat(getStyle('height'));
+
+        elem.style.resize = 'none';
+
+        var change = function () {
+                var scrollTop, height,
+                        padding = 0,
+                        style = elem.style;
+
+                if (elem._length === elem.value.length) return;
+                elem._length = elem.value.length;
+
+                if (!isFirefox && !isOpera) {
+                        padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+                };
+                scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+                elem.style.height = minHeight + 'px';
+                if (elem.scrollHeight > minHeight) {
+                        if (maxHeight && elem.scrollHeight > maxHeight) {
+                                height = maxHeight - padding;
+                                style.overflowY = 'auto';
+                        } else {
+                                height = elem.scrollHeight - padding;
+                                style.overflowY = 'hidden';
+                        };
+                        style.height = height + extra + 'px';
+                        scrollTop += parseInt(style.height) - elem.currHeight;
+                        document.body.scrollTop = scrollTop;
+                        document.documentElement.scrollTop = scrollTop;
+                        elem.currHeight = parseInt(style.height);
+                };
+        };
+
+        addEvent('propertychange', change);
+        addEvent('input', change);
+        addEvent('focus', change);
+        change();
+};
+
+
+
+var text = document.getElementById("textarea");
+        autoTextarea(text);// 调用
+
+
+    apiready = function () {
+        api.parseTapmode();
+        data = api.pageParam.data
+        var  id2
+      for (var i = 0; i < data.comment.length; i++) {
+          id2=data.comment[i].id
+      }
+
+        console.log( JSON.stringify( data ) );
+        // document.getElementById('dianzanshu').innerHTML = '('+data.comment.likes+')'
+      document.getElementById('contTitle').innerHTML = contData(data.info);
+      document.getElementById('contpinlun').innerHTML = contpinluntext(data.comment);
+
+
+    }
+</script>
+</html>

@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/doT.js"></script>
+    <script type="text/javascript" src="../../script/network.js"></script>
+    <style>
+      body{
+
+      }
+
+      .grade{
+        font-size: 24px;
+        margin: 10px auto;
+        text-align: center;
+      }
+
+      .grade_show{
+
+        padding-left: 25px;
+        line-height: 50px;
+        font-size: 20px;
+        background-color: #ddd;
+        width: 80%;
+        margin: 0px auto;
+        height: 50px;
+        border-radius:25px;
+        position: relative;
+      }
+
+      .login_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 100%;
+        margin: 0px auto;
+        border-radius: 0px;
+        position: absolute;
+        font-size: 18px;
+        bottom: 0px;
+      }
+
+      .kaoshi{
+          margin: 10px auto;
+          width: 90%;
+          height: 100px;
+          text-align: center;
+      }
+
+      .ke{
+        display: inline-block;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 1px solid #6666ff;
+        line-height: 80px;
+        font-size: 22px;
+        margin: 0px 10px;
+      }
+
+      .select{
+        background-color: #6666ff!important;
+        color: white;
+      }
+      .grade_show select{
+        /*font-family: "PingFang-SC";*/
+        height: 50px;
+      }
+      .grade_show select option{
+        /*font-family: "PingFang-SC";*/
+      }
+      .pos_right{
+        position:absolute;
+        right:20px;
+        top:0px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical" style="background-color:white;margin-bottom:10px;">
+        <div class="grade">入学年份</div>
+        <div id="grade_id" class="aui-list-item-input grade_show" >
+          <script id="grade_s" type="text/x-dot-template">
+            <select onchange="gradeSelected(this.value)">
+                {{for (var i = 0; i < it.length; i++) {}}
+                  <option value={{=it[i]}}>{{=it[i]}}级</option>
+                {{}}}
+            </select>
+            <div class="aui-list-item-right pos_right" >
+                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+            </div>
+            </script>
+        </div>
+
+        <div class="grade">年级</div>
+        <div class="aui-list-item-input grade_show" >
+            <select onchange="rGradeSelected(this.value)">
+                <option value='请选择'>请选择</option>
+                <option value='高一'>高一</option>
+                <option value='高二'>高二</option>
+                <option value="高三">高三</option>
+            </select>
+            <div class="aui-list-item-right pos_right" >
+                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+            </div>
+        </div>
+
+        <div class="grade">班级</div>
+
+          <div id="class_id" class="aui-list-item-input grade_show" >
+            <!-- <select>
+                <option>安阳县</option>
+
+            </select> -->
+            <script id="class_s" type="text/x-dot-template">
+              <select onchange="classSelected(this.value)">
+              {{for (var i = 0; i < it.length; i++) {}}
+                  <option value={{=it[i].classid}}>{{=it[i].classname}}</option>
+              {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+          </div>
+
+        <div class="grade">考试类型</div>
+
+        <div class="kaoshi">
+          <div id="wen" class="ke select" tapmode onclick="selectBranch(this, 0)">文科</div>
+          <div id="li" class="ke" tapmode onclick="selectBranch(this, 1)">理科</div>
+          <div id="neither" class="ke" tapmode onclick="selectBranch(this, 2)">不分科</div>
+        </div>
+        <!-- <div id="next_step" class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">下一步</div> -->
+
+    </div>
+</body>
+
+<script type="text/javascript">
+    var banTypes = ["文科", "理科", "文理不分科"]
+    var uploadData = {};
+    var class_count = doT.template(document.getElementById('class_s').innerHTML);
+    apiready = function() {
+      uploadData = api.pageParam.data;
+      getYearData();
+    };
+
+    function getYearData() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Student/endpage.html',
+            method: 'post',
+            data: {
+                values: {
+                }
+            }
+        },function(ret, err){
+            api.hideProgress();
+            console.log(JSON.stringify(ret));
+            if (ret) {
+              if (ret.status == 100) {
+                  grade_arr = ret.data;
+                  uploadData.nianji = grade_arr[0];
+                  var grade = doT.template(document.getElementById('grade_s').innerHTML);
+                  document.getElementById('grade_id').innerHTML = grade(grade_arr);
+              }else{
+
+              }
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+      uploadData.type = banTypes[0];
+    }
+
+    window.onload=function(){
+      // var _delta = 2;
+      // api.parseTapmode();
+      // var now = new Date();
+      // var year = now.getFullYear();       //年
+      //
+      // var grade_arr = [];
+      // for (var i = year - _delta; i <= year + _delta; i++) {
+      //   grade_arr.push(i);
+      // }
+
+
+
+    }
+
+    function gradeSelected(value) {
+        uploadData.nianji = value;
+    }
+
+    function classSelected(value) {
+        uploadData.classid = value;
+    }
+    var rGrade = "请选择"
+    function rGradeSelected(value) {
+        if(value == "请选择"){
+          return;
+        }
+        rGrade = value;
+        getClassList();
+    }
+
+    function selectBranch(e, value) {
+      var ke = document.querySelectorAll(".ke");
+      for (var i = 0; i < ke.length; i++) {
+        if ($api.hasCls(ke[i], "select")) {
+            $api.removeCls(ke[i], "select");
+        }
+      }
+      $api.addCls(e, "select");
+      uploadData.type = banTypes[value];
+    }
+
+    function bindClick() {
+        api.openWin({
+            name: 'register_student_code_win',
+            url: './register_student_code_win.html',
+            pageParam: {
+                data: uploadData
+            }
+        });
+    }
+
+    function getClassList() {
+      var parames = {values:{}};
+      parames.values.schoolid = uploadData.schoolid;
+      parames.values.nianji = rGrade;
+      zhc.post("http://www.yxke12.com/index.php/App/Student/banji.html",
+          parames,function(data) {
+            if (data.length == 0) {
+              api.toast({
+                  msg: '该学校班级信息未添加',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              return
+            }
+            document.getElementById('class_id').innerHTML = class_count(data);
+            uploadData.classid = data[0].classid;
+          },null, true);
+    }
+</script>
+
+</html>

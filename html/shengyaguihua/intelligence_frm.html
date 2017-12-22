@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0;}
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+        .top_bar{
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          background-color: white;
+          border-bottom: 1px solid #d2d2d2;
+        }
+        .top_inner{
+          width: 49.4%;
+          height: auto;;
+          float: left;
+          text-align: center;
+          position: relative;
+          background-color: white;
+        }
+
+        .top_inner_right{
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img{
+          vertical-align: middle;
+          width: 35px;
+          height: 35px;
+        }
+
+        .xing_text{
+            display: inline;
+            font-size: 15px;
+            font-family: "PingFang-SC";
+            color: #333333
+        }
+        .mid_text{
+          font-size: 10px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+        .mid_padding_8{
+          padding-top: 9px!important;
+          padding-bottom: 9px!important;
+          line-height: 1.0;
+        }
+        .title_panel{
+          width: 100%;
+          height: auto;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          border-top: 8px solid #f2f2f2;
+          background-color: white;
+
+        }
+        .list_title{
+          margin-left: 8px;
+          color: black;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+        .occupation{
+          position: absolute;
+          text-align: center;
+          width: 100%;
+          margin-top: 50px;
+        }
+        .occupationText {
+          font-family: 'PingFang-SC';
+          font-size: 38px;
+          font-weight: 500;
+          text-align: left;
+          color: #ffffff;
+        }
+
+      .text-style-1 {
+        font-weight: 900;
+        color: #169fd6;
+      }
+      .shashibiya{
+        text-align: right!important;
+
+      }
+      .mingyan{
+        text-align: left;
+        font-family: 'PingFang-SC';
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #333333;
+        margin-top:12.5px;
+      }
+      .yanyu{
+        width: 90%;
+        margin: auto;
+      }
+      .shuoming{
+        width: 90%;
+        margin: auto;
+        margin-top: 30px;
+      }
+      .shuoming p{
+        font-family: 'PingFang-SC';
+        font-size: 16px  ;
+        font-weight: 500;
+        text-align: justify;
+        color: #333333;
+        line-height: 2
+      }
+      .z-t{
+        margin-top: 20px
+      }
+      .z-margin-t-35{
+        margin-top: 35px
+      }
+      .z-col{
+        background: #f5f5f5;
+      }
+      img{
+        height: 100%!important;
+        width: 100%!important;
+      }
+      p{
+        text-indent: 1.5rem
+      }
+      </style>
+</head>
+
+<body style="background:#f5f5f5">
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con z-col" >
+<script id="evaluationtmpl" type="text/x-dot-template">
+      <div>
+        <div class="occupation">
+          <span class="occupationText">多元</span>
+          <span class="occupationText text-style-1">智能</span>
+          <span class="occupationText">测试</span>
+        </div>
+        <img class="top_img" src="../../image/duoyuan.png"  >
+    </div>
+
+    <div class="shuoming">
+      <p>尺有所短，寸有所长，每个人都是一个独特的智能组合体。聪明的人往往能够最大限度地表现自己的才华和优点，因为唯有利用自己的长处，才能给自己的人生增值；相反，利用自己的短处会使自己的人生贬值。 宝贝放错了地方便会失去应有的光芒。</p>
+      <p class="z-t">能力是知己的最重要方面，也是事业成功的必要条件。赶紧了解一下自己的潜在智能吧，否则，如何做到扬长避短呢？</p>
+
+    </div>
+
+    <div class="aui-content z-margin-t-35">
+    <ul class="aui-list aui-media-list">
+
+        {{for (var i = 0; i < it.length; i++) {}}
+            <li class="aui-list-item " tapmode onclick="itemClick({{=i}})">
+                <div class="aui-media-list-item-inner">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-text">
+                            <div class="aui-list-item-title">多元智能测试{{= it[i].numbers}}</div>
+                            <div class="aui-list-item-right">{{= it[i].time}}</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {{}}}
+    </ul>
+</div>
+</script>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+      data = api.pageParam.data;
+      var conText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+      document.getElementById('main').innerHTML = conText(data);
+
+
+      // api.setRefreshHeaderInfo({
+      //     loadingImg: 'widget://image/refresh.png',
+      //     bgColor: '#ccc',
+      //     textColor: '#fff',
+      //     textDown: '下拉刷新...',
+      //     textUp: '松开刷新...'
+      //   }, function(ret, err) {
+      //   //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+      //   // alert("刷新");
+      //   api.refreshHeaderLoadDone();
+      // });
+
+    };
+
+    function itemClick(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Showbaogao/duoyuan.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  num:data[index].numbers
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          console.log(JSON.stringify( ret ));
+          if (ret) {
+            if (ret.status == 100) {
+                // ret.data;
+                // console.log(JSON.stringify( ret ));
+                api.openWin({
+                    name: 'intelligence_report_win',
+                    url: './intelligence_report_win.html',
+                    pageParam: {
+                        data: $api.jsonToStr(ret.data),
+                    }
+                });
+
+            }else {
+              api.toast({
+                  msg: JSON.stringify(ret.message),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+</script>
+</html>

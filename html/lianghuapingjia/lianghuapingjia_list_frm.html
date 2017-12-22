@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>开发</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        .center{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        }
+        .content_item{
+          background-color:#ffffff;
+          box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.3);
+          border-radius:10px;
+          width:90%;
+          height:auto;
+          overflow:hidden;
+          /*display:flex;
+          align-items:center;
+          justify-content:center;*/
+          margin-top:8px;
+          position: relative;
+        }
+
+        .left{
+          margin-top:1rem;
+          margin-bottom: 1rem;
+          float: left;
+          position: relative;
+        }
+
+        .left_img{
+          width:4.225rem;
+          height:4.225rem;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          left: 0.5rem;
+        }
+        .text_pos{
+          width: 54%;
+          overflow: hidden;
+          margin-left: 5.5rem;
+        }
+        .v_line{
+          width: 1px;
+          height: 90px;
+          background-color: white;
+          float: right;
+          margin-right: 20px;
+
+        }
+
+        .title{
+          font-size: 0.7rem;
+          display: inline-block;
+          font-family: "PingFang-SC";
+          color: #333333;
+          /*float: left;*/
+        }
+
+        .subtitle{
+          font-size: 0.5rem;
+          font-family: "PingFang-SC";
+          color: #333333;
+          margin-top: 0.5rem;
+        /*
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 14em;*/
+
+        }
+        .right_arrow{
+          position: absolute;
+          bottom: 0rem;
+          float: right;
+          right: 0.6rem;
+          width: 10px;
+          height: 20px;
+        }
+        .ping_bg{
+          background-color: #ffffff;
+        }
+        .ping_bg:active{
+          background-color: #b699ea;
+        }
+        .zong_bg{
+            background-color: #9fd45b;
+        }
+        .grow_bg{
+          background-color: #76d8ff;
+        }
+        .active_bg{
+          background-color: #f8bd3d;
+        }
+        .suzhitisheng_bg{
+          background: #fc8a8c;
+        }
+    </style>
+</head>
+<body>
+    <div id="main" class="flex-con flex-vertical center">
+
+        <div class="content_item ping_bg" tapmode="hover" onclick="pdpjClick();" >
+          <div class="left">
+            <img class="left_img" src="../../image/pinde.png"/>
+            <div class="text_pos">
+              <p class="title">学生品德表现自评互评</p>
+              <p class="subtitle">学生思想品德主要考察学生在爱党爱国、理想信念、责任义务、遵纪守法等方面的表现。重点是参与党团活动、</p>
+            </div>
+              <img src="../../image/huiarrow.png" class="right_arrow">
+          </div>
+        </div>
+        <div class="content_item ping_bg" tapmode="hover" onclick="ydpjClick()" >
+          <div class="left">
+            <img class="left_img" src="../../image/paizi.png"/>
+            <div class="text_pos">
+              <p class="title">学生运动健康自评互评</p>
+              <p class="subtitle">运动健康主要考察学生的健康生活方式、体育锻炼习惯、身体机能、运动技能和心理素质等。重点是体育运动特长项目，参加体育运动的效果等。</p>
+            </div>
+              <img src="../../image/huiarrow.png" class="right_arrow">
+          </div>
+        </div>
+        <div class="content_item ping_bg" tapmode="hover" onclick="yspjClick()" >
+          <div class="left">
+            <img class="left_img" src="../../image/huabi.png"/>
+            <div class="text_pos">
+              <p class="title">学生艺术自评互评</p>
+              <p class="subtitle">艺术素养主要考察学生对艺术的审美感受、理解、鉴赏和表现的能力。重点是在音乐、美术、舞蹈、戏剧、书法等方面表现出来的兴趣特长，参加艺术活动的成果等。</p>
+            </div>
+              <img src="../../image/huiarrow.png" class="right_arrow">
+          </div>
+        </div>
+        <div class="content_item ping_bg" tapmode="hover" onclick="zhpjClick()" >
+          <div class="left">
+            <img class="left_img" src="../../image/shu.png"/>
+            <div class="text_pos">
+              <p class="title">综合实践评定</p>
+              <p class="subtitle">综合实践主要考察学生在社会生活中动手操作、体验经历等情况。重点是学生参加实践活动的次数、持续时间，形成的作品、调查报告等。</p>
+            </div>
+              <img src="../../image/huiarrow.png" class="right_arrow">
+          </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+function diannao() {
+    api.openWin({
+        name: 'diannaochakan',
+        url: '../diannaochakan.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+
+}
+
+function pdpjClick() {
+  api.openWin({
+      name: 'pdpj_win',
+      url: './pdpingjia/pdpj_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function ydpjClick() {
+  api.openWin({
+      name: 'ydpj_win',
+      url: './ydpingjia/ydpj_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function yspjClick() {
+  api.openWin({
+      name: 'yspj_win',
+      url: './yspingjia/yspj_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function zhpjClick() {
+  api.openWin({
+      name: 'zhpj_win',
+      url: './zhpingjia/zhpj_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+</script>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>开发</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        .center{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        }
+        .content_item{
+          background-color:#ff6b00;
+          border-radius:10px;
+          width:90%;
+          height:90px;
+          overflow:hidden;
+          /*display:flex;
+          align-items:center;
+          justify-content:center;*/
+          margin-top:8px;
+        }
+
+        .left{
+          margin-top:23px;
+          float: left;
+        }
+
+        .left_img{
+          width:45px;
+          height:45px;
+          /*max-width: 44px;*/
+          float:left;
+          margin-left: 8px;
+        }
+        .text_pos{
+          width: auto;
+          overflow: hidden;
+          float: left;
+        }
+        .v_line{
+          width: 1px;
+          height: 90px;
+          background-color: white;
+          float: right;
+          margin-right: 20px;
+
+        }
+
+        .title{
+          font-size: 18px;
+          display: inline-block;
+          font-family: "PingFang-SC";
+          color: #ffffff;
+          /*float: left;*/
+        }
+
+        .subtitle{
+          font-size: 12px;
+          font-family: "PingFang-SC";
+          color: #ffffff;
+/*
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 14em;*/
+
+        }
+        .right_arrow{
+          float: right;
+          margin-top: 35px;
+          margin-right: 12px;
+          width: 10px;
+          height: 20px;
+        }
+        .ping_bg{
+          background-color: #9f69ff;
+        }
+        .ping_bg:active{
+          background-color: #b699ea;
+        }
+        .zong_bg{
+            background-color: #36c7fa;
+        }
+        .grow_bg{
+          background-color: #ffbc10;
+        }
+        .active_bg{
+          background-color: #95de31;
+        }
+        .suzhitisheng_bg{
+          background: #ff4d50;
+        }
+    </style>
+</head>
+<body>
+    <div id="main" class="flex-con flex-vertical center">
+
+        <div class="content_item ping_bg" tapmode="hover" onclick="neirongpingjia()" >
+          <div class="left">
+            <img class="left_img" src="../../image/ping_content.png"/>
+            <div class="text_pos">
+              <p class="title">评价内容与方法</p>
+              <p class="subtitle">国家、省份、高中、高校评价政策</p>
+            </div>
+          </div>
+
+          <img src="../../image/arrow.png" class="right_arrow">
+          <div class="v_line"></div>
+        </div>
+
+        <div class="content_item active_bg" tapmode onclick="huodongjilu()">
+
+          <div class="left">
+            <img class="left_img" src="../../image/active.png"/>
+            <div class="text_pos">
+              <p class="title">活动记录与评价</p>
+              <p class="subtitle">记录范例、活动记录与评价</p>
+            </div>
+          </div>
+
+            <img src="../../image/arrow.png" class="right_arrow">
+            <div class="v_line"></div>
+        </div>
+        <div class="content_item zong_bg" tapmode onclick="lhpjClick();" style="display:none">
+          <div class="left">
+            <img class="left_img" src="../../image/comprehensive.png"/>
+            <div class="text_pos">
+              <p class="title">综合量化评价</p>
+              <p class="subtitle">量化评价成长过程</p>
+            </div>
+          </div>
+
+          <img src="../../image/arrow.png" class="right_arrow">
+          <div class="v_line"></div>
+        </div>
+        <div class="content_item grow_bg" tapmode onclick="seftReport()">
+          <div class="left">
+            <img class="left_img" src="../../image/grow.png"/>
+            <div class="text_pos">
+              <p class="title">成长报告与档案</p>
+              <p class="subtitle">自我陈述报告和成长档案的填写</p>
+            </div>
+          </div>
+
+          <img src="../../image/arrow.png" class="right_arrow">
+          <div class="v_line"></div>
+        </div>
+
+        <div class="content_item suzhitisheng_bg" tapmode onclick="zonghesuzhi()">
+
+          <div class="left">
+            <img class="left_img" src="../../image/648@3x.png"/>
+            <div class="text_pos">
+              <p class="title">综合素养提升</p>
+              <p class="subtitle">讲座、阅读分享、关注心理健康</p>
+            </div>
+          </div>
+
+            <img src="../../image/arrow.png" class="right_arrow">
+            <div class="v_line"></div>
+        </div>
+
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+function diannao() {
+    api.openWin({
+        name: 'diannaochakan',
+        url: '../diannaochakan.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+
+}
+
+function huodongjilu() {
+    // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+    //   api.toast({
+    //       msg: "该功能付费用户才能使用",
+    //       duration: 2000,
+    //       location: 'bottom'
+    //   });
+    //   return;
+    // }
+    api.openWin({
+        name: 'diannaochakan',
+        url: '../huodongjilu/huodongjilu_win.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+
+}
+
+  function neirongpingjia() {
+      // alert("ddddddddddddddddddd");
+      api.openWin({
+          name: 'pingjianeirong_win',
+          url: '../suzhipingjia/pingjianeirong_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+  }
+
+  function lhpjClick() {
+    api.openWin({
+        name: 'lianghuapingjia_list_win',
+        url: '../lianghuapingjia/lianghuapingjia_list_win.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+  }
+  function seftReport() {
+    if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+      api.toast({
+          msg: "该功能付费用户才能使用",
+          duration: 2000,
+          location: 'bottom'
+      });
+      return;
+    }
+    api.openWin({
+        name: 'self_report_win',
+        url: '../baogaoyudangan/self_report_win.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+  }
+
+  function zonghesuzhi() {
+      api.openWin({
+          name: 'zonghe_list_win',
+          url: '../zonghesuzhitisheng/zonghe_list_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+  }
+</script>

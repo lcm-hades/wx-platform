@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+    .zizhuzhaosheng {
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+    .biaoqian {
+      border-radius: 2px;
+      background-color: #eeeeee;
+      display: inline-block!important;
+      text-align: center!important;
+      color: #666666;
+      }
+
+      .biaoqian-color{
+        background-color: #ffbc10;
+        color: white;
+      }
+
+      .biaoti {
+        font-size: 16px;
+        color: #333333;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+      }
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+/*li样式*/
+      .aui-list .aui-list-item-media {
+           width: 3.6rem;
+          position: relative;
+          padding: 0.5rem 0;
+          padding-right: 0.75rem;
+          display: inherit;
+          -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+          -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          -webkit-box-align: center;
+          -webkit-align-items: flex-start;
+          align-items: flex-start;
+      }
+      .h-92{
+        height: 92px;
+      }
+
+      .biaoqian-color{
+        background-color: #ffbc10;
+        color: white;
+      }
+      .biaoqian-first{
+        background-color: #9f69ff;
+        color: white;
+      }
+      .biaoqian-second{
+        background-color: #95de31;
+        color: white;
+      }
+      .biaoqian-third{
+        background-color: #36c7fa;
+        color: white;
+      }
+      .biaoqian-four{
+        background-color: #ffbc10;
+        color: white;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab" id="tab" style="z-index:99;position: fixed;width: 100%;border-bottom: 1px solid #ccc;">
+          <div class="aui-tab-item aui-active">班主任</div>
+          <div class="aui-tab-item">任课教师</div>
+          <div class="aui-tab-item">一生一导</div>
+      </div>
+      <section id="banzhuren" style="margin-top:44px;">
+      <ul class="aui-list aui-media-list" id="banzhuren_ul">
+        <script id="banzhuren_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item h-92" tapmode onclick="onBItemClick({{=i}});">
+                  <div class="aui-media-list-item-inner" style="">
+                      <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                          <div class="aui-list-item-text" style="height:36px;">
+                              <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                          </div>
+                          <div class="aui-info" style="padding-top:20px;padding-bottom:0px;">
+                              <div class="aui-info-item biaoqian biaoqian-first">
+                                <span class="zizhuzhaosheng">班主任</span>
+                              </div>
+                              <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                          </div>
+                      </div>
+                      {{if (it[i].pict != null) {}}
+                        <div class="aui-list-item-media" style="padding-left:10px;">
+                            <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                        </div>
+                      {{}}}
+
+                  </div>
+              </li>
+            {{}}}
+          </script>
+      </ul>
+    </section>
+
+    <section id="renkejiaoshi" style="display:none;margin-top:44px;">
+      <ul class="aui-list aui-media-list" id="rkjs_ul">
+        <script id="rkjs_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item h-92" tapmode onclick="onRItemClick({{=i}});">
+                  <div class="aui-media-list-item-inner" style="">
+                      <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                          <div class="aui-list-item-text" style="height:36px;">
+                              <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                          </div>
+                          <div class="aui-info" style="padding-top:20px;padding-bottom:0px;">
+                              <div class="aui-info-item biaoqian biaoqian-second">
+                                <span class="zizhuzhaosheng">任课教师</span>
+                              </div>
+                              <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                          </div>
+                      </div>
+                      {{if (it[i].pict != null) {}}
+                        <div class="aui-list-item-media" style="padding-left:10px;">
+                            <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                        </div>
+                      {{}}}
+
+                  </div>
+              </li>
+            {{}}}
+          </script>
+      </ul>
+  </section>
+
+  <section id="yishengyidao" style="display:none;margin-top:44px;">
+    <ul class="aui-list aui-media-list" id="ysyd_ul">
+      <script id="ysyd_s" type="text/x-dot-template">
+          {{for (var i = 0; i < it.length; i++) {}}
+            <li class="aui-list-item h-92" tapmode onclick="onYItemClick({{=i}});">
+                <div class="aui-media-list-item-inner" style="">
+                    <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                        <div class="aui-list-item-text" style="height:36px;">
+                            <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                        </div>
+                        <div class="aui-info" style="padding-top:20px;padding-bottom:0px;">
+                            <div class="aui-info-item biaoqian biaoqian-third">
+                              <span class="zizhuzhaosheng">一生一导</span>
+                            </div>
+                            <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                        </div>
+                    </div>
+                    {{if (it[i].pict != null) {}}
+                      <div class="aui-list-item-media" style="padding-left:10px;">
+                          <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                      </div>
+                    {{}}}
+
+                </div>
+            </li>
+          {{}}}
+        </script>
+    </ul>
+</section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    var arr_flag = [1,0,0];
+    var bzrList = [];
+    var rkjsList = [];
+    var ysydList = [];
+    var banzhuren_dot, rkjs_dot, ysyd_dot;
+    apiready = function() {
+      banzhuren_dot = doT.template(document.getElementById('banzhuren_s').innerHTML);
+      rkjs_dot = doT.template(document.getElementById('rkjs_s').innerHTML);
+      ysyd_dot = doT.template(document.getElementById('ysyd_s').innerHTML);
+      getBanZhuRenData();
+    };
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('banzhuren').style.display = "block";
+          document.getElementById('renkejiaoshi').style.display = "none";
+          document.getElementById('yishengyidao').style.display = "none";
+        }else if (ret.index == 2) {
+          document.getElementById('banzhuren').style.display = "none";
+          document.getElementById('renkejiaoshi').style.display = "block";
+          document.getElementById('yishengyidao').style.display = "none";
+          if (arr_flag[ret.index - 1] == 0) {
+              getRKJSListData();
+              arr_flag[ret.index - 1] = 1;
+          }
+        }else{
+          document.getElementById('banzhuren').style.display = "none";
+          document.getElementById('renkejiaoshi').style.display = "none";
+          document.getElementById('yishengyidao').style.display = "block";
+          if (arr_flag[ret.index - 1] == 0) {
+              getYSYDListData();
+              arr_flag[ret.index - 1] = 1;
+          }
+        }
+    });
+
+    function onBItemClick(index) {
+      var parames = {values:{}}
+      parames.values.id = bzrList[index].id;
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/bzrdetail.html',
+          parames,function(data) {
+            api.openWin({
+                name: 'jsjs_details_win',
+                url: './jsjs_details_win.html',
+                pageParam: {
+                    data: data
+                }
+            });
+          },null, true);
+    }
+
+    function onRItemClick(index) {
+      var parames = {values:{}}
+      parames.values.id = rkjsList[index].id;
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/rkjsdetail.html',
+          parames,function(data) {
+            api.openWin({
+                name: 'jsjs_details_win',
+                url: './jsjs_details_win.html',
+                pageParam: {
+                    data: data
+                }
+            });
+          },null, true);
+    }
+
+    function onYItemClick(index) {
+      var parames = {values:{}}
+      parames.values.id = ysydList[index].id;
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/ysyddetail.html',
+          parames,function(data) {
+            api.openWin({
+                name: 'jsjs_details_win',
+                url: './jsjs_details_win.html',
+                pageParam: {
+                    data: data
+                }
+            });
+          },null, true);
+    }
+
+    function getBanZhuRenData() {
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/banzhuren.html',
+          {},function(data) {
+            bzrList = data;
+            document.getElementById('banzhuren_ul').innerHTML = banzhuren_dot(bzrList);
+            api.parseTapmode();
+
+          },null, true);
+    }
+
+    function getRKJSListData() {
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/renkejiaoshi.html',
+          {},function(data) {
+            rkjsList = data;
+            document.getElementById('rkjs_ul').innerHTML = rkjs_dot(rkjsList);
+            api.parseTapmode();
+          }, null, true);
+    }
+
+    function getYSYDListData() {
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/yishengyidao.html',
+          {},function(data) {
+            ysydList = data;
+            document.getElementById('ysyd_ul').innerHTML = ysyd_dot(ysydList);
+            api.parseTapmode();
+          }, function(err) {
+          }, true);
+    }
+</script>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style type="text/css">
+        .biaoti {
+            color: #a1a1a1;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="aui-content">
+        <ul class="aui-list aui-media-list" id="sykt_ul">
+            <script id="HDlist" type="text/x-dot-template">
+                {{for (var i = 0; i< it.length; i++) {}}
+                 <li class="aui-list-item" tapmode onclick="onKeItemClick({{=it[i].id}},'{{=it[i].type}}',{{=it[i].mid}},'{{=it[i].ctitle}}',{{=i}});">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media" style="border-right:none;width:2.5rem;height:2.5rem">
+                            <img src="http://www.yxke12.com/Public/Home/images/touxiang/{{=it[i].touxiang}}" style="border-radius:50%">
+                        </div>
+                        <div class="aui-list-item-inner">
+                          {{if (it[i].status== 0) {}}
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title" id="studentname{{=i}}">{{=it[i].studentname}}<span class="biaoti" id="type{{=i}}">:回复了你在</span> 《{{=it[i].ctitle}}》<span class="biaoti"id="pl{{=i}}">中的评论</span></div>
+                            </div>
+                            <div class="aui-list-item-text" id="reply{{=i}}" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[i].reply}}
+                            </div>
+                            <div class="aui-list-item-text" id="time{{=i}}" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{=it[i].time}}
+                            </div>
+                              {{}else {}}
+                              <div class="aui-list-item-text">
+                                  <div class="aui-list-item-title" style="color:#ddd" id="studentname{{=i}}">{{=it[i].studentname}}<span class="biaoti" style="color:#ddd" id="type{{=i}}">:回复了你在</span> 《{{=it[i].ctitle}}》<span class="biaoti" style="color:#ddd" id="pl{{=i}}">中的评论</span></div>
+                              </div>
+                              <div class="aui-list-item-text" id="reply{{=i}}" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#ddd">
+                                  {{=it[i].reply}}
+                              </div>
+                              <div class="aui-list-item-text" id="time{{=i}}" style="margin-top:8px;max-width: 10rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#ddd">
+                                  {{=it[i].time}}
+                              </div>
+                              {{}}}
+                        </div>
+                    </div>
+                    </li>
+
+                    {{}}}
+
+            </script>
+        </ul>
+    </section>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+<script type="text/javascript">
+    var listHD = doT.template(document.getElementById('HDlist').innerHTML);
+    apiready = function() {
+        var parames = {
+            values: {}
+        }
+        api.parseTapmode();
+        parames.values.studentid = $api.getStorage('studentid')
+        zhc.post(api.pageParam.url, parames, function(data) {
+            document.getElementById('sykt_ul').innerHTML = listHD(data);
+        }, null, true)
+
+    }
+
+
+    function onKeItemClick(id, type, mid,ctitle,index) {
+      var parames = {
+          values: {}
+      }
+      api.parseTapmode();
+      parames.values.id = id
+      parames.values.type = type
+      zhc.post('http://www.yxke12.com/index.php/App/Msg/changestatu.html', parames, function(data) {
+        console.log(JOSN.stringify(data));
+      }, null, true)
+      var li = document.getElementsByTagName("li")
+      for (var i = 0; i < li.length; i++) {
+            if (index == i) {
+              document.getElementById("studentname"+i).style.color = '#ddd'
+              document.getElementById("type"+i).style.color = '#ddd'
+              document.getElementById("pl"+i).style.color = '#ddd'
+              document.getElementById("reply"+i).style.color = '#ddd'
+              document.getElementById("time"+i).style.color = '#ddd'
+            }
+
+      }
+
+        if (type == 'mjzd') {
+          api.openWin({
+              name: 'jksh_details_win',
+              url: '../mingjiazhidao/jksh_details_win.html',
+              pageParam: {
+                  data: mid,
+                  url: "http://www.yxke12.com/index.php/App/Mingjiazhidao/detail.html",
+                  faurl: "http://www.yxke12.com/index.php/App/Mingjiazhidao/comment.html",
+                  hurl: "http://www.yxke12.com/index.php/App/Mingjiazhidao/reply.html",
+                  hqurl:"http://www.yxke12.com/index.php/App/Mingjiazhidao/getreply.html",
+                  durl:"http://www.yxke12.com/index.php/App/Mingjiazhidao/dianzan.html",
+                  title:"名家指导"
+              }
+          });
+        } else if (type == 'xldd') {
+          api.openWin({
+              name: 'bangyangxiangqing_win',
+              url: '../zonghesuzhitisheng/bangyangxiangqing_win.html',
+              pageParam: {
+                data: mid,
+                url: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/xinli_detail.html",
+                faurl: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/addcomment.html",
+                hurl: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/reply.html",
+                hqurl: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/getreply.html",
+                durl: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/dianzan.html",
+                title:ctitle
+              }
+          });
+        }
+    }
+
+</script>
+
+</html>

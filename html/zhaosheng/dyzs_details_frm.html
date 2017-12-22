@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+
+
+      .my-content{
+        width:90%;
+        margin: auto;
+        font-family: 'PingFang-SC';
+      }
+      td,tr{
+        border: 1px solid;
+      }
+      p{
+        text-indent: 1.5rem
+      }
+      strong,span{
+        display: inline-block;
+          text-indent: 1.5rem
+      }
+      h2{
+        display: inline-block;
+      }
+    </style>
+</head>
+
+<body style="background:#fff" id="details_b">
+      <div id="main" class="flex-con my-content" >
+      </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        // var id = api.pageParam.id;
+        var url = api.pageParam.url;
+        var values = api.pageParam.values;
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: url,
+            method: 'post',
+            data: {
+                values: $api.strToJson(values)
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+              if(ret.status == 100){
+                console.log(JSON.stringify(ret));
+                $api.byId('main').innerHTML = ret.data.detail;
+              }
+            } else {
+              api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+        });
+      };
+      /// WARN:别删 高职单招简章详情代码中用
+      function resizepic(a) {
+
+      }
+</script>
+</html>

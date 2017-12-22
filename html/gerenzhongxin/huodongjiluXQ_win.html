@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        .ic-message{
+                background-image: url(../../image/career.png);
+                float: right;}
+
+
+                #footer{  background-color: #f2f2f2; }
+                #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 10px; background-size: auto 22px; text-align: center;font-size: 10px;font-family: "PingFang-SC";color: #a1a1a1;}
+                #footer ul li.active{ color: #6666ff; }
+                #footer ul li:nth-child(1){ background-image: url(../../../image/jiazhanggaokao.png); }
+                #footer ul li:nth-child(2){ background-image: url(../../../image/jiayoukaosheng.png); }
+                #footer ul li:nth-child(3){ background-image: url(../../../image/jiazhangxuexiao.png); }
+                #footer ul li:nth-child(4){ background-image: url(../../../image/jiaoliuhudong.png); }
+                #footer ul li:nth-child(1).active{ background-image: url(../../../image/jiazhanggaokao_1.png); }
+                #footer ul li:nth-child(2).active{ background-image: url(../../../image/jiayoukaosheng_1.png); }
+                #footer ul li:nth-child(3).active{ background-image: url(../../../image/jiazhangxuexiao_1.png); }
+                #footer ul li:nth-child(4).active{ background-image: url(../../../image/jiaoliuhudong_1.png); }
+
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+
+        .bottom_fix{
+            position: fixed;
+            width: 100%;
+                background: #000;
+            bottom:0;
+        }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+  <a class="aui-pull-left aui-btn" tapmode onclick= 'api.closeWin();'>
+      <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+  </a>
+  <div id="title" class="aui-title">活动记录</div>
+
+  <!-- <a class="aui-pull-right aui-btn aui-btn-outlined" tapmode="hover">
+
+        <div class="aui-dot dot-pos"></div>
+        <img src="../../../image/message.png" style="width:18px;height:18px">
+    </a> -->
+</header>
+
+<div id="wrap" class="flex-wrap flex-vertical">
+
+
+
+    <div id="main" class="flex-con">
+
+    </div>
+    <div id="footer" class="border-t bottom_fix">
+        <ul class="flex-wrap" >
+          <input class="aaa" type="text" name="" value="">
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        $api.byId('title').innerHTML = api.pageParam.title;
+        api.parseTapmode();
+        $api.fixStatusBar($api.byId('aui-header'));
+        // $api.fixTabBar($api.byId('footer'))
+        var body_h = $api.offset($api.dom('body')).h,
+            footerh = $api.offset($api.byId('footer')).h,
+            headerh = $api.offset($api.byId('aui-header')).h;
+        api.openFrame({
+            name: 'huodongjiluXQ_frm',
+            url: 'huodongjiluXQ_frm.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: headerh,
+                w: 'auto',
+                h: body_h - headerh
+            },
+            pageParam:{
+              data: api.pageParam.data,
+              img:$api.getStorage("img")
+            },
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false
+        });
+    };
+</script>
+</html>

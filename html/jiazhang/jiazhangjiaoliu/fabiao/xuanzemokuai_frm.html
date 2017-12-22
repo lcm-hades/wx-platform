@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style type="text/css">
+      .btn{
+        width: 32%;
+        border: solid 1px #a1a1a1;
+        background-color: #fff;
+        border-radius: 4px;
+         font-family: 'PingFang-SC';
+         color: #a1a1a1;
+      }
+      .btn1{
+
+        border: solid 1px #6666ff;
+         color: #6666ff;
+      }
+      .queding {
+        width: 90%;
+        height: 1.95rem;
+        border-radius: 18px;
+        background-color: #6666ff;
+        position: fixed;
+        bottom: 3rem;
+        margin: auto;
+        left: 0;
+        right: 0;
+        font-family: 'PingFang-SC';
+        color: #fff;
+        text-align: center;
+        line-height: 1.95rem;
+        font-size: 0.8rem;
+      }
+    </style>
+</head>
+
+<body>
+  <div id="" class="flex-wrap flex-vertical">
+
+      <div style="height:3.55rem;line-height:3.55rem;width: 95%;margin: auto;">
+        <button type="button" name="button" class="btn btn1" id="btnyangshi1" tapmode onclick="xuanze(1)">家长-家长</button>
+        <button type="button" name="button" class="btn" id="btnyangshi2" tapmode onclick="xuanze(2)">家长-教师</button>
+        <button type="button" name="button" class="btn" id="btnyangshi3" tapmode onclick="xuanze(3)">家长-学校</button>
+      </div>
+      <div style="height:1px;background:#000;width: 95%;margin: auto;opacity: 0.1;"></div>
+      <div id="jiazhangjz" style="height:3.55rem;line-height:2rem;width: 95%;margin: auto;margin-top: 0.6rem;">
+        <button type="button" name="button" class="btn btn1" id="ziyangshi1" tapmode onclick="xuanzi1(1)">生涯规划</button>
+        <button type="button" name="button" class="btn" id="ziyangshi2" tapmode onclick="xuanzi1(2)">沟通·代沟</button>
+        <button type="button" name="button" class="btn" id="ziyangshi3" tapmode onclick="xuanzi1(3)">营养·健康</button>
+        <button type="button" name="button" class="btn" id="ziyangshi4" tapmode onclick="xuanzi1(4)">青春期·叛逆</button>
+      </div>
+      <div id="jiazhangjs" style="height:3.55rem;line-height:2rem;width: 95%;margin: auto;margin-top: 0.6rem;display:none">
+        <button type="button" name="button" class="btn btn1" id="ziyangshi1" tapmode onclick="xuanzi1(1)">课后辅导</button>
+        <button type="button" name="button" class="btn" id="ziyangshi2" tapmode onclick="xuanzi1(2)">学生心理</button>
+        <button type="button" name="button" class="btn" id="ziyangshi3" tapmode onclick="xuanzi1(3)">活动情况</button>
+        <!-- <button type="button" name="button" class="btn" id="ziyangshi4" tapmode onclick="xuanzi1(4)">青春期·叛逆</button> -->
+      </div>
+      <div id='jiazhangxx' style="height:3.55rem;line-height:2rem;width: 95%;margin: auto;margin-top: 0.6rem;display:none">
+        <button type="button" name="button" class="btn btn1" id="ziyangshi1" tapmode onclick="xuanzi1(1)">政策交流</button>
+        <button type="button" name="button" class="btn" id="ziyangshi2" tapmode onclick="xuanzi1(2)">校园发展</button>
+        <button type="button" name="button" class="btn" id="ziyangshi3" tapmode onclick="xuanzi1(3)">活动通知</button>
+        <!-- <button type="button" name="button" class="btn" id="ziyangshi4" tapmode onclick="xuanzi1(4)">青春期·叛逆</button> -->
+      </div>
+      <div type="button" name="button" class="queding" tapmode onclick="qued()">确定</div>
+  </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript">
+var a = 1;
+var b = 1;
+var titlea = "家长-家长";
+var titleb ="家长私语" ;
+    apiready = function() {
+
+
+    }
+
+function xuanze(index){
+      if (index == 1) {
+        $api.addCls($api.byId('btnyangshi1'), 'btn1');
+        $api.removeCls($api.byId('btnyangshi2'), 'btn1');
+        $api.removeCls($api.byId('btnyangshi3'), 'btn1');
+        $api.byId('jiazhangjz').style.display = 'block'
+        $api.byId('jiazhangjs').style.display = 'none'
+        $api.byId('jiazhangxx').style.display = 'none'
+        titlea = $api.byId('btnyangshi1').innerHTML
+      }
+       if (index == 2) {
+        $api.addCls($api.byId('btnyangshi2'), 'btn1');
+        $api.removeCls($api.byId('btnyangshi1'), 'btn1');
+        $api.removeCls($api.byId('btnyangshi3'), 'btn1');
+        titlea = $api.byId('btnyangshi2').innerHTML
+        $api.byId('jiazhangjz').style.display = 'none'
+        $api.byId('jiazhangjs').style.display = 'block'
+        $api.byId('jiazhangxx').style.display = 'none'
+      }
+      if (index == 3) {
+          $api.addCls($api.byId('btnyangshi3'), 'btn1');
+          $api.removeCls($api.byId('btnyangshi1'), 'btn1');
+          $api.removeCls($api.byId('btnyangshi2'), 'btn1');
+          titlea = $api.byId('btnyangshi3').innerHTML
+          $api.byId('jiazhangjz').style.display = 'none'
+          $api.byId('jiazhangjs').style.display = 'none'
+          $api.byId('jiazhangxx').style.display = 'block'
+      }
+ a = index
+}
+function xuanzi1(index1){
+  if (index1 == 1) {
+    $api.addCls($api.byId('ziyangshi1'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi2'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi3'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi4'), 'btn1');
+    titleb = $api.byId('ziyangshi1').innerHTML
+  }
+   if (index1 == 2) {
+    $api.addCls($api.byId('ziyangshi2'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi1'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi3'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi4'), 'btn1');
+    titleb = $api.byId('ziyangshi2').innerHTML
+  }
+   if (index1 == 3) {
+    $api.addCls($api.byId('ziyangshi3'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi2'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi1'), 'btn1');
+    $api.removeCls($api.byId('ziyangshi4'), 'btn1');
+    titleb = $api.byId('ziyangshi3').innerHTML
+  }
+  if (index1 == 4) {
+      $api.addCls($api.byId('ziyangshi4'), 'btn1');
+      $api.removeCls($api.byId('ziyangshi2'), 'btn1');
+      $api.removeCls($api.byId('ziyangshi3'), 'btn1');
+      $api.removeCls($api.byId('ziyangshi1'), 'btn1');
+      titleb = $api.byId('ziyangshi4').innerHTML
+  }
+b = index1
+}
+function qued() {
+  if (a!=0 && b!=0) {
+    api.openWin({
+        name: 'fabiao_win',
+        url: './fabiao_win.html',
+        pageParam: {
+            one:a,
+            two:b,
+            titleb:titleb,
+            titlea:titlea
+        }
+    });
+  }else {
+    alert("请选择栏目!")
+  }
+
+
+}
+</script>
+
+</html>

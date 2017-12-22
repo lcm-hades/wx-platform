@@ -1,0 +1,424 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/demo.css" />
+    <style>
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: none;
+      }
+
+      .xiahuaxian{
+        border-bottom: 1px solid #6666ff;
+      }
+
+      .zcText {
+        font-family: 'PingFang-SC';
+        font-size: 14px;
+        font-weight: 500;
+      }
+      #all ul li{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        background: white;
+        overflow: hidden;
+        border-top: 1px solid #e5e5e5;
+
+      }
+
+      .img_c{
+        float: left;
+        height: 64px;
+        width: 64px;
+      }
+      .text_l{
+        float: left;
+        line-height: 64px;
+        margin-left: 8px;
+        font-size: 18px;
+        color: #222222;
+      }
+      .right1_img{
+        height: 22px;
+        width: 22px;
+        display: block;
+        margin: 4px auto;
+      }
+
+      .right2_img{
+        height: 22px;
+        width: 22px;
+        display: block;
+        margin: 4px auto;
+      }
+
+      .right1_p{
+        float: right;
+        display:block;
+        margin-right: 10px;
+        margin-top: 9px;
+      }
+      .right2_p{
+        float: right;
+        display:block;
+        margin-right: 16px;
+        margin-top: 9px;
+      }
+
+      .right1_p span{
+        font-size: 12px;
+        color: #222222;
+      }
+
+      .right2_p span{
+        font-size: 12px;
+        color: #222222;
+      }
+
+      div.screening>ul {
+          height: 40px;
+          margin: 0;
+          padding: 0;
+          list-style-type: none;
+          border-bottom: none;
+          overflow: hidden;
+      }
+      div.screening>ul>li {
+          width: 100%;
+          position: relative;
+
+      }
+
+      div.screening>ul>li:after {
+
+          content: '';
+          display: inline-block;
+          width:20px;
+          height: 20px;
+          position: absolute;
+          right: 10px;
+          top:10px;
+          background: url("../../../image/on_1.png") no-repeat 100% center;
+          transition: 0.5s;
+          background-position-x: 50%;
+      }
+
+      div.screening>ul>li.current:after{
+        -webkit-transform: rotate(180deg);
+      }
+
+      .biaoqian{
+        font-family: 'PingFang-SC';
+        display:inline-block;
+        margin-left:0.5em;
+        line-height: 1.0;
+        padding: 4px 12px;
+        color: #333333;
+      }
+
+      .act_biaoqian{
+        line-height: 1.0;
+        /*padding: 4px 12px;*/
+        background-color: #6666ff;
+        border-radius: 12px;
+        color: white;
+      }
+
+      .choose{
+        display:inline-flex;
+        margin-left:10px;
+        color:#6666ff;
+      }
+
+      .hot_select{
+        display:inline-flex;
+        border-bottom:2px solid #6666ff;
+        color:#6666ff;font-size:16px;
+        margin-right: 10px;
+      }
+      .hot{
+        color: #a1a1a1;
+        border-bottom:0px;
+        font-size:16px;
+        display:inline-flex;
+        margin-right: 10px;
+      }
+
+      .grade-w-roll{
+        top: 84px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+        <div class="aui-tab" id="tab" style=" position: fixed;width: 100%;z-index: 99;top:0px">
+            <div class="aui-tab-item "><span class="zcText xiahuaxian" id="gzc">全国</span></div>
+            <div style="height:1.5rem;border-right: 1px solid #000000;opacity: 0.1;position: relative;margin: auto;top: 0;"></div>
+            <div class="aui-tab-item"><span class='zcText' id="szc">浙江</span></div>
+        </div>
+        <section id="all" style="margin-top:45px;">
+          <ul id="kg_ul">
+            <script id="kg_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.kemu.length; i++) {}}
+              <li>
+                <img class="img_c" src="http://www.yxke12.com//Public/Home/images/student/{{=it.imgs[i]}}"></img>
+                <span class="text_l">{{=it.kemu[i]}}</span>
+
+                <div class="right1_p" tapmode onclick="onSMClick({{=i}})">
+                  <img class="right1_img" src="../../../image/ic_sm.png"></img>
+                  <span>大纲说明</span>
+                </div>
+                <div class="right2_p" tapmode onclick="onDGClick({{=i}})">
+                  <img class="right2_img" src="../../../image/ic_dg.png"></img>
+                  <span>考试大纲</span>
+                </div>
+              </li>
+            {{}}}
+            </script>
+          </ul>
+        </section>
+
+        <section id="province" style="margin-top:44px;">
+          <div class="screening" style="display:inline-block;background:white;" onclick="toggleFilter(event)">
+            <ul>
+                <li style="display:inline-flex; border: none; border-top:1px solid #e5e5e5;padding-left: 20px;text-align: left;" class="Regional" id="PJSD">
+
+                    <div class="hot_select" id="hot_div" tapmode onclick="onHotClick(event);">
+                      推荐
+                    </div>
+                      <div class="choose" id="selected_ke">
+
+                      </div>
+                    <div style="position:fixed;right:34px;">筛选</div>
+                  </script>
+                </li>
+            </ul>
+          </div>
+
+          <div class="grade-eject" id="yincang3" onclick="yincang()">
+              <ul style="background-color:white;"class="grade-w" id="gradew3">
+                  <li style="background-color:white;display:inline-flex;border-bottom:0px;">
+                    <div style="min-width: 3em;">
+                      科目：
+                    </div>
+                    <div style="display:inline-block; margin-left:0.25rem;padding-right:20px;" id="ke_div">
+                      <script id="filter_s" type="text/x-dot-template">
+                        {{for (var i = 0; i < it.length; i++) {}}
+                          {{if (i == 0) {}}
+                            <div class="biaoqian act_biaoqian" tapmode onclick="onKeClick(event, {{=i}});">
+                          {{}else {}}
+                            <div class="biaoqian" tapmode onclick="onKeClick(event, {{=i}});">
+                          {{}}}
+                              {{=it[i]}}
+                          </div>
+                          {{}}}
+                      </script>
+                    </div>
+                  </li>
+              </ul>
+          </div>
+          <ul id="img_ul" style="margin-top:44px;">
+            <script id="img_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <img class="" src="http://www.yxke12.com/Public/Home/images/kaogang/{{=it[i].url}}"></img>
+              {{}}}
+            </script>
+          </ul>
+        </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var kemu = ["语文", "数学(文)", "数学(理)", "英语", "物理", "化学", "生物", "政治", "历史", "地理"];
+    var pic = ["chinese_01.png", "math_01.png", "math_01.png", "english_01.png", "physical_01.png",
+              "Chemistry_01.png", "biological_01.png", "political_01.png", "history_01.png", "geography_01.png"];
+    var kg_dot, filter_dot, img_dot;
+
+    var filterList = [];
+    var imageList = [];
+
+    var hot_div;
+    var cur_ke;
+    apiready = function() {
+      kg_dot = doT.template(document.getElementById('kg_s').innerHTML);
+      filter_dot = doT.template(document.getElementById('filter_s').innerHTML);
+      img_dot = doT.template(document.getElementById('img_s').innerHTML);
+      var data = {};
+      data.kemu = kemu;
+      data.imgs = pic;
+      document.getElementById('kg_ul').innerHTML = kg_dot(data);
+
+      hot_div = $api.byId('hot_div');
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        var gzc = document. getElementById('gzc');
+        var szc = document. getElementById('szc');
+        if (ret.index ==1) {
+          gzc.className="zcText xiahuaxian";
+          szc.className="zcText";
+          document. getElementById('all').style.display = "block";
+          document. getElementById('province').style.display = "none";
+        }else {
+          szc.className="zcText xiahuaxian";
+          gzc.className="zcText";
+          document. getElementById('all').style.display = "none";
+          document. getElementById('province').style.display = "block";
+          getZheJData();
+        }
+    });
+
+    function getZheJData() {
+      zhc.post('http://www.yxke12.com/index.php/App/Kaogangshuoming/getdefaulzj.html',
+          {},function(data) {
+            filterList = data.kemu;
+            imageList = data.list;
+            document.getElementById('ke_div').innerHTML = filter_dot(filterList);
+            document.getElementById('img_ul').innerHTML = img_dot(imageList);
+            api.parseTapmode();
+
+          },null, true);
+    }
+
+    function onSMClick(index) {
+      var parames = {values:{}}
+      parames.values.xueke = kemu[index];
+      zhc.post('http://www.yxke12.com/index.php/App/Kaogangshuoming/getkgsm.html',
+          parames,function(data) {
+            var pdfReader = api.require('pdfReader');
+            pdfReader.open({
+                path: 'http://www.yxke12.com//Public/Home/images/kaogangPDF/'+data.url
+            });
+          },null, true);
+    }
+
+    function onDGClick(index) {
+      var parames = {values:{}}
+      parames.values.xueke = kemu[index];
+      zhc.post('http://www.yxke12.com/index.php/App/Kaogangshuoming/getkaogang.html',
+          parames,function(data) {
+            zhc.download('http://www.yxke12.com//Public/Home/images/kaogangPDF/'+data.url, "fs://pdf/" + data.url, function(ret) {
+                var pdfReader = api.require('pdfReader');
+                pdfReader.open({
+                    path:ret.savePath
+                });
+            });
+          },null, true);
+    }
+
+    function yincang() {
+      toggleFilter();
+    }
+
+    function toggleFilter(e) {
+        var yc = $api.byId('yincang3');
+        var p = $api.byId('PJSD');
+        if ($api.hasCls(yc, "grade-w-roll")) {
+            $api.removeCls(yc, "grade-w-roll");
+              $api.removeCls(p, "current");
+        }else {
+            $api.addCls(yc, "grade-w-roll");
+            $api.addCls(p, "current");
+        }
+    }
+
+    function onHotClick(e) {
+        e.cancelBubble = true;
+        if ($api.hasCls(hot_div, "hot")) {
+          $api.removeCls(hot_div, 'hot');
+          $api.addCls(hot_div, 'hot_select');
+        }
+        clearSelect();
+        getZheJData();
+    }
+  function clearSelect() {
+    var arr = document.getElementById("ke_div").getElementsByTagName("div");
+    for (var i = 0; i < arr.length; i++) {
+        $api.removeCls(arr[i], 'act_biaoqian');
+    }
+    selected_ke.innerHTML = '';
+    cur_ke = null;
+  }
+
+  function onKeClick(e, index) {
+    e.cancelBubble = true;
+    var arr = document.getElementById("ke_div").getElementsByTagName("div");
+    for (var i = 0; i < arr.length; i++) {
+      //
+      if (i == index) {
+          $api.addCls(arr[i], 'act_biaoqian');
+      }else {
+          $api.removeCls(arr[i], 'act_biaoqian');
+      }
+    }
+    selected_ke.innerHTML = arr[index].innerHTML;
+
+    if ($api.hasCls(hot_div, "hot_select")) {
+      $api.removeCls(hot_div, 'hot_select');
+      $api.addCls(hot_div, 'hot');
+    }
+    cur_ke = filterList[index];
+    loadData();
+  }
+
+  function loadData() {
+    var params = {};
+    if (cur_ke != null) {
+      params.kemu = cur_ke;
+    }
+
+    api.showProgress({
+        style: 'default',
+        animationType: 'fade',
+        title: '努力加载中...',
+        text: '先喝杯茶...',
+        modal: true
+    });
+
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Kaogangshuoming/filterxueke.html',
+        method: 'post',
+        data: {
+            values:params
+        }
+    },function(ret, err){
+        console.log(JSON.stringify(ret));
+        api.hideProgress();
+        if (ret) {
+          if (ret.status == 100) {
+            document.getElementById('img_ul').innerHTML = img_dot(ret.data);
+          }else {
+            api.toast({
+                msg: ret.data.error,
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+        } else {
+            api.toast({
+                msg: JSON.stringify( err ),
+                duration: 2000,
+                location: 'bottom'
+            });
+        }
+    });
+  }
+</script>
+
+</html>

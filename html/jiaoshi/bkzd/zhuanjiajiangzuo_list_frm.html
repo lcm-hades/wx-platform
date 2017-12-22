@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/demo.css" />
+    <script type="text/javascript" src="../../../script/aui-tab.js"></script>
+    <style>
+    div.screening>ul {
+        height: 40px;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border-bottom: none;
+        overflow: hidden;
+    }
+    div.screening>ul>li {
+        width: 100%;
+        position: relative;
+
+    }
+
+    div.screening>ul>li:after {
+
+        content: '';
+        display: inline-block;
+        width:20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top:10px;
+        background: url("../../../image/on_1.png") no-repeat 100% center;
+        transition: 0.5s;
+        background-position-x: 50%;
+    }
+
+    div.screening>ul>li.current:after{
+      -webkit-transform: rotate(180deg);
+    }
+
+    .biaoqian{
+      font-family: 'PingFang-SC';
+      display:inline-block;
+      margin-left:0.5em;
+      line-height: 1.0;
+      padding: 4px 12px;
+      color: #333333;
+    }
+
+    .act_biaoqian{
+      line-height: 1.0;
+      /*padding: 4px 12px;*/
+      background-color: #6666ff;
+      border-radius: 12px;
+      color: white;
+    }
+
+    .choose{
+      display:inline-flex;
+      margin-left:10px;
+      color:#6666ff;
+    }
+
+    .hot_select{
+      display:inline-flex;
+      border-bottom:2px solid #6666ff;
+      color:#6666ff;font-size:16px;
+      margin-right: 10px;
+    }
+
+    .hot{
+      color: #a1a1a1;
+      border-bottom:0px;
+      font-size:16px;
+      display:inline-flex;
+      margin-right: 10px;
+    }
+
+    /*.aui-list .aui-list-item-media{
+        border-right: 1px solid #999;
+
+        position: relative;
+
+         padding-right: 0;
+        display: inherit;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+      }*/
+      .third{
+        display: inline-flex;
+          color: #999999;
+          margin-top: 6px;
+
+      }
+      .m-l-8{
+        margin-left: 8px;
+      }
+      .aui-icon-star:before {
+          content: "\e6e0";
+          font-weight: bold;
+      }
+      .f-s-14{
+        font-size: 12px!important;
+      }
+      .icon{
+        margin-top: 8px;
+        border-radius:4px;
+        width: 120px!important;
+        height: 70px;
+      }
+      .aui-list .aui-list-item-media {
+        width: 6.5rem;
+        position: relative;
+        padding: 0.5rem 0;
+        padding-right: 0rem;
+        display: inherit;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+    .aui-list .aui-list-item-inner {
+    position: relative;
+    min-height: 2.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /*display: -webkit-box;*/
+    /*display: -webkit-flex;*/
+    /*display: flex;*/
+    -webkit-box-flex: 1;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+    .m-t-10{
+      margin-top: 8px;
+    }
+    .zcText {
+      font-family: 'PingFang-SC';
+      font-size: 14px;
+      font-weight: 500;
+      /*color: #666666;*/
+    }
+    .xiahuaxian{
+      border-bottom: 1px solid #6666ff;
+    }
+    .aui-tab-item.aui-active {
+      color: #6666ff;
+      border-bottom: none;
+      }
+      .shuliang{
+        margin:auto 0.5rem ;
+      }
+      .shijian{
+        object-fit: 'contain';
+        font-family: 'PingFang-SC';
+        font-size: 0.2rem;
+        text-align: left;
+        color: #999999;
+        }
+        .bofangtu{
+          width: 1.5rem!important;
+          height: 1.5rem;
+          position: absolute;
+          margin: auto;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- <img class="top_img" src="../../../image/zjjz.png"  > -->
+    <div class="flex-wrap flex-vertical">
+      <div >
+          <div class="aui-tab" id="tab" style=" position: fixed;width: 100%;z-index: 99;top:0px;">
+              <div class="aui-tab-item "><span class="zcText xiahuaxian" id="gzc">专家讲座</span></div>
+              <div style="height:1.5rem;border-right: 1px solid #000000;opacity: 0.1;position: relative;margin: auto;top: 0;">
+              </div>
+              <div class="aui-tab-item"><span class='zcText' id="szc">百问百答</span></div>
+          </div>
+      </div>
+      <div class="aui-content aui-margin-b-15" style="display:block;padding-top: 0px;margin-top:44px;" id="guozhengce">
+        <ul class="aui-list aui-media-list" id="video_ul">
+          <script id="video_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item" tapmode onclick="onZJJZClick({{=i}})">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media">
+                          <img src="http://www.yxke12.com/Public/Home/images/student/{{=it[i].image}}" style="width: 6.5rem;height: 4.1rem;border-radius: 5px;">
+                      </div>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title">{{=it[i].videoname}}</div>
+                          </div>
+                          <div class="aui-info aui-margin-t-15" >
+                              <div class="aui-info-item">
+                                          {{=it[i].time}}
+                                  </div>
+                              <div class="aui-info-item"></div>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+            {{}}}
+          </script>
+        </ul>
+    </div>
+
+
+    <div style="margin-top: 44px;display:none" id="shengzhengce">
+      <!-- <div class="aui-content aui-margin-b-15" style="position: relative;top: 35px;">
+
+    </div> -->
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="itemClick(1)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">一、基本情况</div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(2)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">二、普通类志愿填报及投档录取</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(3)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">三、艺术类志愿填报及投档录取</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(4)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">四、体育类志愿填报及投档录取</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(5)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">五、多元选拔及特殊类型招生</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="itemClick(6)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">六、网上填报志愿注意事项</div>
+                </div>
+            </li>
+            <!-- <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">七、心理</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">八、生活</div>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+  </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript" src="../../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var arr_title = ["基本情况", "普通类志愿填报及投档录取", "艺术类志愿填报及投档录取",
+                    "体育类志愿填报及投档录取","多元选拔及特殊类型招生","网上填报志愿注意事项"];
+    var video_dot;
+    var videoList;
+    apiready = function() {
+      video_dot = doT.template(document.getElementById('video_s').innerHTML);
+      getVideoList();
+    };
+
+    function getVideoList() {
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/zjjzlist.html',
+          {},function(data) {
+            videoList = data;
+            document.getElementById('video_ul').innerHTML = video_dot(videoList);
+          },null, true);
+    }
+
+    function onZJJZClick(index){
+      // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+      //   api.toast({
+      //       msg: "该功能付费用户才能使用",
+      //       duration: 2000,
+      //       location: 'bottom'
+      //   });
+      //   return;
+      // }
+      var url = "http://www.yxke12.com/Public/Home/images/video/" + videoList[index].videocsrc;
+      if (videoList[index].videocsrc != null) {
+        api.openWin({
+            name: 'sp_list_win',
+            url: './sp_list_win.html',
+            pageParam: {
+                url:url,
+                img:"http://www.yxke12.com/Public/Home/images/student/" + videoList[index].image
+            }
+        });
+      }else {
+        api.toast({
+            msg: '播放地址错误',
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  }
+
+    function itemClick(index) {
+      api.openWin({
+          name: 'baiwenbaida_neirong_win',
+          url: './baiwenbaida_neirong_win.html',
+          pageParam: {
+              title: arr_title[index - 1],
+              index: index
+          }
+      });
+    }
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      var gzc = document. getElementById('gzc');
+        var szc = document. getElementById('szc');
+        if (ret.index ==1) {
+
+          gzc.className="zcText xiahuaxian";
+          szc.className="zcText";
+           document. getElementById('guozhengce').style.display = "block";
+           document. getElementById('shengzhengce').style.display = "none";
+        }
+        else {
+
+        szc.className="zcText xiahuaxian";
+        gzc.className="zcText";
+        document. getElementById('guozhengce').style.display = "none";
+        document. getElementById('shengzhengce').style.display = "block";
+        }
+    });
+
+  function bookDetails() {
+    api.openWin({
+        name: 'book_details_win',
+        url: './book_details_win.html',
+        pageParam: {
+            name: 'test'
+        }
+    });
+  }
+</script>
+
+</html>

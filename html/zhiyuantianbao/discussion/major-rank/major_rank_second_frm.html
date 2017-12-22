@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .aui-collapse-header.aui-active {
+          background: white;
+      }
+      .my-third-content{
+        border-top: 1px solid #dddddd;
+        padding: 0px!important;
+        padding-left: 15px!important;
+      }
+      .aui-tab-item.aui-active {
+          color: #6666ff;
+          border-bottom: 2px solid #6666ff;
+      }
+      .margin-l-10{
+        margin-left: 10px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <section id="second">
+        <ul class="aui-list aui-collapse aui-border" id="benke_second_ul" >
+          <script id="benke_second_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <div class="aui-collapse-item" >
+                    <li class="aui-list-item aui-collapse-header aui-border-b" tapmode onclick="onItemClick({{=i}})">
+                        <div class="aui-list-item-inner" >
+                            <div class="aui-list-item-title margin-l-10">{{=it[i].category_id}}</div>
+                            <div class="aui-list-item-right">
+                                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+              {{}}}
+          </script>
+        </ul>
+      </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript">
+    var benkeSecondList = [];
+    var benkeThirdList = [];
+    var benke_second;
+    apiready = function() {
+        api.parseTapmode();
+        switchSecond(api.pageParam.category);
+    };
+
+    function switchSecond(_category) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Zhuanyeku/menubenke.html',
+            method: 'post',
+            data: {
+                values: {
+                    category: _category
+                },
+            }
+        },function(ret, err){
+          api.hideProgress();
+
+          if (ret) {
+            if (ret.status == 100) {
+              benkeSecondList = ret.data.twomenu;
+              benkeThirdList = ret.data.threemenu;
+              if (benke_second == null) {
+                benke_second = doT.template(document.getElementById('benke_second_s').innerHTML);
+              }
+              document.getElementById('benke_second_ul').innerHTML = benke_second(benkeSecondList);
+              api.parseTapmode();
+            }
+          }
+
+        });
+    }
+
+    function onItemClick(index) {
+        var second = benkeSecondList[index].category_id;
+        var third = [];
+        for (var i = 0; i < benkeThirdList.length; i++) {
+            if (benkeThirdList[i].category_id == second) {
+                third.push(benkeThirdList[i].name);
+            }
+        }
+        // console.log(JSON.stringify(third));
+        localStorage.third = JSON.stringify(third)
+        api.openWin({
+            name: 'major_rank_third_win',
+            url: './major_rank_third_win.html',
+            pageParam: {
+                // data: third,
+                title:second
+            }
+        });
+    }
+
+</script>
+
+</html>

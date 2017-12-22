@@ -1,0 +1,721 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+
+      body{
+      }
+
+      .linear{
+          width:100%;
+          background:-webkit-gradient(linear, center top, center bottom,from(#66aaff), to(#6666ff));
+      }
+
+      .real_tou{
+        height: 130px;
+        width: 130px;
+        position: absolute;
+        top:0px;
+        left:0px;
+        right:0px;
+        bottom: 0px;
+        border-radius: 65px;
+      }
+      .tou_icon{
+        height: 130px;
+        width: 130px;
+        /*background-image: url("../../image/tou_icon.png");*/
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        margin: 0 auto;
+        margin-top: 10%;
+        position: relative;
+
+      }
+
+      .input_pos{
+        padding: 10px 0px;
+        background-color: #ddd;
+        width:90%;
+        border-radius: 30px;
+        margin: 10px auto;
+        margin-top: 7%;
+        box-shadow:0px 0px 10px #fff
+      }
+      .aui-searchbar-input input {
+          color: #666666;
+          width:90%;
+          padding: 0;
+          margin: 0;
+          height: 20px;
+          line-height: 20px;
+          border: 0;
+          text-align: center;
+          -webkit-appearance: none;
+          font-size: 16px;
+      }
+
+      .my_input{
+        height: 30px;
+        display: flex;
+        align-items: center;
+        background: #ddd!important;
+      }
+
+
+      .img_c{
+        height: 32px;
+        width: 32px;
+        margin: 0px auto;
+        margin-top: 7%;
+        position: absolute;;
+        bottom: 0px;
+        right: 0px;
+      }
+
+      .sex{
+        width: 90px;
+        height: 90px;
+        margin: 0px 10px;
+        display: inline-block;
+      }
+
+      .sex_img{
+        width: 90px;
+        height: 90px;
+      }
+
+      .sex span{
+        margin-top:4px;
+      }
+
+      .sex_pos{
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .login_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 100%;
+        margin: 0px auto;
+        border-radius: 0px;
+        /*position: absolute;*/
+        font-size: 18px;
+        /*bottom: 0px;*/
+      }
+
+           .grade{
+        font-size: 12px;
+        margin: 5px auto;
+        text-align: center;
+      }
+
+      .grade_show{
+        font-family: "PingFang-SC"!important;
+        padding-left: 25px;
+        line-height: 50px;
+        font-size: 20px;
+        background-color: #ddd;
+        width: 80%;
+        margin: 0px auto;
+        height: 50px;
+        border-radius:25px;
+        position: relative;
+      }
+
+ 
+
+      .kaoshi{
+          margin: 10px auto;
+          width: 90%;
+          height: 100px;
+          text-align: center;
+      }
+
+      .ke{
+        display: inline-block;
+        text-align: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 1px solid #6666ff;
+        line-height: 80px;
+        font-size: 22px;
+        margin: 0px 10px;
+      }
+
+      .select{
+        background-color: #6666ff!important;
+        color: white;
+      }
+
+      .grade_show select{
+        font-family: "PingFang-SC";
+        height: 50px;
+      }
+
+      .margin-t-20{
+        margin-top: 20px;
+      }
+
+      .pos_right{
+        position:absolute;
+        right:20px;
+        top:0px;
+      }
+
+    </style>
+</head>
+
+<body >
+    <div class="flex-wrap flex-vertical ">
+ 
+      <div class="input_pos">
+          <div class="aui-searchbar-input my_input">
+                <input type="search" placeholder="输入你的姓名" id="name_in">
+          </div>
+      </div>
+      <div class="grade">所在地区</div>
+          <!-- 省 -->
+          <div class="aui-list-item-input grade_show" id="province_div">
+            <script id="province_s" type="text/x-dot-template">
+              <select onchange="selectProvince(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+              </script>
+          </div>
+            <!-- 市 -->
+          <div class="aui-list-item-input grade_show margin-t-20" id="city_div">
+            <script id="city_s" type="text/x-dot-template">
+              <select onchange="selectCity(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+          </div>
+          <!-- 县 -->
+          <div class="aui-list-item-input grade_show margin-t-20" id="qu_div">
+            <script id="qu_s" type="text/x-dot-template">
+              <select onchange="selectQu(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].provincesname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+          </div>
+
+          <div class="grade">学校</div>
+          <div class="aui-list-item-input grade_show" id="school_div">
+            <script id="school_s" type="text/x-dot-template">
+              <select onchange="selectSchool(this.value)">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option value={{=i}}>{{=it[i].schoolname}}</option>
+                  {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+              </script>
+          </div>
+
+          <div class="grade">入学年份</div>
+        <div id="grade_id" class="aui-list-item-input grade_show" >
+          <script id="grade_s" type="text/x-dot-template">
+            <select onchange="gradeSelected(this.value)">
+                {{for (var i = 0; i < it.length; i++) {}}
+                  <option value={{=it[i]}}>{{=it[i]}}级</option>
+                {{}}}
+            </select>
+            <div class="aui-list-item-right pos_right" >
+                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+            </div>
+            </script>
+        </div>
+
+        <div class="grade">年级</div>
+        <div class="aui-list-item-input grade_show" >
+            <select onchange="rGradeSelected(this.value)">
+                <option value='请选择'>请选择</option>
+                <option value='高一'>高一</option>
+                <option value='高二'>高二</option>
+                <option value="高三">高三</option>
+            </select>
+            <div class="aui-list-item-right pos_right" >
+                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+            </div>
+        </div>
+
+        <div class="grade">班级</div>
+
+          <div id="class_id" class="aui-list-item-input grade_show" >
+            <!-- <select>
+                <option>安阳县</option>
+
+            </select> -->
+            <script id="class_s" type="text/x-dot-template">
+              <select onchange="classSelected(this.value)">
+              {{for (var i = 0; i < it.length; i++) {}}
+                  <option value={{=it[i].classid}}>{{=it[i].classname}}</option>
+              {{}}}
+              </select>
+              <div class="aui-list-item-right pos_right" >
+                  <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+              </div>
+            </script>
+          </div>
+
+        <div class="grade">考试类型</div>
+
+        <div class="kaoshi">
+          <div id="wen" class="ke select" tapmode onclick="selectBranch(this, 0)">文科</div>
+          <div id="li" class="ke" tapmode onclick="selectBranch(this, 1)">理科</div>
+          <div id="neither" class="ke" tapmode onclick="selectBranch(this, 2)">不分科</div>
+        </div>
+        <div id='next_step' class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">完成</div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+<script type="text/javascript">
+    var banTypes = ["文科", "理科", "文理不分科"]
+    var class_count = doT.template(document.getElementById('class_s').innerHTML);
+    var sex_value = -1; // 未选择
+    var cur_pic;
+     var uploadData = {values:{}};
+    var provinceList = [];
+    var cityList = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+    var quList = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+    var schoolList = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+    var city_dot, qu_dot, school_dot;
+    var cur_province, cur_city, cur_qu, cur_school;
+    apiready = function() {
+
+        api.parseTapmode();
+         getProvinceData();
+         getYearData()
+        if(city_dot == null){
+          city_dot = doT.template(document.getElementById('city_s').innerHTML);
+        }
+        document.getElementById('city_div').innerHTML = city_dot(cityList);
+
+        if(qu_dot == null){
+          qu_dot = doT.template(document.getElementById('qu_s').innerHTML);
+        }
+        document.getElementById('qu_div').innerHTML = qu_dot(quList);
+
+        if(school_dot == null){
+          school_dot = doT.template(document.getElementById('school_s').innerHTML);
+        }
+        document.getElementById('school_div').innerHTML = school_dot(schoolList);
+
+    };
+
+    function selectSex(sex) {
+        var man = $api.byId('sex_man');
+        var wm = $api.byId('sex_wm');
+
+        if (sex == 0) {
+          // 女
+          sex_value = 0;
+          man.src = "../../image/man_unselect.png";
+          wm.src = "../../image/wm_select.png";
+        }else {
+          sex_value = 1;
+          man.src = "../../image/man_select.png";
+          wm.src = "../../image/wm_unselect.png";
+        }
+    }
+
+    function touClick() {
+      api.getPicture({
+        sourceType: 'album',
+        encodingType: 'png',
+        mediaValue: 'pic',
+        destinationType: 'url',
+        allowEdit: true,
+        quality: 100,
+        targetWidth: 130,
+        targetHeight: 130,
+        saveToPhotoAlbum: false
+      }, function(ret, err) {
+        if (ret) {
+            // alert(JSON.stringify(ret));
+            var tou_img = $api.byId('tou_img');
+            if(ret.data == "")
+              return;
+            tou_img.src = ret.data;
+            cur_pic = ret.data;
+        } else {
+            // alert(JSON.stringify(err));
+        }
+      });
+    }
+
+
+
+    function checkInfos(pic, sex, name) {
+      var sex_str = sex == 0 ? "女" : "男";
+      uploadData.values.studentname = name;
+      uploadData.values.sex = sex_str;
+      uploadData.values.touxiang = pic;
+      api.openWin({
+          name: 'register_sixth_win',
+          url: './register_sixth_win.html',
+          pageParam: {
+              data: uploadData
+          }
+      });
+    }
+
+    function clearCardPWD() {
+      $api.byId('name_in').blur();
+    }
+
+
+     function getProvinceData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/address.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                provinceList = ret.data.provinces;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                provinceList.unshift(first);
+                var province_dot = doT.template(document.getElementById('province_s').innerHTML);
+                document.getElementById('province_div').innerHTML = province_dot(provinceList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getCityList(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getshi.html',
+          method: 'post',
+          data: {
+              values: {
+                  shengid: provinceList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                cityList = ret.data.shi;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                cityList.unshift(first);
+                if(city_dot == null){
+                  city_dot = doT.template(document.getElementById('city_s').innerHTML);
+                }
+                document.getElementById('city_div').innerHTML = city_dot(cityList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getQu(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getxian.html',
+          method: 'post',
+          data: {
+              values: {
+                  shiid: cityList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                quList = ret.data.xian;
+                var first = {provincesname:"请选择",pid:"0",provincesid:"0"};
+                quList.unshift(first);
+                if(qu_dot == null){
+                  qu_dot = doT.template(document.getElementById('qu_s').innerHTML);
+                }
+                document.getElementById('qu_div').innerHTML = qu_dot(quList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function getSchool(index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getschool.html',
+          method: 'post',
+          data: {
+              values: {
+                  xianid: quList[index].provincesid
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                console.log(JSON.stringify(ret));
+                schoolList = ret.data.school;
+                var first = {schoolname:"请选择",pid:"0",schoolid:"0"};
+                schoolList.unshift(first);
+                if(school_dot == null){
+                  school_dot = doT.template(document.getElementById('school_s').innerHTML);
+                }
+                document.getElementById('school_div').innerHTML = school_dot(schoolList);
+              }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function selectProvince(value) {
+        cur_province = provinceList[value].provincesid;
+        cur_city = null;
+        cur_qu = null;
+        cur_school = null;
+        var first = [{provincesname:"请选择",pid:"0",provincesid:"0"}];
+        quList = first;
+        document.getElementById('qu_div').innerHTML = qu_dot(quList);
+        schoolList = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+        document.getElementById('school_div').innerHTML = school_dot(schoolList);
+        getCityList(value);
+    }
+
+    function selectCity(value) {
+      cur_city = cityList[value].provincesid;
+      cur_qu = null;
+      cur_school = null;
+      var first = [{schoolname:"请选择",pid:"0",schoolid:"0"}];
+      schoolList = first;
+      document.getElementById('school_div').innerHTML = school_dot(schoolList);
+      getQu(value);
+    }
+
+    function selectQu(value) {
+      cur_qu = quList[value].provincesid;
+      uploadData.values.xian = cur_qu
+      cur_school = null;
+      getSchool(value);
+    }
+
+    function selectSchool(index) {
+      cur_school = schoolList[index].schoolid;
+      uploadData.values.schoolid = cur_school
+      console.log(index);
+    }
+
+    function bindClick() {
+      uploadData.values.studentname=document.getElementById('name_in').value
+     
+      uploadData.values.password = localStorage.password1
+      uploadData.values.phoneNumber = localStorage.phoneNum
+      uploadData.values.loginname = localStorage.phoneNum
+
+      zhc.post("http://192.168.1.247/index.php/App/Student/register.html",
+      uploadData,function(data) {
+         console.log(JSON.stringify(data))
+        api.openWin({
+          name: 'index',
+          url: '../../index.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+      },null, true);
+
+      // console.log(JSON.stringify(uploadData))
+
+      // api.openWin({
+      //     name: 'index',
+      //     url: '../../index.html',
+      //     pageParam: {
+      //         name: 'test'
+      //     }
+      // });
+
+    }
+
+
+
+
+function getYearData() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Student/endpage.html',
+            method: 'post',
+            data: {
+                values: {
+                }
+            }
+        },function(ret, err){
+            api.hideProgress();
+            console.log(JSON.stringify(ret));
+            if (ret) {
+              if (ret.status == 100) {
+                  grade_arr = ret.data;
+                  uploadData.values.nianji = grade_arr[0];
+                  var grade = doT.template(document.getElementById('grade_s').innerHTML);
+                  document.getElementById('grade_id').innerHTML = grade(grade_arr);
+              }else{
+
+              }
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+      uploadData.values.type = banTypes[0];
+    }
+
+
+
+function getClassList() {
+      var parames = {values:{}};
+      parames.values.schoolid = uploadData.values.schoolid;
+      parames.values.nianji = rGrade;
+      zhc.post("http://www.yxke12.com/index.php/App/Student/banji.html",
+          parames,function(data) {
+            if (data.length == 0) {
+              api.toast({
+                  msg: '该学校班级信息未添加',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              return
+            }
+            document.getElementById('class_id').innerHTML = class_count(data);
+            uploadData.values.classid = data[0].classid;
+          },null, true);
+    }
+
+
+    function gradeSelected(value) {
+        uploadData.values.nianji = value;
+    }
+
+    function classSelected(value) {
+        uploadData.values.classid = value;
+    }
+    var rGrade = "请选择"
+    function rGradeSelected(value) {
+        if(value == "请选择"){
+          return;
+        }
+        rGrade = value;
+        getClassList();
+    }
+
+
+
+     function selectBranch(e, value) {
+      var ke = document.querySelectorAll(".ke");
+      for (var i = 0; i < ke.length; i++) {
+        if ($api.hasCls(ke[i], "select")) {
+            $api.removeCls(ke[i], "select");
+        }
+      }
+      $api.addCls(e, "select");
+      uploadData.values.type = banTypes[value];
+    }
+</script>
+
+</html>

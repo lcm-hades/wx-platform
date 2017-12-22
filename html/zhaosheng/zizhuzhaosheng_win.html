@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <script type="text/javascript" src="../../script/api.js"></script>
+
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+    <a class="aui-pull-left aui-btn" tapmode onclick= 'api.closeWin();'>
+        <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+    </a>
+    <div class="aui-title">自主招生</div>
+    <a class="aui-pull-right aui-btn" tapmode='hover' onclick='liucheng()' style="color:#6666ff">
+        进程
+    </a>
+</header>
+<body>
+
+</body>
+
+<script type="text/javascript">
+
+function test(){
+
+
+}
+test()
+
+    apiready = function(){
+
+        api.parseTapmode();
+
+        $api.fixStatusBar($api.byId('aui-header'));
+        var body_h = $api.offset($api.dom('body')).h,
+
+            headerh = $api.offset($api.byId('aui-header')).h;
+            api.showProgress({
+                title: '努力加载中...',
+                text: '先喝杯茶...',
+                modal: false,
+            });
+
+            api.openFrame({
+                name: 'zizhuzhaosheng_frm',
+                url: 'zizhuzhaosheng_frm.html',
+                bounces: false,
+                rect: {
+                    x: 0,
+                    y: headerh,
+                    w: 'auto',
+                    h: body_h-headerh
+                },
+                vScrollBarEnabled: false,
+                hScrollBarEnabled: false
+            })
+
+            //
+            // $.ajax({
+            //           url : "http://www.yxke12.com/index.php/App/Zizhuzhaosheng/zixun.html",
+            //           type : "POST",
+            //          data : {},
+            //          dataType : "json",
+            //          success : function(data) {
+            //            api.hideProgress();
+            //
+            //            if (data.status == 100) {
+            //              var data1 = data.data;
+            //               //  console.log( JSON.stringify( data1 ) );
+            //              api.openFrame({
+            //                  name: 'zizhuzhaosheng_frm',
+            //                  url: 'zizhuzhaosheng_frm.html',
+            //                  bounces: false,
+            //                  rect: {
+            //                      x: 0,
+            //                      y: headerh,
+            //                      w: 'auto',
+            //                      h: body_h-headerh
+            //                  },
+            //                  pageParam: {
+            //                      data: data1
+            //                  },
+            //                  vScrollBarEnabled: false,
+            //                  hScrollBarEnabled: false
+            //              })
+            //            }
+            //          },
+            //          error:function(err){
+            //            console.log( JSON.stringify( err ) );
+            //          }
+            //        })
+
+
+//             api.ajax({
+//                 url:'http://www.yxke12.com/index.php/App/Zizhuzhaosheng/zixun.html',
+//                 method: 'POST',
+//                 data: {
+//                 }
+//             },function(ret, err){
+// console.log( JSON.stringify( ret ) );
+//                 if (ret) {
+//                   api.hideProgress();
+//                   if (ret.status == 100) {
+//                     var data = ret.data;
+//                     api.openFrame({
+//                         name: 'zizhuzhaosheng_frm',
+//                         url: 'zizhuzhaosheng_frm.html',
+//                         bounces: false,
+//                         rect: {
+//                             x: 0,
+//                             y: headerh,
+//                             w: 'auto',
+//                             h: body_h-headerh
+//                         },
+//                         pageParam: {
+//                             data: data
+//                         },
+//                         vScrollBarEnabled: false,
+//                         hScrollBarEnabled: false
+//                     })
+//                   }
+//
+//                     // console.log( JSON.stringify( ret ) );
+//                 } else {
+//                     // alert( JSON.stringify( err ) );
+//                 }
+//             });
+
+          };
+
+    function liucheng() {
+      api.parseTapmode();
+      api.openWin({
+          name: 'liucheng_win',
+          url: './liucheng_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+</script>
+</html>

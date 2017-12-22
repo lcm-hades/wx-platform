@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+    body{
+
+    }
+    .linear{
+        width:100%;
+        background:-webkit-gradient(linear, center top, center bottom,from(#66aaff), to(#6666ff));
+    }
+    .input_pos{
+      padding: 10px 0px;
+      background-color: #ddd;
+      width:90%;
+      border-radius: 30px;
+      margin: 10px auto;
+      margin-top: 7%;
+      box-shadow:0px 0px 10px #fff;
+      position: relative;
+    }
+    .aui-searchbar-input input {
+        color: #666666;
+        width:90%;
+        padding: 0;
+        margin: 0;
+        height: 20px;
+        line-height: 20px;
+        border: 0;
+        text-align: center;
+        -webkit-appearance: none;
+        font-size: 16px;
+    }
+
+    .my_input{
+      height: 30px;
+      display: flex;
+      align-items: center;
+      background: #ddd!important;
+    }
+
+    .left_img{
+      line-height: 50px;
+      margin-right: 4px;
+    }
+    .img_c{
+      height: 155px;
+      width: 80%;
+      margin: 0px auto;
+      margin-top: 7%;
+    }
+    .login_btn{
+      height: 50px;
+      line-height: 50px;
+      background-color: #6666ff!important;
+      /*opacity: 0.6;*/
+      color: #fff!important;
+      width: 100%;
+      margin: 0px auto;
+      border-radius: 0px;
+      position: absolute;
+      font-size: 18px;
+      bottom: 0px;
+    }
+    .black_line{
+      width: 100%;
+      height: 1px;
+      background-color: #eee;
+    }
+    .tip{
+      margin-top: 10px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      color: #999999;
+      font-size: 14px;
+      text-align: center;
+    }
+    .pos_right{
+      position:absolute;
+      right:20px;
+      top:0px;
+      line-height: 50px;
+    }
+    .mypwd{
+      font-size: 20px;
+      color: #6666ff;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical ">
+      <!-- <img class="img_c" src="../../image/card_pic.png"></img> -->
+        <div class="input_pos">
+            <div class="aui-searchbar-input my_input">
+                  <input type="search" placeholder="设置你的账号" id="account_in" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+            </div>
+        </div>
+
+        <div class="input_pos">
+            <div class="aui-searchbar-input my_input">
+                  <input type="password" placeholder="设置你的密码" id="password_in" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+            </div>
+            <div class="aui-list-item-right pos_right" tapmode onclick="changeYan();">
+                <i class="aui-iconfont aui-icon-right aui-icon-hide mypwd" id="pwd_yan" ></i>
+            </div>
+        </div>
+        <div class="tip">密码为8-16位数字、字母或者下划线，建议混合使用</div>
+        <!-- <div class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">开始绑定</div> -->
+        <div id='next_step' class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">开始绑定</div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var uploadData = {};
+    apiready = function() {
+        api.parseTapmode();
+        uploadData = api.pageParam.data;
+    };
+
+    function bindClick() {
+      var account = $api.byId('account_in').value;
+      var password = $api.byId('password_in').value;
+      if (account == '') {
+        api.toast({
+           msg: '请设置账号'
+       });
+        return;
+      }
+
+      if (password == '') {
+        api.toast({
+           msg: '请设置密码'
+       });
+        return;
+      }
+
+      // if (account.length < 8 || account.length > 16) {
+      //   api.toast({
+      //     msg: '请检查账号长度'
+      //   });
+      //   return;
+      // }
+
+      if (password.length < 8 || password.length > 16) {
+        api.toast({
+          msg: '请检查密码长度'
+        });
+        return;
+      }
+      checkCardNO(account, password);
+    }
+
+    function checkCardNO(account, password) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '验证中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/getStudentByLoginname.html',
+          method: 'post',
+          data: {
+              values: {
+                  loginname: account,
+                  password:password
+              }
+          }
+      },function(ret, err){
+        console.log(JSON.stringify(ret));
+        api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+              uploadData.loginname = account;
+              uploadData.password = password;
+              console.log("log: "+JSON.stringify(uploadData));
+              api.openWin({
+                  name: 'register_fourth_win',
+                  url: './register_fourth_win.html',
+                  pageParam: {
+                      data: uploadData
+                  }
+              });
+            }else{
+              clearCardPWD();
+              // console.log( JSON.stringify( ret.data.error ) );
+              api.toast({
+                  msg: ret.data,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+            clearCardPWD();
+            api.toast({
+                msg:  JSON.stringify( err ),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function clearCardPWD() {
+      // $api.byId('account_in').value = "";
+      // $api.byId('password_in').value = "";
+      $api.byId('account_in').blur();
+      $api.byId('password_in').blur();
+    }
+
+    function changeYan() {
+
+      var yan = $api.byId('pwd_yan');
+      var password_in = $api.byId('password_in');
+      if ($api.hasCls(yan, "aui-icon-display")) {
+            $api.removeCls(yan, 'aui-icon-display');
+            $api.addCls(yan, 'aui-icon-hide');
+            $api.attr(password_in,'type', 'password');
+      }else {
+        $api.removeCls(yan, 'aui-icon-hide');
+        $api.addCls(yan, 'aui-icon-display');
+        $api.attr(password_in,'type', 'search');
+      }
+    }
+</script>
+
+</html>

@@ -1,0 +1,376 @@
+<!doctype html>
+<html style="background:#13133f">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+    body{
+      font-family: "PingFang-SC";
+    }
+    .linear{
+        width:100%;
+        /*background:#13133f;*/
+        background: url(../../image/xzbj.png);
+        background-size: 100% 100%;
+    }
+
+    .img_stu{
+      width: 46%;
+      height: 46%;
+      float: right;margin-right: 15%;
+      margin-top: 10%;
+    }
+
+    .img_teach{
+      width: 49%;
+      height: 49%;
+      margin-top: -9%;
+      margin-left: 15%;
+    }
+
+    .img_master{
+      width: 46%;
+      height: 46%;
+      float: right;
+      margin-top: -20%;
+    }
+
+    .img_parent{
+      width: 46%;
+      height: 46%;
+      margin-left: 5%;
+      margin-top: -33%;
+    }
+    .stu_pos{
+
+    }
+    .teach_pos{
+
+    }
+    .master{
+
+    }
+    .parent{
+
+    }
+    .logo{
+      width: 13.05rem;
+      margin: 35% auto 3.5rem;
+      /*margin-top: 14.8%;*/
+
+    }
+    .xzsf{
+        font-family: 'PingFang-SC';
+        font-size: 0.9rem;
+        line-height: 1.47;
+        text-align: center;
+        color: #9898f2;
+
+    }
+    .fenlei{
+      width: 100%;
+      height: 4rem
+    }
+    img {
+    max-width: 100%;
+    display: block;
+}
+.gang{
+  position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 25px;
+    top: 0.25rem;
+}
+.gang1{
+
+    width: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.25rem
+}
+.ys{
+  position: absolute;
+margin: auto;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+text-align: center;
+line-height: 3.9rem;
+}
+.mid_wenzi{
+  font-family: 'PingFang-SC';
+  font-size: 1rem;
+  text-align: left;
+  color: #ffffff;
+}
+.xfxxT{
+  width: 6rem;
+  height: 5.7rem;
+  position: relative;
+    left: 50%;
+    margin-left: -3.4rem;
+}
+.xfxxCtL{
+  width: 6rem;
+  height: 5.7rem;
+  /*position: relative;*/
+    /*left: 50%;*/
+    margin-right: 0.5rem;
+}
+.xfxxCtR{
+  width: 6rem;
+  height: 5.7rem;
+  /*position: relative;*/
+    /*left: 50%;*/
+    margin-left: -0.3rem;
+}
+.xxfzC{
+  width: 50%;
+  float: left;
+}
+    </style>
+</head>
+
+<body class="linear">
+    <div class="flex-wrap flex-vertical " style="height:100%">
+        <img src="../../image/logo1.png" alt="" class="logo">
+
+        <div class="">
+          <img src="../../image/xspd.png" alt="" class="xfxxT" tapmode="hover" onclick="itemClick(1)">
+        </div>
+        <div style="margin-top:-2.3rem">
+          <div class="xxfzC" style="text-align:-webkit-right"><img src="../../image/jspd.png" alt=""  class="xfxxCtL" tapmode="hover" onclick="itemClick(2)"></div>
+          <div class="xxfzC"><img src="../../image/jzpd.png" alt=""  class="xfxxCtR" tapmode="hover" onclick="itemClick(4)"></div>
+        </div>
+        <div class="" style="margin-top:-2.3rem">
+          <img src="../../image/xzpd.png" alt="" class="xfxxT" tapmode="hover" onclick="itemClick(3)">
+        </div>
+        <!-- <div style="margin-bottom: 2.25rem;">
+          <div class="xzsf" >
+            选择身份
+          </div>
+          <div class="xzsf">
+            开启你的智慧之旅
+          </div>
+        </div> -->
+
+        <!-- <div class="xs">
+          <div style="position: relative" tapmode="hover" onclick="itemClick(1)">
+            <img src="../../image/gang.png" alt="" class="gang">
+            <img src="../../image/xs.png" alt="" class="fenlei">
+            <div class="ys">
+              <img src="../../image/xst.png" alt="" class="gang1">
+              <span style="vertical-align: middle;" class="mid_wenzi">学 生</span>
+            </div>
+
+          </div>
+          <div style="position: relative" tapmode="hover" onclick="itemClick(4)">
+            <img src="../../image/gang.png" alt="" class="gang">
+            <img src="../../image/jz.png" alt="" class="fenlei">
+            <div class="ys">
+              <img src="../../image/jzt.png" alt="" class="gang1">
+              <span style="vertical-align: middle;" class="mid_wenzi">家 长</span>
+            </div>
+          </div>
+          <div style="position: relative" tapmode="hover" onclick="itemClick(2)">
+            <img src="../../image/gang.png" alt="" class="gang">
+            <img src="../../image/js.png" alt="" class="fenlei">
+            <div class="ys">
+              <img src="../../image/jst.png" alt="" class="gang1">
+              <span style="vertical-align: middle;" class="mid_wenzi">教 师</span>
+            </div>
+          </div>
+          <div style="position: relative" tapmode="hover" onclick="itemClick(3)">
+            <img src="../../image/gang.png" alt="" class="gang">
+            <img src="../../image/xz.png" alt="" class="fenlei">
+            <div class="ys">
+              <img src="../../image/xzt.png" alt="" class="gang1">
+              <span style="vertical-align: middle;" class="mid_wenzi">校 长</span>
+            </div>
+          </div>
+
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        api.parseTapmode();
+        // 1 学生 2老师 3校长 4家长
+        var zhc_source = $api.getStorage('zhc_source');
+        if (zhc_source == 1) {
+          var username = $api.getStorage('loginname');
+          var password = $api.getStorage('password');
+          if (username != null && password != null) {
+              var params = {};
+              params.username = username;
+              params.password = password;
+              login(params, 'http://www.yxke12.com/index.php/App/Student/login.html', zhc_source);
+          }
+        }if (zhc_source == 2) {
+          var username = $api.getStorage('username');
+          var password = $api.getStorage('password');
+          var params = {};
+          params.loginuser = username;
+          params.password = password;
+
+          if (username != null && password != null) {
+              login(params, "http://www.yxke12.com/index.php/Ate/Teacher/login.html", zhc_source);
+          }
+
+        }else if (zhc_source == 4) {
+          var loginuser = $api.getStorage('loginuser');
+          var password = $api.getStorage('password');
+          if (loginuser != null && password != null) {
+              var params = {};
+              params.loginuser = loginuser;
+              params.password = password;
+              login(params, 'http://www.yxke12.com/index.php/Apa/Parent/login.html', zhc_source);
+          }
+        }else {
+
+        }
+
+
+    };
+
+    function itemClick(index) {
+        $api.setStorage('zhc_source', index);
+        switch (index) {
+          case 1:
+              api.openWin({
+                  name: 'login_win',
+                  url: './login_win.html',
+                  pageParam: {
+                      name: 'test'
+                  },
+                  slidBackEnabled:false
+              });
+            break;
+          case 2:
+            api.openWin({
+                name: 'login_win',
+                url: '../jiaoshi/register/login_win.html',
+                pageParam: {
+                    name: 'test'
+                },
+                slidBackEnabled:false
+            });
+              break;
+          case 4:
+            api.openWin({
+                name: 'login_win',
+                url: '../jiazhang/register/login_win.html',
+                pageParam: {
+                    name: 'test'
+                },
+                slidBackEnabled:false
+            });
+          break;
+
+          default:
+
+        }
+    }
+
+    function login(params, url, index) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '正在登录...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: url,
+          method: 'post',
+          data: {
+              values: params
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+              if (ret.status == 100) {
+                var infos = ret.data;
+                if (infos != null) {
+                  for (var key in infos) {
+                    if (infos.hasOwnProperty(key)) {
+                      console.log(key + "-------" + infos[key]);
+                        $api.setStorage(key, infos[key]);
+                    }
+                  }
+                  $api.setStorage('password', params.password);
+                  comeToSY(index);
+                }
+              }else {
+                $api.clearStorage();
+                api.toast({
+                    msg: '登录失败',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+              }
+          } else {
+              $api.clearStorage();
+              api.toast({
+                  msg: 'err.msg',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+              // console.log( JSON.stringify( err.msg ) );
+          }
+      });
+    }
+
+    function comeToSY(index){
+      $api.setStorage('zhc_source', index);
+      if (typeof(index) == 'string') {
+          index = parseInt(index);
+      }
+      switch (index) {
+        case 1:
+          api.openWin({
+              name: 'index',
+              url: '../../index.html',
+              pageParam: {
+                  name: 'test'
+              },
+              slidBackEnabled:false
+          });
+          break;
+        case 2:
+          api.openWin({
+              name: 'frame1_win',
+              url: '../jiaoshi/shouye/frame1_win.html',
+              pageParam: {
+                  name: 'test'
+              },
+              slidBackEnabled:false
+          });
+          break;
+        case 4:
+          api.openWin({
+              name: 'frame1_win',
+              url: '../jiazhang/shouye/frame1_win.html',
+              pageParam: {
+                  name: 'test'
+              },
+              slidBackEnabled:false
+          });
+          break;
+        default:
+      }
+    }
+</script>
+
+</html>

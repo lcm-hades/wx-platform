@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/z.css" />
+    <script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+    <script src="../../../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../../../script/doT.js"></script>
+    <script src="../../../../script/demo.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- <div id="main" class="flex-con">
+
+    </div> -->
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      var UIListCard = api.require('UIListCard');
+              UIListCard.open({
+                  rect : {
+                      x : 0,
+                      y : 0,
+                      w : api.frameWidth,
+                      h : api.frameHeight
+                  },
+                  styles:{
+                      sectionTitle:{},
+                      item:{}
+                  },
+                  contacts : [{
+                      "name" : "博士点",
+                  }, {
+                      "name" : "博士后流动站",
+                  },{
+                      "name" : "本科一批",
+                  },{
+                      "name" : "本科二批",
+                  },{
+                      "name" : "本科三批",
+                  },{
+                      "name" : "本科线",
+                  },{
+                      "name" : "本省政策性加分",
+                  },{
+                      "name" : "本科学科门类",
+                  },{
+                      "name" : "备案专业和审批专业",
+                  },{
+                      "name" : "珠峰计划",
+                  }],
+                  fixedOn : api.frameName
+              }, function(ret) {
+                  if (ret) {
+                      jieshi()
+                  }
+              });
+    };
+
+    function jieshi() {
+      api.openWin({
+          name: 'mingcixiangqing_win',
+          url: './mingcixiangqing_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+    .zizhuzhaosheng {
+      font-family: 'PingFang-SC';
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+    .biaoqian {
+      border-radius: 2px;
+      background-color: #eeeeee;
+      display: inline-block!important;
+      text-align: center!important;
+      color: #666666;
+      }
+
+      .biaoqian-color{
+        background-color: #ffbc10;
+        color: white;
+      }
+
+      .biaoti {
+        font-family: 'PingFang-SC';
+        font-size: 16px;
+        color: #333333;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+      }
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+
+      .left_line {
+          background-color: #6666ff;
+          height: 18px;
+          width: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: 10px;
+      }
+
+      .section_title {
+          color: #333333;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          margin-left: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+
+      .mid_text{
+        font-size: 16px;
+        font-family: "PingFang-SC";
+        color: #333333;
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .mid_img{
+        width: 94%;
+        height: 130px;
+      }
+      .mid_padding_8{
+        padding-top: 9px!important;
+        padding-bottom: 9px!important;
+        line-height: 1.0;
+      }
+      .p-l-6{
+        padding-left: 8px!important;
+      }
+      .p-r-6{
+        padding-right: 8px!important;
+      }
+      .shadow{
+        box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.6);
+      }
+      .radius{
+        border-radius: 4px;
+      }
+      .section_gengduo{
+        font-family: 'PingFang-SC';
+        font-size: 14px;
+        color: #666666;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 10px;
+      }
+      /*li样式*/
+            .aui-list .aui-list-item-media {
+                 width: 3.6rem;
+                position: relative;
+                padding: 0.5rem 0;
+                padding-right: 0.75rem;
+                display: inherit;
+                -webkit-flex-shrink: 0;
+                flex-shrink: 0;
+                -webkit-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+                -webkit-box-align: center;
+                -webkit-align-items: flex-start;
+                align-items: flex-start;
+            }
+            .h-92{
+              height: 92px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab" id="tab" style="z-index:99;position: fixed;width: 100%;">
+          <div class="aui-tab-item aui-active">教师培训</div>
+          <div class="aui-tab-item">经验分享</div>
+      </div>
+      <section id="xuankezhidao" style="margin-top:54px;">
+
+        <div style="height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;position:relative">
+            <div class="left_line"></div>
+            <span class="section_title">职业生涯教育</span>
+            <span class="section_gengduo" tapmode onclick="onUKeMore('职业生涯教育');">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+        </div>
+
+        <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;margin-top:1px;" id="ceshi_id">
+          <script id="tuijianzc" type="text/x-dot-template">
+              {{for (var i = 0; i< it.length; i++) {}}
+              <div class="aui-col-xs-6 mid_padding_8" tapmode onclick="onXKCPClick({{=it[i].id}},'http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}');">
+                  <img class="mid_img radius shadow" src="http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}" alt="">
+                  <div><span class="mid_text">{{=it[i].name}}</span></div>
+              </div>
+              {{}}}
+          </script>
+        </section>
+
+        <div style="height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;margin-top:10px;">
+            <div class="left_line"></div>
+            <span class="section_title">职业道德规范</span>
+            <span class="section_gengduo" tapmode onclick="onUKeMore('职业道德规范');">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+        </div>
+        <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;margin-top:1px;" id="ceshi_id1">
+          <script id="tuijianzc1" type="text/x-dot-template">
+              {{for (var i = 0; i< it.length; i++) {}}
+              <div class="aui-col-xs-6 mid_padding_8" tapmode onclick="onXKCPClick({{=it[i].id}},'http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}');">
+                  <img class="mid_img radius shadow" src="http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}" alt="">
+                  <div><span class="mid_text">{{=it[i].name}}</span></div>
+              </div>
+              {{}}}
+          </script>
+        </section>
+        <div style="height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;margin-top:10px;">
+            <div class="left_line"></div>
+            <span class="section_title">圣贤教育智慧</span>
+            <span class="section_gengduo" tapmode onclick="onUKeMore('圣贤教育智慧');">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+        </div>
+        <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;margin-top:1px;" id="ceshi_id2">
+          <script id="tuijianzc2" type="text/x-dot-template">
+              {{for (var i = 0; i< it.length; i++) {}}
+              <div class="aui-col-xs-6 mid_padding_8" tapmode onclick="onXKCPClick({{=it[i].id}},'http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}');">
+                  <img class="mid_img radius shadow" src="http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}" alt="">
+                  <div><span class="mid_text">{{=it[i].name}}</span></div>
+              </div>
+              {{}}}
+          </script>
+        </section>
+        <div style="height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;margin-top:10px;">
+            <div class="left_line"></div>
+            <span class="section_title">信息技术应用</span>
+            <span class="section_gengduo" tapmode onclick="onUKeMore('信息技术应用');">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+        </div>
+        <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;margin-top:1px;" id="ceshi_id3">
+          <script id="tuijianzc3" type="text/x-dot-template">
+              {{for (var i = 0; i< it.length; i++) {}}
+              <div class="aui-col-xs-6 mid_padding_8" tapmode onclick="onXKCPClick({{=it[i].id}},'http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}');">
+                  <img class="mid_img radius shadow" src="http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}" alt="">
+                  <div><span class="mid_text">{{=it[i].name}}</span></div>
+              </div>
+              {{}}}
+          </script>
+        </section>
+    </section>
+
+    <section id="beikaozhidao" style="display:none;margin-top:54px;">
+        <ul class="aui-list aui-media-list" id="zixun_ul">
+          <script id="banzhuren_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <li class="aui-list-item h-92" tapmode onclick="onBItemClick({{=it[i].id}});">
+                    <div class="aui-media-list-item-inner" style="">
+                        <div class="aui-list-item-inner" style="padding-bottom:0px;padding-right:0px;">
+                            <div class="aui-list-item-text" style="height:36px;">
+                                <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                            </div>
+                            <div class="aui-info" style="padding-top:20px;padding-bottom:0px;">
+                                <div class="aui-info-item biaoqian biaoqian-color">
+                                  <span class="zizhuzhaosheng">经验分享</span>
+                                </div>
+                                <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                            </div>
+                        </div>
+                        {{if (it[i].pict != null) {}}
+                          <div class="aui-list-item-media" style="padding-left:10px;">
+                              <img style="width:72px;height:72px;"src="http://www.yxke12.com/Public/Teacher/images/xueshengchengzhangzhidao/{{=it[i].pict}}">
+                          </div>
+                        {{}}}
+
+                    </div>
+                </li>
+              {{}}}
+            </script>
+        </ul>
+  </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript">
+var zizhuzhaosheng1 = doT.template(document.getElementById('tuijianzc').innerHTML);
+var zizhuzhaosheng2 = doT.template(document.getElementById('tuijianzc1').innerHTML);
+var zizhuzhaosheng3 = doT.template(document.getElementById('tuijianzc2').innerHTML);
+var zizhuzhaosheng4 = doT.template(document.getElementById('tuijianzc3').innerHTML);
+var banzhuren_s1 = doT.template(document.getElementById('banzhuren_s').innerHTML);
+  var parames = {values:{}}
+    apiready = function() {
+      api.parseTapmode();
+
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jiaoshitrain.html',parames,function(data){
+        document.getElementById('ceshi_id').innerHTML = zizhuzhaosheng1(data.shengyajiaoyu);
+        document.getElementById('ceshi_id1').innerHTML = zizhuzhaosheng2(data.daodeguifan);
+        document.getElementById('ceshi_id2').innerHTML = zizhuzhaosheng3(data.jiaoyuzhihui);
+        document.getElementById('ceshi_id3').innerHTML = zizhuzhaosheng4(data.jishuyingyong);
+      },null,true)
+    };
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+        index:1
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('xuankezhidao').style.display = "block";
+          document.getElementById('beikaozhidao').style.display = "none";
+        }else if (ret.index == 2) {
+          document.getElementById('xuankezhidao').style.display = "none";
+          document.getElementById('beikaozhidao').style.display = "block";
+          zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jinyanfenxiang.html',parames,function(data){
+            document.getElementById('zixun_ul').innerHTML = banzhuren_s1(data);
+          },null,true)
+        }
+    });
+
+    function onItemClick() {
+        api.openWin({
+            name: 'jyjl_details_win',
+            url: './jyjl_details_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+
+    function onUKeMore(type) {
+      // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+      //   api.toast({
+      //       msg: "该功能付费用户才能使用",
+      //       duration: 2000,
+      //       location: 'bottom'
+      //   });
+      //   return;
+      // }
+      var parames = {values:{}}
+      parames.values.type = type
+      if (type == '职业生涯教育') {
+
+        zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/peixunleixing.html',parames,function(data) {
+          localStorage.data = JSON.stringify(data)
+          api.openWin({
+              name: 'jyjlxr_list_win',
+              url: './jyjlxr_list_win.html',
+              pageParam: {
+                  // data: data
+              }
+          });
+        },null,true)
+      }
+      if (type == '职业道德规范') {
+        zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/peixunleixing.html',parames,function(data) {
+          localStorage.data = JSON.stringify(data)
+          api.openWin({
+              name: 'jyjlxr_list_win',
+              url: './jyjlxr_list_win.html',
+              pageParam: {
+                  // data: data
+              }
+          });
+        },null,true)
+      }
+      if (type == '圣贤教育智慧') {
+        zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/peixunleixing.html',parames,function(data) {
+          localStorage.data = JSON.stringify(data)
+          api.openWin({
+              name: 'jyjlxr_list_win',
+              url: './jyjlxr_list_win.html',
+              pageParam: {
+                  // data: data
+              }
+          });
+        },null,true)
+      }
+      if (type == '信息技术应用') {
+        zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/peixunleixing.html',parames,function(data) {
+          localStorage.data = JSON.stringify(data)
+          api.openWin({
+              name: 'jyjlxr_list_win',
+              url: './jyjlxr_list_win.html',
+              pageParam: {
+                  // data: data
+              }
+          });
+        },null,true)
+      }
+    }
+
+    function onBItemClick(id) {
+      var parames = {values:{}}
+      parames.values.aid = id;
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/jinyanfenxiangcon.html',
+          parames,function(data) {
+            localStorage.data = JSON.stringify(data)
+            api.openWin({
+                name: 'jyjl_details_win',
+                url: './jyjl_details_win.html',
+                pageParam: {
+                    // data: data
+                }
+            });
+          },null, true);
+    }
+
+    function onXKCPClick(id,pic) {
+      // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+      //   api.toast({
+      //       msg: "该功能付费用户才能使用",
+      //       duration: 2000,
+      //       location: 'bottom'
+      //   });
+      //   return;
+      // }
+      var parames = {values:{}}
+      parames.values.flvid = id
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/peixunleixingcon.html',parames,function(data) {
+        localStorage.data = JSON.stringify(data)
+        api.openWin({
+          name: 'sp_list_win',
+          url: 'sp_list_win.html',
+            pageParam: {
+                // data: data,
+                pic:pic
+            }
+        });
+      },null,true)
+
+    }
+</script>
+
+</html>

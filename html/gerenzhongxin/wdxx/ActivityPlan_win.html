@@ -1,0 +1,475 @@
+<!doctype html>
+<html style="background:#f5f5f5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <link rel="stylesheet" href="../../../script/jedate/skin/jedate.css" media="screen" title="no title">
+    <script type="text/javascript" src="../../../script/jedate/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src='../../../script/jedate/jquery.jedate.js'></script>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        .ic-message{
+                background-image: url(../../image/career.png);
+                float: right;}
+
+
+                #footer{  background-color: #f2f2f2; }
+                #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 10px; background-size: auto 22px; text-align: center;font-size: 10px;font-family: "PingFang-SC";color: #a1a1a1;}
+                #footer ul li.active{ color: #6666ff; }
+                #footer ul li:nth-child(1){ background-image: url(../../../image/jiazhanggaokao.png); }
+                #footer ul li:nth-child(2){ background-image: url(../../../image/jiayoukaosheng.png); }
+                #footer ul li:nth-child(3){ background-image: url(../../../image/jiazhangxuexiao.png); }
+                #footer ul li:nth-child(4){ background-image: url(../../../image/jiaoliuhudong.png); }
+                #footer ul li:nth-child(1).active{ background-image: url(../../../image/jiazhanggaokao_1.png); }
+                #footer ul li:nth-child(2).active{ background-image: url(../../../image/jiayoukaosheng_1.png); }
+                #footer ul li:nth-child(3).active{ background-image: url(../../../image/jiazhangxuexiao_1.png); }
+                #footer ul li:nth-child(4).active{ background-image: url(../../../image/jiaoliuhudong_1.png); }
+
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../../../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+
+        .bottom_fix{
+            position: fixed;
+            width: 100%;
+                background: #000;
+            bottom:0;
+        }
+        .btn{
+          width: 32%;
+          border: solid 1px #a1a1a1;
+          background-color: #fff;
+          border-radius: 4px;
+           font-family: 'PingFang-SC';
+           color: #a1a1a1;
+        }
+        .btn1{
+
+          border: solid 1px #6666ff;
+           color: #6666ff;
+        }
+        .queding {
+          width: 9.4rem;
+          height: 1.95rem;
+          border-radius: 18px;
+          background-color: #6666ff;
+          position: absolute;
+          margin: auto;
+          left: 0;
+          right: 0;
+          font-family: 'PingFang-SC';
+          color: #f5f5f5;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+        .shizi{
+          width:22%;
+          height: 20%;
+
+          /*margin-right: 0.2rem;*/
+          display: inline-block;
+
+        }
+
+        .shizitu{
+          width: 22%;
+          height: 3.6rem;
+          /*margin-left: 0.2rem;*/
+          margin-right: 0.3rem;
+          display: inline-block;
+
+        }
+
+        .aui-iconfont {
+              position: relative;
+              font-family: "aui_iconfont" !important;
+              font-size: 2rem;
+              font-style: normal;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+          }
+          .shizizhong{
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            line-height: 2.9rem;
+          }
+          img {
+              width: 100%;
+              height: 3.6rem;
+          }
+          .biaotineirong{
+            height: 3.55rem!important;
+            position: absolute!important;
+            margin: auto!important;
+            top:0;
+            bottom:0;
+            width: 95%!important;
+            left: 0!important;
+            right: 0!important;
+          }
+          input::-webkit-input-placeholder{
+              color: #999;
+          }
+          .sava{
+            color: #fff;
+            background: #6666ff;
+            border-radius: 4px;
+            font-size: 0.45rem;
+            padding: 0rem 0.8rem;
+          }
+          .planImg{
+            width: 0.6rem;
+            height: 0.6rem;
+            margin-right: 0.5rem
+          }
+
+          .aui-list .aui-list-item-label, .aui-list .aui-list-item-label-icon {
+              color: #212121;
+              width: 45%;
+              min-width: 1.5rem;
+              margin: 0;
+              padding: 0;
+              padding-right: 0.25rem;
+              line-height: 2.2rem;
+              position: relative;
+              overflow: hidden;
+              white-space: nowrap;
+              max-width: 100%;
+              -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+              display: -webkit-box;
+              display: -webkit-flex;
+              display: flex;
+              -webkit-align-items: center;
+              align-items: center;
+          }
+          .workinput{
+            text-align: right;
+            margin-right: 0.5rem!important;
+          }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+  <a class="aui-pull-left aui-btn" tapmode onclick= 'api.closeWin();'>
+      <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+  </a>
+  <div id="title" class="aui-title">新建计划</div>
+
+  <a class="aui-pull-right aui-btn aui-btn-outlined" tapmode="hover" onclick="planEnd()">
+
+        <span class="sava">完成</span>
+
+    </a>
+</header>
+<body style="background:#f5f5f5;height:auto">
+<div  style="margin-top:3.5rem;">
+      <div style="background:#fff">
+        <div style="height:2rem;line-height:3.55rem;position: relative;">
+          <input type="text" name="" value="" placeholder="计划目标（25个字以内）" id="planTitle" class="biaotineirong">
+        </div>
+        <div style="height:1px;background:#000;width: 95%;margin: auto;opacity: 0.1;"></div>
+        <div style="margin-top:0.5rem">
+            <textarea id="planContent" name="name" rows="80" cols="80" style="height:10rem;width: 95%;margin:auto"  placeholder="写下你的计划详情" ></textarea>
+        </div>
+      </div>
+
+
+      <div style="margin: auto;margin-top:0.5rem;">
+           <ul class="aui-list aui-form-list">
+               <li class="aui-list-item">
+                   <div class="aui-list-item-inner">
+                       <div class="aui-list-item-label">
+                           <img src="../../../image/plan.png" class="planImg" alt="">计划状态
+                       </div>
+                       <div class="aui-list-item-input" style="direction: rtl;">
+                           <select id="planState">
+                               <option value="1">学期计划</option>
+                               <option value="2">学年计划</option>
+                               <option value="3">其他计划</option>
+                           </select>
+                       </div>
+                   </div>
+               </li>
+               <li class="aui-list-item">
+                   <div class="aui-list-item-inner">
+                       <div class="aui-list-item-label">
+                           <img src="../../../image/planType.png" class="planImg" alt="">计划类型
+                       </div>
+                       <div class="aui-list-item-input" style="direction: rtl;">
+                           <select id="planType">
+                               <option>未开始</option>
+                               <option>进行中</option>
+                               <option>已完成</option>
+                               <option>未完成</option>
+                           </select>
+                       </div>
+                   </div>
+               </li>
+           </ul>
+           <ul class="aui-list aui-form-list" style="margin-top:0.5rem">
+               <li class="aui-list-item" tapmode >
+                   <div class="aui-list-item-inner">
+                       <div class="aui-list-item-label">
+                           <img src="../../../image/time.png" class="planImg" alt="">开始时间
+                       </div>
+                       <input  type="text" class="workinput" id="inpstart" readonly>
+                   </div>
+               </li>
+               <li class="aui-list-item" tapmode >
+                   <div class="aui-list-item-inner">
+                       <div class="aui-list-item-label">
+                           <img src="../../../image/time.png" class="planImg" alt="">结束时间
+                       </div>
+                       <input type="text" class="workinput" id="inpend" readonly>
+                   </div>
+               </li>
+           </ul>
+
+      </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript">
+
+
+var UIMediaScanner;
+var path1=[];
+var one,two;
+
+    apiready = function(){
+        api.parseTapmode();
+        Date.prototype.Format = function (fmt) { //author: meizz
+          var o = {
+              "M+": this.getMonth() + 1, //月份
+              "d+": this.getDate(), //日
+              "h+": this.getHours(), //小时
+              "m+": this.getMinutes(), //分
+              "s+": this.getSeconds(), //秒
+              "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+              "S": this.getMilliseconds() //毫秒
+          };
+          if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+          for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          return fmt;
+      }
+        var time1 = new Date().Format("yyyy-MM-dd");
+        $api.fixStatusBar($api.byId('aui-header'));
+        // $api.byId('startDate').innerHTML = time1;
+        // $api.byId('endDate').innerHTML = time1;
+        $api.byId('title').innerHTML = api.pageParam.title;
+        planParticulars()
+    };
+
+    //开盘时间和结束时间
+    var start = {
+        format: 'YYYY-MM-DD ',
+        minDate: '1222-01-01', //设定最小日期为当前日期
+        isinitVal: true,
+        festival: true,
+        ishmsVal: false,
+        maxDate: '2099-06-30 ', //最大日期
+        choosefun: function(elem, datas) {
+            end.minDate = datas; //开始日选好后，重置结束日的最小日期
+        }
+    };
+    var end = {
+        format: 'YYYY-MM-DD ',
+        minDate: $.nowDate(0), //设定最小日期为当前日期
+        isinitVal: true,
+        festival: true,
+        maxDate: '2099-06-16', //最大日期
+        choosefun: function(elem, datas) {
+            start.maxDate = datas; //将结束日的初始值设定为开始日的最大日期
+        }
+    };
+    $('#inpstart').jeDate(start);
+    $('#inpend').jeDate(end);
+
+    function planParticulars() {
+
+        var parames = {
+            values: {}
+        }
+        parames.values.id = api.pageParam.id;
+        zhc.post('http://www.yxke12.com/index.php/App/Member/plandetail.html', parames, function(data) {
+          console.log(JSON.stringify(data));
+        if (data == null || data == undefined || data == "") {
+          $api.byId('planTitle').value = ""
+          $api.byId('planContent').value = ""
+
+
+        }else {
+
+          $api.byId('planTitle').value = data.name
+          $api.byId('planContent').value = data.content
+          $api.byId('inpstart').value = data.starttime
+          $api.byId('inpend').value = data.endtime
+          $api.byId('planType').value = data.status
+            $api.byId('planState').value = data.type
+          }
+
+        }, null, true)
+    }
+
+
+function startDate() {
+  api.openPicker({
+      type: 'date',
+      date: new Date(),
+      title: '选择时间'
+  }, function(ret, err) {
+      if (ret) {
+          $api.byId('startDate').innerHTML = ret.year+'-'+ret.month+'-'+ret.day;
+
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+function endDate() {
+  api.openPicker({
+      type: 'date',
+      date: new Date(),
+      title: '选择时间'
+  }, function(ret, err) {
+      if (ret) {
+          $api.byId('endDate').innerHTML = ret.year+'-'+ret.month+'-'+ret.day;
+
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+
+
+function planEnd() {
+  if ($api.byId('planTitle').value!='') {
+    var biaoti   =$api.byId('planTitle').value
+  }else {
+    alert("请输入标题！")
+    return
+  }
+  if ($api.byId('planContent').value !='') {
+    var neirong   =$api.byId('planContent').value
+
+  }else {
+    alert("请输入内容！")
+    return
+  }
+
+  var begin  =$api.byId('inpstart').value
+  var over   =$api.byId('inpend').value
+  var type   =$api.byId('planState').value
+  var zhuangtai   =$api.byId('planType').value
+if ($api.byId('title').innerHTML == "创建计划") {
+  var parames = {values:{}}
+  parames.values.biaoti=biaoti;
+  parames.values.neirong=neirong;
+  parames.values.begin=begin;
+  parames.values.over =over;
+  parames.values.type =type;
+  parames.values.zhuangtai=zhuangtai;
+  parames.values.studentid=$api.getStorage('studentid');
+  zhc.post('http://www.yxke12.com/index.php/App/Member/createplan.html',parames,function(data) {
+      if (data == "yes") {
+        alert("发不成功！")
+        api.execScript({
+            name: 'wdxx_win',
+            frameName : 'wdxx_frm',
+            script : 'myPlan()'
+          });
+
+        api.openWin({
+            name: 'wdxx_win',
+            url: './wdxx_win.html',
+            pageParam: {
+                index: "1"
+            }
+        });
+
+      }
+  },null,true)
+}else {
+  var parames = {values:{}}
+  parames.values.biaoti=biaoti;
+  parames.values.id=api.pageParam.id;
+  parames.values.neirong=neirong;
+  parames.values.begin=begin;
+  parames.values.over =over;
+  parames.values.type =type;
+  parames.values.zhuangtai=zhuangtai;
+  parames.values.studentid=$api.getStorage('studentid');
+  zhc.post('http://www.yxke12.com/index.php/App/Member/createplan.html',parames,function(data) {
+      if (data == "yes") {
+        // api.execScript({
+        //     name: 'wdxx_win',
+        //     frameName : 'wdxx_frm',
+        //     script : 'myPlan()'
+        //   });
+        alert("发布成功！")
+        api.closeToWin({
+            name: 'wdxx_win'
+        });
+        // api.openWin({
+        //     name: 'my_win',
+        //     url: '../../shouye/my_win.html',
+        //     reload:"true",
+        //     pageParam: {
+        //         index: "1"
+        //     }
+        // });
+
+
+      }
+  },null,true)
+}
+
+}
+
+</script>
+</html>

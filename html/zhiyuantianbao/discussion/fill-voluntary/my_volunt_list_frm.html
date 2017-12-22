@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+    table{
+      margin: 0px auto;
+      width: 100%;
+    }
+
+    tr th{
+        background: #f5f5f5;
+        height: 40px;
+        width: 30%;
+        color: #8e8eb2;
+        font-size: 14px;
+        font-family: "PingFang-SC";
+        text-align: center;
+
+    }
+
+    tr td{
+        background: white;
+        height: 40px;
+        width: 30%;
+        color: #222222;
+        font-size: 14px;
+        font-family: "PingFang-SC";
+        text-align: center;
+    }
+    tr{
+      border-bottom:1px solid #dcdcdc;
+    }
+    tr .f{
+      width: 40%;
+
+    }
+    .c{
+      color: #6666ff;
+    }
+
+    ._row{
+
+      transition: 0.5s;
+      /*background-position-x: 50%;*/
+    }
+
+    ._arow{
+      display: inline;
+      width:40px!important;
+      height: 40px!important;
+      color: white;
+      background-color: #ff0000;
+    }
+
+    .width90{
+        -webkit-transform: translateX(-20%);
+    }
+  .reset{
+    -webkit-transform: translateX(0%);
+  }
+
+      ul li{
+        border-bottom: 1px solid #f5f5f5;
+      }
+
+    .first{
+      width: 40%;
+      background: white;
+      color: #222222;
+      font-size: 14px;
+      text-align: center;
+      display: inline-block;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .other{
+      width: 30%;
+      background: white;
+      color: #222222;
+      font-size: 14px;
+      text-align: center;
+      display: inline-block;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .li_p{
+      width:100%;
+      display:inline-flex;
+      transition: 0.5s;
+    }
+
+    ._del{
+      position:absolute;
+      right:0px;
+      height:56px;
+      width:20%;
+      background-color:red;
+      text-align:center;
+      line-height:56px;
+      color:white;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <table>
+        <!-- <script id="vol_s" type="text/x-dot-template"> -->
+          <tr>
+            <th class="f">名称</th>
+            <th>创建时间</th>
+            <th>填报批次</th>
+          </tr>
+          <!-- {{for (var i = 0; i < it.length; i++) {}} -->
+            <!-- <tr id="row_{{=i}}" class="_row">
+              <td class="f c">{{=it[i].create_date}}填写</td>
+              <td>{{=it[i].create_date}}</td>
+              <td>{{=it[i].name}}</td>
+              <td>真实填报</td>
+            </tr> -->
+          <!-- {{}}} -->
+        <!-- </script> -->
+      </table>
+
+      <ul id="vol_ul">
+         <script id="vol_s" type="text/x-dot-template">
+         {{for (var i = 0; i < it.length; i++) {}}
+            <li style="position:relative;" >
+              <div class="_del" tapmode onclick="onDelItem({{=i}})">
+                  删除
+              </div>
+              <div class="li_p reset" id="row_{{=i}}" tapmode onclick="onItemClick({{=i}})">
+                <div class="first">
+                  {{=it[i].date}}填写
+                </div>
+                <div class="other">
+                  {{=it[i].create_date}}
+                </div>
+                <div class="other">
+                  {{=it[i].name}}
+                </div>
+
+              </div>
+            </li>
+          {{}}}
+        </script>
+      </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+    var vol_dot;
+    var data = [];
+    apiready = function() {
+        vol_dot = doT.template(document.getElementById('vol_s').innerHTML);
+        getVoluntData();
+    };
+
+    function getVoluntData() {
+      var parames = {values:{}}
+      parames.values.studentid = $api.getStorage('studentid');
+      zhc.post("http://www.yxke12.com/index.php/App/Zhiyuantianbao/zhiyuanbiao.html",
+          parames,function(_data) {
+            // console.log(JSON.stringify(_data));
+            data=[];
+            for (var i = 0; i < _data.length; i++) {
+              _data[i].date = _data[i].create_date.split(" ")[0];
+              data.push(_data[i]);
+            }
+            document.getElementById('vol_ul').innerHTML = vol_dot(data);
+          },null, true);
+    }
+
+    function winEditeCall() {
+        for (var i = 0; i < data.length; i++) {
+            var e = $api.byId('row_' + i);
+            if ($api.hasCls(e, "width90")) {
+              $api.addCls(e, "reset");
+              $api.removeCls(e, 'width90');
+            }else {
+              $api.addCls(e, "width90");
+              $api.removeCls(e, 'reset');
+            }
+        }
+    }
+
+    function onDelItem(_index) {
+      api.confirm({
+          title: '提示',
+          msg: '确定删除该条填报记录？',
+          buttons: ['确定', '取消']
+      }, function(ret, err) {
+          var index = ret.buttonIndex;
+          if (index == 1) {
+            var parames = {values:{}}
+            parames.values.planid = data[_index].id;
+            zhc.post("http://www.yxke12.com/index.php/App/Zhiyuantianbao/delpici.html",
+                parames,function(_data) {
+                  if (_data == "yes") {
+                    data.splice(_index, 1);
+                    document.getElementById('vol_ul').innerHTML = vol_dot(data);
+                    api.execScript({
+                        name: 'my_volunt_list_win',
+                        script: 'restEdite();'
+                    });
+
+                    api.toast({
+                        msg: '删除成功',
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+                  }
+                },null, true);
+          }
+      });
+
+    }
+
+    function onItemClick(index) {
+      var d = data[index];
+      var parames = {values:{}}
+      parames.values.batchid = d.batchid;
+      parames.values.planid = d.id;
+      parames.values.type = $api.getStorage("type");
+      parames.values.provinceid = $api.getStorage("provinceid");
+      // console.log(JSON.stringify(parames));
+      zhc.post("http://www.yxke12.com/index.php/App/Zhiyuantianbao/showzhiyuan.html",
+          parames,function(_data) {
+            localStorage.m_my_data = $api.jsonToStr(_data);
+            api.openWin({
+                name: 'zytb_win',
+                url: '../mnzytb/zytb_win.html',
+                pageParam: {
+                    data: _data,
+                    rank: _data.rank,
+                    score: _data.score,
+                    source: 1,
+                    planid: d.id
+                }
+            });
+          },null, true);
+    }
+</script>
+
+</html>

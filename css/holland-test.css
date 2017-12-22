@@ -1,0 +1,279 @@
+/*霍兰德人特介绍*/
+.main .introduction {
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
+}
+
+.main .introduction .img {
+    float: left;
+}
+
+.main .introduction .right-jieshao {
+    font-size: 14px;
+    line-height: 25px;
+    width: 725px;
+    float: right;
+    color: #555555;
+}
+
+.main .introduction .right-jieshao span {
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.main .introduction .right-jieshao .john {
+    text-indent: 2em;
+}
+
+.main .introduction .right-jieshao .xuzhi {
+    padding: 20px 0 0 2em;
+}
+
+/*测试题目*/
+.topic {
+    /*height: 502px;*/
+    border: 1px solid #CCCCCC;
+    margin-top: 20px;
+}
+
+/*标题*/
+.topic .title {
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    background-color: #CCCCCC;
+    padding-left: 20px;
+}
+
+/*/!*说明*!/*/
+/*.topic .shuoming {*/
+    /*height: 50px;*/
+    /*line-height: 50px;*/
+    /*font-size: 14px;*/
+    /*padding-left: 20px;*/
+/*}*/
+
+.topic .shuoming span {
+    color: red;
+}
+
+.topic .shuoming p {
+    display: inline-block;
+    color: #555;
+    line-height: 28px;
+}
+
+
+
+/*第一部分*/
+.topic .shuoming {
+    margin-top: 16px;
+    line-height: 20px;
+    font-size: 14px;
+    padding: 0 20px;
+}
+.topic .shuoming p span {
+    color: #01a8a1;
+    line-height: 1;
+
+}
+.topic .shuoming p {
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #555;
+    font-size: 16px;
+}
+
+.topic .topic-list {
+
+    /*padding-left: 20px;*/
+    color: #555;
+
+}
+
+.topic .topic-list .three-input {
+    padding-left: 20px;
+}
+
+.topic .topic-list .three-input input{
+    padding-top: 20px;
+    outline-style: none;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding-left: 20px;
+}
+
+/*第二部分*/
+.topic .topic-list .test-two {
+    padding:0 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.topic .topic-list .test-two .test-two-title{
+    padding: 18px 0;
+}
+
+
+
+
+table
+{
+
+}
+
+table,tr {
+    width: 958px;
+
+}
+tr,td {
+    border:1px solid #ccc;
+    border-collapse:collapse;
+}
+td
+{
+
+    width: 318px;
+    padding:6px;
+
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+td p {
+    display: inline-block;
+    padding-right: 40px;
+    line-height: 18px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+td input{
+    position: absolute;
+    right: 3px;
+    top: -2px;
+    display: inline-block;
+    /*margin-left: 65px;*/
+    /*margin-right: 10px;*/
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    zoom:150%;
+
+}
+tr:nth-child(2n-1)>td{
+    background-color: #f7f7f7;
+}
+
+tr:nth-child(2n)>td{
+    background-color: #fff;
+}
+
+
+/*第三部分*/
+.topic .wrap > div {
+    width: 200px;
+    display: inline-block;
+    margin: 0 80px;
+    padding: 10px;
+}
+
+.topic .wrap > div span {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    color: #01A8A1;
+    font-weight: bolder;
+}
+
+.topic .wrap ul {
+
+    width: 200px;
+    float: left;
+
+}
+
+.topic .wrap ul li {
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    margin-top: 5px;
+    text-align: center;
+    border: 1px solid #01A8A1;
+    background-color: #01A8A1;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 14px;
+
+}
+
+
+/*进度条样式*/
+.topic .progress {
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.topic .progress span {
+    font-size: 16px;
+}
+
+.topic .progress .top-pro, .topic .progress .bot-pro {
+    width: 875px;
+    height: 4px;
+    background-color: #CCCCCC;
+    float: right;
+    margin: 10px 20px 0 0;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+
+}
+
+.topic .progress .top-pro {
+    position: relative;
+}
+
+.topic .progress .bot-pro {
+    width: 50px;
+    background-color: #168782;
+    float: left;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: auto;
+}
+
+/*下一步*/
+.topic .next {
+    width: 100%;
+    background-color: #CCC;
+    padding: 30px 0;
+}
+
+.topic .next input {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    font-size: 20px;
+    color: #FFFFFF;
+    background-color: #01a8a1;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-box-shadow: 0px 3px 2px skyblue;
+    -moz-box-shadow: 0px 3px 2px skyblue;
+    box-shadow: 0px 3px 2px skyblue;
+    margin: 0 auto;
+    display: block;
+}

@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+    body{
+    }
+    .linear{
+        width:100%;
+        background:-webkit-gradient(linear, center top, center bottom,from(#66aaff), to(#6666ff));
+    }
+    .input_pos{
+      padding: 10px 0px;
+      background-color:white;
+      width:90%;
+      border-radius: 10px;
+      margin: 10px auto;
+      margin-top: 15%;
+      box-shadow:0px 0px 10px #fff
+    }
+    .aui-searchbar-input input {
+        color: #666666;
+        width:90%;
+        padding: 0;
+        margin: 0;
+        height: 30px;
+        line-height: 30px;
+        border: 0;
+        -webkit-appearance: none;
+        font-size: 16px;
+    }
+
+    .black_line{
+      width: 100%;
+      height: 1px;
+      background-color: #eee;
+    }
+    .my_input{
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .left_img{
+      line-height: 50px;
+      margin-right: 8px;
+    }
+    .img_c{
+      height: 60px;
+      width: 90%;
+      margin: 0px auto;
+      margin-top: 15%;
+    }
+    .login_btn{
+      height: 50px;
+      line-height: 50px;
+      background-color: white!important;
+      opacity: 0.6;
+      color: #6666ff!important;
+      width: 90%;
+      margin: 0px auto;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    .z-zhaohuimima{
+      width: 85%;
+      margin: auto;
+      margin-top: 10px;
+    }
+    .z-zhaohuimima span{
+       font-size: 16px;
+       font-weight: 500;
+       color: #fff;
+      }
+
+      .z-r{
+        float: right;
+      }
+
+      .aui-icon-cert:before {
+          content: "\e704";
+          font-size: 18px;
+      }
+
+      .aui-icon-lock:before {
+          content: "\e6ef";
+          font-size: 18px;
+      }
+    </style>
+</head>
+
+<body class="linear">
+    <div class="flex-wrap flex-vertical ">
+      <!-- <img class="img_c" src="../../image/login_kouhao.png"></img> -->
+      <div class="input_pos">
+          <div class="aui-searchbar-input my_input">
+              <i class="aui-iconfont aui-icon-cert left_img"></i>
+                <input type="search" placeholder="输入卡号" id="card_no_in" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+          </div>
+          <div class="black_line"></div>
+          <div class="aui-searchbar-input my_input">
+              <i class="aui-iconfont aui-icon-lock left_img"></i>
+                <input type="password" placeholder="输入密码" id="password_in" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+          </div>
+        </div>
+        <div class="aui-btn aui-btn-info login_btn" tapmode onclick="loginClick()">开始激活</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+  var uploadData = {};
+    apiready = function() {
+        api.parseTapmode();
+
+    };
+
+    function loginClick() {
+      var card_no = $api.byId('card_no_in').value;
+      var password = $api.byId('password_in').value;
+
+      if (card_no == '') {
+        api.toast({
+           msg: '请输入卡号'
+       });
+        return;
+      }
+      if (password == '') {
+        api.toast({
+           msg: '请输入密码'
+       });
+        return;
+      }
+      checkCardNO(card_no, password);
+    }
+
+
+    // 验证学生卡卡号
+    function checkCardNO(card_no, password) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '验证中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/Ate/Teacher/stepcard.html',
+            method: 'post',
+            data: {
+                values: {
+                    cardnumber: card_no,
+                    password:password
+                },
+            }
+        },function(ret, err){
+          console.log( JSON.stringify( ret ) );
+          api.hideProgress();
+            if (ret) {
+              if (ret.status == 100) {
+                  // 验证成功
+                  api.openWin({
+                      name: 'forget_pwd_win',
+                      url: './forget_pwd_win.html',
+                      pageParam: {
+                          cardnumber: card_no,
+                          cid:ret.data,
+                          title:"绑定手机号",
+                          type:"5"
+
+                      }
+                  });
+              }else{
+                  clearCardPWD();
+                  // console.log( JSON.stringify( ret.data.error ) );
+                  api.toast({
+                      msg: ret.data,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+
+              }
+            } else {
+              clearCardPWD();
+              api.toast({
+                  msg:  JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    }
+
+    function clearCardPWD() {
+      $api.byId('card_no_in').value = "";
+      $api.byId('password_in').value = "";
+      $api.byId('card_no_in').blur();
+      $api.byId('password_in').blur();
+    }
+</script>
+
+</html>

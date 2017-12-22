@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+      .left-padding-15{
+        padding-left: 15px;
+      }
+
+      .aui-collapse-header.aui-active {
+          background: white;
+      }
+      .my-third-content{
+        border-top: 1px solid #dddddd;
+        padding: 0px!important;
+        padding-left: 15px!important;
+      }
+      .aui-tab-item.aui-active {
+          color: #6666ff;
+          border-bottom: 2px solid #6666ff;
+      }
+      .margin-l-10{
+        margin-left: 10px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <ul class="aui-list aui-collapse aui-border" id="zhiye_first_ul" >
+        <script id="zhiye_first_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <div class="aui-collapse-item" >
+                  <li class="aui-list-item aui-collapse-header aui-border-b" tapmode onclick="selectZhiYe({{=i}})">
+                      <div class="aui-list-item-inner" >
+                          <div class="aui-list-item-title margin-l-10">{{=it[i].main_category}}</div>
+                          <div class="aui-list-item-right">
+                              <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                          </div>
+                      </div>
+                  </li>
+              </div>
+            {{}}}
+
+        </script>
+      </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+    var zhiyeFirstList = [];
+    apiready = function() {
+        api.parseTapmode();
+        zhiyeFirst();
+    };
+
+    function zhiyeFirst() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Zhiyeku/lists.html',
+            method: 'post',
+            data: {
+                values: {
+
+                },
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+              console.log(JSON.stringify(ret));
+                zhiyeFirstList = ret.data.one;
+                // console.log(JSON.stringify(benkeFirstList));
+                document.getElementById('zhiye_first_ul').innerHTML =
+                doT.template(document.getElementById('zhiye_first_s').innerHTML)(zhiyeFirstList);
+                api.parseTapmode();
+            } else {
+              api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+        });
+    }
+
+    function selectZhiYe(index) {
+   
+        api.openWin({
+            name: 'zhiye_storage_second_win',
+            url: './zhiye_storage_second_win.html',
+            pageParam: {
+                category: zhiyeFirstList[index].main_category
+            }
+        });
+
+
+
+        // api.openWin({
+        //     name: 'zhiye_storage_details_win',
+        //     url: './zhiye_storage_details_win.html',
+        //     pageParam: {
+        //         name: 'test'
+        //     }
+        // });
+
+    }
+</script>
+
+</html>

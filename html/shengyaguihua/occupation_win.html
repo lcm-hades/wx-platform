@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        .ic-message{
+                background-image: url(../../image/career.png);
+                float: right;}
+
+
+        #footer{  background-color: #f2f2f2; }
+        #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 10px; background-size: auto 22px; text-align: center;font-size: 10px;font-family: "PingFang-SC";color: #a1a1a1;}
+        #footer ul li.active{ color: #6666ff; }
+        #footer ul li:nth-child(1){ background-image: url(../../image/home.png); }
+        #footer ul li:nth-child(2){ background-image: url(../../image/career.png); }
+        #footer ul li:nth-child(4){ background-image: url(../../image/quality.png); }
+        #footer ul li:nth-child(5){ background-image: url(../../image/me.png); }
+        #footer ul li:nth-child(1).active{ background-image: url(../../image/homeS.png); }
+        #footer ul li:nth-child(2).active{ background-image: url(../../image/careerS.png); }
+        #footer ul li:nth-child(4).active{ background-image: url(../../image/qualityS.png); }
+        #footer ul li:nth-child(5).active{ background-image: url(../../image/meS.png); }
+
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+      .z-btn{
+        background: #6666ff;
+        height: 33px;
+        margin: 16.5px auto;
+        line-height: 33px;
+        width: 80%;
+         border-radius: 16.5px;
+      }
+      .disable_btn{
+        background: #6a6a6a;
+      }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+  <a class="aui-pull-left aui-btn" tapmode onclick="backClick();">
+      <span class="aui-iconfont aui-icon-left"></span>
+  </a>
+  <div class="aui-title">职业兴趣测试</div>
+</header>
+
+<div id="wrap" class="flex-wrap flex-vertical">
+    <div id="main" class="flex-con">
+    </div>
+    <div id="footer" class="border-t">
+        <ul class="flex-wrap" >
+             <p><div id="rightnow_id" class="aui-btn aui-btn-primary aui-btn-block z-btn"  tapmode onclick="nextPage()">马上测试</div></p>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var data = {};
+    var body_h,footerh,headerh;
+    var source;
+    apiready = function(){
+        api.parseTapmode();
+        source = api.pageParam.source;
+        $api.fixStatusBar($api.byId('aui-header'));
+        // $api.fixTabBar($api.byId('footer'))
+        body_h = $api.offset($api.dom('body')).h,
+        footerh = $api.offset($api.byId('footer')).h,
+        headerh = $api.offset($api.byId('aui-header')).h;
+        getReportList();
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            backClick();
+        });
+    };
+
+    function getReportList() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Baogao/lists.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  type:"huolande",
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          console.log(JSON.stringify(ret.data));
+          if (ret) {
+            if (ret.status == 100) {
+                data = ret.data;
+                showUI();
+            }else {
+              api.toast({
+                  msg: ret.data,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+            api.toast({
+                msg: "网络错误",
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function showUI() {
+        // 1可以测试
+        // 0不可以测试
+        var enable = data.enable;
+        var list_data = data.infos;
+        localStorage.data=JSON.stringify(list_data)
+        var rightnow_id = $api.byId('rightnow_id');
+        // if (enable == 1) {
+        //     setButtonEnable(rightnow_id);
+        // }else {
+        //     setButtonDisable(rightnow_id);
+        // }
+
+        api.openFrame({
+            name: 'occupation_frm',
+            url: 'occupation_frm.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: headerh,
+                w: 'auto',
+                h: body_h-footerh-headerh
+            },
+            pageParam:{
+                // data:list_data
+            },
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false
+        })
+
+
+    }
+
+    function setButtonEnable(el) {
+      el.disabled = false;
+      if($api.hasCls(el, 'disable_btn')){
+          $api.removeCls(el, 'disable_btn');
+      }
+    }
+
+    function setButtonDisable(el) {
+      $api.addCls(el, 'disable_btn');
+      el.disabled = true;
+    }
+
+    function nextPage() {
+      if (data.enable == 1){
+        api.openWin({
+            name: 'huolande_win',
+            url: 'huolande_win.html'
+        });
+      }else {
+        api.toast({
+            msg: data.msg,
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+
+
+    }
+
+    function backClick() {
+      if (source == null) {
+        api.closeToWin({name:'xingxiang_list_win'});
+      }else if (source == 0) {
+         // 我的测试
+        api.closeWin();
+      }else {
+        api.closeWin();
+      }
+    }
+
+    // 报告也返回刷新列表数据
+    function reload() {
+      getReportList();
+    }
+</script>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+    .zizhuzhaosheng {
+      font-family: 'PingFang-SC';
+      font-size: 10px;
+      padding: 2px 4px;
+    }
+    .biaoqian {
+      border-radius: 2px;
+      background-color: #eeeeee;
+      display: inline-block!important;
+      text-align: center!important;
+      color: #666666;
+      }
+
+      .biaoqian-color{
+        background-color: #ffbc10;
+        color: white;
+      }
+
+      .biaoti {
+        font-family: 'PingFang-SC';
+        font-size: 16px;
+        color: #333333;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+      }
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+
+      .left_line {
+          background-color: #6666ff;
+          height: 18px;
+          width: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: 10px;
+      }
+
+      .section_title {
+          color: #333333;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          margin-left: 4px;
+          margin-top: auto;
+          margin-bottom: auto;
+      }
+
+      .mid_text{
+        font-size: 16px;
+        font-family: "PingFang-SC";
+        color: #333333;
+        margin-top: 8px;
+        text-align: left;
+        width: 9rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+      }
+
+      .mid_img{
+        width: 94%;
+        height: 130px;
+      }
+      .mid_padding_8{
+        padding-top: 9px!important;
+        padding-bottom: 9px!important;
+        line-height: 1.0;
+
+      }
+      .p-l-6{
+        padding-left: 8px!important;
+      }
+      .p-r-6{
+        padding-right: 8px!important;
+      }
+      .shadow{
+        box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.6);
+      }
+      .radius{
+        border-radius: 4px;
+      }
+      .section_gengduo{
+        font-family: 'PingFang-SC';
+        font-size: 14px;
+        color: #666666;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 10px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+
+
+
+
+        <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;margin-top:1px;" id="ceshi_id">
+          <script id="tuijianzc" type="text/x-dot-template">
+              {{for (var i = 0; i< it.length; i++) {}}
+              <div class="aui-col-xs-6 mid_padding_8" tapmode onclick="onItemClick({{=it[i].id}},'http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}');">
+                  <img class="mid_img radius shadow" src="http://www.yxke12.com/Public/Teacher/images/pic/{{=it[i].pic}}" alt="">
+                  <div><span class="mid_text">{{=it[i].name}}</span></div>
+              </div>
+              {{}}}
+          </script>
+        </section>
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript">
+var zizhuzhaosheng1 = doT.template(document.getElementById('tuijianzc').innerHTML);
+    apiready = function() {
+        api.parseTapmode();
+        document.getElementById('ceshi_id').innerHTML = zizhuzhaosheng1(JSON.parse(localStorage.data));
+    };
+
+
+    function onItemClick(id,pic) {
+      var parames = {values:{}}
+      parames.values.flvid = id
+      zhc.post('http://www.yxke12.com/index.php/Ate/Zhuanyefazhan/peixunleixingcon.html',parames,function(data) {
+        localStorage.data = JSON.stringify(data)
+        api.openWin({
+          name: 'sp_list_win',
+          url: 'sp_list_win.html',
+            pageParam: {
+                // data: data,
+                pic:pic
+            }
+        });
+      },null,true)
+
+    }
+</script>
+
+</html>

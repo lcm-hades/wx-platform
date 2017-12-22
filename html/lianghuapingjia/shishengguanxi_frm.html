@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <script type="text/javascript" src="../../script/aui-tab.js"></script>
+    <script src="../../script/doT.js"></script>
+    <style>
+        .empty{ text-align: center; padding: 120px 0;}
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+        .top_bar{
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          background-color: white;
+          border-bottom: 1px solid #d2d2d2;
+        }
+        .top_inner{
+          width: 49.4%;
+          height: auto;;
+          float: left;
+          text-align: center;
+          position: relative;
+          background-color: white;
+        }
+
+        .top_inner_right{
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img{
+          vertical-align: middle;
+          width: 35px;
+          height: 35px;
+        }
+
+        .xing_text{
+            display: inline;
+            font-size: 15px;
+            font-family: "PingFang-SC-Medium";
+            color: #333333
+        }
+        .mid_text{
+          font-size: 10px;
+          font-family: "PingFang-SC-Medium";
+          color: #333333
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+        .mid_padding_8{
+          padding-top: 9px!important;
+          padding-bottom: 9px!important;
+          line-height: 1.0;
+        }
+        .title_panel{
+          width: 100%;
+          height: auto;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          border-top: 8px solid #f2f2f2;
+          background-color: white;
+
+        }
+        .list_title{
+          margin-left: 8px;
+          color: black;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+        .aui-tab-item {
+    width: 100%;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    position: relative;
+    font-size: 0.7rem;
+    text-align: center;
+    color: #666666;
+    margin-left: -1px;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+        .aui-tab-item.aui-active {
+    color: #6666ff;
+    border-bottom: none;
+}
+.xiahuaxian{
+  border-bottom: 1px solid #6666ff;
+}
+.quxiaoxiahuaxian{
+  border-bottom:none;
+}
+.zcText {
+  font-family: 'PingFang-SC';
+  font-size: 0.7rem;
+  font-weight: 500;
+  /*color: #666666;*/
+}
+
+    </style>
+</head>
+
+<body >
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con" >
+
+
+        <div style="display:none;">
+            <div class="aui-tab" id="tab" style=" position: fixed;width: 100%;z-index: 99;top:0px">
+                <div class="aui-tab-item "><span class="zcText xiahuaxian" id="gzc">我的老师</span></div>
+
+                <div style="height:1.5rem;border-right: 1px solid #000000;opacity: 0.1;position: relative;margin: auto;top: 0;">
+
+                </div>
+                <div class="aui-tab-item"><span class='zcText' id="szc">我的同学</span></div>
+            </div>
+
+        </div>
+
+
+      <!-- list start -->
+
+      <div class="aui-content aui-margin-b-15" style="display:none;padding-top: 2.2rem;" id="guozhengce">
+
+        <div class="aui-content aui-margin-b-15">
+          <ul class="aui-list aui-media-list">
+
+              <li class="aui-list-item aui-list-item-middle">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media" style="width: 3rem;">
+                          <img src="../../image/tou.png" class="aui-img-round aui-list-img-sm">
+                      </div>
+                      <div class="aui-list-item-inner ">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title aui-font-size-14">赵老师</div>
+                              <div class="aui-list-item-right"></div>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+
+          </ul>
+      </div>
+      </div>
+
+    <div style="display:block" id="shengzhengce">
+
+                  <div class="aui-content aui-margin-b-15">
+                    <ul class="aui-list aui-media-list" id="xueshenglist">
+                      <script id="wodetongxue" type="text/x-dot-template">
+                        {{for (var i = 0; i < it.length; i++) {}}
+                        <li class="aui-list-item aui-list-item-middle" tapmode onclick="xuantongxue()">
+                            <div class="aui-media-list-item-inner">
+                                <div class="aui-list-item-media">
+                                    <img style="width: 3rem;height: 3rem;" src="http://www.yxke12.com/Public/Home/images/touxiang/{{=it[i].img}}" class="aui-img-round aui-list-img-sm">
+                                </div>
+                                <div class="aui-list-item-inner ">
+                                    <div class="aui-list-item-text">
+                                        <div class="aui-list-item-title aui-font-size-14">{{=it[i].studentname}}</div>
+                                        <div class="aui-list-item-right"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {{}}}
+                      </script>
+                    </ul>
+                </div>
+
+    <!-- list end -->
+      </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+
+function xuantongxue() {
+  api.openWin({
+      name: 'lianghuapingjia_win',
+      url: 'lianghuapingjia_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+
+var wodetongxue1;
+  apiready = function() {
+    loadClassmates();
+  }
+
+  var tab = new auiTab({
+      element:document.getElementById("tab"),
+  },function(ret){
+    var gzc = document. getElementById('gzc');
+      var szc = document. getElementById('szc');
+      if (ret.index ==1) {
+
+        gzc.className="zcText xiahuaxian";
+        szc.className="zcText";
+         document. getElementById('guozhengce').style.display = "block";
+         document. getElementById('shengzhengce').style.display = "none";
+      }
+      else {
+
+      szc.className="zcText xiahuaxian";
+      gzc.className="zcText";
+      document. getElementById('guozhengce').style.display = "none";
+      document. getElementById('shengzhengce').style.display = "block";
+    }
+
+  });
+
+  function loadClassmates() {
+    api.showProgress({
+        title: '努力加载中...',
+        text: '先喝杯茶...',
+        modal: false
+    });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Member/wodetongxue.html',
+        method: 'post',
+        data: {
+            values: {
+                studentid: $api.getStorage('studentid')
+            },
+        }
+    },function(ret, err){
+      api.hideProgress();
+        if (ret) {
+          if (wodetongxue1 == null) {
+              wodetongxue1 = doT.template(document.getElementById('wodetongxue').innerHTML);
+          }
+          document.getElementById('xueshenglist').innerHTML = wodetongxue1(ret.data.lists);
+        } else {
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+  }
+</script>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .aui-collapse-header.aui-active {
+          background: white;
+      }
+      .my-third-content{
+        border-top: 1px solid #dddddd;
+        padding: 0px!important;
+        padding-left: 15px!important;
+      }
+      .aui-tab-item.aui-active {
+          color: #6666ff;
+          border-bottom: 2px solid #6666ff;
+      }
+      .margin-l-10{
+        margin-left: 10px;
+      }
+      section{
+        top: 46px;
+      }
+    </style>
+</head>
+
+<body style="height:auto;">
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab" id="tab" style="width:100%;color:#6666ff;position:fixed;z-index:2;">
+          <div class="aui-tab-item aui-active">本科</div>
+          <div class="aui-tab-item">专科</div>
+      </div>
+
+      <section id="benke" >
+        <ul class="aui-list" id="benke_first_ul" >
+          <script id="benke_first_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <div class="aui-collapse-item" >
+                    <li class="aui-list-item aui-collapse-header aui-border-b" tapmode onclick="switchSecond({{=i}})">
+                        <div class="aui-list-item-inner" >
+                            <div class="aui-list-item-title margin-l-10">{{=it[i].main_category_id}}</div>
+                            <div class="aui-list-item-right">
+                                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+              {{}}}
+
+          </script>
+        </ul>
+      </section>
+
+      <section id="zhuanke">
+        <ul class="aui-list aui-collapse aui-border" id="zhuanke_first_ul" >
+          <script id="zhuanke_first_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <div class="aui-collapse-item" >
+                    <li class="aui-list-item aui-collapse-header aui-border-b" tapmode onclick="zSwitchSecond({{=i}})">
+                        <div class="aui-list-item-inner" >
+                            <div class="aui-list-item-title margin-l-10">{{=it[i].main_category_id}}</div>
+                            <div class="aui-list-item-right">
+                                <i class="aui-iconfont aui-icon-right aui-collapse-arrow"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+              {{}}}
+
+          </script>
+        </ul>
+      </section>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    var benkeFirstList = [];
+    var zhuankeFirstList = [];
+    apiready = function() {
+        api.parseTapmode();
+        benKeFirst();
+
+    };
+
+    function zhuankeFirst() {
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zhuanyeku/zhuanke.html',
+          method: 'post',
+          data: {
+              values: {
+
+              },
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              zhuankeFirstList = ret.data.one;
+              console.log(JSON.stringify(ret));
+              document.getElementById('zhuanke_first_ul').innerHTML =
+              doT.template(document.getElementById('zhuanke_first_s').innerHTML)(zhuankeFirstList);
+              api.parseTapmode();
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+
+    function benKeFirst() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Zhuanyeku/benke.html',
+            method: 'post',
+            data: {
+                values: {
+
+                },
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+                benkeFirstList = ret.data.one;
+                // console.log(JSON.stringify(benkeFirstList));
+                document.getElementById('benke_first_ul').innerHTML =
+                doT.template(document.getElementById('benke_first_s').innerHTML)(benkeFirstList);
+                api.parseTapmode();
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+    }
+
+    function zSwitchSecond(index) {
+      api.openWin({
+          name: 'zhuanye_storage_second_win',
+          url: './zhuanye_storage_second_win.html',
+          pageParam: {
+              category: zhuankeFirstList[index].main_category_id,
+          }
+      });
+    }
+
+    function switchSecond(index) {
+      api.openWin({
+          name: 'zhuanye_storage_second_win',
+          url: './zhuanye_storage_second_win.html',
+          pageParam: {
+              category: benkeFirstList[index].main_category_id
+          }
+      });
+    }
+
+    var flag = true;
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      if (ret.index==1) {
+          document.getElementById('benke').style.display = "block"
+          document.getElementById('zhuanke').style.display = "none"
+      }else if (ret.index == 2) {
+        document.getElementById('benke').style.display = "none"
+        document.getElementById('zhuanke').style.display = "block"
+        if (flag || zhuankeFirstList == null || zhuankeFirstList.length == 0) {
+          flag = false;
+          zhuankeFirst();
+        }
+      }
+    });
+
+    function selectZhuanYe() {
+        api.openWin({
+            name: 'zhuanye_storage_details_win',
+            url: './zhuanye_storage_details_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+    }
+
+</script>
+
+</html>

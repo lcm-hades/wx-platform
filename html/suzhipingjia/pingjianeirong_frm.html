@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/z.css" />
+    <script type="text/javascript" src="../../script/aui-tab.js"></script>
+    <script src="../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../script/doT.js"></script>
+    <script src="../../script/demo.js"></script>
+    <style>
+        .empty {
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .top_img {
+            width: 100%;
+            height: 150px;
+        }
+
+        .top_bar {
+            width: 100%;
+            overflow: hidden;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: white;
+            border-bottom: 1px solid #d2d2d2;
+        }
+
+        .top_inner {
+            width: 49.4%;
+            height: auto;
+            ;
+            float: left;
+            text-align: center;
+            position: relative;
+            background-color: white;
+        }
+
+        .top_inner_right {
+            border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img {
+            vertical-align: middle;
+            width: 35px;
+            height: 35px;
+        }
+
+        .xing_text {
+            display: inline;
+            font-size: 15px;
+            font-family: "PingFang-SC-Medium";
+            color: #333333
+        }
+
+        .mid_text {
+            font-size: 10px;
+            font-family: "PingFang-SC-Medium";
+            color: #333333
+        }
+
+        .mid_img {
+            width: 45px;
+            height: 45px;
+        }
+
+        .mid_padding_8 {
+            padding-top: 9px!important;
+            padding-bottom: 9px!important;
+            line-height: 1.0;
+        }
+
+        .title_panel {
+            width: 100%;
+            height: auto;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            border-top: 8px solid #f2f2f2;
+            background-color: white;
+        }
+
+        .list_title {
+            margin-left: 8px;
+            color: black;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+            color: #333333
+        }
+
+        .aui-tab-item {
+            width: 100%;
+            height: 2.2rem;
+            line-height: 2.2rem;
+            position: relative;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #666666;
+            margin-left: -1px;
+            -webkit-box-flex: 1;
+            box-flex: 1;
+        }
+
+        .aui-tab-item.aui-active {
+            color: #6666ff;
+            border-bottom: 1px solid #6666ff;
+            ;
+        }
+
+        .xiahuaxian {
+            border-bottom: 1px solid #6666ff;
+        }
+
+        .quxiaoxiahuaxian {
+            border-bottom: none;
+        }
+
+        .zcText {
+            font-family: 'PingFang-SC';
+            font-size: 14px;
+            font-weight: 500;
+            /*color: #666666;*/
+        }
+
+        div.screening>ul {
+            height: 35px;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            border-bottom: none;
+            overflow: hidden;
+        }
+
+        div.screening>ul>li {
+            float: left;
+            width: 49.5%;
+            text-align: center;
+            line-height: 1.7rem;
+            border-left: solid 1px #d3d3d3;
+            background: url(../../image/on_1.png) no-repeat 98% center;
+        }
+
+        .pjimg {
+            width: 94px!important;
+            height: 83px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+        }
+
+        .annui {
+            height: 22px;
+            border-radius: 11px;
+            font-family: "PingFang-SC";
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0 14px;
+            line-height: 22px;
+            color: #a1a1a1;
+            border: solid 1px #a1a1a1;
+            margin-left: 10px;
+        }
+
+        .annuijiaohu {
+            color: #6666ff;
+            border: solid 1px #6666ff;
+        }
+
+        .alpha {
+            height: 100%!important;
+            overflow: hidden!important;
+        }
+
+
+        .left_line1 {
+                background-color: #6666ff;
+                height: 18px;
+                width: 4px;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 10px;
+            }
+
+        .section_title1 {
+            color: #333333;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_gengduo1{
+          display: none;
+          font-family: 'PingFang-SC';
+          font-size: 14px;
+          color: #666666;
+          position: absolute;
+          margin: auto;
+          top: 0;
+          bottom: 0;
+          right: 10px;
+        }
+    </style>
+</head>
+
+<body style="height:auto">
+    <!-- <div class="empty"> -->
+    <div id="main" class="flex-con">
+
+        <div>
+
+            <div class="aui-tab" id="tab" style='position: fixed;top: 0px;z-index: 44;width: 100%;border-bottom: 1px solid #e5e5e5;'>
+                <div class="aui-tab-item aui-active" style="border-right: 1px solid #dcdcdc;">国家政策</div>
+                <div class="aui-tab-item" style="border-right: 1px solid #dcdcdc;">高中制度</div>
+                <div class="aui-tab-item" style="border-right: 1px solid #dcdcdc;">社会机制</div>
+                <div class="aui-tab-item" style="border-right: 1px solid #dcdcdc;">高校方案</div>
+                <div class="aui-tab-item">高职单招</div>
+            </div>
+
+
+
+
+            <!-- list start -->
+
+            <div class="aui-content aui-margin-b-15" style="display:block;padding-top: 45px;" id="guozhengce">
+
+                <div style="border-top:10px solid #f5f5f5; border-bottom: 1px solid #e5e5e5;height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;">
+                    <div class="left_line1"></div>
+                    <span class="section_title1">国家政策——为什么评</span>
+                    <span class="section_gengduo1" tapmode onclick="onUKeMore();">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+                </div>
+                <ul class="aui-list aui-media-list">
+
+                    <li class="aui-list-item" tapmode onclick="gaokaoXZXQ()">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media">
+                                <img src="../../image/guojia.png" class="">
+                            </div>
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">教育部关于加强和改进普通高中学生综合素质评价的意见</div>
+
+                                </div>
+                                <div class="aui-info aui-margin-t-5">
+                                    <div class="aui-info-item">
+
+                                    </div>
+                                    <div class="aui-info-item"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div class="aui-content " style="position: relative;top: 0px;">
+
+                    <div style="border-top:10px solid #f5f5f5; border-bottom: 1px solid #e5e5e5;height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;">
+                        <div class="left_line1"></div>
+                        <span class="section_title1">省份政策——怎么评</span>
+                        <span class="section_gengduo1" tapmode onclick="onUKeMore();">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+                    </div>
+                    <ul class="aui-list aui-media-list" id="pingjiaShengZhengCe">
+
+                        <script id="evaluationtmpl" type="text/x-dot-template">
+                            <li class="aui-list-item" tapmode onclick=shengfenzhengce({{=it.id}})>
+                                <div class="aui-media-list-item-inner">
+                                    <div class="aui-list-item-media">
+                                        <img src="http://www.yxke12.com/Public/Home/images/student/{{=it.thumb}}" class=''>
+                                    </div>
+                                    <div class="aui-list-item-inner">
+                                        <div class="aui-list-item-text">
+                                            <div class="aui-list-item-title">{{=it.title}}</div>
+
+                                        </div>
+                                        <div class="aui-info aui-margin-t-5">
+                                            <div class="aui-info-item">
+
+                                            </div>
+                                            <div class="aui-info-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </script>
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+
+            <div style="margin-top: 44px;display:none" id="shengzhengce">
+
+                <div id="main1" class="flex-con z-col">
+                    <div class="screening">
+
+                    </div>
+                    <div class="screening">
+                        <ul>
+                            <li class="Regional" id="gaoxiaofangdiqu">
+
+                            </li>
+                            <li class="Sort" id="gaoxiaofangdixuexiao">
+
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="grade-eject" id="yincang4" onclick="yincang()">
+                        <ul class="grade-w" id="gaoxiaofanganDQ" style="margin-top: 10px;">
+                            <script id="evaluationtmpl5" type="text/x-dot-template">
+                                {{for (var i = 0; i< it.length; i++) {}}
+                                   <li tapmode onclick='grade4(this,event)'>{{=it[i].recruitprovince}}</li>
+                                    {{}}}
+                            </script>
+                        </ul>
+
+                    </div>
+
+                    <div class="Sort-eject Sort-height" id="yincang5" onclick="yincang()">
+                        <ul class="Sort-Sort" id="gaoxiaofanganXX">
+                            <script id="evaluationtmpl6" type="text/x-dot-template">
+                                {{for (var i = 0; i< it.length; i++) {}}
+                                  <li tapmode onclick="Sorts1(this)">{{=it[i].dxmc}}</li>
+                                    {{}}}
+                            </script>
+                        </ul>
+                    </div>
+
+
+
+                    <!-- 高校方案 -->
+                    <div class="aui-content aui-margin-b-15" id="qingnianzhiyuan" style="position: relative;top: 35px;">
+
+                        <ul class="aui-list aui-media-list" id="gaoxiaofangxq" style="display:block">
+                            <script id="evaluationtmpl9" type="text/x-dot-template">
+                                <li class="aui-list-item" tapmode onclick=shengfenzhengce3({{=it.id}})>
+                                    <div class="aui-media-list-item-inner">
+                                        <div class="aui-list-item-media">
+                                            <img src="http://www.yxke12.com//Public/Home/images/student/downloadpicture/{{=it.picture}}" style="width:94px;height:83px">
+                                        </div>
+                                        <div class="aui-list-item-inner">
+                                            <div class="aui-list-item-text">
+                                                <div class="aui-list-item-title">{{=it.title}}</div>
+
+                                            </div>
+                                            <div class="aui-info aui-margin-t-5">
+                                                <div class="aui-info-item">
+
+                                                </div>
+                                                <div class="aui-info-item"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </script>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+            <div style="margin-top: 44px;display:none" id="shengzhengce1">
+                <div id='gzd' style="height:34px;line-height:1.7rem;display:inline-block;width:100%;background: #f9f7f7;position: fixed;z-index: 44;margin-top: 1px;">
+                    <span class="annui annuijiaohu" tapmode onclick="qiehuan(this)" id="shanghai">上海</span>
+                    <span class="annui" tapmode onclick="qiehuan(this)" id="zhejiang">浙江</span>
+                </div>
+
+
+
+                <!-- 上海 -->
+                <div class="aui-content aui-margin-b-15" id="shanghai" style="position: relative;top: 35px;">
+
+                    <ul class="aui-list aui-media-list" id="pingjiaGZS" style="display:block">
+                        <script id="evaluationtmpl1" type="text/x-dot-template">
+                            {{for (var i = 0; i< it.length; i++) {}}
+                             <li class="aui-list-item" tapmode onclick=shengfenzhengce1({{=it[i].id}})>
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-title">{{=it[i].title}}</div>
+                                </div>
+                                </li>
+                                {{}}}
+                        </script>
+
+                    </ul>
+                </div>
+
+                <!-- 浙江 -->
+                <div class="aui-content aui-margin-b-15" id="zhejiang" style="position: relative;top: 35px;">
+
+                    <ul class="aui-list aui-media-list" id="pingjiaGZZ" style="display:none">
+                        <script id="evaluationtmpl2" type="text/x-dot-template">
+                            {{for (var i = 0; i< it.length; i++) {}}
+                              <li class="aui-list-item" tapmode onclick=shengfenzhengce1({{=it[i].id}})>
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-title">{{=it[i].title}}</div>
+                                </div>
+                                </li>
+                                {{}}}
+                        </script>
+
+                    </ul>
+                </div>
+                <!-- list end -->
+
+            </div>
+
+
+
+
+
+            <div style="margin-top: 44px;display:none" id="shengzhengce2">
+                <div style="height:34px;line-height:1.7rem;display:inline-block;width:100%;background: #f9f7f7;position: fixed;z-index: 44;margin-top: 1px;" id="sjz">
+                    <span class="annui annuijiaohu" tapmode onclick="qiehuanhuodong(this)" id="qingnian">青年志愿者活动</span>
+                    <span class="annui" tapmode onclick="qiehuanhuodong(this)" id="jingsai">竞赛活动</span>
+                </div>
+
+
+
+                <!-- 青年志愿活动 -->
+                <div class="aui-content aui-margin-b-15" id="qingnianzhiyuan1" style="position: relative;top: 35px;">
+
+                    <ul class="aui-list aui-media-list" id="qingnianhuodong" style="display:block">
+                        <script id="evaluationtmpl3" type="text/x-dot-template">
+                            {{for (var i = 0; i< it.length; i++) {}}
+                              <li class="aui-list-item" tapmode onclick=shengfenzhengce2({{=it[i].id}})>
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-title">{{=it[i].title}}</div>
+                                </div>
+                                </li>
+                                {{}}}
+                        </script>
+
+                    </ul>
+                </div>
+
+               <!-- 竞赛活动 -->
+                <div class="aui-content aui-margin-b-15" id="jingsaihd" style="position: relative;top: 35px;">
+
+                  <ul class="aui-list aui-media-list" id="jingsaihuodong" style="display:none" >
+                    <script id="evaluationtmpl4" type="text/x-dot-template">
+                    {{for (var i = 0; i < it.length; i++) {}}
+                    <div style="border-top:10px solid #f5f5f5; border-bottom: 1px solid #e5e5e5;height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;">
+                        <div class="left_line1"></div>
+                        <span class="section_title1">{{=it[i].title}}</span>
+                        <span class="section_gengduo1" tapmode onclick="onUKeMore();">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+                    </div>
+                    {{for (var j = 0; j < it[i].lists.length; j++) {}}
+                      <li class="aui-list-item" tapmode onclick=shengfenzhengce2({{=it[i].lists[j].id}})>
+                           <div class="aui-list-item-inner">
+                               <div class="aui-list-item-title">{{=it[i].lists[j].title}}</div>
+                           </div>
+                       </li>
+                    {{}}}
+                  {{}}}
+                </script>
+
+                  </ul>
+                </div>
+                    <!-- list end -->
+
+            </div>
+
+
+
+
+
+            <!-- 高职高招 -->
+
+            <div style="margin-top: 44px;display:none" id="shengzhengce3">
+              <div id="main2" class="flex-con z-col">
+                  <div class="screening">
+
+                  </div>
+                  <div class="screening">
+                      <ul>
+                          <li class="Regional" id="gzdz_dq">
+
+                          </li>
+                          <li class="Sort" id="gzdz_xx">
+
+                          </li>
+                      </ul>
+                  </div>
+
+
+                  <div class="grade-eject" id="yincang6" onclick="yincang()">
+                      <ul class="grade-w" id="gzdz_dq_ul" style="margin-top: 10px;">
+                          <script id="gzdz_dq_list" type="text/x-dot-template">
+                              {{for (var i = 0; i< it.length; i++) {}}
+                                <li tapmode onclick='grade41(this,event)'>{{=it[i].province}}</li>
+                                  {{}}}
+                          </script>
+                      </ul>
+
+                  </div>
+
+                  <div class="Sort-eject Sort-height" id="yincang7" onclick="yincang()">
+                      <ul class="Sort-Sort" id="gzdz_xx_ul">
+                          <script id="gzdz_xx_list" type="text/x-dot-template">
+                              {{for (var i = 0; i< it.length; i++) {}}
+                                 <li tapmode onclick="Sorts11(this,{{=it[i].id}})">{{=it[i].univ_name}}</li>
+                                  {{}}}
+                          </script>
+                      </ul>
+                  </div>
+
+
+
+                  <!-- 高职高招 -->
+                  <div class="aui-content aui-margin-b-15" id="qingnianzhiyuan" style="position: relative;top: 35px;">
+
+                      <ul class="aui-list aui-media-list" id="gzdz_ul" style="display:block">
+                          <script id="gzdz_list" type="text/x-dot-template">
+                              <li class="aui-list-item" tapmode onclick=shengfenzhengce4({{=it.id}})>
+                              {{if (it.picture==null) {}}
+                              <div class="aui-media-list-item-inner">
+
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-text">
+                                          <div class="aui-list-item-title">{{=it.univ_name}}</div>
+
+                                      </div>
+                                      <div class="aui-info aui-margin-t-5">
+                                          <div class="aui-info-item">
+
+                                          </div>
+                                          <div class="aui-info-item"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                              {{}else {}}
+                              <div class="aui-media-list-item-inner">
+
+                              <div class="aui-list-item-media">
+                                  <img src="http://www.yxke12.com//Public/Home/images/student/downloadpicture/{{=it.picture}}" style="width:94px;height:83px">
+                              </div>
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-text">
+                                          <div class="aui-list-item-title">{{=it.univ_name}}</div>
+
+                                      </div>
+                                      <div class="aui-info aui-margin-t-5">
+                                          <div class="aui-info-item">
+
+                                          </div>
+                                          <div class="aui-info-item"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                              {{}}}
+
+                              </li>
+                          </script>
+
+                      </ul>
+                  </div>
+
+
+              </div>
+
+            </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    // var evalText7 = doT.template(document.getElementById('evaluationtmpl7').innerHTML);
+    // var evalText8 = doT.template(document.getElementById('evaluationtmpl8').innerHTML);
+    var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+    var evalText1 = doT.template(document.getElementById('evaluationtmpl1').innerHTML);
+    var evalText2 = doT.template(document.getElementById('evaluationtmpl2').innerHTML);
+    var evalText3 = doT.template(document.getElementById('evaluationtmpl3').innerHTML);
+    var evalText4 = doT.template(document.getElementById('evaluationtmpl4').innerHTML);
+    var evalText5 = doT.template(document.getElementById('evaluationtmpl5').innerHTML);
+    var evalText6 = doT.template(document.getElementById('evaluationtmpl6').innerHTML);
+    var evalText9 = doT.template(document.getElementById('evaluationtmpl9').innerHTML);
+    var gzdzdq = doT.template(document.getElementById('gzdz_dq_list').innerHTML);
+    var gzdzxx = doT.template(document.getElementById('gzdz_xx_list').innerHTML);
+    var gzdzlist = doT.template(document.getElementById('gzdz_list').innerHTML);
+
+    function aa() {
+        // alert(document.documentElement.clientHeight)
+        if (document.documentElement.clientHeight > 667) {
+            document.getElementById("gzd").style.marginTop = '3px'
+            document.getElementById("sjz").style.marginTop = '3px'
+
+        }
+    }
+    aa()
+
+    function shengfenzhengce(id) {
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Shengfenzhengce/infos.html',
+            method: 'post',
+            data: {
+                values: {
+                    id: id
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+                var data = ret.data
+                localStorage.data = JSON.stringify(data)
+                api.openWin({
+                    name: 'gaoxiang_zhengceXQ_win',
+                    url: './gaoxiang_zhengceXQ_win.html',
+                    pageParam: {
+                        // data: data
+                    }
+                });
+
+                // console.log( JSON.stringify( ret ) );
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    }
+
+    function shengfenzhengce1(id) {
+        // alert(id)
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaozhongzhidu/infos.html',
+            method: 'post',
+            data: {
+                values: {
+                    id: id
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+                var data = ret.data
+                localStorage.data = JSON.stringify(data)
+                api.openWin({
+                    name: 'gaoxiang_zhengceXQ_win',
+                    url: './gaoxiang_zhengceXQ_win.html',
+                    pageParam: {
+                        // data: data
+                    }
+                });
+
+                console.log(JSON.stringify(ret));
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    }
+
+    function shengfenzhengce2(id) {
+        // alert(id)
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Shehuijizhi/infos.html',
+            method: 'post',
+            data: {
+                values: {
+                    id: id
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+                var data = ret.data
+                localStorage.data = JSON.stringify(data)
+                api.openWin({
+                    name: 'gaoxiang_zhengceXQ_win',
+                    url: './gaoxiang_zhengceXQ_win.html',
+                    pageParam: {
+                        // data: data
+                    }
+                });
+
+                console.log(JSON.stringify(ret));
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    }
+
+    function shengfenzhengce3(id) {
+        // alert(id)
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaoxiaofangan/infos.html',
+            method: 'post',
+            data: {
+                values: {
+                    id: id
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+                var data = ret.data
+                localStorage.data = JSON.stringify(data)
+                api.openWin({
+                    name: 'gaoxiang_zhengceXQ1_win',
+                    url: './gaoxiang_zhengceXQ1_win.html',
+                    pageParam: {
+                        // data: data
+                    }
+                });
+
+                console.log(JSON.stringify(ret));
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    }
+
+    function yincang() {
+        // document.getElementById('yincang3').className = 'grade-eject'
+        document.getElementById('yincang4').className = 'grade-eject'
+        document.getElementById('yincang5').className = 'Sort-eject Sort-height'
+        document.getElementById('yincang6').className = 'grade-eject'
+        document.getElementById('yincang7').className = 'Sort-eject Sort-height'
+        $('#main').removeClass('alpha');
+        $('#main1').removeClass('alpha');
+        $('#main2').removeClass('alpha');
+    }
+
+
+
+    apiready = function() {
+
+
+        api.parseTapmode();
+        var data = JSON.parse(localStorage.datazhengce)
+
+        document.getElementById('pingjiaShengZhengCe').innerHTML = evalText(data);
+
+    };
+
+
+
+
+    function Sorts1(sbj) {
+        var gaoxiaofangdiqu = document.getElementById("gaoxiaofangdiqu").innerHTML
+        var gaoxiaofangdixuexiao = document.getElementById("gaoxiaofangdixuexiao").innerHTML = sbj.innerHTML
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaoxiaofangan/searchs.html',
+            method: 'post',
+            data: {
+                values: {
+                    province: gaoxiaofangdiqu.substring(5),
+                    school: gaoxiaofangdixuexiao
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+
+
+                document.getElementById('gaoxiaofangxq').innerHTML = evalText9(ret.data.infos);
+                // alert( JSON.stringify( ret ) );
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+        var arr = document.getElementById("gaoxiaofanganXX").getElementsByTagName("li");
+        for (var i = 0; i < arr.length; i++) {
+            var a = arr[i];
+            // alert(arr[i].innerHTML)
+
+            a.style.borderBottom = "";
+        };
+        sbj.style.borderBottom = "solid 1px #ff7c08"
+
+    }
+    //js点击事件监听开始
+    function grade4(wbj) {
+
+
+        var arr = document.getElementById("gaoxiaofanganDQ").getElementsByTagName("li");
+        for (var i = 0; i < arr.length; i++) {
+            var a = arr[i];
+            a.style.background = "";
+
+        };
+        wbj.style.background = "#eee"
+        var gaoxiaofangdiqu = document.getElementById("gaoxiaofangdiqu").innerHTML = "招生范围："+wbj.innerHTML
+
+
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaoxiaofangan/searchs.html',
+            method: 'post',
+            data: {
+                values: {
+                    province: gaoxiaofangdiqu.substring(5),
+
+                },
+
+            }
+        }, function(ret, err) {
+            if (ret) {
+                document.getElementById('gaoxiaofanganXX').innerHTML = evalText6(ret.data.school);
+                document.getElementById('gaoxiaofangdixuexiao').innerHTML = ret.data.school[0].dxmc
+                api.ajax({
+                    url: 'http://www.yxke12.com/index.php/App/Gaoxiaofangan/searchs.html',
+                    method: 'post',
+                    data: {
+                        values: {
+                            province: gaoxiaofangdiqu.substring(5),
+                            school: ret.data.school[0].dxmc
+                        },
+                    }
+                }, function(ret, err) {
+                  api.hideProgress();
+                    if (ret) {
+
+                        document.getElementById('gaoxiaofangxq').innerHTML = evalText9(ret.data.infos);
+                        console.log(JSON.stringify(ret));
+                    } else {
+                      api.toast({
+                          msg: JSON.stringify(err.msg),
+                          duration: 2000,
+                          location: 'bottom'
+                      });
+                    }
+                });
+
+
+
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+
+        // alert()
+    }
+
+
+
+
+    function qiehuan(obj) {
+        if (obj.innerHTML == "上海") {
+            document.getElementById('pingjiaGZS').style.display = "block";
+            document.getElementById('pingjiaGZZ').style.display = "none";
+            document.getElementById('shanghai').className = "annui annuijiaohu"
+            document.getElementById('zhejiang').className = "annui"
+
+        } else {
+            document.getElementById('pingjiaGZS').style.display = "none";
+            document.getElementById('pingjiaGZZ').style.display = "block";
+            document.getElementById('zhejiang').className = "annui annuijiaohu"
+            document.getElementById('shanghai').className = "annui"
+        }
+    }
+
+    function qiehuanhuodong(obj) {
+        if (obj.innerHTML == "青年志愿者活动") {
+            document.getElementById('qingnianzhiyuan1').style.display = "block";
+            document.getElementById('jingsaihuodong').style.display = "none";
+            document.getElementById('qingnian').className = "annui annuijiaohu"
+            document.getElementById('jingsai').className = "annui"
+
+        } else {
+            document.getElementById('qingnianzhiyuan1').style.display = "none";
+            document.getElementById('jingsaihuodong').style.display = "block";
+            document.getElementById('jingsai').className = "annui annuijiaohu"
+            document.getElementById('qingnian').className = "annui"
+        }
+    }
+
+    function gaokaoXZXQ() {
+        api.openWin({
+            name: 'pingjianeirongfangfa_win',
+            url: './pingjianeirongfangfa_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+
+    var morenjiansuo = {};
+    var tab = new auiTab({
+        element: document.getElementById("tab"),
+    }, function(ret) {
+        var gzc = document.getElementById('gzc');
+        var szc = document.getElementById('szc');
+        if (ret.index == 1) {
+
+
+            document.getElementById('guozhengce').style.display = "block";
+            document.getElementById('shengzhengce').style.display = "none";
+            document.getElementById('shengzhengce1').style.display = "none";
+            document.getElementById('shengzhengce2').style.display = "none";
+            document.getElementById('shengzhengce3').style.display = "none";
+        } else if (ret.index == 4) {
+            document.getElementById('guozhengce').style.display = "none";
+            document.getElementById('shengzhengce').style.display = "block";
+            document.getElementById('shengzhengce1').style.display = "none";
+            document.getElementById('shengzhengce2').style.display = "none";
+            document.getElementById('shengzhengce3').style.display = "none";
+            api.showProgress({
+                title: '努力加载中...',
+                text: '先喝杯茶...',
+                modal: false
+            });
+            api.ajax({
+                url: 'http://www.yxke12.com/index.php/App/Gaoxiaofangan/lists.html',
+                method: 'post',
+                data: {
+
+                }
+            }, function(ret, err) {
+              api.hideProgress();
+                if (ret) {
+
+                    document.getElementById('gaoxiaofangdiqu').innerHTML = "招生范围："+ret.data.province[0].recruitprovince
+                    document.getElementById('gaoxiaofangdixuexiao').innerHTML = ret.data.school[0].dxmc
+                    document.getElementById('gaoxiaofanganDQ').innerHTML = evalText5(ret.data.province);
+                    document.getElementById('gaoxiaofanganXX').innerHTML = evalText6(ret.data.school);
+                    document.getElementById('gaoxiaofangxq').innerHTML = evalText9(ret.data.infos);
+                    // console.log( JSON.stringify( ret.data.infos ) );
+                } else {
+                  api.toast({
+                      msg: JSON.stringify(err.msg),
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }
+            });
+        } else if (ret.index == 2) {
+
+            document.getElementById('guozhengce').style.display = "none";
+            document.getElementById('shengzhengce').style.display = "none";
+            document.getElementById('shengzhengce1').style.display = "block";
+            document.getElementById('shengzhengce2').style.display = "none";
+            document.getElementById('shengzhengce3').style.display = "none";
+            api.showProgress({
+                title: '努力加载中...',
+                text: '先喝杯茶...',
+                modal: false
+            });
+            api.ajax({
+                url: 'http://www.yxke12.com/index.php/App/Gaozhongzhidu/lists.html',
+                method: 'post',
+                data: {
+
+                }
+            }, function(ret, err) {
+              api.hideProgress();
+                if (ret) {
+                    // console.log( JSON.stringify( ret ) );
+
+
+                    document.getElementById('pingjiaGZS').innerHTML = evalText1(ret.data.shanghai);
+
+                    document.getElementById('pingjiaGZZ').innerHTML = evalText2(ret.data.zhejiang);
+                } else {
+                  api.toast({
+                      msg: JSON.stringify(err.msg),
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }
+            });
+
+        } else if (ret.index == 3) {
+            document.getElementById('guozhengce').style.display = "none";
+            document.getElementById('shengzhengce').style.display = "none";
+            document.getElementById('shengzhengce1').style.display = "none";
+            document.getElementById('shengzhengce2').style.display = "block";
+            document.getElementById('shengzhengce3').style.display = "none";
+            api.showProgress({
+                title: '努力加载中...',
+                text: '先喝杯茶...',
+                modal: false
+            });
+            // document. getElementById('shengzhengce3').style.display = "none";
+            api.ajax({
+                url: 'http://www.yxke12.com/index.php/App/Shehuijizhi/lists.html',
+                method: 'post',
+                data: {
+
+                }
+            }, function(ret, err) {
+              api.hideProgress();
+                if (ret) {
+
+                    document.getElementById('qingnianhuodong').innerHTML = evalText3(ret.data.zhiyuan);
+
+                    document.getElementById('jingsaihuodong').innerHTML = evalText4(ret.data.jingsai);
+                    // alert( JSON.stringify( ret ) );
+                } else {
+                    // alert( JSON.stringify( err ) );
+                }
+            });
+
+
+        } else {
+            document.getElementById('guozhengce').style.display = "none";
+            document.getElementById('shengzhengce').style.display = "none";
+            document.getElementById('shengzhengce1').style.display = "none";
+            document.getElementById('shengzhengce2').style.display = "none";
+            document.getElementById('shengzhengce3').style.display = "block";
+            api.showProgress({
+                title: '努力加载中...',
+                text: '先喝杯茶...',
+                modal: false
+            });
+            api.ajax({
+                url: 'http://www.yxke12.com/index.php/App/Gaozhi/jianzhang.html',
+                method: 'post',
+                data: {
+
+                }
+            }, function(ret, err) {
+              api.hideProgress();
+                if (ret) {
+
+                    // console.log( JSON.stringify( ret.data.info ) );
+                    document.getElementById('gzdz_dq').innerHTML = "招生范围："+ret.data.province[0].province
+                    document.getElementById('gzdz_xx').innerHTML = ret.data.school[0].univ_name
+                    document.getElementById('gzdz_dq_ul').innerHTML = gzdzdq(ret.data.province);
+                    document.getElementById('gzdz_xx_ul').innerHTML = gzdzxx(ret.data.school);
+                    document.getElementById('gzdz_ul').innerHTML = gzdzlist(ret.data.info);
+
+                } else {
+                  api.toast({
+                      msg: JSON.stringify(err.msg),
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+                }
+            });
+        }
+
+    });
+
+    //js点击事件监听开始
+    function grade41(wbj) {
+
+
+        var arr = document.getElementById("gzdz_dq_ul").getElementsByTagName("li");
+        for (var i = 0; i < arr.length; i++) {
+            var a = arr[i];
+            a.style.background = "";
+
+        };
+        wbj.style.background = "#eee"
+        var gaoxiaofangdiqu = document.getElementById("gzdz_dq").innerHTML = "招生范围："+wbj.innerHTML
+
+
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaozhi/searchs.html',
+            method: 'post',
+            data: {
+                values: {
+                    province: gaoxiaofangdiqu.substring(5),
+
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+
+                        document.getElementById('gzdz_ul').innerHTML = gzdzlist(ret.data.info);
+                        document.getElementById('gzdz_xx_ul').innerHTML = gzdzxx(ret.data.school);
+
+                        document.getElementById('gzdz_xx').innerHTML = ret.data.school[0].univ_name
+
+                        console.log(JSON.stringify(ret));
+
+
+
+
+            } else {
+                api.toast({
+                    msg: JSON.stringify(err.msg),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+
+            }
+        });
+
+
+        // alert()
+    }
+
+
+
+    function Sorts11(sbj,id) {
+        var gaoxiaofangdiqu = document.getElementById("gzdz_dq").innerHTML
+        var gaoxiaofangdixuexiao = document.getElementById("gzdz_xx").innerHTML = sbj.innerHTML
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaozhi/searchs.html',
+            method: 'post',
+            data: {
+                values: {
+                    province: gaoxiaofangdiqu.substring(5),
+                    id: id
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+
+
+                document.getElementById('gzdz_ul').innerHTML = gzdzlist(ret.data.info);
+                console.log( JSON.stringify( ret ) );
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+        var arr = document.getElementById("gzdz_xx_ul").getElementsByTagName("li");
+        for (var i = 0; i < arr.length; i++) {
+            var a = arr[i];
+            // alert(arr[i].innerHTML)
+
+            a.style.borderBottom = "";
+        };
+        sbj.style.borderBottom = "solid 1px #ff7c08"
+
+    }
+
+
+
+    function shengfenzhengce4(id) {
+        // alert(id)
+        api.showProgress({
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaozhi/detail.html',
+            method: 'post',
+            data: {
+                values: {
+                    id: id
+                },
+
+            }
+        }, function(ret, err) {
+          api.hideProgress();
+            if (ret) {
+
+                var data = ret.data
+                localStorage.data = JSON.stringify(data)
+                api.openWin({
+                    name: 'gaoxiang_zhengceXQ2_win',
+                    url: './gaoxiang_zhengceXQ2_win.html',
+                    pageParam: {
+                        // data: data
+                    }
+                });
+
+                console.log(JSON.stringify(ret));
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    }
+
+</script>
+
+</html>

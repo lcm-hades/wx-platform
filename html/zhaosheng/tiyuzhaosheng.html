@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+
+        .zizhuzhaosheng {
+          font-family: 'PingFang-SC';
+          font-size: 10px;
+          color: #fff;
+        }
+        .zizhuzhaoshengkuan {
+          width: 50px;
+          height: 14px;
+          border-radius: 2px;
+          background-color: #36c7fa;
+          display: inline-block!important;
+          text-align: center!important;
+          }
+          .biaoti {
+            font-family: 'PingFang-SC';
+            font-size: 16px;
+            color: #333333;
+          }
+          .shuoming {
+            font-family: 'PingFang-SC';
+            font-size: 10px;
+            color: #666666;
+            width: 90%;
+          }
+          .nianfen {
+            font-family: 'PingFang-SC';
+            font-size: 14px;
+            line-height: 1.25;
+            color: #666666;
+            width: 20%;
+            height: 23px;
+           border-radius: 5px;
+           border: solid 1px #6666ff;
+           background: url(../../image/41-8.png) no-repeat scroll 95% center transparent;
+           background-size: 14px;
+          }
+
+          table{
+            width: 100%;
+            text-align: center;
+          }
+          tr{
+            font-size: 12px;
+          }
+          .chakan{
+            font-family: 'PingFang-SC';
+            color: #0281f9;
+          }
+
+          .aui-tab-item.aui-active {
+              color: #6666ff;
+              border-bottom: 2px solid #6666ff;
+          }
+
+          .tab-position{
+            width: 100%;
+            position: fixed;
+            z-index: 3;
+            top: 0px;
+          }
+    </style>
+</head>
+<body>
+    <div class="aui-tab tab-position" id="tab">
+        <div class="aui-tab-item aui-active">资讯</div>
+        <div class="aui-tab-item"><div></div>方略</div>
+        <div class="aui-tab-item">招生简章</div>
+        <div class="aui-tab-item">运动员</div>
+
+    </div>
+
+    <div class="aui-content aui-margin-b-15" style="display:block;padding-top:46px;" id="yizixun">
+        <ul class="aui-list aui-media-list" id="tyzx_ul">
+          <script id="tyzx_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item" tapmode onclick="onZItemClick({{=i}})">
+                  <div class="aui-media-list-item-inner">
+
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="aui-info" style="padding-top:0">
+                      <div class="aui-info-item zizhuzhaoshengkuan">
+                        <span class="zizhuzhaosheng">体育招生</span>
+                      </div>
+                      <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                  </div>
+              </li>
+            {{}}}
+          </script>
+        </ul>
+    </div>
+
+
+    <div class="aui-content aui-margin-b-15" style="display:none;padding-top:46px;" id="yifangluo">
+        <ul class="aui-list aui-media-list" id="fanglue_ul">
+          <script id="fanglue_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <li class="aui-list-item" tapmode onclick="onFItemClick({{=i}})">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aui-info" style="padding-top:0">
+                        <div class="aui-info-item zizhuzhaoshengkuan">
+                          <span class="zizhuzhaosheng">体育招生</span>
+                        </div>
+                        <div class="aui-info-item zizhuzhaosheng">{{=it[i].time}}</div>
+                    </div>
+                </li>
+            {{}}}
+        </script>
+        </ul>
+    </div>
+
+    <div class="aui-content aui-margin-b-15" style="display:none;padding-top:46px;"id="puzhaosheng">
+      <div class="aui-list-header" style="background: #fff;padding:8px;border-top:1px solid #f2f2f2">
+        <span class="shuoming">
+            院校归属地：
+            <select class="nianfen" style="display: inline-block;width:70%;padding-left: 10px;" onchange="zhuanyeSelect(this.value)">
+                <option value="1">运动训练专业</option>
+                <option value="2">武术与民族传统体育专业</option>
+              </select>
+        </span>
+      </div>
+        <ul class="aui-list aui-media-list" id="jz_ul">
+          <script id="jz_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+                <li class="aui-list-item" tapmode onclick = "onJZItemClick({{=i}})">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title biaoti">{{=it[i].univ_name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {{}}}
+        </script>
+        </ul>
+    </div>
+    <div class="aui-content aui-margin-b-15" id="yishutuan"  style="display:none;">
+        <ul class="aui-list aui-media-list">
+            <li class="aui-list-header" style="background: #fff;">
+              <span class="">
+                  院校归属
+              </span>
+              <select class="nianfen" id="province_sl" tapmode onchange="provinceSelect(this.value)">
+                <script id="province_s" type="text/x-dot-template">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <option>{{=it[i].province}}</option>
+                  {{}}}
+                </script>
+              </select>
+
+
+            </li>
+
+          <table id="ydy_tb" border="1">
+            <script id="ydy_s" type="text/x-dot-template">
+                <tr>
+                  <th>院校属地</th>
+                  <th>院 校</th>
+                  <th>招生简章</th>
+                  <th>报名时间</th>
+                  <th>招生类别</th>
+                </tr>
+                  {{for (var i = 0; i < it.length; i++) {}}
+                <tr>
+                  <td>{{=it[i].province}}</td>
+                  <td style="width: 20%;">{{=it[i].univ_name}}</td>
+                  <td class="chakan" tapmode onclick="checkJZDetails({{=i}})">查看</td>
+                  {{if (it[i].bm_time == null) {}}
+                    <td style="width: 25%;">-</td>
+                  {{}else{}}
+                    <td style="width: 25%;">{{=it[i].bm_time}}</td>
+                  {{}}}
+                  <td style="width: 25%;">{{=it[i].major}}</td>
+                </tr>
+                {{}}}
+            </script>
+          </table>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js" ></script>
+<script type="text/javascript" src="../../script/aui-tab.js" ></script>
+<script type="text/javascript" src="../../script/doT.js" ></script>
+<script type="text/javascript">
+
+    var ziXunDataList = [];
+    var fanglueDataList = [];
+    var jzydDataList = [];
+    var jzwsDataList = [];
+    var ydyDataList = [];
+    var provinceList = [];
+    var flag_arr = [1,0,0,0];
+    var jianzhang_dot;
+    var ydy_dot;
+    var cur_zhuanye_type = 1;
+    apiready = function(){
+      getZiXunData();
+    }
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index==1) {
+          document.getElementById('yizixun').style.display = "block"
+          document.getElementById('yifangluo').style.display = "none"
+          document.getElementById('puzhaosheng').style.display = "none"
+          document.getElementById('yishutuan').style.display = "none"
+        }else if (ret.index==2) {
+          document.getElementById('yizixun').style.display = "none"
+          document.getElementById('yifangluo').style.display = "block"
+          document.getElementById('puzhaosheng').style.display = "none"
+          document.getElementById('yishutuan').style.display = "none"
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getFangLV();
+          }
+        }else if (ret.index==3) {
+          document.getElementById('yizixun').style.display = "none"
+          document.getElementById('yifangluo').style.display = "none"
+          document.getElementById('puzhaosheng').style.display = "block"
+          document.getElementById('yishutuan').style.display = "none"
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getJianZhangYD();
+          }
+        }else {
+          document.getElementById('yizixun').style.display = "none"
+          document.getElementById('yifangluo').style.display = "none"
+          document.getElementById('puzhaosheng').style.display = "none"
+          document.getElementById('yishutuan').style.display = "block"
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getYDYData();
+          }
+        }
+    });
+
+    function getZiXunData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Tiyulei/zixun.html',
+          method: 'post',
+          data: {
+              values: {
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+              // console.log( JSON.stringify( ret ) );
+              if (ret.status == 100) {
+                ziXunDataList = ret.data;
+                var zizhuzhaosheng = doT.template(document.getElementById('tyzx_s').innerHTML);
+                document.getElementById('tyzx_ul').innerHTML = zizhuzhaosheng(ziXunDataList);
+                api.parseTapmode();
+              }
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+    }
+
+    function getFangLV() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Tiyulei/fanglue.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+                // console.log( JSON.stringify( ret ) );
+                fanglueDataList = ret.data;
+                var zizhuzhaosheng = doT.template(document.getElementById('fanglue_s').innerHTML);
+                document.getElementById('fanglue_ul').innerHTML = zizhuzhaosheng(fanglueDataList);
+                api.parseTapmode();
+
+            }
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+    }
+
+    function getJianZhangYD() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Tiyulei/yundong.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+
+          if (ret) {
+            // console.log( JSON.stringify( ret ) );
+            jzydDataList = ret.data;
+            if (jianzhang_dot == null) {
+              jianzhang_dot = doT.template(document.getElementById('jz_s').innerHTML);
+            }
+            document.getElementById('jz_ul').innerHTML = jianzhang_dot(jzydDataList);
+            api.parseTapmode();
+
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+    }
+
+    function getYDYData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Tiyulei/gaoshuiping.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+
+          if (ret) {
+            console.log( JSON.stringify( ret ) );
+            ydyDataList = ret.data.lists;
+            provinceList = ret.data.province;
+            if (ydy_dot == null) {
+              ydy_dot = doT.template(document.getElementById('ydy_s').innerHTML);
+            }
+            document.getElementById('ydy_tb').innerHTML = ydy_dot(ydyDataList);
+            var province;
+            if (province == null) {
+              province = doT.template(document.getElementById('province_s').innerHTML);
+            }
+            document.getElementById('province_sl').innerHTML = province(provinceList);
+            api.parseTapmode();
+
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+    }
+
+    // 查看资讯详情
+    function onZItemClick(index) {
+      var id = ziXunDataList[index].id;
+      api.openWin({
+          name: 'zzzs_zxfl_details_win',
+          url: './zzzs_zxfl_details_win.html',
+          pageParam: {
+              id: id,
+              title:"艺体招生"
+          }
+      });
+    }
+
+    // 查看方略详情
+    function onFItemClick(index) {
+      var id = fanglueDataList[index].id;
+      api.openWin({
+          name: 'zzzs_zxfl_details_win',
+          url: './zzzs_zxfl_details_win.html',
+          pageParam: {
+              id: id,
+              title:"艺体招生"
+          }
+      });
+    }
+
+    // 查看资讯详情
+    function onJZItemClick(index) {
+      var id = 1;
+      if (cur_zhuanye_type == 1) {
+          // 运动训练
+          id = jzydDataList[index].id;
+      }else {
+        // 武术
+        id = jzwsDataList[index].id;
+      }
+      api.openWin({
+          name: 'dyzs_jz_details_win',
+          url: './dyzs_jz_details_win.html',
+          pageParam: {
+              id: id,
+              url:'http://www.yxke12.com/index.php/App/Tiyulei/details.html'
+          }
+      });
+    }
+
+    function checkJZDetails(index) {
+      var id = ydyDataList[index].id;
+      api.openWin({
+          name: 'dyzs_jz_details_win',
+          url: './dyzs_jz_details_win.html',
+          pageParam: {
+              id: id,
+              url:'http://www.yxke12.com/index.php/App/Tiyulei/gaoinfos.html'
+          }
+      });
+    }
+
+    function zhuanyeSelect(value) {
+        cur_zhuanye_type = value;
+        if (value == 1) {
+          // 运动训练
+          if (jianzhang_dot == null) {
+            jianzhang_dot = doT.template(document.getElementById('jz_s').innerHTML);
+          }
+          document.getElementById('jz_ul').innerHTML = jianzhang_dot(jzydDataList);
+        }else {
+           // 武术
+           if (jzwsDataList == null || jzwsDataList.length == 0) {
+             api.showProgress({
+                 style: 'default',
+                 animationType: 'fade',
+                 title: '努力加载中...',
+                 text: '先喝杯茶...',
+                 modal: true
+             });
+
+              api.ajax({
+                  url: 'http://www.yxke12.com/index.php/App/Tiyulei/wushu.html',
+                  method: 'post',
+                  data: {
+                      values: {
+                      }
+                  }
+              },function(ret, err){
+                  api.hideProgress();
+
+                  if (ret && ret.status == 100) {
+                      // console.log( JSON.stringify( ret ) );
+                      jzwsDataList = ret.data;
+                      if (jianzhang_dot == null) {
+                        jianzhang_dot = doT.template(document.getElementById('jz_s').innerHTML);
+                      }
+                      document.getElementById('jz_ul').innerHTML = jianzhang_dot(jzwsDataList);
+                  } else {
+                    api.toast({
+                    msg: JSON.stringify(err.msg),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                  }
+              });
+           }else{
+             if (jianzhang_dot == null) {
+               jianzhang_dot = doT.template(document.getElementById('jz_s').innerHTML);
+             }
+             document.getElementById('jz_ul').innerHTML = jianzhang_dot(jzwsDataList);
+           }
+        }
+    }
+
+    function provinceSelect(value) {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Tiyulei/province.html',
+            method: 'post',
+            data: {
+                values: {
+                    province: value
+                }
+            }
+        },function(ret, err){
+          api.hideProgress();
+
+            if (ret && ret.status == 100) {
+                // console.log( JSON.stringify( ret ) );
+                ydyDataList = ret.data;
+                if (ydy_dot == null) {
+                  ydy_dot = doT.template(document.getElementById('ydy_s').innerHTML);
+                }
+                document.getElementById('ydy_tb').innerHTML = ydy_dot(ydyDataList);
+            } else {
+              api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+        });
+
+
+    }
+</script>
+</html>

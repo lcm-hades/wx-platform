@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/z.css"/>
+    <script type="text/javascript" src="../../../script/aui-tab.js"></script>
+    <script src="../../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../../script/doT.js"></script>
+    <script src="../../../script/demo.js"></script>
+    <style>
+        .empty{ text-align: center; padding: 120px 0;}
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+        .top_bar{
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          background-color: white;
+          border-bottom: 1px solid #d2d2d2;
+        }
+        .top_inner{
+          width: 49.4%;
+          height: auto;;
+          float: left;
+          text-align: center;
+          position: relative;
+          background-color: white;
+        }
+
+        .top_inner_right{
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img{
+          vertical-align: middle;
+          width: 35px;
+          height: 35px;
+        }
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+        .mid_padding_8{
+          padding-top: 9px!important;
+          padding-bottom: 9px!important;
+          line-height: 1.0;
+        }
+        .title_panel{
+          width: 100%;
+          height: auto;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          border-top: 8px solid #f2f2f2;
+          background-color: white;
+
+        }
+        .list_title{
+          margin-left: 8px;
+          color: black;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+        .aui-tab-item {
+    width: 100%;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    position: relative;
+    font-size: 0.7rem;
+    text-align: center;
+    color: #666666;
+    margin-left: -1px;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+        .aui-tab-item.aui-active {
+    color: #6666ff;
+    border-bottom: none;
+}
+.xiahuaxian{
+  border-bottom: 1px solid #6666ff;
+}
+.quxiaoxiahuaxian{
+  border-bottom:none;
+}
+.zcText {
+  font-family: 'PingFang-SC';
+  font-size: 14px;
+  font-weight: 500;
+  /*color: #666666;*/
+}
+div.screening>ul {
+    height: 35px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border-bottom: none;
+    overflow: hidden;
+}
+div.screening>ul>li {
+    float: left;
+    width: 100%;
+    text-align: center;
+    line-height: 1.7rem;
+    border-left: solid 1px #d3d3d3;
+    background: url(../../../image/on_1.png) no-repeat 85% center;
+}
+    </style>
+</head>
+
+<body >
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con" >
+
+      <div>
+        <div >
+            <div class="aui-tab" id="tab" style=" position: fixed;width: 100%;z-index: 99;top:0px">
+                <div class="aui-tab-item "><span class="zcText xiahuaxian" id="gzc">国家政策</span></div>
+
+                <div style="height:1.5rem;border-right: 1px solid #000000;opacity: 0.1;position: relative;margin: auto;top: 0;">
+
+                </div>
+                <div class="aui-tab-item"><span class='zcText' id="szc">省份政策</span></div>
+            </div>
+
+        </div>
+
+
+      <!-- list start -->
+
+      <div class="aui-content aui-margin-b-15" style="display:block;padding-top: 45px;" id="guozhengce">
+
+        <ul class="aui-list aui-media-list"  >
+          <li class="aui-list-item" tapmode onclick="gaokaoXZXQ()">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media">
+                      <img src="../../../image/guojia.png" style="width: 94px;height: 83px;">
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">国务院关于深化考试招生制度改革的实施意见</div>
+
+                      </div>
+                      <div class="aui-info aui-margin-t-5" >
+                          <div class="aui-info-item">
+
+                              </div>
+                          <div class="aui-info-item">2014年9月3日</div>
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item" tapmode onclick="gaokaoXZXQ1()">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media">
+                      <img src="../../../image/jiaoyu.png" style="width: 94px;height: 83px;">
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">教育部关于普通高中学业水平考试的实施意见</div>
+
+                      </div>
+                      <div class="aui-info aui-margin-t-5" >
+                          <div class="aui-info-item">
+
+                              </div>
+                          <div class="aui-info-item">2014年12月10日</div>
+                      </div>
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item" tapmode onclick="gaokaoXZXQ2()">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media">
+                      <img src="../../../image/jiaoyu.png" style="width: 94px;height: 83px;">
+                  </div>
+                  <div class="aui-list-item-inner">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title">教育部关于加强和改进普通高中学生综合素质评价的意见</div>
+
+                      </div>
+                      <div class="aui-info aui-margin-t-5" >
+                          <div class="aui-info-item">
+
+                              </div>
+                          <div class="aui-info-item">2014年12月10日</div>
+                      </div>
+                  </div>
+              </div>
+          </li>
+        </ul>
+    </div>
+
+              <div style="margin-top: 10px;display:none" id="shengzhengce">
+                <div class="aui-content aui-margin-b-15" style="position: relative;top: 35px;">
+
+                  <ul class="aui-list aui-media-list" id="shengfenzhengce" >
+                    <script id="evaluationtmpl" type="text/x-dot-template">
+                    {{ for(var i=0;i  <it.length;i++) { }}
+                    <li class="aui-list-item"  tapmode onclick=gaokaoXZXQ3('{{=it[i].url}}')>
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media">
+                                <img src="http://www.yxke12.com/Public/Home/images/student/{{=it[i].pict}}" style="width: 94px;height: 83px;">
+                            </div>
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">{{=it[i].name}}</div>
+
+                                </div>
+                                <div class="aui-info aui-margin-t-5" >
+                                    <div class="aui-info-item">
+
+                                        </div>
+                                    <div class="aui-info-item">{{=it[i].time}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {{}}}
+              </script>
+
+                  </ul>
+              </div>
+
+    <!-- list end -->
+            </div>
+</div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+
+var evalText;
+//js点击事件监听开始
+function grade2(wbj){
+    var arr = document.getElementById("gradew1").getElementsByTagName("li");
+    for (var i = 0; i < arr.length; i++){
+        var a = arr[i];
+        a.style.background = "";
+
+    };
+    wbj.style.background = "#eee"
+  var diqu =  document.getElementById("xuexiaoshudi1").innerHTML= wbj.innerHTML
+  // diqu
+  api.showProgress({
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: false
+  });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Gaokaoxinzheng/lists.html',
+        method: 'post',
+        data: {
+            values: {
+                province:diqu
+            },
+
+        }
+    },function(ret, err){
+        if (ret) {
+api.hideProgress();
+
+
+      document.getElementById('shengfenzhengce').innerHTML = evalText(ret.data.lists);
+            // alert( JSON.stringify( ret ) );
+        } else {
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
+
+    // alert()
+}
+
+function yincang() {
+  document.getElementById('yincang3').className = 'grade-eject'
+}
+    apiready = function(){
+
+        api.parseTapmode();
+
+      // var data = $api.getStorage('data');
+      var data =JSON.parse(localStorage.data);
+      // alert(localStorage.data)
+     evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+      document.getElementById('shengfenzhengce').innerHTML = evalText(data);
+    //   api.setRefreshHeaderInfo({
+    //       loadingImg: 'widget://image/refresh.png',
+    //       bgColor: '#ccc',
+    //       textColor: '#fff',
+    //       textDown: '下拉刷新...',
+    //       textUp: '松开刷新...'
+    //     }, function(ret, err) {
+    //     //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+    //     // alert("刷新");
+    //     api.refreshHeaderLoadDone();
+    //   });
+    //
+    };
+
+function gaokaoXZXQ(){
+  api.openWin({
+      name: 'gaoKaoXinZhengNeiRong_win',
+      url: './gaoKaoXinZhengNeiRong_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
+function gaokaoXZXQ1(){
+  api.openWin({
+      name: 'gaoKaoXinZhengNeiRong1_win',
+      url: './gaoKaoXinZhengNeiRong1_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
+function gaokaoXZXQ2(){
+  api.openWin({
+      name: 'gaoKaoXinZhengNeiRong2_win',
+      url: './gaoKaoXinZhengNeiRong2_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
+function gaokaoXZXQ3(url){
+  // alert(url)
+  api.showProgress({
+    title: '努力加载中...',
+    text: '先喝杯茶...',
+    modal: false
+});
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Gaokaoxinzheng/infos.html',
+      method: 'post',
+      data: {
+          values: {
+              url: url
+          },
+      }
+  },function(ret, err){
+      if (ret) {
+        api.hideProgress();
+        var data = ret.data
+        localStorage.data = JSON.stringify(data)
+        api.openWin({
+            name: 'gaoKaoXinZhengNeiRong3_win',
+            url: './gaoKaoXinZhengNeiRong3_win.html',
+            pageParam: {
+                data: data
+            }
+        });
+          // console.log( JSON.stringify( ret ) );
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+
+
+
+}
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      var gzc = document. getElementById('gzc');
+        var szc = document. getElementById('szc');
+        if (ret.index ==1) {
+
+          gzc.className="zcText xiahuaxian";
+          szc.className="zcText";
+           document. getElementById('guozhengce').style.display = "block";
+           document. getElementById('shengzhengce').style.display = "none";
+        }
+        else {
+
+        szc.className="zcText xiahuaxian";
+        gzc.className="zcText";
+        document. getElementById('guozhengce').style.display = "none";
+        document. getElementById('shengzhengce').style.display = "block";
+        }
+    });
+    function xingXiangTest() {
+      api.openWin({
+          name: 'xingxiang_list_win',
+          url: './xingxiang_list_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+
+</script>
+</html>

@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+
+      ul li{
+        background-color: white;
+        height: 65px;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      ul li .ic{
+        width: 45px;
+        height: 45px;
+        border-radius: 22.5px;
+        margin-left: 10px;
+        margin-top: 10px;
+        float: left;
+      }
+
+      ul li span{
+          margin-left: 10px;
+          font-size: 18px;
+          display: inline-block;
+          float: left;
+          line-height: 65px;
+      }
+
+      ul li .ic_right{
+          float: right;
+          width: 22px;
+          height: 22px;
+          margin-top: 21.5px;
+          margin-right: 10px;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+
+      <ul id="stu_ul">
+        <script id="stu_s" type="text/x-dot-template">
+          {{for (var i = 0; i < it.stuList.length; i++) {}}
+            <li tapmode onclick="itemClick({{=i}});">
+              <img src="http://www.yxke12.com/Public/Home/images/touxiang/{{=it.stuList[i].img}}" class="ic"></img>
+              <span>{{=it.stuList[i].studentname}}</span>
+              {{if (it.group[it.stuList[i].studentid]) {}}
+                <img src="../../../../image/ic_g_select.png" class="ic_right" id="ic_{{=i}}" data-url="1"></img>
+              {{}else {}}
+                <img src="../../../../image/ic_g_unselect.png" class="ic_right" id="ic_{{=i}}" data-url="0"></img>
+              {{}}}
+            </li>
+          {{}}}
+        </script>
+      </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+    var source;
+    var stuTotalData = {};
+    var stu_dot;
+    var groupStuList = [];
+    var timer;
+    apiready = function() {
+        source = api.pageParam.source;
+        stu_dot = doT.template(document.getElementById('stu_s').innerHTML);
+        stuTotalData.group = {};
+        stuTotalData.stuList = [];
+        if(source == 1){
+          var _group = api.pageParam.data;
+          var obj = {};
+          for (var i = 0; i < _group.length; i++) {
+            obj[_group[i].studentid] = _group[i];
+            groupStuList.push(_group[i].studentid);
+          }
+          stuTotalData.group = obj;
+        }
+        getStudentList();
+
+    };
+
+    function getStudentList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/allstudent.html",
+          parames,function(_data) {
+            stuTotalData.stuList = _data;
+            document.getElementById('stu_ul').innerHTML = stu_dot(stuTotalData);
+            api.parseTapmode();
+          },null, true);
+    }
+
+    function itemClick(index) {
+        var stu = stuTotalData.stuList[index];
+        var ic = $api.byId('ic_' + index);
+        var value = $api.attr(ic, 'data-url');
+        // ic.src = "../../../../image/ic_g_unselect.png"
+        if (value == "0") {
+          $api.attr(ic, 'data-url', '1');
+          ic.src = "../../../../image/ic_g_select.png"
+          groupStuList.push(stu.studentid);
+          stuTotalData.group[stu.studentid] = stu;
+        }else {
+          $api.attr(ic, 'data-url', '0');
+          ic.src = "../../../../image/ic_g_unselect.png"
+          deleteStu(stu.studentid);
+          stuTotalData.group[stu.studentid] = null;
+        }
+    }
+
+    function deleteStu(_studentid) {
+        for (var i = 0; i < groupStuList.length; i++) {
+          if (groupStuList[i] == _studentid) {
+              groupStuList.splice(i, 1);
+              break;
+          }
+        }
+    }
+
+    function winFinishCall() {
+      if (source == 1) {
+        // 编辑
+        if(groupStuList.length == 0){
+          // 解散
+          api.confirm({
+              title:"提示",
+              msg: "确认解散？",
+              buttons: ['确定', '取消']
+          }, function(ret, err) {
+              if(ret.buttonIndex == 1){
+                //  disGroup();
+              }
+          });
+        }else{
+          api.confirm({
+              title:"提示",
+              msg: "确认修改？",
+              buttons: ['确定', '取消']
+          }, function(ret, err) {
+              if(ret.buttonIndex == 1){
+                 modifyGroup();
+              }
+          });
+        }
+      }else{
+        if (groupStuList.length == 0) {
+            api.toast({
+                msg: '请选择学生',
+                duration: 2000,
+                location: 'bottom'
+            });
+            return;
+        }
+        api.prompt({
+          title: "请输入小组名",
+          buttons: ['确定', '取消']
+        }, function(ret, err) {
+          var index = ret.buttonIndex;
+          var text = ret.text;
+          if(ret.buttonIndex == 1){
+            if (text == '') {
+              api.toast({
+                  msg: '创建失败！输入组名不能为空',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+
+              return;
+            }
+            addGroup(text);
+          }
+        });
+      }
+    }
+
+    function modifyGroup() {
+      var parames = {values:{}};
+      parames.values.id = api.pageParam.id;
+      parames.values.member = groupStuList;
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/modifyxiaozu.html",
+          parames,function(_data) {
+            api.toast({
+                msg: _data,
+                duration: 2000,
+                location: 'bottom'
+            });
+            timer = window.setInterval(timeCall,1000);
+          },null, true);
+
+    }
+
+    function addGroup(_text) {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      parames.values.member = groupStuList;
+      parames.values.zuname = _text;
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/createxiaozu.html",
+          parames,function(_data) {
+            api.toast({
+                msg: _data,
+                duration: 2000,
+                location: 'bottom'
+            });
+            timer = window.setInterval(timeCall,1000);
+          },null, true);
+    }
+
+    function timeCall() {
+      api.closeWin();
+      window.clearInterval(timer);
+      if (source == 1) {
+        var re_a = [];
+        for (var key in stuTotalData.group) {
+          if (stuTotalData.group.hasOwnProperty(key)) {
+              if (stuTotalData.group[key]) {
+                  re_a.push(stuTotalData.group[key]);
+              }
+          }
+        }
+          var re = $api.jsonToStr(re_a);
+          api.execScript({
+              name: 'edite_group_win',
+              frameName: 'edite_group_frm',
+              script: 'editeCallBack(' + re + ');'
+          });
+
+      }else {
+        // 更新分组列表
+        api.execScript({
+            name: 'class_manage_win',
+            frameName: 'class_manage_frm',
+            script: 'addResult();'
+        });
+
+      }
+    }
+</script>
+
+</html>

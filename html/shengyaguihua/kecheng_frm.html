@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+       <style>
+
+
+
+.z-col{
+  text-align: justify;
+}
+
+p{
+font-family: 'PingFang-SC';
+font-size: 0.8rem;
+font-weight: 500;
+
+color: #333333;
+width: 90%;
+margin: auto;
+line-height: 1.9
+}
+.left_line {
+    background-color: #6666ff;
+    height: 18px;
+    width: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+span{
+  padding-left: 10px;
+      line-height: 50px;
+  height: 50px;
+}
+.aui-tab-item.aui-active {
+    color: #6666ff;
+    border-bottom: 2px solid #6666ff;
+}
+       </style>
+</head>
+
+<body >
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con z-col" >
+
+        <div class="aui-tab" id="tab" style="position:fixed;width:100%;top: 0px;">
+            <div class="aui-tab-item aui-active">简介</div>
+            <div class="aui-tab-item"><div></div>学科要求</div>
+            <div class="aui-tab-item">学法指导</div>
+            <div class="aui-tab-item">相关专业</div>
+        </div>
+  <div id="xuankele" style="margin-top:60px">
+  <script id="evaluationtmpl" type="text/x-dot-template">
+
+  <div id="jieshao" style="background:#fff;margin-top: 10px;">
+
+    {{=it.couse_simple}}
+
+  </div>
+
+  <div id="yaoqiu" style="display:none">
+    <div style="background: #fff;margin-top: 10px;">
+    {{=it.content}}
+
+    </div>
+
+
+</div>
+<div id="zhidao" style="display:none">
+<div style="background: #fff;margin-top: 10px;">
+
+  {{=it.guide}}
+
+</div>
+
+    </div>
+  <div id="zhuanye" style="background:#fff;margin-top: 10px;display:none">
+
+        <p>{{=it.class}}</p>
+  </div>
+
+
+    </script>
+    </div>
+      </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/aui-tab.js" ></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+          api.parseTapmode();
+    var data =  JSON.parse(localStorage.data)
+    var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+    document.getElementById('xuankele').innerHTML = evalText(data);
+
+    }
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      if (ret.index==1) {
+          document.getElementById('jieshao').style.display = "block"
+          document.getElementById('yaoqiu').style.display = "none"
+          document.getElementById('zhidao').style.display = "none"
+          document.getElementById('zhuanye').style.display = "none"
+      }else if (ret.index == 2) {
+        document.getElementById('jieshao').style.display = "none"
+        document.getElementById('yaoqiu').style.display = "block"
+        document.getElementById('zhidao').style.display = "none"
+        document.getElementById('zhuanye').style.display = "none"
+      }else if (ret.index == 3) {
+        document.getElementById('jieshao').style.display = "none"
+        document.getElementById('yaoqiu').style.display = "none"
+        document.getElementById('zhidao').style.display = "block"
+        document.getElementById('zhuanye').style.display = "none"
+      }else {
+        document.getElementById('jieshao').style.display = "none"
+        document.getElementById('yaoqiu').style.display = "none"
+        document.getElementById('zhidao').style.display = "none"
+        document.getElementById('zhuanye').style.display = "block"
+      }
+        console.log(ret)
+    });
+
+</script>
+</html>

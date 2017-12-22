@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/aui.css"/>
+    <script type="text/javascript" src="script/api.js"></script>
+
+
+    <style>
+.bianDL{
+    background: #fff;
+    margin: auto;
+    border-radius: 22px
+}
+
+.aui-list .aui-list-item {
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 0%);
+    background-image: -webkit-linear-gradient(90deg,#dddddd,#dddddd 0%,transparent 0%);
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+     padding-bottom: 13px;
+    /*color: #212121;*/
+    /*border-bottom: 1px solid #dddddd;*/
+    position: relative;
+    min-height: 2.2rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.aui-list .aui-list-item-inner {
+    position: relative;
+    min-height: 2.2rem;
+    padding-right: 0.75rem;
+    width: 90%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.aui-list .aui-list-item-label-icon {
+    width: auto;
+    padding-left: 0.75rem;
+}
+.aui-list-item:active {
+	background-color: #dddddd!important;
+}
+.z-magin-t-28{
+  margin-top: 28.5px
+}
+.aui-btn-block {
+    display: block;
+    width: 90%;
+    height: 2.5rem;
+    line-height: 2.55rem;
+    margin: auto;
+    font-size: 0.9rem;
+    border-radius: 22px;
+    background: #6666ff;
+}
+.z-zhaohuimima{
+  width: 85%;
+  margin: auto;
+  margin-top: 25px;
+}
+.z-zhaohuimima span{
+
+ font-family: PingFang-SC;
+ font-size: 16px;
+ font-weight: 500;
+
+ color: #6666ff;
+}
+.z-r{
+  float: right;
+}
+
+    </style>
+</head>
+<body style="background: #dddddd">
+  <header id='he' class="aui-bar aui-bar-nav">会员登录</header>
+  <div class="aui-content aui-margin-b-15 z-magin-t-28" >
+      <ul class="aui-list aui-form-list" style="background: #dddddd" >
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner bianDL">
+                  <div class="aui-list-item-label-icon">
+                      <i class="aui-iconfont aui-icon-my"></i>
+                  </div>
+                  <div class="aui-list-item-input">
+                      <input type="text" placeholder="username" id="username">
+                  </div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner bianDL">
+                  <div class="aui-list-item-label-icon">
+                      <i class="aui-iconfont aui-icon-lock"></i>
+                  </div>
+                  <div class="aui-list-item-input">
+                      <input type="password" placeholder="password" id="password">
+                  </div>
+                  <div class="aui-list-item-label-icon">
+                      <i class="aui-iconfont aui-icon-display"></i>
+                  </div>
+              </div>
+          </li>
+      </ul>
+  </div>
+
+  <p><div class="aui-btn aui-btn-primary aui-btn-block" tapmode onclick="denglu()">登录</div></p>
+  <div class="z-zhaohuimima">
+    <span>卡号激活</span>
+    <span class="z-r">忘记密码</span>
+  </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+
+    apiready = function () {
+    $api.fixStatusBar($api.byId('he'));
+
+    if(document.readyState == 'complete'){
+        // alert("加载完成");
+        api.removeLaunchView()
+    }
+
+  }
+
+function denglu() {
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Student/login.html',
+      method: 'post',
+      data: {
+        values:{
+          username:$api.byId('username').value,
+          password:$api.byId('password').value,
+          }
+      }
+  },function(ret, err){
+      if (ret) {
+console.log(JSON.stringify(ret));
+          if (ret.status==100) {
+            localStorage.studentid = ret.data.studentid
+            localStorage.sex = ret.data.sex
+            localStorage.studentname = ret.data.studentname
+            localStorage.img = ret.data.img
+            // alert( localStorage.studentid );
+            api.openWin({
+                name: 'index',
+                url: 'index.html',
+                pageParam: {
+                    name: 'test'
+                },
+                // animation:{
+                //    type:"fade",
+                //    duration:1500
+                // },
+                slidBackEnabled:false
+
+            });
+            api.startPlay({
+                    path: 'rdio/lingsheng.mp3'
+            }, function(ret, err) {
+               if (ret) {
+              //  alert('播放完成');
+            } else {
+              //  alert(JSON.stringify(err));
+          }
+          });
+          return
+
+          }
+          alert( JSON.stringify(ret.data.status));
+
+      }
+  });
+
+
+
+
+
+
+}
+
+</script>

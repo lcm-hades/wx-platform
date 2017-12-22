@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        .auto {
+            height: auto;
+        }
+
+        p {
+            text-indent: 2em;
+            font-size: 16px;
+            padding-left: 5%;
+            padding-right: 10px;
+            font-family: "PingFang-SC";
+            color: #666666;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 18px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_title {
+            color: #6666ff;
+            font-size: 18px;
+            font-family: "PingFang-SC";
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .four_panel {
+            margin: 10px;
+            margin-left: 5%;
+            margin-bottom: 0px;
+        }
+
+        .four_tile {
+            font-family: "PingFang-SC";
+            font-size: 18px;
+        }
+
+        .content_font {
+            font-family: "PingFang-SC";
+            font-size: 16px;
+            color: #666666;
+            margin-top: 10px;
+        }
+
+        .img_bg {
+            height: 40px;
+            width: 90%;
+            background-image: url("../../image/four_bg.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 10px auto;
+        }
+
+        .img_tile {
+            color: white;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+        }
+
+        .left {
+            float: left;
+            display: inline-block;
+            line-height: 40px;
+            margin-left: 10px;
+        }
+
+        .right {
+            float: right;
+            display: inline-block;
+            line-height: 40px;
+            margin-right: 10px;
+        }
+
+        .font_title {
+            font-weight: bold;
+        }
+
+        .xingge_analyze {
+            height: auto;
+            width: 90%;
+            border-radius: 10px;
+            border: 1px dashed #6666ff;
+            margin: 10px auto;
+            padding-bottom: 12px;
+        }
+
+        .margin-12 {
+            margin: 12px;
+        }
+
+        .last-panel {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            padding: 8px;
+            margin: 10px;
+        }
+
+        .operation-panel {
+            height: 45px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;;
+        }
+
+        .z-btn {
+            background: #6666ff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            /*border: 1px solid #6666ff !important;*/
+            color: #ffffff;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .white-btn {
+            background: #ffffff;
+            height: 33px;
+            width: 150px;
+            margin-bottom: 0px;
+            line-height: 33px;
+            width: 45%;
+            border-radius: 16.5px;
+            border: 1px solid #a1a1a1 !important;
+            color: #a1a1a1;
+            font-size: 14px;
+            font-family: "PingFang-SC";
+        }
+
+        .margin-left-10 {
+            margin-left: 10px;
+        }
+
+        .item {
+            width: 45%;
+            height: 30px;
+            display: inline-block;
+            text-align: left;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+            line-height: 30px;
+            color: #333333;
+        }
+
+/*测试结果*/
+    .top_result{
+      width: 90%;
+      height: 75px;
+      background-color: #6666ff;
+      border-radius: 3px;
+      margin: 10px auto;
+      padding: 10px 0px;
+      overflow: hidden;
+    }
+    .result_miaoshu{
+      color: white;
+      font-family: "PingFang-SC";
+      text-indent: 0em;
+    }
+    .result_text{
+        font-size: 18px;
+        color: white;
+        font-family: "PingFang-SC";
+        text-indent: 0em;
+    }
+
+    .pic{
+      margin: 0 auto;
+      width: 80%;
+      height: 400px;
+      /*border: 1px solid #eeeeee;*/
+
+
+      }
+.pic p {
+    text-align: center;
+    padding: 20px 0;
+
+}
+ .pic .bei_zhu{
+    line-height: 18px;
+}
+ .pic .li_tu{
+    border: 1px solid #ABD8F7;
+    /*width: 580px;*/
+    height: 250px;
+    margin: 0 auto;
+    font-size: 14px;
+}
+ .pic .li_tu .box{
+
+    width: 50%;
+    height: 50px;
+    float: left;
+    border-right: 1px solid #ABD8F7;
+    border-bottom: 1px solid #ABD8F7;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+
+}
+.pic .li_tu .box:nth-child(2n){
+    border-right: none;
+}
+
+.pic .li_tu .rt span{
+    display: inline-block;
+    /*line-height: 50px;*/
+    padding: 0px 10px;
+    position: absolute;
+    right: -32px;
+    top: 0px;
+}
+
+.pic .li_tu .lt span{
+    display: inline-block;
+    /*line-height: 50px;*/
+    padding: 0px 10px;
+    position: absolute;
+    left: -32px;
+    top: 0px;
+}
+.pic .li_tu .box .left{
+    width: 100%;
+    height: 35px;
+    margin-left: 3px;
+    margin-top: 7px;
+    /*background-color: red;*/
+    /*float: right;*/
+}
+.pic .li_tu .box .left .bian {
+    width: 30%;
+    height: 80%;
+    background-color: #FD8E41;
+    margin-top: 4px;
+    float: right;
+    margin-right: 2px;
+}
+.pic .li_tu .box .right .bian {
+    width: 30%;
+    height: 80%;
+    background-color: #FD8E41;
+    margin-top: 4px;
+    float: left;
+    margin-left: 2px;
+}
+.pic .li_tu .box .right{
+    width: 100%;
+    height: 35px;
+    margin-right: 3px;
+    margin-top: 7px;
+    /*background-color: yellow;*/
+}
+
+.pic .li_tu .f_duan{
+    width: 100%;
+    height: 50px;
+    /*background-color: pink;*/
+
+
+}
+.pic .li_tu .f_duan div{
+    /*line-height: 50px;*/
+    text-align: center;
+
+    float: left;
+
+}
+
+/*.pic .li_tu .f_duan .mingxian {
+    width: 20px;
+    border-right: 1px solid #ABD8F7;
+
+}
+ .pic .li_tu .f_duan .rt {
+    width: 45px;
+    border-right: none;
+
+}
+.pic .li_tu .f_duan .qingwei {
+    width: 240px;
+    border-right: 1px solid #ABD8F7;
+}
+.pic .li_tu .f_duan .bijiaomingxian {
+    width: 60px;
+    border-right: 1px solid #ABD8F7;
+}
+.pic .li_tu .f_duan .yiban {
+    width: 120px;
+    border-right: 1px solid #ABD8F7;
+
+}*/
+        .pic .li_tu .f_duan .rt {
+           width: 45px;
+           border-right: none;
+        }
+
+        .pic .li_tu .f_duan .mingxian {
+            width: 7%;
+            height: 50px;
+            font-size: 12px;
+
+        }
+       .right-line {
+            border-right: 1px solid #ABD8F7!important;
+        }
+
+        .pic .li_tu .f_duan .bijiaomingxian {
+            width: 10%;
+            height: 50px;
+            border-right: 1px solid #ABD8F7;
+            font-size: 12px;
+        }
+        .pic .li_tu .f_duan .yiban {
+            width: 17%;
+            height: 50px;
+            border-right: 1px solid #ABD8F7;
+            font-size: 12px;
+        }
+        .pic .li_tu .f_duan .qingwei {
+            width: 28%;
+            height: 50px;
+            border-right: 1px solid #ABD8F7;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div id="report" class="flex-wrap flex-vertical">
+
+        <script id="interpolationtmpl" type="text/x-dot-template">
+        <div style="margin-left:5%;padding-top:10px;">
+          <span style="color:#6666ff;font-size:16px;font-weight:bold;font-family: 'PingFang-SC';">{{=it.studentname}}</span>
+          <span style="color:#666666;font-size:16px;font-family: 'PingFang-SC';">同学：</span>
+        </div>
+        <p>您好！</p>
+        <p>非常感谢你使用我们的系统进行高中生职业性格测试，职业性格测试主要探讨你的性格所具备的职业倾向，最终为你在高中阶段的学科选择、高考志愿填报以及未来职业生涯的规划提供参考。</p>
+        <p>职业心理学的研究表明，不同的职业有不同的性格要求。虽然每个人的性格都不能百分之百地适合某项职业，但却可以根据自己的职业倾向来培养、发展相应的职业性格。</p>
+        <p>本报告是根据你的实际作答情况，从四个维度对你的性格特质、职业特点等做出分析，结合国家最新公布的职业数据，为你定制具有科学指导意义的个性化评估报告。</p>
+
+        <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+            <div class="left_line"></div>
+            <span class="section_title">测试方法</span>
+        </div>
+        <p>本测试采用MBTI 人格理论模型，该模型的基础是著名心理学家卡尔·荣格（Carl G. Jung）关于心理类型的划分，后经美国心理学家Katharine Cook Briggs 与Isabel Briggs Myers 研究并加以发展而形成的。MBTI 人格分为四个维度，每个维度有两个方向，共计8个方向，即8种人格特点，具体如下：</p>
+
+        <div class="four_panel">
+            <span class="four_tile">态度倾向</span>
+            <span class="content_font">我们与世界相互作用的方式<span>
+          <div class="content_font">
+            <span class="font_title">外向:</span> 关注自己如何影响外部环境：将心理能量和注意力聚集于外部世界和与他人的交往上。
+        </div>
+        <div class="content_font">
+            <span class="font_title">内向:</span> 关注外部环境的变化对自己的影响：将心理能量和注意力聚集于内部世界，注重自己的内心体验。
+        </div>
+        <div class="img_bg"><span class="img_tile left">E外向</span><span class="img_tile right">I内向</span></div>
+    </div>
+
+    <div class="four_panel">
+        <span class="four_tile">接受信息</span>
+        <span class="content_font">我们获取信息的主要方式<span>
+          <div class="content_font">
+            <span class="font_title">感觉:</span> 关注由感觉器官获取的具体信息：看到的、听到的、闻到的、尝到的、触摸到的事物。
+    </div>
+    <div class="content_font">
+        <span class="font_title">直觉:</span> 关注事物的整体和发展变化趋势：灵感、预测、暗示，重视推理。
+    </div>
+    <div class="img_bg"><span class="img_tile left">S感觉</span><span class="img_tile right">N直觉</span></div>
+    </div>
+
+    <div class="four_panel">
+        <span class="four_tile">处理信息</span>
+        <span class="content_font">我们的决策方式<span>
+          <div class="content_font">
+            <span class="font_title">思考:</span> 重视事物之间的逻辑关系，喜欢通过客观分析作决定评价。
+    </div>
+    <div class="content_font">
+        <span class="font_title">情感:</span> 以自己和他人的感受为重，将价值观作为判定标准。
+    </div>
+    <div class="img_bg"><span class="img_tile left">T思考</span><span class="img_tile right">F情感</span></div>
+    </div>
+
+    <div class="four_panel">
+        <span class="four_tile">行动方式</span>
+        <span class="content_font">我们的做事方式<span>
+          <div class="content_font">
+            <span class="font_title">判断:</span> 喜欢做计划和决定，愿意进行管理和控制，希望生活井然有序。
+    </div>
+    <div class="content_font">
+        <span class="font_title">知觉:</span> 灵活、试图去理解、适应环境、倾向于留有余地，喜欢宽松自由的生活方式。
+    </div>
+    <div class="img_bg"><span class="img_tile left">J判断</span><span class="img_tile right">P知觉</span></div>
+    </div>
+
+    <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+        <div class="left_line"></div>
+        <span class="section_title">测试结果</span>
+    </div>
+
+    <div class="top_result">
+        <p class="result_miaoshu">根据测试，你的性格特征为：</p>
+        <p class="result_text">“{{=it.en}}”({{=it.text1}}+{{=it.text2}}+{{=it.text3}}+{{=it.text4}})</p>
+        <p class="result_text" style="float:right;margin-right:10px;">——{{=it.cn}}</p>
+    </div>
+
+    <div class="pic">
+        <p>MBTI倾向示意图</p>
+
+        <div class="li_tu clearFix">
+            <div class="clearFix">
+                <div class="box lt">
+                    <span>外</br>倾</span>
+
+                    <div class="left">
+                        {{if (it.values1 > it.values2) {}}
+                          <div class="bian" style="background:#9ee6d9; width:{{=it.values1/(it.values1+it.values2)*100}}%;"></div>
+                        {{}else{}}
+                          <div class="bian" style="background:#9ee6d9; width:0%;"></div>
+                        {{}}}
+                    </div>
+                </div>
+                <div class="box rt">
+                    <div class="right">
+                        {{if (it.values1 <= it.values2) {}}
+                          <div class="bian" style="background:#ff9999; width:{{=it.values2/(it.values1+it.values2)*100}}%;"></div>
+                        {{}else{}}
+                          <div class="bian" style="background:#ff9999; width:0%;"></div>
+                        {{}}}
+
+
+                    </div>
+                    <span>内</br>倾</span>
+                </div>
+                <div class="box lt">
+                    <span>感</br>觉</span>
+
+                    <div class="left">
+                      {{if (it.values3 > it.values4) {}}
+                        <div class="bian" style="background:#9ee6d9; width:{{=it.values3/(it.values3+it.values4)*100}}%;"></div>
+                      {{}else{}}
+                        <div class="bian" style="background:#9ee6d9; width:0%;"></div>
+                      {{}}}
+                    </div>
+                </div>
+                <div class="box rt">
+                    <div class="right">
+                      {{if (it.values3 <= it.values4) {}}
+                        <div class="bian" style="background:#ff9999; width:{{=it.values4/(it.values3+it.values4)*100}}%;"></div>
+                      {{}else{}}
+                        <div class="bian" style="background:#ff9999; width:0%;"></div>
+                      {{}}}
+                    </div>
+                    <span>直</br>觉</span>
+                </div>
+                <div class="box lt">
+                    <span>思</br>维</span>
+
+                    <div class="left">
+
+                      {{if (it.values5 > it.values6) {}}
+                        <div class="bian" style="background:#9ee6d9; width:{{=it.values5/(it.values5+it.values6)*100}}%;"></div>
+                      {{}else{}}
+                        <div class="bian" style="background:#9ee6d9; width:0%;"></div>
+                      {{}}}
+                    </div>
+                </div>
+                <div class="box rt">
+                    <div class="right">
+                      {{if (it.values5 <= it.values6) {}}
+                        <div class="bian" style="background:#ff9999; width:{{=it.values6/(it.values5+it.values6)*100}}%;"></div>
+                      {{}else{}}
+                        <div class="bian" style="background:#ff9999; width:0%;"></div>
+                      {{}}}
+                    </div>
+                    <span>情</br>感</span>
+                </div>
+                <div class="box lt">
+                    <span>判</br>断</span>
+                    <div class="left">
+                      {{if (it.values7 > it.values8) {}}
+                        <div class="bian" style="background:#9ee6d9; width:{{=it.values7/(it.values7+it.values8)*100}}%;"></div>
+                      {{}else{}}
+                        <div class="bian" style="background:#9ee6d9; width:0%;"></div>
+                      {{}}}
+                    </div>
+                </div>
+                <div class="box rt">
+                    <div class="right">
+                        {{if (it.values7 <= it.values8) {}}
+                          <div class="bian" style="background:#ff9999; width:{{=it.values8/(it.values7+it.values8)*100}}%;"></div>
+                        {{}else{}}
+                          <div class="bian" style="background:#ff9999; width:0%;"></div>
+                        {{}}}
+                    </div>
+                    <span>知</br>觉</span>
+                </div>
+            </div>
+
+            <div class="f_duan clearFix">
+                <div class="mingxian right-line">明显</div>
+                <div class="bijiaomingxian">比较明显</div>
+                <div class="yiban">一般</div>
+                <div class="qingwei">轻微</div>
+                <div class="yiban ">一般</div>
+                <div class="bijiaomingxian ">比较明显</div>
+                <div class="mingxian rt">明显</div>
+            </div>
+        </div>
+        <p class="bei_zhu" style="font-size: 14px;text-align:left;text-indent: 0em;">
+            <b style="vertical-align: top;">备注：</b>倾向示意图表示四个维度分别的倾向成度。<br/>从中间往两边看，颜色区块指示条对应下面坐标的哪个区域。
+        </p>
+    </div>
+
+
+    <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+        <div class="left_line"></div>
+        <span class="section_title">职业性格分析</span>
+    </div>
+
+    <div class="xingge_analyze">
+        <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+            <span class="section_title margin-12">
+              个性特征描述
+            </span>
+            <p style="text-indent:0em;">
+                {{=it.gexingtezheng}}
+            </p>
+        </div>
+        <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+            <span class="section_title margin-12">
+              对组织的贡献
+            </span>
+            <p style="text-indent:0em;">
+              {{=it.zuzhigongxian}}
+            </p>
+        </div>
+        <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+            <span class="section_title margin-12">
+              领导模式
+            </span>
+            <p style="text-indent:0em;">
+              {{=it.lingdaoms}}}
+            </p>
+        </div>
+        <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+            <span class="section_title margin-12">
+              学习模式
+            </span>
+            <p style="text-indent:0em;">
+              {{=it.xuexims}}}
+            </p>
+        </div>
+        <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+            <span class="section_title margin-12">
+              解决问题模式
+            </span>
+            <p style="text-indent:0em;">
+              {{=it.jiejuewtms}}
+            </p>
+        </div>
+        <div style="border-bottom: 1px dashed #6666ff; padding-bottom:12px;">
+            <span class="section_title margin-12">
+              工作环境倾向性
+            </span>
+            <p style="text-indent:0em;">
+              {{=it.gongzuohjqxx}}
+            </p>
+        </div>
+        <span class="section_title margin-12">
+          发展建议
+        </span>
+        <p style="text-indent:0em;">
+          {{=it.fazhanjy}}}
+        </p>
+    </div>
+
+
+    <div style="margin-left:5%;margin-top:10px;height:auto;display: none;">
+        <div class="left_line"></div>
+        <span class="section_title">适合的职业</span>
+    </div>
+    <ul style="margin-left:5%;display:none">
+      {{var shihezhiye_arr = it.shihezhiye.split("、");}}
+      {{if(shihezhiye_arr.length%2 != 0){}}
+          {{shihezhiye_arr.push("");}}
+      {{}}}
+      {{for (var i = 0; i < shihezhiye_arr.length; i+=2) {}}
+        <li>
+            <div class="item">{{=shihezhiye_arr[i]}}</div>
+            <div class="item">{{=shihezhiye_arr[i+1]}}</div>
+        </li>
+      {{}}}
+    </ul>
+    <div class="last-panel">
+        <p>
+            我们真心希望，通过我们的测评报告，能帮助你发现平常从未知晓的自己，并帮助你进行自己的职业生涯规划，为你开启一扇智慧的大门。
+        </p>
+    </div>
+
+    <div class="operation-panel">
+        <div id="st_id" style="display:none;" class="aui-btn aui-btn-primary aui-btn-block white-btn " tapmode onclick="sendTeacher()">发送老师</div>
+        <div class="aui-btn aui-btn-primary aui-btn-block z-btn margin-left-10" tapmode onclick="continueTest()">继续测试</div>
+    </div>
+</script>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript">
+var data;
+    apiready = function() {
+        api.parseTapmode();
+        data = $api.strToJson(localStorage.data);
+        console.log("ffffffffffffffff "+JSON.stringify(data));
+        var conText = doT.template(document.getElementById('interpolationtmpl').innerHTML);
+        document.getElementById('report').innerHTML = conText(data);
+        var teacher = data.teacher;
+        if (teacher == 1) {
+          var st = $api.byId('st_id');
+          st.disabled = true;
+        }
+    };
+
+    function sendTeacher() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Baogao/result.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  num:data.num,
+                  type:"mbti",
+                  value:data.en
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+                var st = $api.byId('st_id');
+                st.disabled = true;
+                api.toast({
+                    msg: ret.data.infos,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                // console.log(JSON.stringify(ret.data));
+            }else {
+              api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+              console.log(JSON.stringify( ret ));
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+    }
+
+    function continueTest() {
+        api.openWin({
+            name: 'zhuanYe_win',
+            url: './zhuanYe_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html style="background-color: #f5f5f5;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+    .aui-list .aui-list-item-title {
+        font-size: 0.8rem;
+        position: relative;
+        max-width: 100%;
+        color: #333333;
+        margin-left: 5px;
+    }
+
+    .aui-list .aui-list-item-right{
+         max-width: 100%;
+        position: relative;
+        font-size: 0.6rem;
+        color: #757575;
+        margin-left: 0.25rem;
+    }
+    table{
+      text-align: center;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+    td{
+      width: 25%;
+      padding: 0.5rem 0;
+    }
+    .left_line {
+        background-color: #6666ff;
+        height: 18px;
+        width: 4px;
+        margin-top: auto;
+        margin-bottom: auto;
+        float: left;
+    }
+    .section_title {
+        color: #333333;
+        font-size: 16px;
+        font-family: "PingFang-SC";
+        margin-left: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+  <section class="aui-content" id="center_ul">
+    <script id="center_s" type="text/x-dot-template">
+    <ul class="aui-list aui-list-in aui-margin-b-15">
+        <li class="aui-list-item" tapmode onclick="selectImg();">
+            <div class="aui-list-item-inner aui-list-item-arrow">
+                <div class="aui-list-item-title">头像</div>
+                <div class="aui-list-item-right">
+                  <img src="http://www.yxke12.com/Public/Home/images/touxiang/{{=it.img}}" style='width:3rem;height:3rem;margin:0.5rem 0;border-radius:1.5rem;' alt="">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+      <ul  class="aui-list aui-list-in aui-margin-b-15">
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">用户名</div>
+                  <div class="aui-list-item-right">{{=it.loginname}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">所在地区</div>
+                  <div class="aui-list-item-right">{{=it.sheng}}</div>
+              </div>
+          </li>
+
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">学籍号</div>
+                  <div class="aui-list-item-right">{{=it.enrollmentno}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">入学年份</div>
+                  <div class="aui-list-item-right">{{=it.nianji}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">中考成绩</div>
+                  {{if (it.msexamscore==""||it.msexamscore==null||it.msexamscore==undefined) {}}
+                    <div class="aui-list-item-right">请到电脑端填写</div>
+                  {{}else{}}
+                    <div class="aui-list-item-right">{{=it.msexamscore}}</div>
+                  {{}}}
+
+              </div>
+          </li>
+
+
+      </ul>
+      <ul class="aui-list aui-list-in aui-margin-b-15">
+
+
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner ">
+                    <div class="aui-list-item-title">学校</div>
+                    <div class="aui-list-item-right">{{=it.school}}</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+
+                <div class="aui-list-item-inner ">
+                    <div class="aui-list-item-title">年级</div>
+                    {{if (it.grade==null||it.grade==""||it.grade==undefined) {}}
+                      <div class="aui-list-item-right" id="grade">该校暂未设置分班</div>
+                    {{}else {}}
+                      <div class="aui-list-item-right" id="grade">{{=it.grade}}</div>
+                    {{}}}
+
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner ">
+                    <div class="aui-list-item-title">班级</div>
+                    {{if (it.grade==null||it.grade==""||it.grade==undefined) {}}
+                    <div class="aui-list-item-right" id="class">
+                        该校暂未设置分班
+                    </div>
+                    {{}else {}}
+                    <div class="aui-list-item-right" id="class">
+                        {{=it.class}}
+                    </div>
+                    {{}}}
+
+                </div>
+            </li>
+
+      </ul>
+      <ul class="aui-list aui-list-in aui-margin-b-15">
+
+                <li class="aui-list-item">
+
+                    <div class="aui-list-item-inner ">
+                        <div class="aui-list-item-title">学生姓名</div>
+                        <div class="aui-list-item-right">{{=it.studentname}}</div>
+                    </div>
+                </li>
+                <li class="aui-list-item">
+
+                    <div class="aui-list-item-inner ">
+                        <div class="aui-list-item-title">性别</div>
+                        <div class="aui-list-item-right">{{=it.sex}}</div>
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="birthday()">
+
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-title" >出生日期</div>
+
+                        {{if (it.birthday == null || it.birthday == '' || it.birthday == undefined) {}}
+                          <div class="aui-list-item-right" id="birthday">暂无</div>
+                        {{}else {}}
+                          <div class="aui-list-item-right" id="birthday">{{=it.birthday}}</div>
+                        {{}}}
+                    </div>
+                </li>
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner ">
+                        <div class="aui-list-item-title">考试类型</div>
+                        <div class="aui-list-item-right">{{=it.type}}</div>
+                    </div>
+                </li>
+
+
+      </ul>
+      <ul class="aui-list aui-list-in aui-margin-b-15">
+
+              <li class="aui-list-item" tapmode onclick="onTelClick()">
+
+                  <div class="aui-list-item-inner ">
+                      <div class="aui-list-item-title">手机号</div>
+                      {{if (it.hideTel == null || it.hideTel == '' || it.hideTel == undefined) {}}
+                        <div class="aui-list-item-right">暂无</div>
+                      {{}else {}}
+                        <div class="aui-list-item-right">{{=it.hideTel}}</div>
+                      {{}}}
+
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner ">
+                      <div class="aui-list-item-title">身高</div>
+                      {{if (it.height==""||it.height==null||it.height==undefined) {}}
+                        <div class="aui-list-item-right">请到电脑端填写</div>
+                      {{}else{}}
+                      <div class="aui-list-item-right" >
+                          {{=it.height}}
+                      </div>
+                      {{}}}
+
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner ">
+                      <div class="aui-list-item-title">体重</div>
+                      {{if (it.weight==""||it.weight==null||it.weight==undefined) {}}
+                        <div class="aui-list-item-right">请到电脑端填写</div>
+                      {{}else{}}
+                      <div class="aui-list-item-right" >
+                          {{=it.weight}}
+                      </div>
+                      {{}}}
+
+                  </div>
+              </li>
+              <li class="aui-list-item">
+                  <div class="aui-list-item-inner ">
+                      <div class="aui-list-item-title">特长</div>
+                      {{if (it.specialty==""||it.specialty==null||it.specialty==undefined) {}}
+                        <div class="aui-list-item-right">请到电脑端填写</div>
+                      {{}else{}}
+                      <div class="aui-list-item-right" id="class">
+                          {{=it.specialty}}
+                      </div>
+                      {{}}}
+
+                  </div>
+              </li>
+
+      </ul>
+    </script>
+
+  </section>
+
+
+
+<!-- 经历 -->
+
+<section class="aui-content"  id="wodejili">
+  <div style="margin-left:5%;margin-top:10px;height:auto;display: inline-flex;">
+      <div class="left_line"></div>
+      <div class="section_title">经历</div>
+  </div>
+  <table  id="xsjl">
+    <script id="jl" type="text/x-dot-template">
+          <tr style="border-top: 1px solid #e5e5e5;border-bottom: 1px solid #e5e5e5;">
+            <td>起始时间</td>
+            <td>终止时间</td>
+            <td>所在学校</td>
+            <td>证明人</td>
+          </tr>
+          <tr style="background:#fff;border-bottom: 1px solid #e5e5e5;">
+          {{if (it.startime==""||it.startime==null||it.startime==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+              <td>{{=it.startime}}</td>
+          {{}}}
+          {{if (it.endtime==""||it.endtime==null||it.endtime==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+              <td>{{=it.endtime}}</td>
+          {{}}}
+          {{if (it.suozaixuexiao==""||it.suozaixuexiao==null||it.suozaixuexiao==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+              <td>{{=it.suozaixuexiao}}</td>
+          {{}}}
+          {{if (it.zhengmingren==""||it.zhengmingren==null||it.zhengmingren==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+              <td>{{=it.zhengmingren}}</td>
+          {{}}}
+
+          </tr>
+          <tr style="background:#fff;border-bottom: 1px solid #e5e5e5;">
+          {{if (it.startime1==""||it.startime1==null||it.startime1==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.startime1}}</td>
+          {{}}}
+          {{if (it.endtime1==""||it.endtime1==null||it.endtime1==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.endtime1}}</td>
+          {{}}}
+          {{if (it.suozaixuexiao1==""||it.suozaixuexiao1==null||it.suozaixuexiao1==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.suozaixuexiao1}}</td>
+          {{}}}
+          {{if (it.zhengmingren1==""||it.zhengmingren1==null||it.zhengmingren1==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.zhengmingren1}}</td>
+          {{}}}
+
+          </tr>
+          <tr style="background:#fff;border-bottom: 1px solid #e5e5e5;">
+          {{if (it.startime2==""||it.startime2==null||it.startime2==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.startime2}}</td>
+          {{}}}
+          {{if (it.endtime2==""||it.endtime2==null||it.endtime2==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.endtime2}}</td>
+          {{}}}
+          {{if (it.suozaixuexiao2==""||it.suozaixuexiao2==null||it.suozaixuexiao2==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.suozaixuexiao2}}</td>
+          {{}}}
+          {{if (it.zhengmingren2==""||it.zhengmingren2==null||it.zhengmingren2==undefined) {}}
+              <td>--</td>
+          {{}else {}}
+            <td>{{=it.zhengmingren2}}</td>
+          {{}}}
+
+          </tr>
+      </script>
+  </table>
+</section>
+</div>
+<!-- <li class="aui-list-item">
+    <div class="aui-list-item-inner aui-list-item-arrow">
+        <div class="aui-list-item-title">考试类型</div>
+        <div class="aui-list-item-right">
+          <select class="aui-list-item-right" onchange="onTypeChange(this.value)">
+            {{if (it.type == '文科') {}}
+              <option value="0" selected = "selected">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文科</option>
+              <option value="1" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp理科</option>
+              <option value="2">文理不分科</option>
+            {{}else if (it.type == '理科') {}}
+              <option value="0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文科</option>
+              <option value="1" selected = "selected" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp理科</option>
+              <option value="2">文理不分科</option>
+            {{}else {}}
+              // 文理不分
+              <option value="0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp文科</option>
+              <option value="1">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp理科</option>
+              <option value="2" selected = "selected">文理不分科</option>
+            {{}}}
+          </select>
+        </div>
+    </div>
+</li> -->
+
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+<script type="text/javascript" src="../../script/tools.js"></script>
+<script type="text/javascript">
+    var data = {};
+    var cur_pic = null;
+    var cur_type = null;
+    var new_type = null;
+    var center_dot=doT.template(document.getElementById('center_s').innerHTML);
+    var xsjl1=doT.template(document.getElementById('jl').innerHTML);
+
+    apiready = function(){
+        api.parseTapmode();
+        getData();
+        setCurData();
+        if ($api.getStorage('jsons')==""||$api.getStorage('jsons')==null||$api.getStorage('jsons')==undefined) {
+          $api.byId('wodejili').style.display="none";
+        }else {
+          $api.byId('wodejili').style.display="block";
+          var jldata = $api.getStorage('jsons')
+          var jlDate =$api.strToJson(jldata)
+          document.getElementById('xsjl').innerHTML = xsjl1(jlDate);
+        }
+    };
+
+    function setCurData() {
+        cur_type = data.type;
+        new_type = data.type;
+        // cur_pic = data.img;
+    }
+
+    function getData() {
+      // img
+      console.log($api.getStorage('enrollmentno'));
+      data.img = $api.getStorage('img');
+      data.insuranceno = $api.getStorage('insuranceno');
+      data.enrollmentno = $api.getStorage('enrollmentno');
+      data.msexamscore = $api.getStorage('msexamscore');
+      data.height = $api.getStorage('height');
+      data.weight = $api.getStorage('weight');
+      data.specialty = $api.getStorage('specialty');
+      // loginname
+      data.loginname = $api.getStorage('loginname');
+      // studentname
+      data.studentname = $api.getStorage('studentname');
+      // sex
+      data.sex = $api.getStorage('sex');
+      // nianji
+      data.nianji = $api.getStorage('nianji');
+      // sheng
+      data.banji = $api.getStorage('banji');
+      // type
+      data.type = $api.getStorage('type');
+      // sheng
+      data.sheng = $api.getStorage('sheng');
+      data.nianji = $api.getStorage('nianji');
+
+      // school
+      data.school = $api.getStorage('school');
+      data.grade = $api.getStorage('grade');
+      data.class = $api.getStorage('banji');
+      data.birthday = $api.getStorage('birthday');
+      data.tel = $api.getStorage('tel');
+      if (data.tel != null && tools.isPhone(data.tel)) {
+          data.hideTel = tools.hidePhone(data.tel);
+      }
+      document.getElementById('center_ul').innerHTML = center_dot(data);
+    }
+    var type_arr = ['文科', '理科', '文理不分科'];
+
+
+    function onTypeChange(value) {
+        // console.log(type_arr[value]);
+        new_type = type_arr[value];
+        uploadData()
+    }
+
+    function selectImg() {
+        api.getPicture({
+            sourceType: 'album',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            targetWidth: 130,
+            targetHeight: 130,
+            saveToPhotoAlbum: false
+        }, function(ret, err){
+         //  console.log(JSON.stringify(ret));
+            if(ret){
+                if (ret.data != null) {
+                  cur_pic = ret.data;
+                  uploadData();
+                }
+
+            }else{
+                 console.log(JSON.stringify(err));
+            }
+        });
+
+    }
+
+    function uploadData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Member/editinfo.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  type: new_type,
+              },
+              files: {
+                  file: cur_pic
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+        console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              if (ret.data.touxiang != null) {
+                data.img = ret.data.touxiang;
+                cur_pic = ret.data.touxiang;
+                $api.setStorage('img', cur_pic);
+
+              }
+
+              if (ret.data.type != null) {
+                data.type = ret.data.type;
+                cur_type = ret.data.type;
+                $api.setStorage('type', cur_type);
+              }else{
+                new_type = cur_type;
+              }
+
+            }else {
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+          document.getElementById('center_ul').innerHTML = center_dot(data);
+          api.parseTapmode();
+      });
+
+    }
+
+
+    function birthday() {
+      api.openPicker({
+          type: 'date',
+          date: new Date(),
+          title: '选择时间'
+      }, function(ret, err) {
+          if (ret) {
+              $api.byId('birthday').innerHTML = ret.year+'-'+ret.month+'-'+ret.day;
+              var date = ret.year+'-'+ret.month+'-'+ret.day;
+              var parames = {values:{}}
+              parames.values.studentid=$api.getStorage('studentid');
+              parames.values.date=date;
+              zhc.post('http://www.yxke12.com/index.php/App/Member/savememberinfo.html',parames,function(data) {
+              if (data.status == 100) {
+                api.toast({
+                  msg: '保存成功',
+                  duration: 2000,
+                  location: 'bottom'
+              });
+
+              }
+              },null,true)
+          } else {
+
+          }
+      });
+    }
+
+    function onTelClick() {
+      if (data.tel) {
+        api.openWin({
+            name: "auth_phone_win",
+            url: './cell-phone/auth_phone_win.html',
+            pageParam: {
+                phone: data.tel
+            }
+        });
+      }else {
+        api.openWin({
+            name: "new_phone_win",
+            url: './cell-phone/new_phone_win.html',
+            pageParam: {
+              source: 0
+            }
+        });
+      }
+
+
+    }
+</script>
+</html>

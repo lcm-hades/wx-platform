@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style type="text/css">
+        #classify {
+            color: #ffffff !important;
+        }
+        span{
+          vertical-align: top;
+        }
+        .pinglunneirong {
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          color: #333333;
+          margin: auto;
+          width: 70%;
+        }
+        .xuehao {
+          font-family: 'PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          color: #6666ff;
+        }
+        .xuehaoneirong {
+          font-family:' PingFang-SC';
+          font-size: 0.7rem;
+          font-weight: 500;
+          text-align: left;
+          color: #333333;
+        }
+    .bottom_fix{
+        position: fixed;
+        width: 100%;
+        bottom:0;
+    }
+
+    .search-input {
+        height: 1.6rem!important;
+        line-height: 1.6rem!important;
+        background: #f5f5f5!important;
+        border-radius: 30px!important;
+        position: relative;
+        font-family:"aui_iconfont" !important;
+        text-align: left;
+        padding-left: 1.5rem!important;
+        color: #999999;
+    }
+    .search-input:after {
+        position: absolute;
+        left: 0;
+        padding-left: 0.5rem;
+        content: "\e615";
+    }
+    section{
+          /* main绝对定位，进行内部滚动 */
+
+          position: absolute;
+          top: 0;
+          bottom: 54px;
+          /* 使之可以滚动 */
+          overflow-y: scroll;
+          /* 增加该属性，可以增加弹性 */
+          /*-webkit-overflow-scrolling: touch;*/
+          height: auto;
+    }
+    .fasong{
+      width: 2.5rem;
+      height: 1.3rem;
+      background: #3ec234;
+      border: 1px solid #219718;
+      color: #fff;
+      font-family: "PingFang-SC";
+      font-size: 0.8rem;
+      display: inline-block;
+      line-height: 1.3rem;
+      position: fixed;
+      bottom: 0.65rem;
+      right: 0.75rem;
+      border-radius: 5px;
+    }
+
+
+    #textarea {
+    display: block;
+    margin:0 auto;
+    overflow: hidden;
+    width: 100%;
+    font-size: 14px;
+    height: 18px;
+    line-height: 24px;
+    margin-bottom: 0.75rem;
+    margin-top: 0.75rem;
+    /*padding:2px;*/
+}
+.aui-content::-webkit-scrollbar {display:none}
+textarea {
+    outline: 0 none;
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+    </style>
+</head>
+<body >
+
+
+
+
+
+    <!-- <footer class="aui-bar aui-bar-tab aui-margin-t-15 "> -->
+        <!-- <div class="aui-bar-tab-item aui-padded-l-15 aui-padded-r-15" tapmode style="width: auto;"> -->
+          <!-- <textarea id="textarea" placeholder="回复内容"></textarea> -->
+            <!-- <input id='your-input-id' class="search-input" type="text" name="" value=""> -->
+        <!-- </div> -->
+        <!-- <div class="aui-bar-tab-item" tapmode style="width: 2.2rem;">
+            <i class="aui-iconfont aui-icon-comment"></i>
+        </div>
+        <div class="aui-bar-tab-item" tapmode style="width: 2.2rem;">
+            <i class="aui-iconfont aui-icon-star"></i>
+        </div> -->
+        <!-- <div class="aui-bar-tab-item" tapmode style="width: 2.6rem;padding-right:1rem" > -->
+            <!-- <i class="aui-iconfont aui-icon-share"></i> -->
+            <!-- <span id="fasong1"  class="fasong" tapmode onclick="fasongbtn(1)" style="display:blocks" >发送</span> -->
+            <!-- <span id="fasong2"  class="fasong" tapmode onclick="fasongbtn(2)"style="display:none" >发送</span> -->
+        <!-- </div> -->
+    <!-- </footer> -->
+
+
+    <!-- <div id="footer" class="border-t bottom_fix">
+        <ul class="flex-wrap" >
+          <input id='your-input-id' class="search-input" type="text" name="" value="">
+        </ul>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../script/jquery.media.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+
+<script type="text/javascript">
+
+// var cont=[];
+// var huifucont=[];
+// // var contpinlunhuifu1 = doT.template(document.getElementById('contpinlunhuifu1').innerHTML)
+// var contpinluntext = doT.template(document.getElementById('contpinluntext').innerHTML)
+//
+// function fasongbtn(index) {
+//   if (index==1) {
+//     // alert("sss")
+//     if (document.getElementById("textarea").value) {
+//       var datas = {};
+//       datas.touxiang = "wm_select.png"
+//       datas.name = '赵'
+//       datas.id = cont.length
+//       datas.message = document.getElementById("textarea").value
+//       cont.push(datas)
+//
+//     }
+//     document.getElementById("textarea").value = ''
+//     console.log(JSON.stringify(cont))
+//      ;
+//     document.getElementById('contpinlun').innerHTML = contpinluntext(cont);
+//     return
+//   }
+//   if (index==2) {
+//
+//     if (document.getElementById("textarea").value) {
+//       var datas = {};
+//       datas.name1 = '赵'
+//       datas.message1 = document.getElementById("textarea").value
+//       huifucont.push(datas)
+//
+//     }
+//     document.getElementById("textarea").value = ''
+//     console.log(JSON.stringify(huifucont))
+//
+//         document.getElementById('huifucont').innerHTML = contpinlunhuifu1(huifucont);
+//   }
+//
+//
+// }
+
+// function huifu(id) {
+//   alert(id)
+//   document.getElementById("fasong1").style.display = "none"
+//   document.getElementById("fasong2").style.display = "block"
+//   document.getElementById("textarea").value = '回复他'
+//
+// }
+//
+// var zuobiao;
+// function aaa(obj) {
+//   var input = document.getElementById("textarea");
+//   input.blur();
+// }
+//
+// function ccc(e) {
+// zuobiao = e.touches[0].clientY
+//     console.log(e.touches[0].clientY );
+// }
+// function bbb(e) {
+//   if (e.touches[0].clientY >zuobiao) {
+//     var input = document.getElementById("textarea");
+//     input.blur();
+//     console.log(e.touches[0].clientY );
+//   }
+// }
+//
+// var autoTextarea = function (elem, extra, maxHeight) {
+//         extra = extra || 0;
+//         var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+//         isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+//                 addEvent = function (type, callback) {
+//                         elem.addEventListener ?
+//                                 elem.addEventListener(type, callback, false) :
+//                                 elem.attachEvent('on' + type, callback);
+//                 },
+//                 getStyle = elem.currentStyle ? function (name) {
+//                         var val = elem.currentStyle[name];
+//
+//                         if (name === 'height' && val.search(/px/i) !== 1) {
+//                                 var rect = elem.getBoundingClientRect();
+//                                 return rect.bottom - rect.top -
+//                                         parseFloat(getStyle('paddingTop')) -
+//                                         parseFloat(getStyle('paddingBottom')) + 'px';
+//                         };
+//
+//                         return val;
+//                 } : function (name) {
+//                                 return getComputedStyle(elem, null)[name];
+//                 },
+//                 minHeight = parseFloat(getStyle('height'));
+//
+//         elem.style.resize = 'none';
+//
+//         var change = function () {
+//                 var scrollTop, height,
+//                         padding = 0,
+//                         style = elem.style;
+//
+//                 if (elem._length === elem.value.length) return;
+//                 elem._length = elem.value.length;
+//
+//                 if (!isFirefox && !isOpera) {
+//                         padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+//                 };
+//                 scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//
+//                 elem.style.height = minHeight + 'px';
+//                 if (elem.scrollHeight > minHeight) {
+//                         if (maxHeight && elem.scrollHeight > maxHeight) {
+//                                 height = maxHeight - padding;
+//                                 style.overflowY = 'auto';
+//                         } else {
+//                                 height = elem.scrollHeight - padding;
+//                                 style.overflowY = 'hidden';
+//                         };
+//                         style.height = height + extra + 'px';
+//                         scrollTop += parseInt(style.height) - elem.currHeight;
+//                         document.body.scrollTop = scrollTop;
+//                         document.documentElement.scrollTop = scrollTop;
+//                         elem.currHeight = parseInt(style.height);
+//                 };
+//         };
+//
+//         addEvent('propertychange', change);
+//         addEvent('input', change);
+//         addEvent('focus', change);
+//         change();
+// };
+
+
+
+// var text = document.getElementById("textarea");
+        // autoTextarea(text);// 调用
+// $(document).ready(function(){
+//   $("input").focus(function(){
+//     $("input").css("background-color","#FFFFCC");
+//   });
+//   $("input").blur(function(){
+//     $("input").css("background-color","#000");
+//   });
+// });
+
+    apiready = function () {
+        api.parseTapmode();
+      var data = api.pageParam.data
+
+
+      // var browser = api.require('webBrowser');
+      // browser.open({
+      //     url: 'http://ow365.cn/?i=13277&amp;furl=http://www.yxke12.com/Public/Parent/images/zhuantijiangzuo/浙江省新高考高一家长会.ppt'
+      // });
+
+      // var pdfReader = api.require('pdfReader');
+      //
+      // pdfReader.open({
+      //     path: 'http://www.yxke12.com/Public/Home/images/kaogangPDF/yuwens.pdf'
+      // });
+      //   alert(data)
+        // var gundong = document.getElementById("gundong")
+        //
+        // gundong.style.height = document.body.clientHeight-document.getElementById("footer").clientHeight
+        // alert( document.body.clientHeight)
+//       var inputField = api.require('inputField');
+//       inputField.open({
+//           bgColor: '#ffffff',
+//           lineColor: 'rgba(0,0,0,0.1)',
+//           maxLines:2,
+//           borderColor: '#a1a1a1',
+//
+//           placeholder:'请输入评价内容...',
+//           sendBtn:{
+//             bg: '#ff0',          //字符串类型；发送按钮常态背景色
+//             bgHighlight: '#000', //字符串类型；发送按钮点击时的高亮背景色
+//             title: '发送',        //字符串类型；发送按钮的标题
+//             titleColor: '#000',  //字符串类型；发送按钮标题文字颜色
+//             corner: 5            //数字类型；发送按钮圆角大小
+//           },
+//
+//           fixedOn: api.frameName
+//       }, function(ret, err) {
+//           if (ret) {
+// inputField.resignFirstResponder();
+//
+//               // alert(JSON.stringify(ret));
+//           } else {
+//               alert(JSON.stringify(err));
+//           }
+//       });
+//
+//       inputField.setInputFieldListener(function(ret, err) {
+//           if (ret.inputFieldH>51) {
+//             if (ret.chatViewH <0) {
+//
+//             }
+//           } else {
+//               // alert(JSON.stringify(err));
+//           }
+//       });
+
+
+
+// var UIInput = api.require('UIInput');
+// UIInput.open({
+//     rect: {
+//         x: 0,
+//         y:api.frameHeight-40,
+//         w: api.winWidth,
+//         h: 40
+//     },
+//     styles: {
+//         bgColor: '#fff',
+//         size: 14,
+//         color: '#000',
+//         placeholder: {
+//             color: '#ccc'
+//         }
+//     },
+//     autoFocus: false,
+//     maxRows: 4,
+//     placeholder: '这是一个输入框',
+//     keyboardType: 'text',
+//     fixedOn: api.frameName
+// }, function(ret, err) {
+//     if (ret) {
+//         // alert(JSON.stringify(ret));
+//     } else {
+//         // alert(JSON.stringify(err));
+//     }
+// });
+
+    }
+</script>
+</html>

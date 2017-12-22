@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css"/>
+    <style>
+    .aui-list .aui-list-item-title {
+        font-size: 0.8rem;
+        position: relative;
+        max-width: 100%;
+        color: #333333;
+        margin-left: 5px;
+    }
+
+    .aui-list .aui-list-item-right{
+         max-width: 100%;
+        position: relative;
+        font-size: 0.6rem;
+        color: #757575;
+        margin-left: 0.25rem;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+  <section class="aui-content" id="center_ul">
+    <script id="center_s" type="text/x-dot-template">
+    <ul class="aui-list aui-list-in aui-margin-b-15">
+        <li class="aui-list-item" tapmode onclick="selectImg();">
+            <div class="aui-list-item-inner aui-list-item-arrow">
+                <div class="aui-list-item-title">头像</div>
+                <div class="aui-list-item-right">
+                  <img src="http://www.yxke12.com/Public/Teacher/images/touxiang/{{=it.touxiang}}" style='width:3rem;height:3rem;margin:0.5rem 0;border-radius:1.5rem;' alt="">
+                </div>
+            </div>
+        </li>
+    </ul>
+
+      <ul  class="aui-list aui-list-in aui-margin-b-15">
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">账号</div>
+                  <div class="aui-list-item-right">{{=it.loginuser}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">教师姓名</div>
+                  <div class="aui-list-item-right">{{=it.teachername}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">性别</div>
+                  <div class="aui-list-item-right">{{=it.sex}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">年级</div>
+                  <div class="aui-list-item-right">{{=it.grade}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">班级</div>
+                  <div class="aui-list-item-right">{{=it.classname}}</div>
+              </div>
+          </li>
+
+
+      </ul>
+
+      <ul  class="aui-list aui-list-in aui-margin-b-15">
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">所在地区</div>
+                  <div class="aui-list-item-right">{{=it.suozaidi}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">学校</div>
+                  <div class="aui-list-item-right">{{=it.school}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item">
+              <div class="aui-list-item-inner ">
+                  <div class="aui-list-item-title">科目</div>
+                  <div class="aui-list-item-right">{{=it.kemu}}</div>
+              </div>
+          </li>
+          <li class="aui-list-item" tapmode onclick = "xiugaishoujihao()">
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">手机号</div>
+                  <div class="aui-list-item-right">{{=it.phone}}</div>
+              </div>
+          </li>
+      </ul>
+    </script>
+
+  </section>
+</div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/tools.js"></script>
+<script type="text/javascript">
+    var data = {};
+    var cur_pic = null;
+    var cur_type = null;
+    var new_type = null;
+    var center_dot = doT.template(document.getElementById('center_s').innerHTML);
+    apiready = function(){
+        // api.parseTapmode();
+        getData();
+
+
+        api.parseTapmode();
+    };
+
+
+    function selectImg() {
+        api.getPicture({
+            sourceType: 'album',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            targetWidth: 130,
+            targetHeight: 130,
+            saveToPhotoAlbum: false
+        }, function(ret, err){
+         //  console.log(JSON.stringify(ret));
+            if(ret){
+                if (ret.data != null) {
+                  cur_pic = ret.data;
+                  uploadData();
+                }
+
+            }else{
+                 console.log(JSON.stringify(err));
+            }
+        });
+
+    }
+
+
+    function uploadData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Member/editinfo.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  type: new_type,
+              },
+              files: {
+                  file: cur_pic
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+        console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              if (ret.data.touxiang != null) {
+                data.img = ret.data.touxiang;
+                cur_pic = ret.data.touxiang;
+                $api.setStorage('img', cur_pic);
+
+              }
+
+              if (ret.data.type != null) {
+                data.type = ret.data.type;
+                cur_type = ret.data.type;
+                $api.setStorage('type', cur_type);
+              }else{
+                new_type = cur_type;
+              }
+
+            }else {
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+          document.getElementById('center_ul').innerHTML = center_dot(data);
+          api.parseTapmode();
+      });
+
+    }
+
+
+    function getData() {
+      // img
+      data.touxiang = $api.getStorage('touxiang');
+      // loginuser
+      data.loginuser = $api.getStorage('username');
+      // parentname
+      data.teachername = $api.getStorage('teachername');
+      // studentname
+      data.kemu = $api.getStorage('kemu');
+      // school
+      data.school = $api.getStorage('school');
+      data.classname = $api.getStorage('classname');
+      data.phone = tools.hidePhone($api.getStorage('phone'));
+      data.grade = $api.getStorage('grade');
+      data.sex = $api.getStorage('sex');
+      data.suozaidi = $api.getStorage('shengs')+$api.getStorage('xians');
+      document.getElementById('center_ul').innerHTML = center_dot(data);
+    }
+
+    function xiugaishoujihao() {
+      api.openWin({
+          name: 'forget_pwd_win',
+          url: '../../register/forget_pwd_win.html',
+          pageParam: {
+              title: '验证手机号',
+              type:"7"
+          }
+      });
+    }
+</script>
+</html>

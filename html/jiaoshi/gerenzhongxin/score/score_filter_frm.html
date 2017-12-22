@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+        .filter_item{
+          width: 100%;
+          height: 40px;
+          background-color: white;
+          border-bottom: 1px solid #e5e5e5;
+
+        }
+
+        .filter_item .ic{
+            width:12px;
+            height: 12px;
+            margin-top: 14px;
+            margin-left: 10px;
+        }
+
+        .filter_item .left{
+
+        }
+
+        .filter_item .right{
+            float: right;
+            line-height: 40px;
+            height: 40px;
+            width: 70px;
+            margin-right: 10px;
+            font-size: 12px;
+            color: #886e91;
+            text-align: right;
+            padding-left: 30px;
+        }
+
+        .btn_query{
+          width: 80%;
+          margin: 30px auto;
+          background-color: #6666ff;
+          border-radius: 4px;
+          color: white;
+          font-size: 14px;
+          text-align: center;
+          padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+
+      <div class="filter_item">
+        <img src="../../../../image/ic_l_score.png" class="ic"></img>
+        <span class="left">入学年份</span>
+        <select class="right">
+          <option value="0" selected = "selected">2017年</option>
+          <option value="1">2016年</option>
+          <option value="2" >2015年</option>
+          <option value="3" >2014年</option>
+        </select>
+      </div>
+
+      <div class="filter_item">
+        <img src="../../../../image/ic_l_score.png" class="ic"></img>
+        <span class="left">年级</span>
+        <select class="right">
+          <option value="0" selected = "selected">高一</option>
+          <option value="1">高二</option>
+          <option value="2" >高三</option>
+        </select>
+      </div>
+
+      <div class="filter_item">
+        <img src="../../../../image/ic_l_score.png" class="ic"></img>
+        <span class="left">班级</span>
+        <select class="right">
+          <option value="0" selected = "selected">1班</option>
+          <option value="1">2班</option>
+          <option value="2" >3班</option>
+        </select>
+      </div>
+
+      <div class="filter_item">
+        <img src="../../../../image/ic_l_score.png" class="ic"></img>
+        <span class="left">学期</span>
+        <select class="right">
+          <option value="0" selected = "selected">上学期</option>
+          <option value="1">下学期</option>
+        </select>
+      </div>
+      <div class="filter_item">
+        <img src="../../../../image/ic_l_score.png" class="ic"></img>
+        <span class="left">考试类型</span>
+        <select class="right">
+          <option value="0" selected = "selected">月考</option>
+          <option value="1">期中</option>
+          <option value="2">期末</option>
+        </select>
+      </div>
+
+      <div class="btn_query" tapmode onclick="onQueryClick()">查询</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      api.parseTapmode();
+    };
+
+    function onQueryClick() {
+        api.openWin({
+            name: 'score_win',
+            url: './score_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+    }
+</script>
+
+</html>

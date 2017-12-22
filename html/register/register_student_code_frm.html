@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+      .grade{
+        font-size: 24px;
+        margin: 10px auto;
+        margin-top: 50px;
+        text-align: center;
+      }
+      .input_pos{
+        padding: 10px 0px;
+        background-color: #ddd;
+        width:90%;
+        border-radius: 30px;
+        margin: 10px auto;
+        margin-top: 7%;
+        box-shadow:0px 0px 10px #fff
+      }
+      .aui-searchbar-input input {
+          color: #666666;
+          width:90%;
+          padding: 0;
+          margin: 0;
+          height: 20px;
+          line-height: 20px;
+          border: 0;
+          text-align: center;
+          -webkit-appearance: none;
+          font-size: 16px;
+      }
+
+      .my_input{
+        height: 30px;
+        display: flex;
+        align-items: center;
+        background: #ddd!important;
+      }
+
+      .login_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff!important;
+        /*opacity: 0.6;*/
+        color: #fff!important;
+        width: 100%;
+        margin: 0px auto;
+        border-radius: 0px;
+        position: absolute;
+        font-size: 18px;
+        bottom: 0px;
+      }
+
+    </style>
+</head>
+
+<body >
+    <div class="flex-wrap flex-vertical ">
+      <div class="grade">学籍号</div>
+      <div class="input_pos">
+          <div class="aui-searchbar-input my_input">
+                <input type="search" placeholder="输入你的学籍号" id="code_in">
+          </div>
+      </div>
+        <div id='next_step' class="aui-btn aui-btn-info login_btn" tapmode onclick="bindClick()">完成绑定</div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var uploadData = {};
+    apiready = function() {
+        uploadData = api.pageParam.data;
+    }
+
+    function bindClick() {
+      uploadData.xjhao = code_in.value;
+      console.log(JSON.stringify(uploadData));
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '正在上传...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/addinfo.html',
+          method: 'post',
+          data: {
+              values: uploadData,
+              files: {
+                  // file: 'fs://a.gif'
+                  file:uploadData.touxiang
+              }
+          }
+      },function(ret, err){
+          api.hideProgress();
+          console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              // login(uploadData.loginname, uploadData.password);
+              api.openWin({
+                  name: 'login_win',
+                  url: './login_win.html',
+                  pageParam: {
+                      name: 'test'
+                  }
+              });
+
+
+            }else {
+              // console.log("kkkkffffff: " + JSON.stringify(ret));
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+
+            }
+          } else {
+              console.log( JSON.stringify( err ) );
+              api.toast({
+                  msg: "检查网络",
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+
+    }
+
+    function login(_usr, _pwd) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Student/login.html',
+          method: 'post',
+          data: {
+              values: {
+                  username: _usr, // 'lichengming1',
+                  password: _pwd // "123456"
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+              var infos = ret.data;
+              if (infos != null) {
+                for (var key in infos) {
+                  if (infos.hasOwnProperty(key)) {
+                    // console.log(key + "-------" + JSON.stringify(infos[key]));
+                      $api.setStorage(key, infos[key]);
+                  }
+                }
+                $api.setStorage('password', _pwd);
+                api.openWin({
+                    name: 'index',
+                    url: '../../index.html',
+                    pageParam: {
+                        name: 'test'
+                    },
+                    slidBackEnabled:false
+                });
+              }
+
+            }else {
+              // console.log( JSON.stringify( ret ) );
+              $api.clearStorage ();
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+
+          } else {
+            $api.clearStorage();
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+    }
+</script>
+
+</html>

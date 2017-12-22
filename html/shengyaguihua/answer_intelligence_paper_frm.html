@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        .center {
+            /*display: flex;
+            align-items: center;*/
+
+        }
+        .my-progress{
+          margin-top: 10px;
+          border-radius: 4px;
+          background-color: #a1a1a1;
+          width: 90%;
+
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .my-progress-bar{
+          background-color: #6666ff;
+          border-radius: 4px;
+        }
+        .title{
+          font-family: "PingFang-SC";
+          /*margin-left: auto; margin-right: auto;*/
+        }
+        .z-btn{
+          background: #ffffff;
+          height: 33px;
+          margin:16.5px auto;
+          margin-bottom: 0px;
+          line-height: 33px;
+          width: 90%;
+          border-radius: 16.5px;
+          border: 1px solid #6666ff !important;
+          color: #6666ff;
+          font-size: 14px;
+          font-family: "PingFang-SC";
+        }
+    </style>
+</head>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var apiready_flag = false;
+    apiready = function() {
+      apiready_flag = true;
+      api.parseTapmode();
+      var data = api.pageParam.data;
+      if (data == null){
+
+      }else {
+        var a_btn = $api.byId("a_btn");
+        var b_btn = $api.byId("b_btn");
+        var c_btn = $api.byId("c_btn");
+        var d_btn = $api.byId("d_btn");
+
+        var q_title = $api.byId("q_title");
+        a_btn.innerHTML = data.check_a;
+        b_btn.innerHTML = data.check_b;
+        c_btn.innerHTML = data.check_c;
+        d_btn.innerHTML = data.check_d;
+
+        q_title.innerHTML = data.z_questions; // != "" ? data.m_questions : "在下列一对词语中，哪一个词语更合你心意？";
+
+
+        var progress_text = $api.byId("progress_text");
+        progress_text.innerHTML = api.pageParam.cur_c + 1 +"/"+api.pageParam.total_c;
+
+        var progress = $api.byId("progress");
+        $api.css(progress,'width:'+((api.pageParam.cur_c + 1)/api.pageParam.total_c * 100).toString()+'%;');
+      }
+    };
+
+    function rightTest(index) {
+      if (!apiready_flag)return;
+      var jsfun = 'nextQus('+index+');';
+      api.execScript({
+          script: jsfun
+      });
+      if(api.pageParam.cur_c + 1 === api.pageParam.total_c){
+          api.toast({
+              msg: '最后一页',
+              location: 'bottom'
+          });
+      }else {
+        api.closeFrame();
+      }
+    }
+</script>
+<body>
+  <div id="wrap" class="flex-wrap flex-vertical center">
+    <div class="aui-progress aui-progress-xs my-progress">
+        <div id="progress" class="aui-progress-bar my-progress-bar" style="width: 60%;"></div>
+    </div>
+    <!-- <div style="margin-top:10px;margin-left: auto; margin-right: auto;"> -->
+      <span id="progress_text" style="text-align:center;width:90%;margin-bottom:10px;margin-top:10px;margin-left:auto;margin-right:auto;color:#6666ff;">1/18</span>
+    <!-- </div> -->
+    <div style="margin-left:5%;"><p id="q_title" class="title"></p></div>
+    <div id="a_btn" class="aui-btn aui-btn-primary aui-btn-block z-btn" tapmode onclick="rightTest(3)"></div>
+    <div id="b_btn" class="aui-btn aui-btn-primary aui-btn-block z-btn" tapmode onclick="rightTest(2)"></div>
+    <div id="c_btn" class="aui-btn aui-btn-primary aui-btn-block z-btn" tapmode onclick="rightTest(1)"></div>
+    <div id="d_btn" class="aui-btn aui-btn-primary aui-btn-block z-btn" tapmode onclick="rightTest(0)"></div>
+  </div>
+</body>
+
+
+</html>

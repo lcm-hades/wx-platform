@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+        .aui-tab-item.aui-active {
+            color: #6666ff;
+            border-bottom: 2px solid #6666ff;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 18px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_title {
+            color: #333333;
+            font-size: 18px;
+            font-family: "PingFang-SC-Medium";
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .part_c{
+            background-color: white;
+            margin-top: 50px;
+        }
+
+        .title_panel{
+          margin-left:0.8rem;
+          margin-top:10px;
+          height:auto;
+          display:inline-flex;
+        }
+        .part_c p{
+          padding:0px 0.8rem;
+          padding-bottom: 10px;
+          width: 90%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="details_div" class="flex-wrap flex-vertical">
+        <script id="details_s" type="text/x-dot-template">
+      <div class="aui-tab" id="tab" style="width:100%;color:#6666ff;position:fixed;z-index:2;">
+          <div class="aui-tab-item aui-active">专业概述</div>
+          <div class="aui-tab-item">从业资格</div>
+          {{if(it.lists[4] == null && it.lists[5] == null){}}
+            <div class="aui-tab-item" style="display:none;">现状及前景</div>
+          {{}else {}}
+            <div class="aui-tab-item" >现状及前景</div>
+          {{}}}
+      </div>
+      <div  class="flex-wrap flex-vertical">
+
+      <!-- start part1 -->
+      <div class="part_c" id="part1" style="display:block;">
+
+        {{if (it.lists[1] == null ) {}}
+          <div class="title_panel" style="display:none;">
+        {{}else {}}
+          <div class="title_panel">
+        {{}}}
+            <div class="left_line"></div>
+            <span class="section_title">职业简介</span>
+        </div>
+        {{if (it.lists[1] == null){}}
+          <p style="display:none;">
+        {{}else {}}
+          <p>
+        {{}}}
+          {{=it.lists[1]}}
+        </p>
+
+        {{if (it.lists[2] == null){}}
+          <div class="title_panel" style="display:none;">
+        {{}else {}}
+          <div class="title_panel">
+        {{}}}
+            <div class="left_line"></div>
+            <span class="section_title">工作内容示例</span>
+        </div>
+
+        {{if (it.lists[2]  == null) {}}
+          <p style="display:none;text-indent:0em;">
+        {{}else {}}
+          <p style="text-indent:0em;">
+        {{}}}
+            {{=it.lists[2]}}
+          </p>
+      </div>
+      <!-- end part1 -->
+
+      <!-- start part2 -->
+      <div class="part_c" id="part2" style="display:none;">
+        {{if (it.lists[3] == null){}}
+          <div class="title_panel" style="display:none;">
+        {{}else {}}
+          <div class="title_panel">
+        {{}}}
+            <div class="left_line"></div>
+            <span class="section_title">从业资格示例</span>
+        </div>
+        {{if (it.lists[3] == null){}}
+          <p style="display:none;text-indent:0em;">
+        {{}else {}}
+          <p style="text-indent:0em;">
+        {{}}}
+          {{=it.lists[3]}}
+        </p>
+
+      </div>
+
+      <!-- end part2 -->
+
+
+      <!-- start part3 -->
+
+      <div class="part_c" id="part3" style="display:none;">
+        {{if (it.lists[4] == null) {}}
+          <div class="title_panel" style="display:none;">
+        {{}else {}}
+          <div class="title_panel">
+        {{}}}
+            <div class="left_line"></div>
+            <span class="section_title">发展现状及前景</span>
+        </div>
+        {{if (it.lists[4]  == null) {}}
+          <p style="display:none;text-indent:0em;">
+        {{}else {}}
+          <p style="text-indent:0em;">
+        {{}}}
+        {{=it.lists[4]}}
+        </p>
+
+        {{if (it.lists[5] == null){}}
+          <div class="title_panel" style="display:none;">
+        {{}else {}}
+          <div class="title_panel">
+        {{}}}
+            <div class="left_line"></div>
+            <span class="section_title">小贴士</span>
+        </div>
+        {{if (it.lists[5] == null){}}
+          <p style="display:none;text-indent:0em;">
+        {{}else {}}
+          <p style="text-indent:0em;">
+        {{}}}
+        {{=it.lists[5]}}
+        </p>
+      </div>
+<!-- end part3 -->
+      </script>
+
+    </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    var zhiyeDetails;
+    apiready = function() {
+        getDetailsData(api.pageParam.name);
+    };
+
+
+    function getDetailsData(_name) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zhiyeku/infos.html',
+          method: 'post',
+          data: {
+              values: {
+                  name: _name
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+
+
+              console.log( JSON.stringify( ret ) );
+              var data = ret.data;
+              if (zhiyeDetails == null) {
+                zhiyeDetails = doT.template(document.getElementById('details_s').innerHTML);
+              }
+              document.getElementById('details_div').innerHTML = zhiyeDetails(data);
+
+              var tab = new auiTab({
+                  element:document.getElementById("tab"),
+              },function(ret){
+                if (ret.index==1) {
+                    document.getElementById('part1').style.display = "block"
+                    document.getElementById('part2').style.display = "none"
+                    document.getElementById('part3').style.display = "none"
+                }else if (ret.index == 2) {
+                  document.getElementById('part1').style.display = "none"
+                  document.getElementById('part2').style.display = "block"
+                  document.getElementById('part3').style.display = "none"
+                }else if (ret.index == 3) {
+                  document.getElementById('part1').style.display = "none"
+                  document.getElementById('part2').style.display = "none"
+                  document.getElementById('part3').style.display = "block"
+                }
+              });
+              api.parseTapmode();
+
+            }
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+
+    }
+
+
+</script>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+    .titleDiv{
+        width:90%;
+        margin: auto;
+        font-family: 'PingFang-SC';
+        font-size: 0.9rem;
+        font-weight: bold;
+        line-height: 1.24;
+        text-align: center;
+        color: #333333;
+        padding-top: 16px;
+      }
+      .fuTitleDiv{
+        width: 90%;
+        font-family: 'PingFang-SC';
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 2;
+        text-align: left;
+        color: #999999;
+        margin: auto;
+        margin-top: 14px;
+
+      }
+      .fuXian{
+        width: 95%;
+        height: 1px;
+        opacity: 0.1;
+        background-color: #333333;
+        margin: auto;
+      }
+      span,p{
+        text-indent: 1.5rem
+      }
+      h2,h3,h6{
+        text-align: center;
+      }
+      h6{
+        text-align: center;
+        font-family: 'PingFang-SC';
+         font-size: 0.7rem;
+         color: #797979;
+      }
+      .fu_title{
+        text-align: center!important;
+        text-indent: 0rem!important;
+      }
+    </style>
+</head>
+
+<body style="background:#fff" id="details_b">
+    <!-- <div class="empty"> -->
+
+    <script id="details_s" type="text/x-dot-template">
+      <div id="main" class="flex-con" >
+          <div class="titleDiv">{{=it.name}}</div>
+          <div id="ftitle"></div>
+          <h6 id="ntitle"></h6>
+          <div class="fuTitleDiv">
+          <span style="text-indent: 0.1rem!important">{{=it.time}}</span>
+          </div>
+      </div>
+      <div class="fuXian"></div>
+      <div style="width:90%;margin:auto">
+        {{=it.content}}
+      </div>
+    </script>
+    <!-- <p style="color:#333;text-align: right;">教 育 部</p>
+    <p style="color:#333;text-align: right;">2014年12月10日</p> -->
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        getDetailsByID();
+    };
+
+    function getDetailsByID() {
+        // console.log(JSON.stringify(api.pageParam.data));
+              var details = doT.template(document.getElementById('details_s').innerHTML);
+              document.getElementById('details_b').innerHTML = details(JSON.parse(localStorage.data));
+              if (api.pageParam.data.fname == undefined || api.pageParam.data.fname == null) {
+                  $api.byId('ftitle').innerHTML = '';
+              }else {
+                $api.byId('ftitle').innerHTML = api.pageParam.data.fname;
+              }
+              if (api.pageParam.data.student_name == undefined || api.pageParam.data.student_name == null) {
+                $api.byId('ntitle').innerHTML = '';
+              }else {
+                $api.byId('ntitle').innerHTML = api.pageParam.data.student_name;
+              }
+
+    }
+
+
+
+
+</script>
+</html>

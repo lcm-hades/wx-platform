@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0;}
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+        .top_bar{
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          background-color: white;
+          border-bottom: 1px solid #d2d2d2;
+        }
+        .top_inner{
+          width: 49.4%;
+          height: auto;;
+          float: left;
+          text-align: center;
+          position: relative;
+          background-color: white;
+        }
+
+        .top_inner_right{
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img{
+          vertical-align: middle;
+          width: 35px;
+          height: 35px;
+        }
+
+        .xing_text{
+            display: inline;
+            font-size: 15px;
+            font-family: "PingFang-SC";
+            color: #333333
+        }
+        .mid_text{
+          font-size: 10px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+        .mid_padding_8{
+          padding-top: 9px!important;
+          padding-bottom: 9px!important;
+          line-height: 1.0;
+        }
+        .title_panel{
+          width: 100%;
+          height: auto;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          border-top: 8px solid #f2f2f2;
+          background-color: white;
+
+        }
+        .list_title{
+          margin-left: 8px;
+          color: black;
+          font-size: 16px;
+          font-family: "PingFang-SC";
+          color: #333333
+        }
+        .chakanshipin{
+
+              text-align: center;
+            font-family: 'PingFang-SC';
+            font-size: 0.5rem;
+            line-height: 30px;
+            color: #6666ff;
+        }
+
+        .suojin{padding: 0 10px;}
+
+      .aui-list .aui-list-item-media{
+          border-right: 1px solid #999;
+
+          position: relative;
+
+           padding-right: 0;
+          display: inherit;
+          -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+          -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          -webkit-box-align: center;
+          -webkit-align-items: flex-start;
+          align-items: flex-start;
+        }
+        .z-list{
+            width: 2.5rem!important;
+             padding:0!important;
+        }
+          .gaotu{
+            width: 29.5pt!important;
+            height: 29.5pt
+          }
+          .aui-list-item-inner {
+
+            padding-right: 0px!important;
+            width: 85%!important;
+    position: relative;
+    min-height: 2.2rem;
+    padding-left: 0.75rem;
+    /*width: 100%;*/
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.aui-font-size-14 img{
+    width: 27.5px;
+    height: 11.5px;
+    margin-top: 0.15rem;
+}
+.aui-font-size-14 span{
+  margin-left: 10px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  width: 100%
+}
+
+.bor-b{
+  border-bottom: none;
+
+}
+.bor-b ul{
+  /*border-top: 1px solid #d2d2d2!important;*/
+}
+.aui-grid [class*=aui-col-] {
+  display: table-cell;
+  position: relative;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10.5px 0;
+}
+.chengZhangImg{
+  width: 100%;
+  height: 60px;
+}
+
+.aui-list-item-inner-CZ {
+
+  /*padding-right: 0px!important;*/
+  /*width: 85%!important;*/
+position: relative;
+/*min-height: 2.2rem;*/
+padding-right: 0.55rem;
+width: 100%;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+-webkit-box-flex: 1;
+-webkit-box-pack: justify;
+-webkit-justify-content: space-between;
+justify-content: space-between;
+-webkit-box-align: center;
+-webkit-align-items: center;
+align-items: center;
+}
+.aui-card-list {
+    position: relative;
+     margin-bottom: 0px;
+    background: #ffffff;
+}
+.swiper-container {
+        width: 100%;
+        height: 150px;
+        /*margin: 50px auto;*/
+    }
+    .swiper-slide {
+        background: #f1f1f1;
+        color:#000;
+        text-align: center;
+        /*line-height: 150;*/
+    }
+    .layer {
+
+      height: 34px;
+      font-family: PingFang-SC;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: center;;
+      color: #333333;
+      margin: 18.5px 0 9px 0;
+
+    }
+.kuan{
+  width: 80%;
+    margin-right: 12px;
+}
+.swiper-wrapper img{
+  height: 150px
+}
+.xiaoxi  {
+  width: 45.5px;
+  height: 28px;
+
+position: absolute;
+z-index: 9999;
+right: 0px;
+top: 6.5px;
+}
+.left_line {
+    background-color: #6666ff;
+    height: 18px;
+    width: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+.section_title {
+    color: #333333;
+    font-size: 16px;
+    font-family: "PingFang-SC";
+    margin-left: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.section_gengduo{
+  font-family: 'PingFang-SC';
+  font-size: 14px;
+  color: #666666;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+}
+.zizhuzhaosheng {
+  font-family: 'PingFang-SC';
+  font-size: 10px;
+  color: white;
+}
+
+.time{
+  font-size: 10px;
+  color: #666666;
+}
+
+.zizhuzhaoshengkuan {
+  border-radius: 2px;
+  color: white!important;
+  background-color: #9f69ff;
+  display: inline-block!important;
+  padding: 2px 4px;
+  text-align: center!important;
+  }
+  .biaoti {
+    font-family: 'PingFang-SC';
+    font-size: 16px;
+    color: #333333;
+  }
+  .aui-list .aui-list-item:active {
+    background-color: #fff;
+}
+.cont{
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+      .bwbd{
+        margin: 10px auto;
+        margin-bottom:0px;
+        width: 320px;
+        height:65px;
+        background: url(../../../image/p_s_bwbd.png) no-repeat;
+        background-size: 100%;
+      }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con" >
+
+      <div>
+        <img class="top_img" src="../../../image/p_career_banner.png"  >
+        <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;" id="ceshi_id">
+          <div class="aui-row" id="xuekeqianneng_id" style="margin-left:12px;margin-right:12px;">
+              <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="nextPage('school_storage_win');" >
+                  <!-- <i class="aui-iconfont aui-icon-home"></i> -->
+                  <img class="mid_img" src="../../../image/school.png" alt="">
+                  <div><span class="mid_text">院校信息</span></div>
+              </div>
+              <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="nextPage('zhuanye_storage_win');">
+                  <!-- <i class="aui-iconfont aui-icon-gear"></i> -->
+                  <img class="mid_img" src="../../../image/major.png" alt="">
+                  <div><span class="mid_text">专业信息</span></div>
+              </div>
+              <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="nextPage('zhiye_storage_win');">
+                  <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                  <img class="mid_img" src="../../../image/job.png" alt="">
+                  <div><span class="mid_text">职业信息</span></div>
+              </div>
+              <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="jiazhangduoyuan();">
+                  <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                  <img class="mid_img" src="../../../image/jiazhangduoyuan.png" alt="">
+                  <div><span class="mid_text">多元备考</span></div>
+              </div>
+              <div class="aui-col-xs-20 mid_padding_8" tapmode onclick="zhiyuantianbao();">
+                  <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                  <img class="mid_img" src="../../../image/qianbi.png" alt="">
+                  <div><span class="mid_text">志愿填报</span></div>
+              </div>
+            </div>
+        </section>
+        <div class="top_bar" style="display:none;">
+            <div class="top_inner" tapmode onclick="jiazhangduoyuan()">
+                <!-- <div class="aui-badge">88</div> -->
+                <img class="xing_img" src="../../../image/jiazhangduoyuan.png"/>
+                <span class="xing_text">多元备考</span>
+            </div>
+            <div class="top_inner top_inner_right" tapmode onclick="zhiyuantianbao()">
+                <img class="xing_img" src="../../../image/qianbi.png"/>
+                <span class="xing_text">志愿填报</span>
+            </div>
+
+        </div>
+
+        <section class="aui-grid" style="display:none;">
+          <div class="aui-row">
+              <div class="aui-col-xs-4 mid_padding_8" tapmode onclick="nextPage('school_storage_win')" >
+                  <!-- <i class="aui-iconfont aui-icon-home"></i> -->
+                  <img class="mid_img" src="../../../image/school.png" alt="">
+                  <div><span class="mid_text">院校库</span></div>
+              </div>
+              <div class="aui-col-xs-4 mid_padding_8" tapmode onclick="nextPage('zhuanye_storage_win')">
+                  <!-- <i class="aui-iconfont aui-icon-gear"></i> -->
+                  <img class="mid_img" src="../../../image/major.png" alt="">
+                  <div><span class="mid_text">专业库</span></div>
+              </div>
+              <div class="aui-col-xs-4 mid_padding_8" tapmode onclick="nextPage('zhiye_storage_win')">
+                  <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                  <img class="mid_img" src="../../../image/job.png" alt="">
+                  <div><span class="mid_text">职业库</span></div>
+              </div>
+            </div>
+          </section>
+          <div class="aui-card-list suojin">
+
+                      <div class="bor-b">
+                          <ul class="aui-list aui-media-list aui-list-noborder" id="zixunHot">
+                            <script id="zixuntuijian" type="text/x-dot-template">
+                              <li class="aui-list-item aui-list-item-middle" tapmode  onclick="zixundongtai()">
+                                  <div class="aui-media-list-item-inner">
+                                      <div class="aui-list-item-media z-list" >
+                                          <img class='gaotu' src="../../../image/zixundongtaitu.png" >
+                                      </div>
+                                      <div class="aui-list-item-inner ">
+                                          <div class="aui-list-item-text">
+
+                                              <div class="aui-list-item-title aui-font-size-14">
+
+                                                      <div style="float:left">
+                                                        <img  src="../../../image/hot.png" alt="">
+
+                                                      </div>
+                                                      <div class="aui-col-xs-10">
+                                                      {{if (it.zuixinzixun[0]==""||it.zuixinzixun[0]==null||it.zuixinzixun[0]==undefined) {}}
+                                                        <span >
+
+                                                        </span>
+                                                      {{}else {}}
+                                                        <span >
+                                                              {{=it.zuixinzixun[0].name}}
+                                                        </span>
+                                                      {{}}}
+
+                                                      </div>
+                                                </div>
+
+
+                                          </div>
+                                          <div class="aui-list-item-text">
+
+
+                                              <div class="aui-list-item-title aui-font-size-14">
+
+                                                      <div style="float:left">
+                                                        <img src="../../../image/cityAll.png" alt="">
+
+                                                      </div>
+                                                      <div class="aui-col-xs-10">
+                                                      {{if (it.quanguozixun[0]==""||it.quanguozixun[0]==null||it.quanguozixun[0]==undefined) {}}
+                                                        <span >
+
+                                                        </span>
+                                                      {{}else {}}
+                                                        <span >
+                                                          {{=it.quanguozixun[0].name}}
+                                                        </span>
+                                                      {{}}}
+
+                                                      </div>
+                                                </div>
+
+
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                  </script>
+                          </ul>
+                      </div>
+
+                  </div>
+
+      <div class="bwbd" tapmode onclick="onBWBDClick();"></div>
+      <div id="gaokaoxinzheng_jiazhang" style="margin-top:10px;height:auto;display: inline-flex;background: #fff;width: 100%;position: relative;line-height: 2.5;">
+          <div class="left_line"></div>
+          <span class="section_title">高考新政</span>
+          <span class="section_gengduo" tapmode  onclick="gaoKaoXinZheng()">更多 <i class="aui-iconfont aui-icon-right"></i></span>
+      </div>
+
+      <!-- list start -->
+
+      <div class="aui-content aui-margin-b-15"  id="gaokaoxinzheng_jiazhang1">
+          <ul class="aui-list aui-media-list" id="gkxztjnr">
+              <script id="gkxztj" type="text/x-dot-template">
+                {{ for(var i=0;i  <it.length;i++) { }}
+              <li class="aui-list-item" tapmode onclick=gaokaoXZXQ3('{{=it[i].url}}')>
+                  <div class="aui-media-list-item-inner">
+
+                      <div class="aui-list-item-inner" style="width: 95%!important;">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title biaoti">{{=it[i].name}}</div>
+
+                          </div>
+
+                                {{=it[i].smaple}}
+
+
+                      </div>
+                  </div>
+                  <div class="aui-info" style="padding-top:0">
+                      <div class="aui-info-item zizhuzhaoshengkuan">
+                        <span class="zizhuzhaosheng">政策资讯</span>
+                      </div>
+                      <div class="aui-info-item time">{{=it[i].time}}</div>
+                  </div>
+              </li>
+              {{}}}
+            </script>
+          </ul>
+      </div>
+
+
+      <!-- list end -->
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+var zixuntuijian1 = doT.template(document.getElementById('zixuntuijian').innerHTML)
+var gkxztj1 = doT.template(document.getElementById('gkxztj').innerHTML)
+function gaoKaoXinZheng() {
+  api.openWin({
+      name: 'gaoKaoXinZheng_win',
+      url: '../gaokaoxinzheng/gaoKaoXinZheng_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function zixundongtai() {
+  api.openWin({
+      name: 'zixundongtai_win',
+      url: '../zixundongtai/zixundongtai_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function gaokaoXZXQ3(url){
+  // alert(url)
+  api.showProgress({
+    title: '努力加载中...',
+    text: '先喝杯茶...',
+    modal: false
+});
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Gaokaoxinzheng/infos.html',
+      method: 'post',
+      data: {
+          values: {
+              url: url
+          },
+
+      }
+  },function(ret, err){
+      if (ret.status == 100) {
+        api.hideProgress();
+        var data = ret.data
+        localStorage.data=JSON.stringify(data)
+        api.openWin({
+            name: 'gaoKaoXinZhengNeiRong3_win',
+            url: '../gaokaoxinzheng/gaoKaoXinZhengNeiRong3_win.html',
+            pageParam: {
+                data: data
+            }
+        });
+          // console.log( JSON.stringify( ret ) );
+      } else {
+        api.hideProgress();
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+      }
+  });
+}
+    apiready = function(){
+
+        data = JSON.parse(localStorage.data)
+        // console.log(JSON.stringify(data.zuixinzixun[0].name));
+        document.getElementById('zixunHot').innerHTML = zixuntuijian1(data);
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#ccc',
+            textColor: '#fff',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            jiazai()
+        });
+        jiazai()
+
+
+    };
+
+
+function jiazai() {
+  api.showProgress({
+    title: '努力加载中...',
+    text: '先喝杯茶...',
+    modal: false
+});
+
+api.ajax({
+    url: 'http://www.yxke12.com/index.php/Apa/Parent/checkgaige.html',
+    method: 'post',
+    data: {
+        values: {
+            parentid: $api.getStorage('parentid')
+        },
+
+    }
+},function(ret, err){
+  api.refreshHeaderLoadDone();
+    if (ret.status == 100) {
+        if (ret.data == 1) {
+          document.getElementById('gaokaoxinzheng_jiazhang').style.display = 'inline-flex';
+          document.getElementById('gaokaoxinzheng_jiazhang1').style.display = 'block';
+        }else {
+          document.getElementById('gaokaoxinzheng_jiazhang').style.display = 'none';
+          document.getElementById('gaokaoxinzheng_jiazhang1').style.display = 'none';
+        }
+    } else {
+      api.hideProgress();
+        api.refreshHeaderLoadDone();
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+    }
+});
+
+
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/Apa/Default/gaokaoxinzheng.html',
+      method: 'post',
+      data: {
+          values: {
+              parentid: $api.getStorage('parentid')
+          },
+
+      }
+  },function(ret, err){
+    api.refreshHeaderLoadDone();
+    api.hideProgress();
+    if (ret) {
+      if (ret.status == 100) {
+        document.getElementById('gkxztjnr').innerHTML = gkxztj1(ret.data);
+      } else {
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+      }
+    }else {
+      api.toast({
+          msg: "网络错误",
+          duration: 2000,
+          location: 'bottom'
+      });
+    }
+
+  });
+
+}
+
+
+    function jiazhangduoyuan() {
+      if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+        api.toast({
+            msg: "该功能付费用户才能使用",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+      api.openWin({
+          name: 'frame3_win',
+          url: '../duoyuanzhaosheng/frame3_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+    function xuankezhinan() {
+      api.openWin({
+          name: 'moNiXuanKe_win',
+          url: '../../moNiXuanKe_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+    function zhiyuantianbao() {
+      if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+        api.toast({
+            msg: "该功能付费用户才能使用",
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+      api.openWin({
+          name: 'zhiyuantianbao_win',
+          url: '../zhiyuantianbao/zhiyuantianbao_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+
+    function nextPage(url) {
+      api.openWin({
+          name: url,
+          url: '../zhiyexinxi/' + url + '.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+
+    function onBWBDClick() {
+      // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+      //   api.toast({
+      //       msg: "该功能付费用户才能使用",
+      //       duration: 2000,
+      //       location: 'bottom'
+      //   });
+      //   return;
+      // }
+      api.openWin({
+          name: "baiwenbaida_list_win",
+          url: '../baiwenbaida/baiwenbaida_list_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    }
+
+</script>
+</html>

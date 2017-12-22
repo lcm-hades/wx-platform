@@ -1,0 +1,577 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/demo.css" />
+    <style>
+    div.screening>ul {
+        height: 40px;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border-bottom: none;
+        overflow: hidden;
+    }
+    div.screening>ul>li {
+        width: 100%;
+        position: relative;
+
+    }
+
+    div.screening>ul>li:after {
+
+        content: '';
+        display: inline-block;
+        width:20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        top:10px;
+        background: url("../../../image/on_1.png") no-repeat 100% center;
+        transition: 0.5s;
+        background-position-x: 50%;
+    }
+
+    div.screening>ul>li.current:after{
+      -webkit-transform: rotate(180deg);
+    }
+
+    .biaoqian{
+      font-family: 'PingFang-SC';
+      display:inline-block;
+      margin-left:0.5em;
+      line-height: 1.0;
+      padding: 4px 12px;
+      color: #333333;
+    }
+
+    .act_biaoqian{
+      line-height: 1.0;
+      /*padding: 4px 12px;*/
+      background-color: #6666ff;
+      border-radius: 12px;
+      color: white;
+    }
+
+    .choose{
+      display:inline-flex;
+      margin-left:10px;
+      color:#6666ff;
+    }
+
+    .hot_select{
+      display:inline-flex;
+      border-bottom:2px solid #6666ff;
+      color:#6666ff;font-size:16px;
+      margin-right: 10px;
+    }
+
+    .hot{
+      color: #a1a1a1;
+      border-bottom:0px;
+      font-size:16px;
+      display:inline-flex;
+      margin-right: 10px;
+    }
+
+    /*.aui-list .aui-list-item-media{
+        border-right: 1px solid #999;
+
+        position: relative;
+
+         padding-right: 0;
+        display: inherit;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+      }*/
+      .third{
+        display: inline-flex;
+          color: #999999;
+          margin-top: 6px;
+
+      }
+      .m-l-8{
+        margin-left: 8px;
+      }
+      .aui-icon-star:before {
+          content: "\e6e0";
+          font-weight: bold;
+      }
+      .f-s-14{
+        font-size: 12px!important;
+      }
+      .icon{
+        margin-top: 8px;
+        border-radius:4px;
+        width: 120px!important;
+        height: 70px;
+      }
+      .aui-list .aui-list-item-media {
+        width: 120px;
+        position: relative;
+        padding: 0.5rem 0;
+        padding-right: 0.75rem;
+        display: inherit;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+    .m-t-10{
+      margin-top: 8px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="screening" style="display:inline-block;background:white;" onclick="toggleFilter(event)">
+        <ul>
+            <li style="display:inline-flex; border: none;padding-left: 20px;text-align: left;" class="Regional" id="PJSD">
+              <div class="hot_select" id="hot_div" tapmode onclick="onHotClick(event);">
+                热门
+              </div>
+              <div class="choose" id="selected_grade">
+
+              </div>
+              <div class="choose" id="selected_ke">
+
+              </div>
+              <div class="choose" id="selected_type"></div>
+              <div class="choose" id="selected_ban"></div>
+              <div style="position:fixed;right:34px;">筛选</div>
+            </li>
+        </ul>
+      </div>
+
+      <div class="grade-eject" id="yincang3" onclick="yincang()">
+          <ul  style="background-color:white;"class="grade-w" id="gradew3">
+              <li style="background-color:white;border-bottom:0px;">
+                <div style="display:inline-block;min-width: 3em;">
+                    年级：
+                </div>
+                <div style="display:inline-block;" id="gradeChoose_div">
+                  <div  class="biaoqian" tapmode onclick="gradeItemClick(event, 0);">
+                      高一
+                  </div>
+                  <div class="biaoqian" tapmode onclick="gradeItemClick(event, 1);">
+                      高二
+                  </div>
+                  <div class="biaoqian" tapmode onclick="gradeItemClick(event, 2);">
+                      高三
+                  </div>
+                </div>
+              </li>
+
+              <li style="background-color:white;display:inline-flex;border-bottom:0px;">
+                <div style="min-width: 3em;">
+                  科目：
+                </div>
+                <div style="display:inline-block; margin-left:0.25rem;padding-right:20px;" id="ke_div">
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 0);">
+                      语文
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 1);">
+                      数学
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 2);">
+                      英语
+                  </div>
+
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 3);">
+                      历史
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 4);">
+                      政治
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 5);">
+                      物理
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 6);">
+                      化学
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 7);">
+                      生物
+                  </div>
+                  <div class="biaoqian" tapmode onclick="onKeClick(event, 8);">
+                      地理
+                  </div>
+                </div>
+              </li>
+
+              <li style="background-color:white;display:inline-flex;border-bottom:0px;">
+                <div style="min-width: 3em;">
+                  类型：
+                </div>
+                <div style="display:inline-block; margin-left:0.25rem;" id="type_div">
+                  <script id="type_s" type="text/x-dot-template">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <div class="biaoqian" tapmode onclick="onTypeItemClick(event, {{=i}});">
+                        {{=it[i]}}
+                    </div>
+                  {{}}}
+
+
+                  </script>
+                </div>
+              </li>
+
+              <li style="background-color:white;display:inline-flex;border-bottom:0px;">
+                <div style="min-width: 3em;">
+                  版本：
+                </div>
+                <div style="display:inline-block; margin-left:0.25rem;" id="ban_div">
+                  <script id="ban_s" type="text/x-dot-template">
+                  {{for (var i = 0; i < it.length; i++) {}}
+                    <div class="biaoqian" tapmode onclick="onBanItemClick(event, {{=i}});">
+                        {{=it[i]}}
+                    </div>
+                  {{}}}
+                  </script>
+
+                </div>
+              </li>
+          </ul>
+      </div>
+      <div class="aui-content " style="margin-top:40px;">
+        <ul class="aui-list aui-media-list" id="kecheng_list">
+          <script id="kecheng_d" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item" tapmode onclick="onItemClick({{=it[i].kid}});">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media" style="border-right:none;display: block;">
+                          <img src="../../../image/uke_top.png"style="position:absolute;width:120px;height:6px;">
+                          <img src="http://www.yxke12.com/Public/Home/images/videothumb/{{=it[i].kid}}.jpg" class="icon">
+                      </div>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title" style="width:10rem!important;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{=it[i].kname}}</div>
+                          </div>
+                          <div class="aui-list-item-text m-t-10">
+                              {{=it[i].neirong}} | 共：{{=it[i].shuliang}}讲
+                          </div>
+                          <div class="third">
+                              <img src="../../../image/ic_look.png" style="width:15px;height:10px;margin-top:3px;">
+                              <span style="margin-top:1px;" class="f-s-14">&nbsp{{=it[i].looks}}</span>
+                              <i class="aui-iconfont aui-icon-star m-l-8 f-s-14">&nbsp{{=it[i].stores}}</i>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+              {{}}}
+          </script>
+        </ul>
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var grade_arr = ["高一", "高二", "高三"];
+    var ke_arr = ["语文","数学","英语","历史","政治","物理","化学","生物","地理"];
+    var type_arr = [];
+    var ban_arr = [];
+    var selected_grade,
+    selected_ke,
+    selected_type,
+    selected_ban,
+    hot_div;
+    var cur_grade;
+    var cur_ke;
+    var cur_type;
+    var cur_ban;
+    var kecheng_data = doT.template(document.getElementById('kecheng_d').innerHTML)
+    apiready = function() {
+      selected_grade = $api.byId('selected_grade');
+      selected_ke = $api.byId('selected_ke');
+      selected_type = $api.byId('selected_type');
+      selected_ban = $api.byId('selected_ban');
+      hot_div = $api.byId('hot_div');
+      getFilterData();
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Youketang/lists.html',
+          method: 'post',
+          data: {
+
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+
+              document.getElementById('kecheng_list').innerHTML = kecheng_data(ret.data);
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+
+    };
+
+    function yincang() {
+      toggleFilter();
+    }
+
+    function toggleFilter(e) {
+        var yc = $api.byId('yincang3');
+        var p = $api.byId('PJSD');
+        if ($api.hasCls(yc, "grade-w-roll")) {
+            $api.removeCls(yc, "grade-w-roll");
+              $api.removeCls(p, "current");
+        }else {
+            $api.addCls(yc, "grade-w-roll");
+            $api.addCls(p, "current");
+        }
+    }
+
+    function gradeItemClick(e, index) {
+      e.cancelBubble = true;
+      var arr = document.getElementById("gradeChoose_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+        //
+        if (i == index) {
+            $api.addCls(arr[i], 'act_biaoqian');
+        }else {
+            $api.removeCls(arr[i], 'act_biaoqian');
+        }
+      }
+      selected_grade.innerHTML = arr[index].innerHTML;
+      if ($api.hasCls(hot_div, "hot_select")) {
+        $api.removeCls(hot_div, 'hot_select');
+        $api.addCls(hot_div, 'hot');
+      }
+      // console.log("gradeItemClick: "+arr.length);
+      cur_grade = grade_arr[index];
+      loadData();
+    }
+
+    function onKeClick(e, index) {
+      e.cancelBubble = true;
+      var arr = document.getElementById("ke_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+        //
+        if (i == index) {
+            $api.addCls(arr[i], 'act_biaoqian');
+        }else {
+            $api.removeCls(arr[i], 'act_biaoqian');
+        }
+      }
+      selected_ke.innerHTML = arr[index].innerHTML;
+      if ($api.hasCls(hot_div, "hot_select")) {
+        $api.removeCls(hot_div, 'hot_select');
+        $api.addCls(hot_div, 'hot');
+      }
+      cur_ke = ke_arr[index];
+      loadData();
+    }
+
+    function onTypeItemClick(e, index) {
+      e.cancelBubble = true;
+      var arr = document.getElementById("type_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+        //
+        if (i == index) {
+            $api.addCls(arr[i], 'act_biaoqian');
+        }else {
+            $api.removeCls(arr[i], 'act_biaoqian');
+        }
+      }
+      selected_type.innerHTML = arr[index].innerHTML;
+      if ($api.hasCls(hot_div, "hot_select")) {
+        $api.removeCls(hot_div, 'hot_select');
+        $api.addCls(hot_div, 'hot');
+      }
+      cur_type = type_arr[index];
+      loadData();
+    }
+
+    function onBanItemClick(e, index) {
+      e.cancelBubble = true;
+      var arr = document.getElementById("ban_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+        //
+        if (i == index) {
+            $api.addCls(arr[i], 'act_biaoqian');
+        }else {
+            $api.removeCls(arr[i], 'act_biaoqian');
+        }
+      }
+      selected_ban.innerHTML = arr[index].innerHTML;
+      if ($api.hasCls(hot_div, "hot_select")) {
+        $api.removeCls(hot_div, 'hot_select');
+        $api.addCls(hot_div, 'hot');
+      }
+      cur_ban = ban_arr[index];
+      loadData();
+    }
+
+    function onHotClick(e) {
+        e.cancelBubble = true;
+        if ($api.hasCls(hot_div, "hot")) {
+          $api.removeCls(hot_div, 'hot');
+          $api.addCls(hot_div, 'hot_select');
+        }
+        clearSelect();
+        cur_grade = null;
+        cur_ke = null;
+        cur_type = null;
+        cur_ban = null;
+        loadData();
+    }
+
+    function clearSelect() {
+      var arr = document.getElementById("gradeChoose_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+          $api.removeCls(arr[i], 'act_biaoqian');
+      }
+      selected_grade.innerHTML = '';
+
+      var arr = document.getElementById("ke_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+          $api.removeCls(arr[i], 'act_biaoqian');
+      }
+      selected_ke.innerHTML = '';
+
+      var arr = document.getElementById("type_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+          $api.removeCls(arr[i], 'act_biaoqian');
+      }
+      selected_type.innerHTML = '';
+
+      var arr = document.getElementById("ban_div").getElementsByTagName("div");
+      for (var i = 0; i < arr.length; i++) {
+        $api.removeCls(arr[i], 'act_biaoqian');
+      }
+      selected_ban.innerHTML = '';
+    }
+
+    function onItemClick(kid) {
+        api.openWin({
+            name: 'kecheng_win',
+            url: './kecheng_win.html',
+            pageParam: {
+                kid: kid,
+                url:'http://www.yxke12.com/index.php/App/Youketang/seevideo.html',
+                paixu:1
+            }
+        });
+
+    }
+
+    function getFilterData() {
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Youketang/datatypes.html',
+          method: 'post',
+          data: {
+              values: {
+              }
+          }
+      },function(ret, err){
+          // console.log(JSON.stringify(ret));
+          if (ret) {
+              if (ret.status == 100) {
+                type_arr = ret.data.leixing;
+                ban_arr = ret.data.banben;
+                var type_dot = doT.template(document.getElementById('type_s').innerHTML);
+                document.getElementById('type_div').innerHTML = type_dot(type_arr);
+                var ban_dot = doT.template(document.getElementById('ban_s').innerHTML);
+                document.getElementById('ban_div').innerHTML = ban_dot(ban_arr);
+              }else {
+
+              }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+
+          }
+      });
+
+    }
+
+    function loadData() {
+      var params = {};
+      if (cur_grade != null) {
+        params.grade = cur_grade;
+      }
+
+      if (cur_ke != null) {
+        params.kemu = cur_ke;
+      }
+
+      if (cur_type != null) {
+        params.type = cur_type;
+      }
+
+      if (cur_ban != null) {
+        params.banben = cur_ban;
+      }
+      console.log(JSON.stringify(params));
+
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Youketang/lists.html',
+          method: 'post',
+          data: {
+              values:params
+          }
+      },function(ret, err){
+          // console.log(JSON.stringify(ret));
+          api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+              document.getElementById('kecheng_list').innerHTML = kecheng_data(ret.data);
+            }else {
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+    }
+</script>
+
+</html>

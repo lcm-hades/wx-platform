@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+
+      ul li{
+        background-color: white;
+        height: 65px;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      ul li .ic{
+        width: 45px;
+        height: 45px;
+        border-radius: 22.5px;
+        margin-left: 10px;
+        margin-top: 10px;
+        float: left;
+      }
+
+      ul li span{
+          margin-left: 10px;
+          font-size: 18px;
+          display: inline-block;
+          float: left;
+          line-height: 65px;
+      }
+
+      ul li .ic_right{
+          float: right;
+          width: 22px;
+          height: 22px;
+          margin-top: 21.5px;
+          margin-right: 10px;
+      }
+
+      ul li .edite{
+        color: #886e91;
+      }
+      ul .th{
+        height: 30px;
+        background-color: white;
+        margin-bottom: 10px;
+      }
+
+      .th span{
+        float: left;
+        margin-left: 10px;
+        line-height: 30px;
+        color: #999999;
+      }
+
+      .th p{
+        float: right;
+        margin-right: 10px;
+        line-height: 30px;
+        color: #999999;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+
+      <ul id="stu_ul">
+        <script id="stu_s" type="text/x-dot-template">
+          <div class="th">
+              <span>创建时间：{{=it[0].createtime}}</span>
+              <p>共{{=it.length}}人</p>
+          </div>
+          {{for (var i = 0; i < it.length; i++) {}}
+            <li>
+              <img src="http://www.yxke12.com/Public/Home/images/touxiang/{{=it[i].img}}" class="ic"></img>
+              <span>{{=it[i].studentname}}</span>
+            </li>
+          {{}}}
+          <li tapmode onclick="onAddStudent();">
+            <img src="../../../../image/add_s.png" class="ic"></img>
+            <span class="edite">编辑小组成员</span>
+          </li>
+        </script>
+      </ul>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+    var stuList = [];
+    var stu_dot;
+    var groupStuList = [];
+    var timer;
+    apiready = function() {
+        stu_dot = doT.template(document.getElementById('stu_s').innerHTML);
+        getStudentList();
+    };
+
+    function getStudentList() {
+      var parames = {values:{}};
+      parames.values.id = api.pageParam.id;
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/xiaozucon.html",
+          parames,function(_data) {
+            stuList = _data;
+            document.getElementById('stu_ul').innerHTML = stu_dot(stuList);
+            api.parseTapmode();
+          },null, true);
+    }
+
+    function disGroup() {
+      var parames = {values:{}};
+      parames.values.id = api.pageParam.id;
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/delxiaozu.html",
+          parames,function(_data) {
+            api.toast({
+                msg: _data,
+                duration: 2000,
+                location: 'bottom'
+            });
+            timer = window.setInterval(timeCall,1000);
+          },null, true);
+    }
+
+    function timeCall() {
+      api.closeWin();
+      window.clearInterval(timer);
+      api.execScript({
+          name: 'class_manage_win',
+          frameName: 'class_manage_frm',
+          script: 'disGroupCall();'
+      });
+    }
+
+    // 编辑小组成员事件
+    function onAddStudent() {
+        api.openWin({
+            name: 'add_group_win',
+            url: './add_group_win.html',
+            pageParam: {
+                data:stuList,
+                source:1,
+                id: api.pageParam.id
+            }
+        });
+    }
+
+    // 解散回调事件
+    function winFinishCall() {
+      api.confirm({
+          title:"提示",
+          msg: "确认解散？",
+          buttons: ['确定', '取消']
+      }, function(ret, err) {
+          if(ret.buttonIndex == 1){
+             disGroup();
+          }
+      });
+    }
+
+    function editeCallBack(_result) {
+      stuList = _result;
+      document.getElementById('stu_ul').innerHTML = stu_dot(stuList);
+    }
+
+    function winBackCall() {
+        api.closeWin();
+        api.execScript({
+            name: 'class_manage_win',
+            frameName: 'class_manage_frm',
+            script: 'editeGroupCall(' + stuList.length + ');'
+        });
+    }
+</script>
+
+</html>

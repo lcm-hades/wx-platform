@@ -1,0 +1,191 @@
+<!doctype html>
+<html style="background:#f5f5f5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+        header {
+            background-color: #fff!important;
+        }
+
+        header ul li {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            display: none;
+            color: #323237;
+            position: relative;
+            font-size: 18px;
+        }
+
+        header ul li.active {
+            display: block;
+        }
+
+        .sava {
+            color: #fff;
+            background: #6666ff;
+            border-radius: 4px;
+            font-size: 0.45rem;
+            padding: 0rem 0.8rem;
+        }
+
+        .planImg {
+            width: 0.6rem;
+            height: 0.6rem;
+            margin-right: 0.5rem
+        }
+
+        .aui-list .aui-list-item {
+            border: none;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-image: linear-gradient(0, #dddddd, #dddddd 0%, transparent 0%);
+            background-image: -webkit-linear-gradient(90deg, #dddddd, #dddddd 0%, transparent 0%);
+        }
+
+        h3 {
+            margin-top: 3.3rem;
+            padding-top: 0.5rem;
+            font-size: 1.4rem;
+            text-align: left;
+            color: #333333;
+        }
+
+        .planDate {
+            margin: 0.7rem 0px;
+            font-size: 0.55rem;
+            text-align: left;
+            color: #886e91;
+        }
+
+        p {
+            font-size: 0.8rem;
+            text-align: left;
+            color: #666666;
+            line-height: 1.5;
+        }
+
+        li {
+            font-size: 0.8rem;
+            text-align: left;
+            color: #333333;
+        }
+
+        .planK {
+            width: 90%;
+            margin: auto;
+            /*margin-top:2.5rem;*/
+            /*background: #fff*/
+        }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+    <a class="aui-pull-left aui-btn" tapmode onclick='api.closeWin();'>
+        <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+    </a>
+    <div id="title" class="aui-title" style="color:#333">计划详细</div>
+
+    <a class="aui-pull-right aui-btn aui-btn-outlined" tapmode="hover" onclick="planModification()">
+
+        <span class="sava">修改</span>
+
+    </a>
+</header>
+
+<body style="background:#fff;height:auto">
+    <div class="planK" id="planP">
+      <script id="planS" type="text/x-dot-template">
+        <h3>{{=it.name}}</h3>
+        <div class="aui-list-item-label planDate">
+            <img src="../../../image/time.png" class="planImg " alt="">发表于: {{=it.time}}
+        </div>
+        <p>
+          {{=it.content}}
+        </p>
+
+        <ul class="aui-list aui-form-list" style="margin-top:0.85rem">
+            <li class="aui-list-item" tapmode onclick="startDate()">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label" style="width:100%">
+                        计划时间：{{=it.starttime}}至{{=it.endtime}}
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="endDate()">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label" style="width:100%">
+                    {{if (it.type == 1) {}}
+                      计划类型：学期计划
+                    {{}else if (it.type == 2) {}}
+                      计划类型：学年计划
+                    {{}else {}}
+                      计划类型：其他计划
+                    {{}}}
+
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="endDate()">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label" style="width:100%">
+                        计划状态：{{=it.status}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+      </script>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    var UIMediaScanner;
+    var path1 = [];
+    var one, two;
+
+    apiready = function() {
+        api.parseTapmode();
+        $api.fixStatusBar($api.byId('aui-header'));
+        planParticulars()
+
+
+    };
+
+
+
+
+  var planS = doT.template(document.getElementById('planS').innerHTML);
+    function planParticulars() {
+
+        var parames = {
+            values: {}
+        }
+        parames.values.id = api.pageParam.id;
+        zhc.post('http://www.yxke12.com/index.php/App/Member/plandetail.html', parames, function(data) {
+        document.getElementById('planP').innerHTML = planS(data);
+        }, null, true)
+    }
+
+    function planModification() {
+      api.openWin({
+          name: 'ActivityPlan_win',
+          url: './ActivityPlan_win.html',
+          pageParam: {
+              title: '修改计划',
+              id:api.pageParam.id
+          }
+      });
+
+    }
+</script>
+
+</html>

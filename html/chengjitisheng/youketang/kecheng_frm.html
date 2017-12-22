@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+
+    .top_img{
+      width: 100%;
+      height: 210px;
+      position: absolute;
+    }
+    .boimg{
+      width: 0.5rem;
+      height: 0.65rem;
+    }
+    .keTitle{
+      font-family: 'PingFang-SC';
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #666666;
+    }
+    .boTitle{
+      color: #6666ff!important;
+    }
+    .kechengjieshaoTitle{
+       font-family: 'PingFang-SC';
+       font-weight: 500;
+       color: #333333;
+    }
+    .biaotu{
+      width: 11.5rem;
+      height: 6.5rem;
+      margin: 0.55rem auto;
+    }
+    .cont{
+      width: 90%;
+      margin: auto;
+      text-align: left;
+      font-family: "PingFang-SC";
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: #333333;
+      margin-top: 8px;
+    }
+    .zhujiaoimg{
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      text-align: center;
+    }
+    .timg{
+      width: 2.7rem;
+      height: 2.7rem;
+      vertical-align: middle;
+    }
+    .zhujiang{
+      font-family: 'PingFang-SC';
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: left;
+      color: #333333;
+      padding-left: 1rem;
+    }
+    .aui-tab-item.aui-active {
+      color: #6666ff;
+      border-bottom: 2px solid #6666ff;
+    }
+    .play-bottom{
+      position: relative;
+      height: 50px;
+      width: 100%;
+      background-color: #333333;
+    }
+    .title_c{
+      margin-top: 8px;
+      color: black;
+      font-size: 18px;
+      margin-left: 5%;
+    }
+    .fee_c{
+      margin-top: 20px;
+      font-size: 22px;
+      color: #9fd45b;
+      margin-left: 5%;
+      padding-bottom: 10px;
+    }
+
+    textarea{
+      width: 90%;
+      margin: auto;
+      background: #ffffff;
+      padding-top: 10px;
+      padding-left: 4px;
+      margin:0px auto!important;
+      height: 10rem!important;
+      overflow: auto!important;
+    }
+    .aui-btn-block {
+        display: block;
+        width: 100%;
+        height: 2rem;
+        line-height: 2rem;
+        margin: auto; font-size: 0.9rem;
+        border-radius: 0px;
+        background: #6666ff;
+    }
+
+    .aui-list {
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 0%)!important;
+}
+    </style>
+</head>
+<body>
+
+
+    <div id="sykt_div" class="aui-content aui-margin-b-15"  style="background:#000">
+      <!-- <script id="evaluationtmpl" type="text/x-dot-template"> -->
+      <div style="position:fixed;width:100%;z-index:1;background:#000">
+
+        <video style="width:100%;height:10.55rem" preload="load" controls="controls" id="shipin" onwebkitendfullscreen="onVideoPlaying();">
+
+        </video>
+        <div class="play-bottom">
+          <div style="margin-left:10px;width:200px;float:left;line-height:50px;color:#a1a1a1;">播放：<span id="cishu"></span>次</div>
+          <img src="../../../image/sp_shoucang_select.png" style="position:absolute;width:22px;height:22px;right:10px;top:14px;" id="shoucang" tapmode onclick="onShouCangClick();"></img>
+        </div>
+        <div class="aui-tab" style="width:100%;"id="tab">
+            <div class="aui-tab-item aui-active">目录</div>
+            <div class="aui-tab-item">介绍</div>
+            <div class="aui-tab-item">笔记</div>
+        </div>
+
+      </div>
+
+        <ul class="aui-list aui-list-in" id="mulu" style="display:block;margin-top:305px;">
+        <script id="shipin_list" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+                    <li class="aui-list-item" tapmode onclick="onItemPlayClick({{=i}})">
+                        <div class="aui-list-item-label-icon">
+                            <img src="../../../image/weibofang.png" id='shipin_img{{=i}}' class="boimg"  alt="">
+                        </div>
+                        <div class="aui-list-item-inner keTitle " id="shipin_name{{=i}}">
+                            {{=it[i].vname}}
+                            <div class="aui-list-item-right ">第{{=it[i].paixu}}讲</div>
+                        </div>
+                    </li>
+            {{}}}
+
+      </script>
+     </ul>
+
+     <ul class="aui-list aui-list-in" id="kechengxiangqing" style="margin-top:305px;padding:10px;display:none">
+       <script id="jieshao_s" type="text/x-dot-template">
+          <div class="title_c">{{=it.content.kname}}</div>
+          <div class="cont">
+            {{=it.content.category}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp共:{{=it.counts}}讲
+          </div>
+          <div class="fee_c">免费</div>
+          <div style="width:100%;height:1px;background-color:#f5f5f5;"></div>
+          <div class="title_c">主讲教师: {{=it.teacher.name}}</div>
+          <div class="cont">
+            {{=it.teacher.school}}
+          </div>
+          <div class="cont">
+            {{=it.teacher.jianjie}}
+          </div>
+        </script>
+     </ul>
+
+        <ul class="aui-list aui-list-in" id="jiaoshijieshao" style="margin-top:310px;display:none;z-index:2;">
+          <textarea id="feedback_t" name="name" placeholder="笔记范例，没有最少字的限制。"></textarea>
+
+        </ul>
+
+        <!-- </script> -->
+
+    </div>
+
+
+<div id="note_btn" style="position:fixed;bottom:0px;width:100%;display:none;z-index:2;"><div class="aui-btn aui-btn-primary aui-btn-block" tapmode onclick="saveNote()">保存笔记</div></div>
+
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/aui-tab.js" ></script>
+<script type="text/javascript" src="../../../script/doT.js" ></script>
+<script type="text/javascript">
+    var cur_data_list = [];
+    var cur_paixu;
+    var index;
+    var data;
+    var evalText = doT.template(document.getElementById('shipin_list').innerHTML);
+    var jieshao_dot = doT.template(document.getElementById('jieshao_s').innerHTML);
+
+    var flag = true;
+    apiready = function(){
+        api.parseTapmode();
+        index = api.pageParam.index;
+        data = api.pageParam.data;
+        cur_paixu = api.pageParam.paixu;
+        getPlayAddress();
+        // var play = $api.byId("play_id");
+        // play.style.left = (api.winWidth/2 - $api.offset(play).w/2) + "px";
+        var v = document.getElementById("shipin")
+         autoFullScrenn(v)
+
+    }
+
+    var fullscreen = function(elem) {
+        var prefix = 'webkit';
+          if ( elem[prefix + 'EnterFullScreen'] ) {
+            return prefix + 'EnterFullScreen';
+          } else if( elem[prefix + 'RequestFullScreen'] ) {
+            return prefix + 'RequestFullScreen';
+          };
+        return false;
+    };
+
+    function autoFullScrenn(v){
+        var ua   = navigator.userAgent.toLowerCase();
+        var Android = String(ua.match(/android/i)) == "android";
+        if(!Android) return;//非android系统不使用;
+        var video  = v,doc = document;
+        var fullscreenvideo = fullscreen(doc.createElement("video"));
+        if(!fullscreen) {
+            alert("不支持全屏模式");
+            return;
+        }
+        video.addEventListener("webkitfullscreenchange",function(e){
+            if(doc.webkitIsFullScreen){//退出全屏暂停视频
+                // this.pause();
+                // alert("aaaa")
+                api.setScreenOrientation({
+                    orientation: 'auto'
+                });
+                // this.pause();
+            };
+        }, false);
+        video.addEventListener("click", function(){
+            this.play();
+            video[fullscreenvideo]();
+        }, false);
+
+
+        video.addEventListener('ended',function(){
+            doc.webkitCancelFullScreen(); //播放完毕自动退出全屏
+        },false);
+
+    };
+
+    function getPlayAddress() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: api.pageParam.url,
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  kid:api.pageParam.kid,
+                  paixu:cur_paixu
+              },
+
+          }
+      },function(ret, err){
+        console.log("aaaa:"+JSON.stringify(ret));
+        api.hideProgress();
+        if (ret) {
+            if (ret.status == 100) {
+              if (!flag) {
+
+                $api.byId('shipin').autoplay = 'autoplay';
+              }
+                flag = false;
+                $api.byId('shipin').src = ret.data.video;
+                $api.byId('shipin').poster = api.pageParam.img;
+                // console.log(api.pageParam.img);
+
+                cur_data_list = ret.data.lists;
+                $api.byId('mulu').innerHTML = evalText(ret.data.lists);
+                var index1 = cur_paixu - 1;
+                $api.byId('cishu').innerHTML = ret.data.lists[index1].looks;
+                var a =  document.getElementsByTagName('li');
+                $api.byId('shipin_img'+(cur_paixu - 1)).src = '../../../image/bofang.png';
+                $api.addCls($api.byId('shipin_name'+(cur_paixu - 1)), 'boTitle');
+
+                $api.byId('kechengxiangqing').innerHTML = jieshao_dot(ret.data);
+                var shoucang = $api.byId('shoucang');
+
+                if (ret.data.stores == 0) {
+                    shoucang.src = "../../../image/sp_shoucang_normal.png";
+                }else {
+                    shoucang.src = "../../../image/sp_shoucang_select.png";
+                }
+
+                var no = $api.byId("feedback_t");
+                if (ret.data.notes != null) {
+                  no.innerHTML = ret.data.notes.notes;
+                }
+                api.parseTapmode();
+
+            }else {
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+    }
+    var cur_index = 0;
+    function onItemPlayClick(index) {
+      cur_index = index;
+      var a =  document.getElementsByTagName('li')
+      for (var i = 0; i < a.length; i++) {
+        if (i == index) {
+          $api.byId('shipin_img'+i).src = '../../../image/bofang.png'
+          $api.addCls($api.byId('shipin_name'+i), 'boTitle');
+        }else {
+          $api.byId('shipin_img'+i).src = '../../../image/weibofang.png'
+          $api.removeCls($api.byId('shipin_name'+i), 'boTitle');
+        }
+      }
+      cur_paixu = cur_data_list[index].paixu;
+      getPlayAddress();
+    }
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      if (ret.index == 1) {
+        $api.byId('mulu').style.display = 'block';
+        $api.byId('kechengxiangqing').style.display = 'none';
+        $api.byId('jiaoshijieshao').style.display = 'none';
+        $api.byId('note_btn').style.display = 'none';
+
+      }else if (ret.index == 2) {
+        $api.byId('mulu').style.display = 'none';
+        $api.byId('kechengxiangqing').style.display = 'block';
+        $api.byId('jiaoshijieshao').style.display = 'none';
+        $api.byId('note_btn').style.display = 'none';
+      }else {
+        $api.byId('mulu').style.display = 'none';
+        $api.byId('kechengxiangqing').style.display = 'none';
+        $api.byId('jiaoshijieshao').style.display = 'block';
+        $api.byId('note_btn').style.display = 'block';
+      }
+        // console.log(JSON.stringify(ret));
+    });
+
+    function saveNote() {
+      var note = $api.byId('feedback_t').value;
+
+        if (note == '') {
+          api.toast({
+              msg: '请记录后再保存',
+              duration: 2000,
+              location: 'bottom'
+          });
+          return;
+        }
+        uploadNote(note);
+    }
+
+    function uploadNote(content) {
+      var video = cur_data_list[cur_index];
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '保存中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Youketang/notes.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  notes:content,
+                  vid:video.vid,
+                  kid:video.kid,
+                  paixu:video.paixu,
+                  nianji:video.nianji,
+                  kemu:video.kemu,
+                  vname:video.vname
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+              api.toast({
+                  msg: ret.data,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }else {
+              api.toast({
+                  msg: ret.data.error,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+
+    }
+
+    function onShouCangClick() {
+      var video = cur_data_list[cur_index];
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '操作中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Youketang/stores.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  vid:video.vid,
+                  kid:video.kid,
+                  paixu:video.paixu,
+                  nianji:video.nianji,
+                  kemu:video.kemu,
+                  vname:video.vname
+              }
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              // console.log( JSON.stringify( ret ) );
+              if (ret.status == 100) {
+                 var shoucang = $api.byId('shoucang');
+                  if (ret.data.infos == 0) {
+                      shoucang.src = "../../../image/sp_shoucang_normal.png";
+                  }else {
+                      shoucang.src = "../../../image/sp_shoucang_select.png";
+                  }
+              }else {
+                  api.toast({
+                      msg: ret.data.error,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+              }
+          } else {
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+
+    }
+
+    function onVideoPlaying() {
+      api.setFullScreen({
+        fullScreen: false
+      });
+    }
+</script>
+</html>

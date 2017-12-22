@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html style="background:#f5f5f5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/aui-tab.js" ></script>
+    <script type="text/javascript" src="../../script/doT.js"></script>
+    <script src="../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../script//demo.js"></script>
+       <style>
+      .tou{
+        height: 104px;
+        width: 100%;
+        background: #6666ff;
+        position:fixed;
+
+      }
+      .logo{
+        width: 71px;
+        height: 71px;
+        border-radius: 11px;
+        background-color: #ffffff;
+        margin: auto;
+        position: absolute;
+        top: 0; left: 30.5px; bottom: 0;
+      }
+      .daxueming {
+    font-family: "PingFang-SC";
+    font-size: 24px;
+    font-weight: 500;
+    text-align: left;
+    color: #ffffff;
+    padding-left: 125px;
+    padding-top: 20px;
+  }
+
+.logo img{
+  width: 61.5px;
+  height: 61.5px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;right: 0;
+}
+p{
+  margin-top: 20px
+}
+.title1{
+  text-align: right;
+  width: 25%;
+}
+.title2{
+  margin-left: 20px;
+  font-size: 0.6rem;
+  width: 60%;
+}
+.left_line {
+    background-color: #6666ff;
+    height: 40px;
+    width: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
+    float: left;
+}
+.section_title {
+    color: #333333;
+    font-size: 14px;
+    font-family: "PingFang-SC";
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.zhaoshengdiqu{
+  display: inline-block;
+  width: 80px;
+  height: 14.5px;
+  font-family: "PingFang-SC";
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: left;
+  color: #666666;
+}
+.zhaoshengdiqu1{
+  width: 69.5px;
+ height: 23px;
+ border-radius: 5px;
+background: url("../../image/41-8.png") no-repeat scroll 50px center transparent;
+background-size: 15px;
+    line-height: 19px;
+ border: solid 1px #6666ff;
+}
+.aui-tab-item.aui-active {
+          color: #6666ff;
+          border-bottom: 2px solid #6666ff;
+      }
+
+ </style>
+</head>
+
+<body >
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con z-col" >
+
+        <div style="height:104px" id="touxiang">
+          <script id="evaluationtmpl" type="text/x-dot-template">
+          <div class="tou">
+            <div class="logo">
+              {{if (it.logo != null) {}}
+                <img src="http://www.yxke12.com/Public/Home/images/schools/{{=it.logo}}" alt="">
+              {{}}}
+            </div>
+            <span class="daxueming">
+              {{=it.dxmc}}
+            </span>
+          </div>
+          </script>
+        </div>
+
+            <div style="height:50px;" id="tab_p">
+              <div class="aui-tab" id="tab" style="position:fixed;width:100%;padding-top: 0px;">
+                  <div class="aui-tab-item aui-active">简介</div>
+                  <div class="aui-tab-item">学科要求</div>
+
+              </div>
+            </div>
+
+
+      </div>
+      <div id="jieshao" style="width:90%;margin:auto;display:block">
+        <script id="evaluationtmpl1" type="text/x-dot-template">
+        <p><span class="title1">院校类型</span> <span class="title2">{{=it.yxlx}}</span></p>
+        <p><span class="title1">院校层次</span> <span class="title2">{{=it.xlcc}}</span></p>
+        <p><span class="title1">隶属</span> <span class="title2">{{=it.zgbm}}</span></p>
+        <p><span class="title1">建校时间</span> <span class="title2">{{=it.cbsj}}</span></p>
+        <p><spna class="title1">国家重点学科</spna> <span class="title2">{{=it.gjzdxk}}</span></p>
+        {{if (it.ssd==null) {}}
+          <p><span class="title1">硕士点</span> <span class="title2"></span></p>
+        {{}else {}}
+          <p><span class="title1">硕士点</span> <span class="title2">{{=it.ssd}}</span></p>
+        {{}}}
+        {{if (it.bsd==null) {}}
+          <p><span class="title1">博士点</span> <span class="title2"></span></p>
+        {{}else {}}
+          <p><span class="title1">博士点</span> <span class="title2">{{=it.bsd}}</span></p>
+        {{}}}
+        <p><span class="title1">电话</span> <span class="title2">{{=it.lxdh}}</span></p>
+        <p><span class="title1">官网链接</span> <span class="title2">{{=it.xxwz}}</span></p>
+        <p><span class="title1" style="vertical-align: top;">学校地址</span> <span class="title2">{{=it.xxdz}}</span></p>
+          </script>
+      </div>
+
+
+      <div id="xuankemu" style="display:none">
+
+      <script id="evaluationtmpl2" type="text/x-dot-template">
+        <div style="margin-left:10px;margin-top:10px;height:auto;">
+            <div class="left_line"></div>
+            <p class="section_title">2018 招生普通高校专业（类）</p>
+            <p class="section_title">选考科目范围</p>
+        </div>
+          <div style="margin-top:17.5px;margin-left:10px">
+            <div class="zhaoshengdiqu">
+              招生地区：
+            </div>
+            <div class="zhaoshengdiqu ">
+                <select class="zhaoshengdiqu1" name="" style="">
+                  <option value="">北京</option>
+                  <option value="">天津</option>
+                  <option value="">河北</option>
+                  <option value="">山西</option>
+                  <option value="">内蒙古</option>
+                  <option value="">辽宁</option>
+                  <option value="">吉林</option>
+                  <option value="">黑龙江</option>
+                  <option value="">上海</option>
+                  <option value="">江苏</option>
+                  <option value="">南宁</option>
+                  <option value="">陕西</option>
+                  <option value="">浙江</option>
+                  <option value="">安徽</option>
+                  <option value="">福建</option>
+                  <option value="">江西</option>
+                  <option value="">山东</option>
+                  <option value="">河南</option>
+                  <option value="">湖北</option>
+                  <option value="">武汉</option>
+                  <option value="">湖南</option>
+                  <option value="">广东</option>
+                  <option value="">广西</option>
+                  <option value="">海南</option>
+                  <option value="">重庆</option>
+                  <option value="">四川</option>
+                  <option value="">贵州</option>
+                  <option value="">云南</option>
+                  <option value="">甘肃</option>
+                  <option value="">青海</option>
+                  <option value="">宁夏</option>
+                  <option value="">新疆</option>
+                  <option value="">香港</option>
+                </select>
+            </div>
+          </div>
+
+          <table border="1" style="margin-top: 20px;">
+            <tr>
+              <th style="width: 10%;">层次</th>
+              <th>专业名称</th>
+              <th style="">细分专业</th>
+              <th style="width: 17%;">科目1</th>
+              <th style="width: 17%;">科目2</th>
+              <th style="width: 17%;">科目3</th>
+            </tr>
+              {{ for(var i=0;i  <it.length;i++) { }}
+          <tr>
+
+            <td>{{=it[i].xlcc}}</td>
+            <td>{{=it[i].major_class}}</td>
+            <td>{{=it[i].major}}</td>
+            {{if (it[i].xuanke1==null) {}}
+              <td></td>
+            {{}else {}}
+              <td>{{=it[i].xuanke1}}</td>
+            {{}}}
+            {{if (it[i].xuanke2==null) {}}
+              <td></td>
+            {{}else {}}
+              <td>{{=it[i].xuanke2}}</td>
+            {{}}}
+            {{if (it[i].xuanke3==null) {}}
+              <td></td>
+            {{}else {}}
+              <td>{{=it[i].xuanke3}}</td>
+            {{}}}
+
+
+          </tr>
+            {{}}}
+          </table>
+  </script>
+      </div>
+
+</body>
+
+<script type="text/javascript">
+var tab = new auiTab({
+    element:document.getElementById("tab"),
+},function(ret){
+  if (ret.index==1) {
+      document.getElementById("jieshao").style.display = 'block'
+      document.getElementById("xuankemu").style.display = 'none'
+  }else {
+    document.getElementById("jieshao").style.display = 'none'
+    document.getElementById("xuankemu").style.display = 'block'
+  }
+    console.log(ret)
+});
+    apiready = function(){
+          api.parseTapmode();
+          var data =  api.pageParam.data
+          var data1 =  api.pageParam.data1
+
+          if (data == null) {
+              var img = $api.byId("touxiang");
+              var tab_p = $api.byId("tab_p");
+              var jieshao = $api.byId("jieshao");
+              var xuankemu = $api.byId("xuankemu");
+              img.style.display = "none";
+              tab_p.style.display = "none";
+              jieshao.style.display = "none";
+              xuankemu.style.display = "block";
+          }else {
+            var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+            var evalText1 = doT.template(document.getElementById('evaluationtmpl1').innerHTML);
+            document.getElementById('touxiang').innerHTML = evalText(data);
+            document.getElementById('jieshao').innerHTML = evalText1(data);
+          }
+
+          var evalText2 = doT.template(document.getElementById('evaluationtmpl2').innerHTML);
+
+          document.getElementById('xuankemu').innerHTML = evalText2(data1);
+
+    }
+
+
+</script>
+</html>

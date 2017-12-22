@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <script type="text/javascript" src="../../script/aui-tab.js"></script>
+    <style>
+      #footer{  background-color: #f2f2f2; position: fixed;bottom: 0;width: 100%;z-index: 99}
+        .empty{ text-align: center; padding: 120px 0;}
+        .top_img{
+          width: 100%;
+          height: 150px;
+        }
+
+        .top_bar{
+          width: 100%;
+          overflow: hidden;
+          padding-top: 12px;
+          padding-bottom: 12px;
+          background-color: white;
+          border-bottom: 1px solid #d2d2d2;
+        }
+        .top_inner{
+          width: 49.4%;
+          height: auto;;
+          float: left;
+          text-align: center;
+          position: relative;
+          background-color: white;
+        }
+
+        .top_inner_right{
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .xing_img{
+          vertical-align: middle;
+          width: 35px;
+          height: 35px;
+        }
+
+        .xing_text{
+            display: inline;
+            font-size: 15px;
+            font-family: "PingFang-SC-Medium";
+            color: #333333
+        }
+        .mid_text{
+          font-size: 10px;
+          font-family: "PingFang-SC-Medium";
+          color: #333333
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+        .mid_padding_8{
+          padding-top: 9px!important;
+          padding-bottom: 9px!important;
+          line-height: 1.0;
+        }
+        .title_panel{
+          width: 100%;
+          height: auto;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          border-top: 8px solid #f2f2f2;
+          background-color: white;
+
+        }
+        .list_title{
+          margin-left: 8px;
+          color: black;
+          font-size: 16px;
+          font-family: "PingFang-SC-Medium";
+          color: #333333
+        }
+        .aui-tab-item {
+    width: 100%;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    position: relative;
+    font-size: 0.7rem;
+    text-align: center;
+    color: #666666;
+    margin-left: -1px;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+        .aui-tab-item.aui-active {
+    color: #6666ff;
+    border-bottom: none;
+}
+.xiahuaxian{
+  border-bottom: 1px solid #6666ff;
+}
+.quxiaoxiahuaxian{
+  border-bottom:none;
+}
+.zsm {
+
+  font-family: 'PingFang-SC';
+  font-size: 11px!important;
+  color: #a1a1a1;
+  overflow:hidden!important;
+text-overflow:ellipsis!important;
+display:-webkit-box!important;
+-webkit-box-orient:vertical!important;
+-webkit-line-clamp:2!important;
+
+}
+.zdivw{
+    width: 50%!important;
+}
+button {
+  position: relative;
+  display: inline-block;
+  font-size: 0.55rem;
+  font-weight: 400;
+  font-family: inherit;
+  text-decoration: none;
+  text-align: center;
+  /*margin-left: 10px;*/
+  background: #6666ff;
+  width: 3.1rem;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  border-radius: 11px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  user-select: none;
+  color: #ffffff;
+
+}
+.btnbian{
+  background: #a1a1a1!important;
+}
+.z-btn{
+  background: #6666ff;
+  height: 33px;
+  margin: 16.5px auto;
+  line-height: 33px;
+  width: 45%;
+   border-radius: 16.5px;
+}
+.ke1{
+  width: 33px;
+  height: 33px;
+  border-radius: 4px;
+  background-color: #b699ea;
+  text-align: center;
+  display: none
+}
+.ke2{
+  width: 33px;
+  height: 33px;
+  border-radius: 4px;
+  background-color: #9fd45b;
+  text-align: center;
+  margin-left: 10px;
+  display: none
+}
+.ke3{
+  width: 33px;
+  height: 33px;
+  border-radius: 4px;
+  background-color: #76d8ff;
+  text-align: center;;
+  margin-left: 10px;
+  display: none
+}
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+
+
+
+
+
+
+
+      <!-- list start -->
+
+      <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-media-list">
+
+          <li class="aui-list-item" style="height: 6rem;" >
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media" tapmode onclick="xuekejieshao(6)">
+                      <img src="../../image/96@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw" tapmode onclick="xuekejieshao(6)">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title" ><input type="text" name="" value="物" style="display:none">物理</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm">
+                          什么是物理？格物究理也，探究万物的规律法则。
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button tapmode  onclick="xuanke(0,event,'6')"   >选择</button></i>
+
+              </div>
+
+          </li>
+          <li class="aui-list-item" style="height: 6rem;" >
+              <div class="aui-media-list-item-inner" tapmode onclick="xuekejieshao(2)">
+                  <div class="aui-list-item-media">
+                      <img src="../../image/97@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw" tapmode onclick="xuekejieshao(2)">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title"><input type="text" name="" value="化" style="display:none">化学</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm">
+                          化学，简单从字面理解就是“变化的科学”。
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button tapmode  onclick="xuanke(1,event,'2')">选择</button></i>
+              </div>
+          </li>
+          <li class="aui-list-item" style="height: 6rem;" tapmode onclick="xuekejieshao(3)">
+              <div class="aui-media-list-item-inner">
+                  <div class="aui-list-item-media">
+                      <img src="../../image/98@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title"><input type="text" name="" value="生" style="display:none">生物</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm" >
+                          什么是生物？生，即生命，物，即物体。
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button  tapmode onclick="xuanke(2,event,'3')">选择</button></i>
+              </div>
+          </li>
+          <li class="aui-list-item" style="height: 6rem;" >
+              <div class="aui-media-list-item-inner" tapmode onclick="xuekejieshao(1)">
+                  <div class="aui-list-item-media">
+                      <img src="../../image/99@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw" tapmode onclick="xuekejieshao(1)">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title"><input type="text" name="" value="政" style="display:none">政治</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm" >
+                          初中思想政治，包含了心理健康、道德、法律等方面的内容，通过学习我们懂得了尊重与关爱，学会了交往与合作，知晓了自身的权利和义务。
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button tapmode onclick="xuanke(3,event,'1')">选择</button></i>
+              </div>
+          </li>
+          <li class="aui-list-item" style="height: 6rem;" >
+              <div class="aui-media-list-item-inner" tapmode onclick="xuekejieshao(4)">
+                  <div class="aui-list-item-media">
+                      <img src="../../image/100@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw" tapmode onclick="xuekejieshao(4)">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title"><input type="text" name="" value="历" style="display:none">历史</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm" >
+                          历史是记载和解释一系列人类活动进程的历史事件的一门基础性学科，也是新高考选考科目之一。
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button tapmode  onclick="xuanke(4,event,'4')">选择</button></i>
+              </div>
+          </li>
+          <li class="aui-list-item" style="height: 6rem;" >
+              <div class="aui-media-list-item-inner" tapmode onclick="xuekejieshao(5)">
+                  <div class="aui-list-item-media">
+                      <img src="../../image/101@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw" tapmode onclick="xuekejieshao(5)">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title"><input type="text" name="" value="地" style="display:none">地理</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm" >
+                          “地理”到底是什么学科？其实你可以拆开来理解， “地”可以指土地、大地，但是这一学科所包含的内容并不是这样的狭隘，宏观上来看“地”理解为地球更为恰
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button tapmode  onclick="xuanke(5,event,'5')">选择</button></i>
+              </div>
+          </li>
+          <li class="aui-list-item" style="height: 6rem;" >
+              <div class="aui-media-list-item-inner" tapmode onclick="xuekejieshao(6)">
+                  <div class="aui-list-item-media">
+                      <img src="../../image/101@3x.png">
+                  </div>
+                  <div class="aui-list-item-inner zdivw" tapmode onclick="xuekejieshao(6)">
+                      <div class="aui-list-item-text">
+                          <div class="aui-list-item-title"><input type="text" name="" value="技" style="display:none">技术</div>
+
+                      </div>
+                      <div class="aui-list-item-text zsm" >
+                          技术是人类为满足自身需求和愿望而对大自然进行的改造。
+                      </div>
+
+                  </div>
+                   <i class="aui-iconfont "> <button tapmode  onclick="xuanke(6,event,'7')">选择</button></i>
+              </div>
+          </li>
+        </ul>
+    </div>
+
+      <!-- list end -->
+  </div>
+  <div id="footer" class="border-t" style="display:none">
+    <ul class="flex-wrap" >
+      <p>
+        <div class="aui-btn aui-btn-primary aui-btn-block z-btn"  style="background: #f2f2f2;text-align: left;">
+            <div class="ke1 ke" ></div>
+            <div class="ke2 ke" ></div>
+            <div class="ke3 ke" ></div>
+        </div>
+    </p>
+         <div class="aui-btn aui-btn-primary aui-btn-block z-btn" id="fasongBtn" style="visibility: hidden;"  tapmode onclick="fasonglaoshi()">发送老师</div>
+    </ul>
+  </div>
+  <!-- <div id="footer" class="border-t">
+      <ul class="flex-wrap" >
+        <p>
+          <div class="aui-btn aui-btn-primary aui-btn-block z-btn"  style="background: #f2f2f2;text-align: left;">
+              <div class="ke1" id="ke1"></div>
+              <div class="ke2" id="ke2"></div>
+              <div class="ke3" id="ke3"></div>
+          </div>
+      </p>
+           <p><div class="aui-btn aui-btn-primary aui-btn-block z-btn"  tapmode onclick="nextPage()">发送老师</div></p>
+      </ul>
+  </div> -->
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+
+
+
+
+    apiready = function(){
+
+        api.parseTapmode();
+        api.alert({
+            title: '选科提示',
+                  msg: '四次选科时间:第一学期（入学、期末），第二学期（期中 、期末），入学的选择作为入学分班参考',
+                  buttons:["我知道了"]
+              }, function(ret, err) {
+
+        });
+    };
+
+
+
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      var gzc = document. getElementById('gzc');
+        var szc = document. getElementById('szc');
+        if (ret.index ==1) {
+
+          gzc.className="zcText xiahuaxian";
+          szc.className="zcText";
+        }
+        if (ret.index ==2) {
+
+        szc.className="zcText xiahuaxian";
+        gzc.className="zcText";
+        }
+    });
+
+function xuekejieshao(index) {
+// alert(index)
+var data=[]
+api.ajax({
+    url: 'http://www.yxke12.com/index.php/App/Xuanke/infos.html',
+    method: 'post',
+    data: {
+        values: {
+            id: index
+        },
+
+    }
+},function(ret, err){
+    if (ret) {
+      // if (index==1) {
+      //   data = ret.data
+      // }else if (index==2) {
+      //   data = ret.data
+      // }else if (index==3) {
+      //   data = ret.data
+      // }else if (index==4) {
+      //   data = ret.data
+      // }else if (index==5) {
+      //   data = ret.data
+      // }else {
+        data = ret.data.infos
+        localStorage.data = JSON.stringify(data)
+      // }
+      api.openWin({
+          name: 'kecheng_win',
+          url: 'kecheng_win.html',
+          pageParam: {
+              // data: data
+          }
+      });
+
+console.log( JSON.stringify( data ) );
+    } else {
+      api.toast({
+          msg: JSON.stringify(err.msg),
+          duration: 2000,
+          location: 'bottom'
+      });
+    }
+});
+
+
+}
+
+
+    function xingXiangTest() {
+      api.openWin({
+          name: 'xingxiang_list_win',
+          url: './xingxiang_list_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+
+var xuankearr=[]
+var xuankeId=[]
+    function xuanke(index,e,id) {
+
+      // console.log(typeof id.toString());
+        e.cancelBubble = true;
+      var xuanke = document.getElementsByTagName('input')
+      var xuanke1 = document.getElementById('footer')
+        var fasongBtn = document.getElementById('fasongBtn')
+      xuanke1.style.display='block'
+      // var li = document.getElementsByTagName('li')
+      var btn = document.getElementsByTagName('button')
+      var ke = document.getElementsByClassName('ke')
+      for (var i = 0; i < xuanke.length; i++) {
+
+            if (i==index) {
+              // li[index].style.backgroundColor="#fff"
+                  if (btn[i].innerHTML == "选择") {
+                      btn[index].className='btnbian'
+                        btn[index].innerHTML = "已选择"
+                          // btn[index].disabled='true'
+
+                      xuankearr.push(xuanke[i].value)
+
+                      xuankeId.push(id)
+                      if (xuankearr!=[]||xuankearr!='') {
+                        for (var i = 0; i < xuankearr.length; i++) {
+                          ke[i].style.display =  "inline-block"
+                          if (ke[i].style.display ==  "inline-block") {
+                              ke[i].innerHTML = xuankearr[i]
+                          }
+                        }
+                      }
+              console.log(xuankeId);
+                      if (xuankearr.length>2) {
+                        fasongBtn.style.visibility = 'visible'
+                        for (var i = 0; i < btn.length; i++) {
+                      if (btn[i].innerHTML == "选择") {
+                          btn[i].disabled='true'
+                      }
+                        btn[i].className='btnbian'
+
+                  }
+              }
+              return
+            }
+        }
+              if (btn[i].innerHTML == "已选择") {
+
+                  if (i==index) {
+                  btn[i].innerHTML = "选择"
+                btn[i].className=''
+                // for (var i = 0; i < btn.length; i++) {
+                  for (var i = 0; i < xuankearr.length; i++) {
+                      if (xuankearr[i]==xuanke[index].value) {
+                        xuankearr.splice(i, 1)
+                        xuankeId.splice(i, 1)
+                        if (xuankearr.length <3) {
+                          fasongBtn.style.visibility = 'hidden'
+                          for (var i = 0; i < btn.length; i++) {
+                            if (btn[i].innerHTML == "选择") {
+                              btn[i].className=''
+                              btn[i].disabled=false
+                            }
+
+                          }
+                          console.log(JSON.stringify(xuankeId));
+                        }
+
+                      }
+                    }
+                    for (var i = 0; i < ke.length; i++) {
+
+                      if (ke[i].innerHTML ==  xuanke[index].value) {
+                        // console.log(ke[i].innerHTML);
+                        // console.log('aaa'+xuankearr[i]);
+                          ke[i].style.display =  "none"
+                      }
+
+                    }
+                // }
+                if (xuankearr.length == 0) {
+                  xuanke1.style.display='none'
+                }
+                return
+              }
+          }
+    }
+
+}
+
+
+function fasonglaoshi() {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Xuanke/xuanke.html',
+        method: 'post',
+        data: {
+            values: {
+              studentid:$api.getStorage('studentid'),
+                checks: xuankeId
+            },
+
+        }
+    },function(ret, err){
+        if (ret) {
+          api.hideProgress();
+          if (ret.status==100) {
+            api.toast({
+                msg: '发送成功',
+                duration: 2000,
+                location: 'bottom'
+            });
+            setTimeout("api.openWin({name: 'index.html',url: '../../index.html'});", 500 )
+
+              // api.openWin({
+              //     name: 'index.html',
+              //     url: '../../index.html',
+              //     pageParam: {
+              //         name: 'test'
+              //     }
+              // });
+
+
+          }
+
+
+
+            console.log( JSON.stringify( ret ) );
+
+        } else {
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
+}
+</script>
+</html>

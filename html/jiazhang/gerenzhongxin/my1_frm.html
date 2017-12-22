@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>文档</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        .top_bg{
+          height: 190px;
+          width: 100%;
+          background-color: #6666ff;
+          text-align: center;
+        }
+        .gaokao_day{
+          height: 55px;
+          width: 90%;
+          background-image: url("../../../image/gaokao_time.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          margin: 0 auto;
+          margin-top: -28px;
+          line-height: 1.2;
+        }
+        .gaokao_white_text{
+          font-family: "PingFang-SC";
+          font-size: 18px;
+          color: white;
+          font-weight:bold;
+        }
+        .gaokao_s_red_text{
+          font-family: "PingFang-SC";
+          font-size: 18px;
+          color:red;font-weight:bold;
+        }
+
+        .gaokao_red_text{
+          font-family: "PingFang-SC";
+          font-size: 26px;
+          color:red;
+          font-weight:bold;
+          text-shadow: 0 0 8px white;
+        }
+        .geyan_text{
+          font-size: 14px;
+          font-weight:normal;
+        }
+        .text_pos{
+          text-align: center;
+        }
+        .my_icon_bg{
+          margin-top:44px;
+          height: 70px;
+          width: 70px;
+          background-image: url("../../../image/icon_bg.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          /*text-align: center;*/
+          display:inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .name_panel{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 10px;
+          /*color: #ffffff;*/
+        }
+        .my_name{
+          color: white;
+          margin-right: 4px;
+        }
+        .my_sex{
+          width:12px;
+          height:12px;
+          margin-right:4px;
+        }
+
+        .mid_padding_8{
+          margin-top: 10px!important;
+          margin-bottom: 10px!important;
+          padding-top: 0px!important;
+          padding-bottom: 0px!important;
+          line-height: 1.0;
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+
+        .left_line{
+          box-sizing:border-box;
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .item_image{
+          -webkit-align-self: center;
+                  align-self: center;
+          font-size: 0.8rem;
+          width: 36px;
+          height: 32px;
+        }
+
+        .aui-list .aui-list-item-label-icon {
+            width: auto;
+            padding-right: 0.75rem;
+            margin-left: 6px;
+        }
+        button, .aui-btn {
+          position: relative;
+          display: inline-block;
+          font-size: 0.7rem;
+          font-weight: 400;
+          font-family: inherit;
+          text-decoration: none;
+          text-align: center;
+          margin: 0;
+          background: #dddddd;
+          padding: 0rem 0.6rem;
+          height: 1.5rem;
+          line-height: 1.5rem;
+          border-radius: 0.2rem;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          vertical-align: middle;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+
+        .aui-btn-block.aui-btn-sm {
+            font-size: 0.7rem;
+            height: 1.8rem;
+            line-height: 1.8rem;
+        }
+
+  .aui-list .aui-list-item-title {
+      font-size: 0.8rem;
+      position: relative;
+      max-width: 100%;
+      color: #333333;
+      margin-left: 5px;
+  }
+
+    </style>
+</head>
+<body>
+  <div id="main" class="flex-con flex-vertical center">
+    <a class="aui-pull-left aui-btn" tapmode onclick='api.closeWin();' style='background:#6666ff;color:#fff;position: fixed;margin-top:1rem;'>
+        <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+    </a>
+      <div class="top_bg">
+        <div style="width:auto;" id="geren">
+        <script id="evaluationtmpl" type="text/x-dot-template">
+        <div class="my_icon_bg" >
+          <img src="{{=it.img}}" style="width:60px;height:60px;border-radius: 50%;" tapmode onclick="onPersonClick();"/>
+        </div>
+        <div class="name_panel">
+          <span class="my_name" id="my_name">{{=it.parentname}}</span>
+        </div>
+      </script>
+        </div>
+      </div>
+        <section class="aui-content">
+        <ul class="aui-list aui-list-in aui-margin-b-15 aui-margin-t-15">
+          <li class="aui-list-item" tapmode onclick="guanzhuyuanxiao()">
+              <div class="aui-list-item-label-icon">
+                  <img src="../../../image/j_gzyx.png" class="item_image"/>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">我的关注院校</div>
+              </div>
+          </li>
+            <li class="aui-list-item" tapmode onclick="onBaogaoClick();">
+                <div class="aui-list-item-label-icon">
+                    <img src="../../../image/huodongjilu.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">TA的测试结果</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="xuankeClick()">
+                <div class="aui-list-item-label-icon">
+                    <img src="../../../image/xuanke.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">TA的选科记录</div>
+                </div>
+            </li>
+
+        </ul>
+
+        <ul class="aui-list aui-list-in aui-margin-b-15 aui-margin-t-15">
+            <li class="aui-list-item" tapmode onclick="huodongjilu()">
+                <div class="aui-list-item-label-icon">
+                    <img src="../../../image/j_hdjl.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">TA的活动记录</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="chengzhangdanan()">
+                <div class="aui-list-item-label-icon">
+                    <img src="../../../image/j_czda.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">TA的成长档案</div>
+                </div>
+            </li>
+            <li class="aui-list-item" tapmode onclick="zhiyuantianbao()">
+                <div class="aui-list-item-label-icon">
+                    <img src="../../../image/baokaofangan.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">TA的模拟志愿</div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="aui-content">
+        <ul class="aui-list aui-list-in">
+          <!-- <li class="aui-list-item">
+              <div class="aui-list-item-label-icon">
+                  <img src="../../../image/my_help.png" class="item_image"/>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">帮助中心</div>
+              </div>
+          </li> -->
+          <li class="aui-list-item" tapmode onclick="shezhi()">
+              <div class="aui-list-item-label-icon">
+                  <img src="../../../image/my_setting.png" class="item_image"/>
+              </div>
+              <div class="aui-list-item-inner aui-list-item-arrow">
+                  <div class="aui-list-item-title">设置</div>
+              </div>
+          </li>
+        </ul>
+    </section>
+  </div>
+</body>
+</html>
+<!-- <script type="text/javascript" src="../script/aui-slide.js"></script> -->
+<script type="text/javascript" src="../../../script/api.js"></script>
+  <script type="text/javascript" src="../../../script/doT.js"></script>
+<!-- <script src="../script/swiper.min.js"></script> -->
+<script type="text/javascript">
+var geRenShuJu={}
+  apiready=function() {
+    geRenShuJu['parentname']=$api.getStorage('parentname');
+    geRenShuJu['sex']=$api.getStorage('sex');
+    geRenShuJu['img']="http://www.yxke12.com/Public/Parent/images/touxiang/"+$api.getStorage('touxiang');
+    var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+    document.getElementById('geren').innerHTML =evalText(geRenShuJu);
+}
+
+function onBaogaoClick() {
+  api.openWin({
+      name: 'csjg_win',
+      url: './csjg_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function shezhi() {
+  api.openWin({
+      name: 'shezhi_win',
+      url: 'shezhi_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function huodongjilu(){
+  api.openWin({
+      name: 'huodongjilu_win',
+      url: '../gerenzhongxin/huodongjilu_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function xuankeClick() {
+  api.openWin({
+      name: 'xuankejilu_win',
+      url: '../gerenzhongxin/xuankejilu_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function guanzhuyuanxiao() {
+  api.openWin({
+      name: 'guanzhuyuanxiao_win',
+      url: '../gerenzhongxin/guanzhuyuanxiao_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function onPersonClick() {
+  api.openWin({
+      name: 'guanzhuyuanxiao_win',
+      url: '../gerenzhongxin/gerenxinxi_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+function chengzhangdanan() {
+  api.openWin({
+      name: 'chengzhangdangan_win',
+      url: 'chengzhangdangan_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+
+function zhiyuantianbao() {
+  api.openWin({
+      name: 'baokaofangan_win',
+      url: 'baokaofangan_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+}
+function refresh() {
+  // geRenShuJu['img']="http://www.yxke12.com/Public/Home/images/touxiang/"+$api.getStorage('img');
+  // document.getElementById('geren').innerHTML =evalText(geRenShuJu);
+}
+</script>

@@ -1,0 +1,471 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/demo.css">
+    <script src="../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../script/demo.js"></script>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/doT.js"></script>
+    <style>
+    .aui-list .aui-list-item-media {
+        width: 4.5rem;
+        position: relative;
+        padding: 0.5rem 0;
+        padding-right: 0.75rem;
+        display: block;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+    .aui-list .aui-list-item-text {
+        font-size: 10px;
+        color: #757575;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .biaoqian{
+      /*width: 2rem;
+      height: 1rem;*/
+      padding: 2px 4px;
+      border-radius: 5px;
+      background-color: #6f47b6;
+      color: #fff!important;
+      margin-left: 4px;
+      font-family: 'PingFang-SC';
+    }
+    .biaoqian-orange{
+      background-color: #ef5b1f;
+    }
+
+    .biaoqian-blue{
+      background-color: #2cb3eb;
+    }
+
+    .biaoqian-green{
+      background-color: #32c785;
+    }
+    .bgyx{
+      background: #9f69ff;
+    }
+    .margin-t-14{
+         margin-top: 14px;
+    }
+
+    .aui-list-item-media .gray_color{
+      color: #a1a1a1;
+    }
+
+    .aui-list-item-media .text_color{
+      color: #a1a1a1;
+      /*font-family: ''*/
+      /*font-family: 'PingFang-SC' !important;*/
+    }
+
+    .shoucang{
+      color: #6666ff;
+      /*background-color: #6666ff;*/
+    }
+    .alpha {
+     height: 100%!important;
+     overflow: hidden!important;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="school" class="flex-wrap flex-vertical">
+
+        <div class="screening">
+            <ul>
+              <li id="Sort">地区</li>
+              <li id="SchoolType">类型</li>
+              <li id="Level">学历</li>
+              <li id="Chara">特色</li>
+            </ul>
+        </div>
+
+        <div class="Sort-eject Sort-height"  id="address_pan">
+            <ul class="Sort-Sort" id="Sort-Sort">
+              <script id="province" type="text/x-dot-template">
+                {{for (var i = 0; i < it.length; i++) {}}
+                  <li tapmode onclick="SortsFuc(this, {{=i}})">{{=it[i].province}}</li>
+                {{}}}
+              </script>
+            </ul>
+        </div>
+
+        <div class="Sort-eject Sort-height" id="school_type_pan">
+            <ul class="Sort-Sort" id="SchoolType_ul">
+              <script id="schooltype_s" type="text/x-dot-template">
+                {{for (var i = 0; i < it.length; i++) {}}
+                    <li tapmode onclick="SchoolTypeFuc(this, {{=i}})">{{=it[i].yxlx}}</li>
+                {{}}}
+              </script>
+            </ul>
+        </div>
+
+        <div class="Sort-eject Sort-height" id="level_pan">
+            <ul class="Sort-Sort" id="Level_ul">
+              <script id="level_s" type="text/x-dot-template">
+                {{for (var i = 0; i < it.length; i++) {}}
+                  <li tapmode onclick="LevelFuc(this, {{=i}})">{{=it[i].xlcc}}</li>
+                {{}}}
+              </script>
+            </ul>
+        </div>
+
+        <div class="Sort-eject Sort-height" id="chara_pan">
+            <ul class="Sort-Sort" id="Chara_ul">
+              <script id="chara_s" type="text/x-dot-template">
+              {{for (var i = 0; i < it.length; i++) {}}
+                <li tapmode onclick="CharaFuc(this, {{=i}})">{{=it[i]}}</li>
+                {{}}}
+              </script>
+            </ul>
+        </div>
+
+
+        <ul id="schools_ul"class="aui-list aui-media-list" style="margin-top:2rem;">
+
+          <script id="schools_s" type="text/x-dot-template">
+          {{for (var i = 0; i < it.length; i++) {}}
+            <li class="aui-list-item aui-list-item-middle" tapmode onclick="itemClick({{=i}})">
+                   <div class="aui-media-list-item-inner">
+                       <div class="aui-list-item-media" style="width: 3rem;">
+                           <img class="aui-img-round aui-list-img-sm" onload="fnLoadImage(this)"  data-url="{{=it[i].logo}}" src="../../image/no-pic.png">
+                       </div>
+                       <div class="aui-list-item-inner ">
+                           <div class="aui-list-item-text" style="display: flex;justify-content: initial;">
+                               <div class="aui-list-item-title aui-font-size-18">{{=it[i].dxmc}}</div>
+                                {{if (it[i].is985 != null) {}}
+                                    <div class="aui-list-item-text biaoqian biaoqian-orange">985</div>
+                                {{}else {}}
+                                    <div class="aui-list-item-text biaoqian biaoqian-orange" style="display:none;">985</div>
+                                {{}}}
+                                {{if (it[i].is211 != null) {}}
+                                   <div class="aui-list-item-text biaoqian biaoqian-blue">211</div>
+                                {{}else {}}
+                                    <div class="aui-list-item-text biaoqian biaoqian-blue" style="display:none;">211</div>
+                                {{}}}
+                                {{if (it[i].syl != 0) {}}
+                                   <div class="aui-list-item-text biaoqian biaoqian-green">双</div>
+                                 {{}else {}}
+                                   <div class="aui-list-item-text biaoqian biaoqian-green" style="display:none;">双</div>
+                                 {{}}}
+                                {{if (it[i].iszizhu != null) {}}
+                                   <div class="aui-list-item-text biaoqian bgyx">自</div>
+                                 {{}else {}}
+                                   <div class="aui-list-item-text biaoqian bgyx" style="display:none;">自</div>
+                                 {{}}}
+                           </div>
+                           <div class="aui-list-item-media gray_color" style="width:auto;">
+                             <i class="aui-iconfont aui-icon-location text_color" style="font-family:'PingFang-SC!important';">{{=it[i].province}}</i>
+                             <span class="text_color" style="display:inline;" style="font-family:'PingFang-SC!important';">综合排名：{{=it[i].rank}}</span>
+                         </div>
+                       </div>
+                       <div class="aui-list-item-media" style="text-align:right;width:auto;padding-left:16px;" tapmode onclick="itemShouCang(event, {{=i}})">
+                      {{if (it[i].imgname == 0) {}}
+
+                          <img id="shoucang_id{{=i}}" src="../../image/shoucang.png" style="height:16px;width:18px;">
+                      {{}else {}}
+
+                          <img id="shoucang_id{{=i}}" src="../../image/shoucang_select.png" style="height:16px;width:18px;">
+                      {{}}}
+                     </div>
+                   </div>
+               </li>
+             {{}}}
+           </script>
+        </ul>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var total_data = {};
+    var list = doT.template(document.getElementById('schools_s').innerHTML);
+    var page = 1;
+    var limit = 50;
+    apiready = function() {
+      getData(page);
+        api.parseTapmode();
+        api.addEventListener({
+          name : 'scrolltobottom',
+          extra : {
+             threshold : 0 //设置距离底部多少距离时触发，默认值为0，数字类型
+             }
+            }, function(ret, err) {
+                page++
+               getData(page);
+          });
+
+
+
+    };
+var province1 = doT.template(document.getElementById('province').innerHTML);
+var schooltype = doT.template(document.getElementById('schooltype_s').innerHTML);
+var chara = doT.template(document.getElementById('chara_s').innerHTML);
+var level = doT.template(document.getElementById('level_s').innerHTML);
+    function getData(page) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Yuanxiaoku/lists.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid'),
+                  page : page,
+                  limit:limit,
+              },
+          }
+      },function(ret, err){
+        api.hideProgress();
+
+          if (ret) {
+              total_data = ret.data;
+              var province = {province:"不限"};
+              total_data.province.unshift(province);
+
+              var yxlx = {yxlx:"不限"};
+              total_data.yxlx.unshift(yxlx);
+
+              var xlcc = {xlcc:"不限"};
+              total_data.xlcc.unshift(xlcc);
+
+              total_data.yxts.unshift("不限");
+              console.log(JSON.stringify(total_data));
+              // start 筛选
+
+              document.getElementById('Sort-Sort').innerHTML = province1(total_data.province);
+
+
+              document.getElementById('SchoolType_ul').innerHTML = schooltype(total_data.yxlx);
+
+
+              document.getElementById('Level_ul').innerHTML = level(total_data.xlcc);
+
+
+              document.getElementById('Chara_ul').innerHTML = chara(total_data.yxts);
+              // end 筛选
+              // start 列表
+
+              $api.append(document.getElementById('schools_ul'),list(total_data.lists));
+              // end 列表
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+    }
+
+    var yxts_c, xlcc_c, yxlx_c, province_c;
+    function SortsFuc(obj, index) {
+      var arr = document.getElementById("Sort-Sort").getElementsByTagName("li");
+      document.getElementById("Sort").innerHTML = obj.innerHTML
+      for (var i = 0; i < arr.length; i++){
+          var a = arr[i];
+          a.style.borderBottom = "";
+      }
+        obj.style.borderBottom = "solid 1px #ff7c08";
+        province_c = total_data.province[index].province == "不限" ? null : total_data.province[index].province;
+        filterSchoolList();
+    }
+
+    function SchoolTypeFuc(obj, index) {
+
+      var arr = document.getElementById("SchoolType_ul").getElementsByTagName("li");
+      document.getElementById("SchoolType").innerHTML = obj.innerHTML
+      for (var i = 0; i < arr.length; i++){
+          var a = arr[i];
+          a.style.borderBottom = "";
+      };
+      obj.style.borderBottom = "solid 1px #ff7c08"
+
+        yxlx_c = total_data.yxlx[index].yxlx == "不限" ? null : total_data.yxlx[index].yxlx;
+        filterSchoolList();
+    }
+
+    function LevelFuc(sbj, index) {
+      var arr = document.getElementById("Level_ul").getElementsByTagName("li");
+      document.getElementById("Level").innerHTML = sbj.innerHTML
+      for (var i = 0; i < arr.length; i++){
+          var a = arr[i];
+          a.style.borderBottom = "";
+      };
+      sbj.style.borderBottom = "solid 1px #ff7c08"
+      xlcc_c = total_data.xlcc[index].xlcc == "不限" ? null : total_data.xlcc[index].xlcc;
+      filterSchoolList();
+    }
+
+    function CharaFuc(sbj, index) {
+      var arr = document.getElementById("Chara_ul").getElementsByTagName("li");
+      document.getElementById("Chara").innerHTML = sbj.innerHTML
+      for (var i = 0; i < arr.length; i++){
+          var a = arr[i];
+          a.style.borderBottom = "";
+      };
+      sbj.style.borderBottom = "solid 1px #ff7c08"
+        yxts_c = total_data.yxts[index] == "不限" ? null : total_data.yxts[index];
+        filterSchoolList();
+    }
+
+    function filterSchoolList() {
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+
+        var char = {};
+        char.studentid = $api.getStorage('studentid');
+        if (yxts_c != null) {
+          char.yxts = yxts_c;
+        }
+
+        if (xlcc_c != null) {
+          char.xlcc = xlcc_c;
+        }
+
+        if (yxlx_c != null) {
+          char.yxlx = yxlx_c;
+        }
+
+        if (province_c != null) {
+          char.province = province_c;
+        }
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Yuanxiaoku/search.html',
+            method: 'post',
+            data: {
+                values: char,
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+                // console.log( JSON.stringify( ret ) );
+                if (ret.status == 100) {
+                  total_data.lists = ret.data;
+                  document.getElementById('schools_ul').innerHTML = list(ret.data);
+                }
+            } else {
+              api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+        });
+
+    }
+
+    function itemClick(index) {
+      api.openWin({
+          name: 'school_storage_details_win',
+          url: './school_storage_details_win.html',
+          pageParam: {
+              index: index,
+              title: total_data.lists[index].dxmc
+          }
+      });
+    }
+
+    function itemShouCang(e, index) {
+        e.cancelBubble  = true;
+        var it = total_data.lists[index];
+        var str = (it.imgname == 1) ?'取消中...':'收藏中...';
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: str,
+            text: '先喝杯茶...',
+            modal: false
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Yuanxiaoku/collect.html',
+            method: 'post',
+            data: {
+                values: {
+                    studentid: $api.getStorage('studentid'),
+                    schoolid: it.id
+                },
+            }
+        },function(ret, err){
+          api.hideProgress();
+            if (ret) {
+                // console.log( JSON.stringify( total_data ) );
+                if (ret.status = 100) {
+
+                  total_data.lists[index].imgname = ret.data.imgname;
+                  var el = $api.byId('shoucang_id'+ index);
+                    if(ret.data.imgname == 1){
+                      // $api.addCls(el, 'shoucang');
+                      el.src="../../image/shoucang_select.png";
+                    }else{
+                      // $api.removeCls(el, 'shoucang');
+                      el.src="../../image/shoucang.png";
+                    }
+                }
+            } else {
+              api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+        });
+
+    }
+
+    function fnLoadImage(ele_) {
+      var imageURL = $api.attr(ele_, 'data-url');
+      // console.log(imageURL);
+      if (imageURL) {
+          api.imageCache({
+              url : "http://www.yxke12.com/Public/Home/images/schools/"+imageURL
+          }, function(ret, err) {
+              if (ret.status) {
+                  ele_.src = ret.url;
+                  $api.removeAttr(ele_, 'data_url');
+              }
+          });
+      }
+    }
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        header {
+            background-color: #f2f2f2;
+        }
+
+        header ul li {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            display: none;
+            color: #323237;
+            position: relative;
+            font-size: 18px;
+        }
+
+        header ul li.active {
+            display: block;
+        }
+
+        .aui-bar-mystyle {
+            color: #333333;
+            font-family: "PingFang-SC";
+            background-color: #ffffff;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .left_btn_c_b {
+            color: #a1a1a1!important;
+        }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+    <a class="aui-pull-left aui-btn" tapmode onclick='api.closeToWin({name: "occupation_win"});'>
+        <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+    </a>
+    <div class="aui-title">职业兴趣测试</div>
+</header>
+
+<div id="wrap" class="flex-wrap flex-vertical">
+
+    <div id="main" class="flex-con">
+
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var diyiti = [],
+        dierti = [],
+        disanti = [];
+    apiready = function() {
+        api.parseTapmode();
+        $api.fixStatusBar($api.byId('aui-header'));
+        var headerh = $api.offset($api.byId('aui-header')).h;
+        api.parseTapmode();
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            api.closeToWin({
+                name: 'occupation_win'
+            });
+        });
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Hollander/hollander.html',
+            method: 'post',
+            data: {
+                values: {
+                    studentid:$api.getStorage('studentid')
+                },
+
+            }
+        }, function(ret, err) {
+             api.hideProgress();
+             console.log( JSON.stringify( ret ) );
+            if (ret) {
+                if (ret.status == 100) {
+                  for (var i = 0; i < ret.data.question.length; i++) {
+                      if (ret.data.question[i].h_portion == 1) {
+                          diyiti.push(ret.data.question[i]);
+                      }
+                      if (ret.data.question[i].h_portion == 2) {
+                          dierti.push(ret.data.question[i]);
+                      }
+                      if (ret.data.question[i].h_portion == 3) {
+                          disanti.push(ret.data.question[i]);
+                      }
+                  }
+                  localStorage.diyiti = $api.jsonToStr(diyiti)
+                  localStorage.dierti = $api.jsonToStr(dierti);
+                  localStorage.disanti = $api.jsonToStr(disanti)
+                  api.openFrame({
+                      name: 'answer_paper_frm',
+                      url: './answer_paper_frm.html',
+                      rect: {
+                          x: 0,
+                          y: headerh,
+                          w: 'auto',
+                          h: 'auto'
+                      },
+                      pageParam: {
+                          name: 'test'
+                      },
+                      bounces: false,
+                      bgColor: 'rgba(0,0,0,0)',
+                      vScrollBarEnabled: false,
+                      hScrollBarEnabled: false
+                  });
+                }else {
+                    api.toast({
+                        msg: ret.data,
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+
+                }
+            } else {
+              api.toast({
+                  msg: "网络错误",
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+    };
+</script>
+
+</html>

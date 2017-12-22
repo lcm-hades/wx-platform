@@ -1,0 +1,308 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .p{
+        border: 1px solid #c9c9c9;
+        border-radius: 4px;
+        width: 90%;
+        margin: auto;
+        margin-top: 10px;
+      }
+
+      .p .tel{
+        display: block;
+        border-bottom: 1px solid #c9c9c9;
+        position: relative;
+      }
+      .p .tel .ic{
+        width: 18px;
+        height: 22px;
+        display: inline;
+        margin-left: 10px;
+        vertical-align:bottom;
+        vertical-align:middle;
+        vertical-align:top;
+        margin-top: 20px;
+      }
+
+      .p .tel input{
+        display: inline;
+        height: 65px;
+        width: 14em;
+        padding-left: 4px;
+
+      }
+
+      .p .tel .del{
+        display: inline;
+        width: 16px;
+        height: 16px;
+        float: right;
+        margin-top: 24px;
+        margin-right: 10px;
+      }
+
+      .p .tel .yan{
+        width: 66px;
+        height: 33px;
+        display: inline;
+        background: #dfe0e1;
+        border-radius: 4px;
+        border: 1px solid #dddddd;
+        text-align: center;
+        line-height: 33px;
+        color: #b6b6b6;
+        float: right;
+        margin-top: 15px;
+        margin-right: 10px;
+      }
+
+      .p .pwd{
+        display: block;
+        position: relative;
+      }
+
+      .p .pwd .ic{
+        width: 18px;
+        height: 22px;
+        display: inline;
+        margin-left: 10px;
+        vertical-align:bottom;
+        vertical-align:middle;
+        vertical-align:top;
+        margin-top: 22px;
+      }
+      .p .pwd input{
+        display: inline;
+        height: 65px;
+        padding-left: 4px;
+        width: 14em;
+      }
+
+      .next_btn{
+        height: 50px;
+        line-height: 50px;
+        background-color: #6666ff;
+        width: 90%;
+        margin: 0px auto;
+        margin-top: 20px;
+        border-radius: 4px;
+        text-align: center;
+        color: white;
+      }
+      .tip{
+        margin-top: 10px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        color: #999999;
+        font-size: 14px;
+        text-align: center;
+      }
+      .pos_right{
+        position:absolute;
+        right:0.5rem;
+        top:0px;
+        line-height: 65px;
+      }
+      .mypwd{
+        font-size: 20px;
+        color: #6666ff;
+      }
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div class="flex-wrap flex-vertical">
+      <div class="p">
+        <div class="tel">
+          <img class="ic" src="../../../image/ic_lo.png"></img>
+          <input id="pwd" type="password" placeholder="请输入密码（至少8位）" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></input>
+          <div class="aui-list-item-right pos_right" tapmode onclick="changeYan();">
+              <i class="aui-iconfont aui-icon-right aui-icon-hide mypwd" id="pwd_yan" ></i>
+          </div>
+        </div>
+
+        <div class="pwd">
+          <img class="ic" src="../../../image/ic_lo.png"></img>
+          <input id="new_pwd" type="password" placeholder="再次输入密码" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"></input>
+          <div class="aui-list-item-right pos_right" tapmode onclick="newhangeYan();">
+              <i class="aui-iconfont aui-icon-right aui-icon-hide mypwd" id="pwd_yan" ></i>
+          </div>
+        </div>
+      </div>
+      <div class="tip">密码长度8~16位，其中数字，字母和符号至少包含两种</div>
+      <div class="next_btn" tapmode onclick="finishClick();">完成</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+var pwd = $api.byId('pwd');
+var new_pwd = $api.byId('new_pwd');
+var reg = /^[A-Za-z][A-Za-z0-9]{0,}$/;
+    apiready = function() {
+    };
+
+    function finishClick() {
+      if (pwd.value == '') {
+        api.toast({
+           msg: '请设置密码'
+       });
+        return;
+      }
+      if (pwd.value.length < 8 || pwd.value.length > 16) {
+        api.toast({
+          msg: '请检查密码长度'
+        });
+        return;
+      }
+      if (!reg.test(pwd.value)) {
+
+                api.toast({
+                  msg: '"密码格式不正确，只能填写字母、数字和下划线，不能以数字开头"'
+                });
+                return ;
+            }
+      if (pwd.value != new_pwd.value) {
+        api.toast({
+            msg: '请输入相同的密码',
+            duration: 2000,
+            location: 'bottom'
+        });
+        return;
+      }
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '修改中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Ate/Teacher/findteacheridbymobile.html',
+          method: 'post',
+          data: {
+              values: {
+                  shoujihao: api.pageParam.shoujihao
+              },
+          }
+      },function(ret, err){
+          if (ret) {
+            if (ret.status == 100) {
+              xiugai(ret.data)
+            }else {
+              api.toast({
+                  msg: ret.data,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+
+          } else {
+            api.toast({
+                msg: JSON.stringify(err.msg),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+      });
+
+    }
+
+
+function xiugai(id) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '修改中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/Ate/Teacher/modifyoldmima.html',
+      method: 'post',
+      data: {
+          values: {
+              teacherid: id,
+              password:pwd.value,
+              rpassword:new_pwd.value
+          },
+      }
+  },function(ret, err){
+      if (ret) {
+        if (ret.status == 100) {
+          api.toast({
+              msg: ret.data,
+              duration: 2000,
+              location: 'bottom'
+          });
+          api.openWin({
+              name: 'login_win',
+              url: './login_win.html',
+              pageParam: {
+                  name: 'test'
+              },
+              slidBackEnabled:false
+          });
+        }else {
+          api.toast({
+              msg: ret.data,
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+
+}
+
+
+    function changeYan() {
+
+      var yan = $api.byId('pwd_yan');
+      var pwd = $api.byId('pwd');
+      var new_pwd = $api.byId('new_pwd');
+      if ($api.hasCls(yan, "aui-icon-display")) {
+            $api.removeCls(yan, 'aui-icon-display');
+            $api.addCls(yan, 'aui-icon-hide');
+            $api.attr(pwd,'type', 'password');
+      }else {
+        $api.removeCls(yan, 'aui-icon-hide');
+        $api.addCls(yan, 'aui-icon-display');
+        $api.attr(pwd,'type', 'search');
+      }
+    }
+    function newhangeYan() {
+
+      var yan = $api.byId('pwd_yan');
+      var pwd = $api.byId('pwd');
+      var new_pwd = $api.byId('new_pwd');
+      if ($api.hasCls(yan, "aui-icon-display")) {
+            $api.removeCls(yan, 'aui-icon-display');
+            $api.addCls(yan, 'aui-icon-hide');
+            $api.attr(new_pwd,'type', 'password');
+      }else {
+        $api.removeCls(yan, 'aui-icon-hide');
+        $api.addCls(yan, 'aui-icon-display');
+        $api.attr(new_pwd,'type', 'search');
+      }
+    }
+</script>
+
+</html>

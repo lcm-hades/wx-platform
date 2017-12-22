@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>文档</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+
+      img{
+        width: 3.5rem;
+        height: 3.5rem;
+        display: block;
+        margin: 0.5rem 0.5rem 0.5rem 0;
+            /*display: inline-block;*/
+            float: left;
+      }
+
+
+      .aui-content-padded {
+           margin: 0rem;
+          position: relative;
+          word-break: break-all;
+          -webkit-overflow-scrolling: touch;
+      }
+      .jiantou{
+        position: absolute!important;
+        right: 0.5rem;
+        bottom: 0.5rem;
+        }
+      .kaishiceshi{
+        position: absolute;
+        line-height: 4.5rem;
+        right: 2rem;
+        font-family: "PingFang-SC";
+        font-size: 0.56rem;
+        color: #6666ff;
+
+      }
+      .baogaotitle{
+        line-height: 4.5rem;
+        font-family: "PingFang-SC";
+        font-size: 1rem;
+        color: #333333;
+      }
+    </style>
+</head>
+<body>
+  <div id="  " class="flex-con flex-vertical center">
+
+    <section class="aui-content-padded">
+        <ul class="aui-list aui-collapse aui-border" id="zonghecs">
+            <script id="zonghe" type="text/x-dot-template">
+
+                        <div class="aui-collapse-item">
+                            <li class="aui-list-item aui-collapse-header" tapmode>
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-title">
+                                      <img src="../../image/qingxiangBG.png" alt="">
+                                        <span class="baogaotitle">专业倾向报告</span>
+                                    </div>
+                                    <div class="aui-list-item-right jiantou">
+                                        <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                                    </div>
+                                </div>
+                                {{if (it.length >=3) {}}
+                                <span class="kaishiceshi" style='display:none'>开始测试</span>
+                                {{}else {}}
+                                  <span class="kaishiceshi" style='display:block' tapmode onclick=ceshi('zhuanYe_win',event)>开始测试</span>
+                                {{}}}
+                            </li>
+
+                            <div class="aui-collapse-content">
+                          {{for (var i = 0; i < it.length; i++) {}}
+                            <li class="aui-list-item" tapmode onclick="zongheReport({{=it[i].id}},{{=it[i].numbers}});">
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    <div class="aui-list-item-title" style="margin-left: 1rem;">报告{{=it[i].numbers}}</div>
+                                </div>
+                            </li>
+                          {{}}}
+                            </div>
+                        </div>
+            </script>
+        </ul>
+    </section>
+
+    <section class="aui-content-padded">
+        <ul class="aui-list aui-collapse aui-border" id="huolandecs">
+          <script id="huolande" type="text/x-dot-template">
+
+                      <div class="aui-collapse-item">
+
+                          <li class="aui-list-item aui-collapse-header" tapmode>
+                              <div class="aui-list-item-inner">
+                                  <div class="aui-list-item-title">
+                                    <img src="../../image/zhiyexq.png" alt="">
+                                      <span class="baogaotitle">职业兴趣测试</span>
+                                  </div>
+                                  <div class="aui-list-item-right jiantou">
+                                      <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                                  </div>
+                              </div>
+                              {{if (it.length >=3) {}}
+                              <span class="kaishiceshi" style='display:none'>开始测试</span>
+                              {{}else {}}
+                                <span class="kaishiceshi" style='display:block' tapmode onclick=ceshi('occupation_win',event)>开始测试</span>
+                              {{}}}
+                          </li>
+
+                          <div class="aui-collapse-content">
+                        {{for (var key in it) {}}
+                          <li class="aui-list-item" tapmode onclick="zhiyeXQReport({{=key}})">
+                              <div class="aui-list-item-inner aui-list-item-arrow">
+                                  <div class="aui-list-item-title" style="margin-left: 1rem;">报告{{=key-0+1}}</div>
+                              </div>
+                          </li>
+                        {{}}}
+                          </div>
+                      </div>
+            </script>
+        </ul>
+    </section>
+
+
+    <section class="aui-content-padded">
+        <ul class="aui-list aui-collapse aui-border" id="mbtics">
+        <script id="mbti" type="text/x-dot-template">
+
+                      <div class="aui-collapse-item">
+                          <li class="aui-list-item aui-collapse-header" tapmode>
+                              <div class="aui-list-item-inner">
+                                  <div class="aui-list-item-title">
+                                    <img src="../../image/zyxgcs.png" alt="">
+                                      <span class="baogaotitle">职业性格测试</span>
+                                  </div>
+                                  <div class="aui-list-item-right jiantou">
+                                      <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                                  </div>
+                              </div>
+                              {{if (it.length >=3) {}}
+                              <span class="kaishiceshi" style='display:none'>开始测试</span>
+                              {{}else {}}
+                                <span class="kaishiceshi" style='display:block' tapmode onclick=ceshi('occupationXG_win',event)>开始测试</span>
+                              {{}}}
+                          </li>
+
+                          <div class="aui-collapse-content">
+                        {{for (var key in it) {}}
+                          <li class="aui-list-item" tapmode onclick="zhiyeXGReport({{=key}})">
+                              <div class="aui-list-item-inner aui-list-item-arrow">
+                                  <div class="aui-list-item-title" style="margin-left: 1rem;">报告{{=key-0+1}}</div>
+                              </div>
+                          </li>
+                        {{}}}
+                          </div>
+                      </div>
+            </script>
+        </ul>
+    </section>
+
+
+    <section class="aui-content-padded" style="display:none;">
+        <ul class="aui-list aui-collapse aui-border" id="duoyuancs">
+        <script id="duoyuan" type="text/x-dot-template">
+
+                      <div class="aui-collapse-item">
+                          <li class="aui-list-item aui-collapse-header" tapmode>
+                              <div class="aui-list-item-inner">
+                                  <div class="aui-list-item-title">
+                                    <img src="../../image/duoyuancs.png" alt="">
+                                      <span class="baogaotitle">多元智能测试</span>
+                                  </div>
+                                  <div class="aui-list-item-right jiantou">
+                                      <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                                  </div>
+                              </div>
+                              {{if (it.length >=3) {}}
+                              <span class="kaishiceshi" style='display:none'>开始测试</span>
+                              {{}else {}}
+                                <span class="kaishiceshi" style='display:block' tapmode onclick=ceshi('intelligence_win',event)>开始测试</span>
+                              {{}}}
+                          </li>
+
+                          <div class="aui-collapse-content">
+                        {{for (var key in it) {}}
+                          <li class="aui-list-item" tapmode onclick="duoyuanReport({{=key}});">
+                              <div class="aui-list-item-inner aui-list-item-arrow">
+                                  <div class="aui-list-item-title" style="margin-left: 1rem;">报告{{=key-0+1}}</div>
+                              </div>
+                          </li>
+                        {{}}}
+                          </div>
+                      </div>
+            </script>
+        </ul>
+    </section>
+
+
+
+    <section class="aui-content-padded">
+        <ul class="aui-list aui-collapse aui-border" id="xuekecs">
+        <script id="xueke" type="text/x-dot-template">
+
+                      <div class="aui-collapse-item">
+                          <li class="aui-list-item aui-collapse-header" tapmode>
+                              <div class="aui-list-item-inner">
+                                  <div class="aui-list-item-title">
+                                    <img src="../../image/xuekecs.png" alt="">
+                                      <span class="baogaotitle">学科兴趣测试</span>
+                                  </div>
+                                  <div class="aui-list-item-right jiantou">
+                                      <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                                  </div>
+                              </div>
+                              {{if (it.length >=3) {}}
+                              <span class="kaishiceshi" style='display:none'>开始测试</span>
+                              {{}else {}}
+                                <span class="kaishiceshi" style='display:block' tapmode onclick=ceshi('xueke_test_win',event)>开始测试</span>
+                              {{}}}
+                          </li>
+
+                          <div class="aui-collapse-content">
+                        {{for (var key in it) {}}
+                          <li class="aui-list-item" tapmode onclick="xuekeReport({{=key}});">
+                              <div class="aui-list-item-inner aui-list-item-arrow">
+                                  <div class="aui-list-item-title" style="margin-left: 1rem;">报告{{=key-0+1}}</div>
+                              </div>
+                          </li>
+                        {{}}}
+                          </div>
+                      </div>
+            </script>
+        </ul>
+    </section>
+  </div>
+</body>
+</html>
+<script type="text/javascript" src="../../script/jquery-1.8.2.min.js" ></script>
+<!-- <script type="text/javascript" src="../script/aui-slide.js"></script> -->
+<script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/doT.js"></script>
+<!-- <script src="../script/swiper.min.js"></script> -->
+<script type="text/javascript" src="../../script/aui-collapse.js" ></script>
+
+<script type="text/javascript">
+// function aaaa() {
+//
+//        api.showProgress({
+//            title: '努力加载中...',
+//            text: '先喝杯茶...',
+//            modal: false
+//        });
+//        var diyiti = [],
+//            dierti = []
+//        disanti = [];
+//        $.ajax({
+//            type: "post",
+//            url: "http://www.yxke12.com/index.php/App/Member/wodeceping.html",
+//            data: {
+//              studentid: 290
+//            },
+//            dataType: "json",
+//            success: function(data) {
+//               //  api.hideProgress();
+//               console.log(JSON.stringify(data));
+//                var xuekec = doT.template(document.getElementById('xueke').innerHTML);
+//                var duoyuanc = doT.template(document.getElementById('duoyuan').innerHTML);
+//                var zonghec = doT.template(document.getElementById('zonghe').innerHTML);
+//                var mbtic = doT.template(document.getElementById('mbti').innerHTML);
+//                var huolandec = doT.template(document.getElementById('huolande').innerHTML);
+//
+//                document.getElementById('xuekecs').innerHTML = xuekec(data.data.xueke);
+//                document.getElementById('duoyuancs').innerHTML = duoyuanc(data.data.duoyuan);
+//                document.getElementById('zonghecs').innerHTML = zonghec(data.data.zonghe);
+//                document.getElementById('mbtics').innerHTML = mbtic(data.data.huolande);
+//                document.getElementById('huolandecs').innerHTML = huolandec(data.data.mbti);
+//                var collapse = new auiCollapse({
+//                    autoHide:false //是否自动隐藏已经展开的容器
+//                });
+//            }
+//        });
+//
+//    }
+// aaaa()
+var xuekeList = [];
+var duoyuanList = [];
+var zongheList = [];
+var huolandeList = [];
+var mbtiList = [];
+var xuekec = doT.template(document.getElementById('xueke').innerHTML);
+// var duoyuanc = doT.template(document.getElementById('duoyuan').innerHTML);
+var zonghec = doT.template(document.getElementById('zonghe').innerHTML);
+var mbtic = doT.template(document.getElementById('mbti').innerHTML);
+var huolandec = doT.template(document.getElementById('huolande').innerHTML);
+apiready = function () {
+    api.parseTapmode();
+    xuekeList =  api.pageParam.data.xueke;
+    duoyuanList =  api.pageParam.data.duoyuan;
+    zongheList =  api.pageParam.data.zonghe;
+    huolandeList =  api.pageParam.data.huolande;
+    mbtiList =  api.pageParam.data.mbti;
+
+
+
+    document.getElementById('xuekecs').innerHTML = xuekec(xuekeList);
+    // document.getElementById('duoyuancs').innerHTML = duoyuanc(duoyuanList);
+    document.getElementById('zonghecs').innerHTML = zonghec(zongheList);
+    document.getElementById('mbtics').innerHTML = mbtic(mbtiList);
+    document.getElementById('huolandecs').innerHTML = huolandec(huolandeList);
+
+
+        var collapse = new auiCollapse({
+               autoHide:false //是否自动隐藏已经展开的容器
+           });
+}
+
+function ceshi(url,e) {
+    e.cancelBubble = true;
+    api.openWin({
+        name: url,
+        url: '../shengyaguihua/'+url+'.html',
+        pageParam: {
+            source: 0
+        }
+    });
+}
+
+function zhiyeXQReport(index) {
+    api.showProgress({
+        style: 'default',
+        animationType: 'fade',
+        title: '努力加载中...',
+        text: '先喝杯茶...',
+        modal: true
+    });
+
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/App/Showbaogao/huolande.html',
+        method: 'post',
+        data: {
+            values: {
+                studentid: $api.getStorage('studentid'),
+                num:huolandeList[index].numbers
+            },
+        }
+    },function(ret, err){
+        api.refreshHeaderLoadDone();
+        api.hideProgress();
+        if (ret) {
+          if (ret.status == 100) {
+              api.openWin({
+                  name: 'zhiyexingqu_report_win',
+                  url: '../shengyaguihua/zhiyexingqu_report_win.html',
+                  pageParam: {
+                      data: ret.data,
+                      source: 0
+                  }
+              });
+          }else {
+            api.toast({
+                msg: JSON.stringify(ret.message),
+                duration: 2000,
+                location: 'bottom'
+            });
+          }
+        } else {
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+}
+
+function zhiyeXGReport(index) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Showbaogao/mbti.html',
+      method: 'post',
+      data: {
+          values: {
+              studentid: $api.getStorage('studentid'),
+              num:mbtiList[index].numbers
+          },
+      }
+  },function(ret, err){
+      api.refreshHeaderLoadDone();
+      api.hideProgress();
+      if (ret) {
+        if (ret.status == 100) {
+            api.openWin({
+                name: 'zhiye_xingge_report_win',
+                url: '../shengyaguihua/zhiye_xingge_report_win.html',
+                pageParam: {
+                    data: ret.data,
+                    source:0
+                }
+            });
+        }else {
+          api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+
+function duoyuanReport(index) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Showbaogao/duoyuan.html',
+      method: 'post',
+      data: {
+          values: {
+              studentid: $api.getStorage('studentid'),
+              num:duoyuanList[index].numbers
+          },
+      }
+  },function(ret, err){
+      api.hideProgress();
+      // console.log(JSON.stringify( ret ));
+      if (ret) {
+        if (ret.status == 100) {
+            // ret.data;
+            // console.log(JSON.stringify( ret ));
+            api.openWin({
+                name: 'intelligence_report_win',
+                url: '../shengyaguihua/intelligence_report_win.html',
+                pageParam: {
+                    data: $api.jsonToStr(ret.data),
+                    source:0
+                }
+            });
+
+        }else {
+          api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+
+function zongheReport(id,num) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/Ate/Member/teacher_parentcon.html',
+      method: 'post',
+      data: {
+          values: {
+              studentid: $api.getStorage('studentid'),
+              num:num,
+              zid:id
+          },
+      }
+  },function(ret, err){
+      api.hideProgress();
+      // console.log(JSON.stringify( ret ));
+      if (ret) {
+        if (ret.status == 100) {
+            // ret.data;
+            // console.log(JSON.stringify( ret ));
+            api.openWin({
+                name: 'zhuanye_report_win',
+                url: '../shengyaguihua/zhuanye_report_win.html',
+                pageParam: {
+                    data: ret.data,
+                    source:0
+                }
+            });
+
+        }else {
+          api.toast({
+              msg: JSON.stringify(ret.message ),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+
+function xuekeReport(index) {
+  api.showProgress({
+      style: 'default',
+      animationType: 'fade',
+      title: '努力加载中...',
+      text: '先喝杯茶...',
+      modal: true
+  });
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Showbaogao/xueke.html',
+      method: 'post',
+      data: {
+          values: {
+              studentid: $api.getStorage('studentid'),
+              num:xuekeList[index].numbers
+          },
+      }
+  },function(ret, err){
+      api.hideProgress();
+      if (ret) {
+        if (ret.status == 100) {
+            api.openWin({
+                name: 'xueke_xingqu_report_win',
+                url: '../shengyaguihua/xueke_xingqu_report_win.html',
+                pageParam: {
+                    data: ret.data,
+                    source:0
+                }
+            });
+        }else {
+          api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+      } else {
+        api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+  });
+}
+</script>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+
+    <style>
+    .ke1{
+      width: 30%;
+      height: 2.7rem;
+      border-radius: 4px;
+      background-color: #b699ea;
+      text-align: center;
+      display: inline-block;
+      line-height: 2.7rem;
+      color: #fff;
+    }
+    .ke2{
+      width: 30%;
+      height: 2.7rem;
+      border-radius: 4px;
+      background-color: #9fd45b;
+      text-align: center;
+      margin-left: 10px;
+      display: inline-block;
+      line-height: 2.7rem;
+      color: #fff;
+    }
+    .ke3{
+      width: 30%;
+      height: 2.7rem;
+      border-radius: 4px;
+      background-color: #76d8ff;
+      text-align: center;;
+      margin-left: 10px;
+      display: inline-block;
+      line-height: 2.7rem;
+      color: #fff;
+    }
+    .left{width: 90%;margin:auto;}
+    .left_line {
+        background-color: #6666ff;
+        height: 18px;
+        width: 4px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .section_title {
+        color: #6666ff;
+        font-size: 18px;
+        font-family: "PingFang-SC";
+        font-weight: bold;
+        margin-left: 4px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div class="flex-wrap flex-vertical" id="xingquceshi">
+      <script id="evaluationtmpl" type="text/x-dot-template">
+          <div class="left">
+            <div style="margin:1rem 0">选科时间：{{=it.jilu.time}}</div>
+            <div class="ke1 ke" tapmode onclick='xuekexq({{=it.jilu.xid1}})'>{{=it.jilu.xname1}}</div>
+            <div class="ke2 ke" tapmode onclick='xuekexq({{=it.jilu.xid2}})'>{{=it.jilu.xname2}}</div>
+            <div class="ke3 ke" tapmode onclick='xuekexq({{=it.jilu.xid3}})'>{{=it.jilu.xname3}}</div>
+            <div style="margin-left:10px;margin-top:1rem;height:auto;display: inline-flex;">
+                <div class="left_line"></div>
+                <span class="section_title">评价</span>
+            </div>
+            <div style="width:100%;height:1px;background:#f5f5f5;margin-top0.5rem"></div>
+              {{for (var i = 0; i < it.comment.length; i++) {}}
+                      <div style="margin-top:0.5rem;width:100%;overflow: hidden;">
+                          <div style="width:20%;float:left">
+                            <img src="http://www.yxke12.com/Public/Teacher/images/touxiang/{{=it.comment[i].touxiang}}" style='width:2.5rem;height:2.5rem;border-radius:50%' alt="">
+                          </div>
+                            <div style="width:80%;float:left">
+                              <div class="" style="margin-top:0.2rem">
+                                {{=it.comment[i].teachername}}
+                              </div>
+                              <div>
+                                {{=it.comment[i].content}}
+                              </div>
+                            </div>
+                        </div>
+
+            {{}}}
+          </div>
+
+       </script>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/echart.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+    var data;
+    apiready = function() {
+        data = api.pageParam.data;
+        console.log(JSON.stringify(data));
+        var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+        document.getElementById('xingquceshi').innerHTML = evalText(data);
+        var teacher = data.teacher;
+        if (teacher == 1) {
+          var st = $api.byId('st_id');
+          st.disabled = true;
+        }
+
+    };
+function xuekexq(id) {
+  var parames = {values:{}}
+  parames.values.id=id;
+  zhc.post('http://www.yxke12.com/index.php/App/Xuanke/infos.html',parames,function(data) {
+    console.log(JSON.stringify(data));
+    api.openWin({
+        name: 'kecheng_win',
+        url: '../../shengyaguihua/kecheng_win.html',
+        pageParam: {
+            data: data.infos
+        }
+    });
+  },null,true)
+}
+</script>
+
+</html>

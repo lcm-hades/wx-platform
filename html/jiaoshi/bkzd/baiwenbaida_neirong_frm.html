@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>云API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+    .aui-content-padded {
+         margin: 0rem;
+        position: relative;
+        word-break: break-all;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .aui-border {
+        border: none;
+        background-image: -webkit-linear-gradient(270deg, #dddddd, #dddddd 0%, transparent 0%), -webkit-linear-gradient(180deg, #dddddd, #dddddd 0%, transparent 0%), -webkit-linear-gradient(90deg, #dddddd, #dddddd 0%, transparent 0%), -webkit-linear-gradient(0, #dddddd, #dddddd 50%, transparent 0%);
+        background-image: linear-gradient(180deg, #dddddd, #dddddd 0%, transparent 0%), linear-gradient(270deg, #dddddd, #dddddd 0%, transparent 0%), linear-gradient(0deg, #dddddd, #dddddd 0%, transparent 0%), linear-gradient(90deg, #dddddd, #dddddd 0%, transparent 0%);
+        background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+        background-repeat: no-repeat;
+        background-position: top, right top, bottom, left top;
+    }
+    .title_zi{
+      font-family: 'PingFang-SC';
+     font-size: 0.7rem!important;
+     text-align: left;
+     color: #333333;
+     padding-top: 20px;
+     padding-bottom: 20px;
+     padding-left: 10px;
+    }
+    .title_neirong{
+      font-family: 'PingFang-SC';
+     font-size: 0.7rem;
+     text-align: left;
+     color: #333333;
+     margin: 0.5rem;
+    }
+
+    </style>
+</head>
+<body>
+  <section class="aui-content-padded">
+      <ul class="aui-list aui-collapse aui-border" id="bwbd_ul">
+          <script id="bwbd_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <div class="aui-collapse-item"  tapmode>
+                  <li class="aui-list-item aui-collapse-header" tapmode>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-title title_zi">{{=it[i].name}}</div>
+                          <div class="aui-list-item-right">
+                              <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                          </div>
+                      </div>
+                  </li>
+                  <div class="aui-collapse-content title_neirong">
+                      {{=it[i].content}}
+                  </div>
+              </div>
+            {{}}}
+          </script>
+      </ul>
+  </section>
+
+</body>
+<script type="text/javascript" src="../../../script/api.js" ></script>
+<script type="text/javascript" src="../../../script/aui-tab.js" ></script>
+<script type="text/javascript" src="../../../script/doT.js" ></script>
+<script type="text/javascript" src="../../../script/aui-collapse.js" ></script>
+<script type="text/javascript" src="../../../script/network.js" ></script>
+
+<script type="text/javascript">
+    var bwbdList = [];
+    var bwbd_dot;
+    apiready = function(){
+        bwbd_dot = doT.template(document.getElementById('bwbd_s').innerHTML);
+        getDetails();
+    }
+
+    function getDetails() {
+      var parames = {values:{}}
+      parames.values.id = api.pageParam.index;
+      zhc.post('http://www.yxke12.com/index.php/Ate/Xueshengzhidao/getbwbd.html',
+          parames,function(data) {
+            bwbdList = data;
+            document.getElementById('bwbd_ul').innerHTML = bwbd_dot(bwbdList);
+            var collapse = new auiCollapse({
+                autoHide:false //是否自动隐藏已经展开的容器
+            });
+            api.parseTapmode();
+          },null, true);
+    }
+</script>
+</html>

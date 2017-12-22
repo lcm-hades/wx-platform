@@ -1,0 +1,670 @@
+<!doctype html>
+<html style="background:#f5f5f5">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/z.css"/>
+
+    <style>
+      .aui-collapse-header.aui-active {
+          background: white;
+      }
+      .my-third-content{
+        border-top: 1px solid #dddddd;
+        padding: 0px!important;
+        padding-left: 15px!important;
+      }
+      .aui-tab-item.aui-active {
+          color: #6666ff;
+          border-bottom: 2px solid #6666ff;
+      }
+      .margin-l-10{
+        margin-left: 10px;
+      }
+      section{
+        top: 46px;
+      }
+      td{
+            padding: 0.5rem;
+            border-bottom: 1px solid #e5e5e5
+      }
+      p{
+        font-size: 0.7rem;
+       line-height: 1.39;
+       color: #ffffff;
+      }
+      .aui-list-item-inner.aui-swipe-handle {
+          overflow-x: hidden;
+          position: relative;
+          z-index: 1;
+          background-color: #ffffff;
+      }
+      .aui-swipe-btn {
+          position: absolute;
+          right: 0;
+          z-index: 0;
+          height: 100%;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-flex: 1;
+          -webkit-box-pack: justify;
+          -webkit-justify-content: space-between;
+                  justify-content: space-between;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+                  align-items: center;
+      }
+      .aui-swipe-btn .aui-btn {
+          border-radius: 0;
+          height: 100%;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+                  align-items: center;
+
+      }
+      .donghua {
+          -webkit-transition-duration:300ms;
+          transition-duration:300ms;
+      }
+      .aui-list .aui-list-item {
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+     background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 0%);
+     background-image: -webkit-linear-gradient(90deg,#dddddd,#dddddd 0%,transparent 0%);
+}
+.aui-list {
+    border: none;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: linear-gradient(0,#dddddd,#dddddd 0%,transparent 0%);
+}
+.shanchulist{
+  width: 95%;
+  margin: auto;
+  border-radius: 4px;
+}
+.aui-list .aui-list-item-inner {
+    position: relative;
+    min-height: 2.2rem;
+    padding-right: 0.75rem;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+     display: block;;
+    -webkit-box-flex: 1;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    line-height: 2.2rem;
+}
+.suolue{
+  display: -webkit-box!important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  padding-top: 0.35rem
+}
+.zsj{
+    font-size: 0.5rem;
+    font-weight: 500;
+    text-align: left;
+    color: #886e91;
+}
+.aui-info {
+    position: relative;
+    padding: 0.25rem 0;
+    font-size: 0.7rem;
+    color: #757575;
+    background-color: transparent;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.mid_img2{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.fabiao{
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
+}
+
+div.screening>ul {
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border-bottom: solid 1px #d3d3d3;
+  overflow: hidden;
+ }
+ div.screening>ul>li {
+     float: left;
+     width: 26%;
+     text-align: center;
+     line-height: 1.99rem;
+     border-left: solid 1px #d3d3d3;
+     background: url(../../../image/on_1.png) no-repeat 85% center;
+ }
+ .jiantou{
+     background: url(../../../../image/on_1.png) no-repeat 85% center!important;
+ }
+ .grade-w-roll {
+       top: 4.5rem;
+   }
+   .quanbu{
+     font-family: "PingFang-SC";
+     font-size: 14px;
+     font-weight: 500;
+     text-align: left;
+     color: #6666ff;
+     border-bottom:1px solid #6666ff;
+   }
+   .quanbubianse{
+     font-family: "PingFang-SC";
+     font-size: 14px;
+     font-weight: 500;
+     text-align: left;
+     color: #666;
+     border:none;
+   }
+   .mid_img{
+     width: 94%;
+     height: 130px;
+   }
+   .radius{
+     border-radius: 4px;
+   }
+   .shadow{
+     box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.6);
+   }
+   .mid_text{
+     font-size: 16px;
+     font-family: "PingFang-SC";
+     color: #333333;
+     margin-top: 8px;
+     text-align: left;
+   }
+   .mid_padding_8{
+     padding-top: 9px!important;
+     padding-bottom: 9px!important;
+     line-height: 1.0;
+   }
+   .aui-list .aui-list-item-title {
+    font-size: 0.8rem;
+    position: relative;
+    width: 70%;
+    color: #333333;
+    display: inline-block;
+}
+
+.aui-list .aui-list-item-right, .aui-list-item-title-row em {
+    max-width: 50%;
+    position: absolute;;
+    font-size: 0.6rem;
+    color: #757575;
+    display: inline-block;
+    right:1rem;
+}
+.cj{
+  width:1.1rem;
+  height:1.1rem;
+  vertical-align: middle;
+  margin-right: 0.45rem;
+}
+.aui-content-padded {
+     margin: 0rem;
+    position: relative;
+    word-break: break-all;
+    -webkit-overflow-scrolling: touch;
+}
+.time{
+    padding-left: 0.5rem;
+    line-height: 1.25rem;
+    background: #f5f5f5;
+    font-size: 0.7rem;
+    text-align: left;
+    color: #222222;
+}
+.title_name{
+  font-size: 0.9rem!important;
+  text-align: left;
+  color: #222222!important;
+}
+.text_name{
+  padding-left: 1rem
+}
+.text_font{
+  font-size: 0.9rem!important;
+  text-align: left;
+  color: #666666!important;
+}
+
+.bull{
+  width: 43.9%;
+  height: 31.2%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.border-t:before, .border-b:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #ddd;
+    right: 0;
+    height: 0px;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+ul{ overflow: hidden; background: #f5f5f5!important;}
+ul li{ line-height: 42px; padding:0px 0.5rem; background: #fff;margin-bottom: 0rem}
+ul li.animation{ -webkit-transition: .3s all; transition: .3s all; }
+ul li .right-btns{ position: absolute; left: 100%; top: 0; bottom: 0; }
+ul li .right-btns .flex-con{ padding: 0 30px; background-color: #ccc; color: white; display: table; white-space: nowrap; height: 100%; }
+ul li .right-btns .flex-con span{ display: table-cell; vertical-align: middle; }
+ul li .right-btns .flex-con.red{ background-color: #ff4c00; }
+    </style>
+</head>
+
+<body style="height:auto;">
+
+    <div class="flex-wrap flex-vertical" style="background:#f5f5f5">
+      <div class="aui-tab" id="tab" style="width:100%;color:#6666ff;position:fixed;z-index:2;">
+          <div class="aui-tab-item aui-active">课表</div>
+          <div class="aui-tab-item">老师</div>
+          <div class="aui-tab-item">笔记</div>
+          <div class="aui-tab-item">成绩</div>
+      </div>
+
+      <div id="kb" >
+        <div class="bull">
+            <img src="../../../../image/bull.png" alt="">
+        </div>
+        <!-- <table style="margin-top:50px;width:100%;text-align:center">
+          <tr>
+            <td></td>
+            <td>周一</td>
+            <td>周二</td>
+            <td>周三</td>
+            <td>周四</td>
+            <td>周五</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td style="background:#b699ea">
+          <p>
+            语文
+          </p>
+          <p>
+            高一(14)
+          </p>
+            </td>
+            <td style="background:#9fd45b"><p>
+              语文
+            </p>
+            <p>
+              高一(14)
+            </p></td>
+            <td style="background:#58bef9"><p>
+              语文
+            </p>
+            <p>
+              高一(14)
+            </p></td>
+            <td style="background:#fc8a8c"><p>
+              语文
+            </p>
+            <p>
+              高一(14)
+            </p></td>
+            <td style="background:#fdbf2d"><p>
+              语文
+            </p>
+            <p>
+              高一(14)
+            </p></td>
+          </tr>
+        </table> -->
+
+      </div>
+
+
+      <div id="jh" style="display:none;margin-top:2.5rem;">
+
+        <div class="aui-content aui-margin-b-15">
+            <ul class="aui-list aui-media-list" id="wodelaoshi">
+                <script id="wdls" type="text/x-dot-template">
+                      {{  for (var i = 0; i < it.length; i++) {}}
+                          <li class="aui-list-item aui-list-item-middle">
+                              <div class="aui-media-list-item-inner">
+                                  <div class="aui-list-item-media" style="width: 3rem;">
+                                  {{if (it[i].touxiang == null) {}}
+                                    <img src="../../../../image/gerentouxiang.png" class="aui-img-round aui-list-img-sm">
+                                  {{}else {}}
+                                    <img src="http://www.yxke12.com/Public/Parent/images/touxiang/{{=it[i].touxiang}}" class="aui-img-round aui-list-img-sm">
+                                  {{}}}
+                                  </div>
+                                  <div class="aui-list-item-inner ">
+                                      <div class="aui-list-item-text">
+                                          <div class="aui-list-item-title aui-font-size-14">{{=it[i].teachername}}</div>
+                                          <div class="aui-list-item-right">{{=it[i].kemu}}</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                    {{}}}
+                </script>
+            </ul>
+        </div>
+
+
+      </div>
+
+      <div id="bj" style="margin-top:2.4rem;display:none">
+        <div id="neirong">
+                  <div class="screening">
+
+                  </div>
+                  <div class="screening" >
+                    <ul>
+                        <li><span class="quanbu" id="quanbu1" template onclick="quanbuxianshi()">全部</span></li>
+                        <li class="Regional jiantou" id="shudu">全部</li>
+                        <li class="Sort jiantou" id="xuelicengci">全部</li>
+                        <!-- <li class="Brand">学科门类</li> -->
+                    </ul>
+                </div>
+            <div class="grade-eject" id="yincang" tapmode onclick="yincang(event)">
+                <ul class="grade-w" id="gradew">
+                    <li tapmode onclick="grade1(this,event)">全部</li>
+                    <li tapmode onclick="grade1(this,event)">高一</li>
+                    <li tapmode onclick="grade1(this,event)">高二</li>
+                    <li tapmode onclick="grade1(this,event)">高三</li>
+
+                </ul>
+
+            </div>
+
+            <div class="Sort-eject Sort-height" id="yincang1" tapmode onclick="yincang(event)">
+                <ul class="Sort-Sort" id="Sort-Sort">
+                    <li tapmode onclick="Sorts(this,event)">全部</li>
+                    <li tapmode onclick="Sorts(this,event)">数学</li>
+                    <li tapmode onclick="Sorts(this,event)">语文</li>
+                    <li tapmode onclick="Sorts(this,event)">英语</li>
+                    <li tapmode onclick="Sorts(this,event)">物理</li>
+                    <li tapmode onclick="Sorts(this,event)">化学</li>
+                    <li tapmode onclick="Sorts(this,event)">生物</li>
+                    <li tapmode onclick="Sorts(this,event)">历史</li>
+                    <li tapmode onclick="Sorts(this,event)">地理</li>
+                    <li tapmode onclick="Sorts(this,event)">政治</li>
+                </ul>
+            </div>
+
+            <div class="aui-content aui-margin-b-15" style=" padding-top: 0rem;">
+                      <section class="aui-grid"  style="border-bottom: 10px solid #f5f5f5;margin-top:1px;" id="ceshi_id">
+                        <script id="tuijianzc" type="text/x-dot-template">
+                            {{for (var i = 0; i< it.length; i++) {}}
+                            <div class="aui-col-xs-6 mid_padding_8" tapmode onclick="onItemClick({{=it[i].kid}},'http://www.yxke12.com/Public/Home/images/videothumb/{{=it[i].kimage}}');">
+                                <img class="mid_img radius shadow" src="http://www.yxke12.com/Public/Home/images/videothumb/{{=it[i].kimage}}" alt="">
+                                <div><span class="mid_text">{{=it[i].vname}}</span></div>
+                            </div>
+                            {{}}}
+                        </script>
+                      </section>
+            </div>
+        </div>
+        <div class="bull" id="xiaoniu" style="display:none">
+            <img src="../../../../image/bull.png" alt="">
+        </div>
+
+      </div>
+
+      <div id="cj" style="display:none">
+        <div class="bull">
+            <img src="../../../../image/bull.png" alt="">
+        </div>
+        <!-- <section class="aui-content-padded">
+            <ul class="aui-list aui-collapse aui-border">
+              <div class="time">2017-09-19</div>
+              <div class="aui-collapse-item"  tapmode>
+                  <li class="aui-list-item aui-collapse-header" tapmode>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-title title_name"><img src="../../../../image/cj.png" class="cj" alt="">高一上学期其中考试</div>
+                          <div class="aui-list-item-right">
+                              <i class="aui-iconfont aui-icon-down aui-collapse-arrow"></i>
+                          </div>
+                      </div>
+                  </li>
+                  <div class="aui-collapse-content ">
+                            <ul class="aui-list aui-list-in">
+                              <li class="aui-list-item">
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-title text_name  text_font">语文</div>
+                                      <div class="aui-list-item-right text_font" >90分</div>
+                                  </div>
+                              </li>
+                              <li class="aui-list-item">
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-title text_name  text_font">数学</div>
+                                      <div class="aui-list-item-right text_font" >69分</div>
+                                  </div>
+                              </li>
+                              <li class="aui-list-item">
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-title text_name  text_font">英语</div>
+                                      <div class="aui-list-item-right text_font" >60分</div>
+                                  </div>
+                              </li>
+                              <li class="aui-list-item">
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-title text_name  text_font">物理</div>
+                                      <div class="aui-list-item-right text_font" >90分</div>
+                                  </div>
+                              </li>
+                              <li class="aui-list-item">
+                                  <div class="aui-list-item-inner">
+                                      <div class="aui-list-item-title text_name  text_font">总分</div>
+                                      <div class="aui-list-item-right text_font" >690分</div>
+                                  </div>
+                              </li>
+                            </ul>
+                  </div>
+              </div>
+            </ul>
+        </section> -->
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/aui-list-swipe.js"></script>
+<script src="../../../../script/jquery-1.8.3.min.js"></script>
+<script src="../../../../script/demo.js"></script>
+<script src="../../../../script/network.js"></script>
+<script type="text/javascript" src="../../../../script/aui-collapse.js" ></script>
+<script type="text/javascript">
+    var listHD = doT.template(document.getElementById('tuijianzc').innerHTML);
+      var wodetongxue2 = doT.template(document.getElementById('wdls').innerHTML);
+    apiready = function() {
+        api.parseTapmode();
+        var swipe = new auiListSwipe(function(ret){
+            // console.log(ret)
+        });
+wodels()
+    };
+    var collapse = new auiCollapse({
+        autoHide:false //是否自动隐藏已经展开的容器
+    });
+
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+            $api.byId('kb').style.display = "block";
+            $api.byId('jh').style.display = "none";
+            $api.byId('bj').style.display = "none";
+            $api.byId('cj').style.display = "none";
+
+        }else if (ret.index == 2) {
+          $api.byId('kb').style.display = "none";
+          $api.byId('jh').style.display = "block";
+          $api.byId('bj').style.display = "none";
+          $api.byId('cj').style.display = "none";
+          wodels()
+        }else if (ret.index == 3) {
+          $api.byId('kb').style.display = "none";
+          $api.byId('jh').style.display = "none";
+          $api.byId('bj').style.display = "block";
+          $api.byId('cj').style.display = "none";
+              first()
+        }else {
+          $api.byId('kb').style.display = "none";
+          $api.byId('jh').style.display = "none";
+          $api.byId('bj').style.display = "none";
+          $api.byId('cj').style.display = "block";
+        }
+    });
+
+function first() {
+  var parames = {values:{}}
+  parames.values.studentid=$api.getStorage('studentid');
+  zhc.post('http://www.yxke12.com/index.php/App/Member/wodebiji.html',parames,function(data) {
+
+  if (data==0) {
+    $api.byId('xiaoniu').style.display = "block";
+    $api.byId('neirong').style.display = "none";
+
+  }else {
+    document.getElementById('ceshi_id').innerHTML = listHD(data);
+  }
+  },null,true)
+}
+
+    function yincang(e) {
+      e.cancelBubble =true
+      document.getElementById('yincang').className = 'grade-eject'
+      document.getElementById('yincang1').className = 'Sort-eject Sort-height'
+    }
+    function quanbuxianshi(){
+      var parames = {values:{}}
+        document.getElementById("quanbu1").className = "quanbu"
+        parames.values.studentid=$api.getStorage('studentid');
+        zhc.post('http://www.yxke12.com/index.php/App/Member/wodebiji.html',parames,function(data) {
+        document.getElementById('ceshi_id').innerHTML = listHD(data);
+        },null,true)
+          $api.byId('shudu').innerHTML = '全部'
+          $api.byId('xuelicengci').innerHTML='全部'
+    }
+
+     //js点击事件监听开始
+    function grade1(wbj,e){
+      var parames = {values:{}}
+      document.getElementById("quanbu1").className = "quanbubianse"
+      $api.byId('shudu').innerHTML = wbj.innerHTML;
+        e.cancelBubble =true
+       var arr = document.getElementById("gradew").getElementsByTagName("li");
+        for (var i = 0; i < arr.length; i++){
+            var a = arr[i];
+            a.style.background = "";
+        };
+        wbj.style.background = "#eee"
+        parames.values.studentid=$api.getStorage('studentid');
+        parames.values.nianji=$api.byId('shudu').innerHTML;
+        zhc.post('http://www.yxke12.com/index.php/App/Member/wodebiji.html',parames,function(data) {
+        document.getElementById('ceshi_id').innerHTML = listHD(data);
+        },null,true)
+        yincang(event)
+    }
+
+
+     function Sorts(sbj,e){
+       var parames = {values:{}}
+       e.cancelBubble =true
+       document.getElementById("quanbu1").className = "quanbubianse"
+         $api.byId('xuelicengci').innerHTML = sbj.innerHTML;
+        var arr = document.getElementById("Sort-Sort").getElementsByTagName("li");
+        for (var i = 0; i < arr.length; i++){
+            var a = arr[i];
+            a.style.borderBottom = "";
+        };
+        sbj.style.borderBottom = "solid 1px #ff7c08"
+        parames.values.studentid=$api.getStorage('studentid');
+        parames.values.nianji=$api.byId('shudu').innerHTML;
+        parames.values.kemu=$api.byId('xuelicengci').innerHTML;
+        zhc.post('http://www.yxke12.com/index.php/App/Member/wodebiji.html',parames,function(data) {
+        document.getElementById('ceshi_id').innerHTML = listHD(data);
+        },null,true)
+        yincang(event)
+    }
+
+
+
+    function onItemClick(kid,img) {
+        api.openWin({
+            name: 'kecheng_win',
+            url: '../../../chengjitisheng/youketang/kecheng_win.html',
+            pageParam: {
+                kid: kid,
+                img: img,
+                url:'http://www.yxke12.com/index.php/App/Youketang/seevideo.html',
+                paixu:1
+            }
+        });
+
+    }
+
+
+function wodels() {
+
+    var datas={values:{}}
+      datas.values.studentid = $api.getStorage('studentid');
+      zn.post("http://www.yxke12.com/index.php/Apa/Member/tadelaoshi.html",datas,function (data) {
+        console.log(JSON.stringify(data));
+              document.getElementById('wodelaoshi').innerHTML = wodetongxue2(data.data);
+      },true)
+
+
+}
+
+</script>
+
+</html>

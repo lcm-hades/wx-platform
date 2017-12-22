@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .flex-vertical .system{
+          width: 90%;
+          margin: 10px auto;
+      }
+
+       table{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border:solid 1px #58bef9;
+      }
+
+       table tr{
+        border-bottom:solid 1px #58bef9;
+      }
+
+       table tr td{
+         text-align: center;
+        padding: 10px;
+        border-right:solid 1px #58bef9;
+        width: 33.3%;
+      }
+
+      table th td{
+        text-align: center;
+       padding: 10px;
+       border-right:solid 1px #58bef9;
+       width: 33.3%;
+     }
+
+
+    </style>
+</head>
+
+<body style="background-color:white;">
+    <div class="flex-wrap flex-vertical">
+      <table id="xuekepaiming_id">
+          <script id="xuekepaiming_s" type="text/x-dot-template">
+            <tr>
+              <td>学科名称</td>
+              <td>学科水平得分</td>
+              <td>学科水平得分</td>
+            </tr>
+            {{for (var i = 0; i < it.length; i++) {}}
+                <tr>
+                    <td>{{=it[i].major}}</td>
+                    <td>{{=it[i].grade}}</td>
+                    <td>{{=it[i].rank}}</td>
+                </tr>
+            {{}}}
+        </script>
+      </table>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+
+    apiready = function() {
+      var xuekepaiming = doT.template(document.getElementById('xuekepaiming_s').innerHTML);
+      document.getElementById('xuekepaiming_id').innerHTML = xuekepaiming(api.pageParam.data);
+    };
+</script>
+
+</html>

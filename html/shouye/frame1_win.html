@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        .ic-message{
+                background-image: url(../../image/career.png);
+                float: right;}
+
+
+        #footer{  background-color: #f2f2f2; }
+        #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 10px; background-size: auto 22px; text-align: center;font-size: 10px;font-family: "PingFang-SC";color: #8e8eb2;}
+        #footer ul li.active{ color: #6666ff; }
+        #footer ul li:nth-child(1){ background-image: url(../../image/career.png); }
+        #footer ul li:nth-child(2){ background-image: url(../../image/868_1.png); }
+        #footer ul li:nth-child(3){ background-image: url(../../image/quality.png); }
+        #footer ul li:nth-child(4){ background-image: url(../../image/duoyuanzhaosheng_1.png); }
+        #footer ul li:nth-child(5){ background-image: url(../../image/867-3@3x.png); }
+        #footer ul li:nth-child(1).active{ background-image: url(../../image/careerS.png); }
+        #footer ul li:nth-child(2).active{ background-image: url(../../image/868@3x.png); }
+        #footer ul li:nth-child(3).active{ background-image: url(../../image/qualityS.png); }
+        #footer ul li:nth-child(4).active{ background-image: url(../../image/duoyuanzhaosheng.png); }
+        #footer ul li:nth-child(5).active{ background-image: url(../../image/zhiyuantianbao.png); }
+
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+  <a class="aui-pull-left aui-btn aui-btn-outlined" tapmode onclick="my()">
+      <img src="../../image/my.png" style="width:18px;height:18px">
+  </a>
+  <div class="aui-title">成绩提升</div>
+
+  <a class="aui-pull-right aui-btn aui-btn-outlined" tapmode="hover" onclick="xiaoxi()">
+
+        <div id="dian" class=" dot-pos"></div>
+        <img src="../../image/message.png" style="width:18px;height:18px">
+    </a>
+</header>
+
+<div id="wrap" class="flex-wrap flex-vertical">
+
+
+
+    <div id="main" class="flex-con">
+
+    </div>
+    <div id="footer" class="border-t">
+        <ul class="flex-wrap" >
+            <li tapmode="hover" onclick=diopen('index') class="flex-con" >生涯规划</li>
+            <li tapmode="hover"  class="flex-con active" >成绩提升</li>
+            <li tapmode="hover" onclick=diopen('frame2_win') class="flex-con" >素质评价</li>
+            <li tapmode="hover" onclick=diopen('frame3_win') class="flex-con" >多元备考</li>
+            <li tapmode="hover"  onclick=diopen('frame4_win') class="flex-con" >志愿填报</li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+<script type="text/javascript">
+function xiaoxi() {
+  localStorage.a = document.getElementById('dian').className = 'dot-pos'
+  api.openWin({
+      name: 'xiaoxi_win',
+      url: '../xiaoxi/xiaoxi_win.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
+
+function my() {
+
+    api.openWin({
+        name: "my_win",
+        url: 'my_win.html',
+        pageParam: {
+            name: 'test'
+        },
+        slidBackEnabled:false
+    });
+}
+
+    apiready = function(){
+
+        api.parseTapmode();
+        // if (localStorage.a==undefined) {
+        //   document.getElementById('dian').className = 'dot-pos aui-dot'
+        // }else {
+        //   document.getElementById('dian').className = 'dot-pos '
+        // }
+
+        var parames = {values:{}}
+            parames.values.studentid = $api.getStorage('studentid')
+            zhc.post('http://www.yxke12.com/index.php/App/Msg/counts.html',parames,function(data) {
+              if (data.teachercomment==0) {
+                document.getElementById('dian').className = 'dot-pos '
+              }else if (data.action==0) {
+                document.getElementById('dian').className = 'dot-pos '
+              }else {
+                document.getElementById('dian').className = 'dot-pos aui-dot'
+              }
+            },null,true)
+        $api.fixStatusBar($api.byId('aui-header'));
+        // $api.fixTabBar($api.byId('footer'))
+        var body_h = $api.offset($api.dom('body')).h,
+            footerh = $api.offset($api.byId('footer')).h,
+            headerh = $api.offset($api.byId('aui-header')).h;
+        api.openFrame({
+            name: 'frame1_frm',
+            url: 'frame1_frm.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: headerh,
+                w: 'auto',
+                h: body_h-footerh-headerh
+            },
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false
+        })
+        var lastTime = 0;
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            // alert('按了返回键');
+            var timestamp = (new Date()).valueOf();
+            if (timestamp - lastTime > 2000) {
+              lastTime = timestamp;
+                api.toast({
+                    msg: '再次点击退出应用',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }else {
+              api.closeWidget({
+                  id: 'A6944502823879',
+                  retData: {
+                      name: 'closeWidget'
+                  },
+                  silent:true,
+                  animation: {
+                      type: 'flip',
+                      subType: 'from_bottom',
+                      duration: 500
+                  }
+              });
+            }
+        });
+        if(api.systemType == 'android'){
+          api.setStatusBarStyle({
+              // style: 'dark',
+              color: '#000'
+          });
+        }
+    };
+    function diopen(url) {
+      var  url1;
+      if (url=='index') {
+        url1='../../'+url
+      }else {
+        url1=url
+      }
+      api.openWin({
+          name: url,
+          url: url1+'.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation:{
+             type:"none"
+          },
+          slidBackEnabled:false
+      });
+    }
+</script>
+</html>

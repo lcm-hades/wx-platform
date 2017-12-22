@@ -1,0 +1,1003 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        .aui-tab-item.aui-active {
+            color: #6666ff;
+            border-bottom: 2px solid #6666ff;
+        }
+
+        .left_line {
+            background-color: #6666ff;
+            height: 18px;
+            width: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .section_title {
+            color: #333333;
+            font-size: 18px;
+            font-family: "PingFang-SC-Medium";
+            margin-left: 4px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .part_c{
+            background-color: white;
+            margin-top: 50px;
+            width: 100%;
+
+        }
+
+        .title_panel{
+          margin-left:5%;
+          margin-top:10px;
+          height:auto;
+          display:inline-flex;
+        }
+        .part_c p{
+          text-indent: 2em;
+          padding:0px 5%;
+          padding-bottom: 10px;
+          width: 90%;
+        }
+
+        .mid-title{
+          text-indent: 0em!important;
+          font-size: 14px;
+          font-family: 'PingFang-SC';
+          padding-top: 4px!important;
+          padding-bottom: 0px!important;
+          color: #333333;
+        }
+
+        .small-title{
+          text-indent: 0em!important;
+          font-size: 14px;
+          font-family: 'PingFang-SC';
+          font-weight: bold;
+          padding-top: 10px!important;
+          padding-bottom: 0px!important;
+          color: #333333;
+        }
+        .item {
+            width: 45%;
+            height: 30px;
+            display: inline-block;
+            text-align: left;
+            font-size: 16px;
+            font-family: "PingFang-SC";
+            line-height: 30px;
+            color: #333333;
+        }
+        td{
+          height: 1.5rem;
+          text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab" id="tab" style="width:100%;color:#6666ff;position:fixed;z-index:2;">
+          <div class="aui-tab-item aui-active">专业概述</div>
+          <div class="aui-tab-item">就业方向</div>
+          <div class="aui-tab-item">就业分布</div>
+          <div class="aui-tab-item">相关院校</div>
+      </div>
+      <div id="details_div" class="flex-wrap flex-vertical">
+      <script id="details_s" type="text/x-dot-template">
+        <!-- start part1 -->
+        <div class="part_c" id="part1" style="display:block;">
+        {{if (it.infos.background == null) {}}
+          <div class="title_panel" style="display:none;">
+        {{}else {}}
+          <div class="title_panel">
+        {{}}}
+            <div class="left_line"></div>
+            <span class="section_title">专业背景</span>
+        </div>
+        {{if (it.infos.background == null) {}}
+            <p style="display:none;">
+        {{}else{}}
+            <p>
+        {{}}}
+            {{=it.infos.background}}
+        </p>
+
+
+          {{if (it.infos.target == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">培养目标</span>
+          </div>
+          {{if (it.infos.target == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+              {{=it.infos.target}}
+          </p>
+
+          {{if (it.infos.requirement == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">培养要求</span>
+          </div>
+          {{if (it.infos.requirement == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+              {{=it.infos.requirement}}
+          </p>
+
+          {{if (it.infos.course == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">主要课程</span>
+          </div>
+          {{if (it.infos.course == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+              {{=it.infos.course}}
+          </p>
+
+          {{if (it.infos.degree_issued == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">授予学位</span>
+          </div>
+          {{if (it.infos.degree_issued == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+              {{=it.infos.degree_issued}}
+          </p>
+
+          {{if (it.infos.year == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">修学年限</span>
+          </div>
+          {{if (it.infos.year == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+              {{=it.infos.year}}
+          </p>
+
+          {{if (it.infos.student_capacity == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">学生能力</span>
+          </div>
+          {{if (it.infos.student_capacity == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+              {{=it.infos.student_capacity}}
+          </p>
+        </div>
+        <!-- end part1 -->
+
+        <!-- start part2 -->
+        <div class="part_c" id="part2" style="display:none;">
+          {{if (it.infos.future == null) {}}
+            <div class="title_panel" style="display:none;">
+          {{}else {}}
+            <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">就业方向</span>
+          </div>
+          {{if (it.infos.future == null) {}}
+              <p style="display:none;">
+          {{}else{}}
+              <p>
+          {{}}}
+            {{=it.infos.future}}
+          </p>
+
+          {{var kecongshigangnwei_arr = it.kecongshigangnwei;}}
+          {{if (kecongshigangnwei_arr == null || kecongshigangnwei_arr.length == 0) {}}
+              <div class="title_panel" style="display:none;">
+          {{}else{}}
+              <div class="title_panel">
+          {{}}}
+              <div class="left_line"></div>
+              <span class="section_title">可从事岗位</span>
+          </div>
+          <ul style="margin-left:5%;">
+            {{if(kecongshigangnwei_arr.length%2 != 0){}}
+                {{kecongshigangnwei_arr.push({'value2':""});}}
+            {{}}}
+            {{for (var i = 0; i < kecongshigangnwei_arr.length; i+=2) {}}
+              <li>
+                  {{if (kecongshigangnwei_arr[i].value2 == null) {}}
+                    <div class="item"></div>
+                  {{}else {}}
+                    <div class="item">{{=kecongshigangnwei_arr[i].value2}}</div>
+                  {{}}}
+
+                  {{if (kecongshigangnwei_arr[i+1].value2 == null) {}}
+                    <div class="item"></div>
+                  {{}else {}}
+                    <div class="item">{{=kecongshigangnwei_arr[i+1].value2}}</div>
+                  {{}}}
+              </li>
+            {{}}}
+          </ul>
+        </div>
+
+        <!-- end part2 -->
+
+
+        <!-- start part3 -->
+
+        <div class="part_c" id="part3" style="display:none;">
+          <div class="title_panel">
+              <div class="left_line"></div>
+              <span class="section_title">就业行业分布情况</span>
+          </div>
+          <div id="hangye" style="width:100%;height:300px;margin: 0px 0 10px 0;"></div>
+          <div class="title_panel">
+              <div class="left_line"></div>
+              <span class="section_title">就业地区分布情况</span>
+          </div>
+          <div id="diqu" style="width: 100%;height:300px;margin: 0px 0 10px 0;"></div>
+          <div class="title_panel">
+              <div class="left_line"></div>
+              <span class="section_title">企业用人要求统计</span>
+          </div>
+
+          <p class="mid-title">按该专业的相关职位要求进行统计</p>
+          <p class="small-title">工资情况：</p>
+          <div id="gongzi" style="width: 100%;height:300px;margin: 0px 0 10px 0;"></div>
+
+          <p class="small-title">经验要求：</p>
+          <div id="jingyan" style="width: 100%;height:300px;margin: 0px 0 20px 0;"></div>
+
+          <p class="small-title">学历要求：</p>
+          <div id="xueli" style="width: 100%;height:300px;margin: 0px 0 20px 0;"></div>
+
+        </div>
+        <!-- end part3 -->
+
+        <div class="part_c" id="part4" style="display:none;">
+            <div style='width:95%;margin:auto'>注：专业等级A以下的高校不做排名区分</div>
+            <table id="jianzhang_tb" border="1" style='width:95%;margin:auto'>
+              <tr>
+                <th>开设学校</th>
+                <th>专业等级</th>
+                <th>专业排名</th>
+              </tr>
+
+                  {{for (var i = 0; i < it.data.length; i++) {}}
+                    <tr>
+                      <td tapmode onclick='chakan("{{=it.data[i].univ_name}}")'>{{=it.data[i].univ_name}}</td>
+                      <td >{{=it.data[i].grade}}</td>
+                        <td >{{=it.data[i].rank}}</td>
+                    </tr>
+                  {{}}}
+            </table>
+        </div>
+
+        </script>
+
+
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/aui-tab.js"></script>
+<script type="text/javascript" src="../../script/echart.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+
+<script type="text/javascript">
+var show_flag = true;
+var option1, option2, option3, option4, option5;
+    apiready = function() {
+      var name = api.pageParam.name;
+      getDetails(name);
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      if (ret.index==1) {
+          document.getElementById('part1').style.display = "block"
+          document.getElementById('part2').style.display = "none"
+          document.getElementById('part3').style.display = "none"
+          document.getElementById('part4').style.display = "none"
+      }else if (ret.index == 2) {
+        document.getElementById('part1').style.display = "none"
+        document.getElementById('part2').style.display = "block"
+        document.getElementById('part3').style.display = "none"
+        document.getElementById('part4').style.display = "none"
+      }else if (ret.index == 3) {
+        document.getElementById('part1').style.display = "none"
+        document.getElementById('part2').style.display = "none"
+        document.getElementById('part3').style.display = "block"
+        document.getElementById('part4').style.display = "none"
+        if (show_flag) {
+            show_flag = false;
+            setJYFBData(jiuyehangyefenbu, jiuyehangyefenbu_data);
+            setJYDQData(jiuyediqu, jiuyediqu_data);
+            setGZQKData(gongziqingkuang, gongziqingkuang_data);
+            setJYYQData(jingyanyaoqiu, jingyanyaoqiu_data);
+            setXLYQData(xueliyaoqiu, xueliyaoqiu_data);
+
+        }
+      }else {
+        document.getElementById('part1').style.display = "none"
+        document.getElementById('part2').style.display = "none"
+        document.getElementById('part4').style.display = "block"
+        document.getElementById('part3').style.display = "none"
+      }
+    });
+
+    function setXLYQData(titles, datas) {
+
+      var xueliChart = echarts.init($api.byId('xueli'));
+      option5 = {
+          //        color: ['#3398DB'],
+          title: {
+              textStyle: {
+                  fontSize: 15
+              }
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              },
+              formatter: "{a} <br/>{b} : {c}%"
+          },
+          grid: {
+              left: '5%',
+              right: '5%',
+              bottom: '8%',
+              containLabel: true
+                  //            y2: 10
+          },
+          xAxis: [{
+              type: 'category',
+              data: titles,// ["人际智能", "自我认知智能", "音乐智能", "身体运动智能", "数学逻辑智能", "空间智能", "语言智能", "自然认知智能", ],
+
+              boundaryGap: [0, 0.01],
+              axisTick: {
+                  alignWithLabel: true,
+                  show: false
+              },
+              axisLabel: {
+                  interval: 0,
+                  rotate: 45,
+                  textStyle: {
+                      fontSize: 14
+                  },
+                  // formatter:function(val){
+                  //     return val.split("").join("\n");
+                  // }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '百分比',
+              min: 0,
+              max: 100,
+              interval: 20,
+              formatter: '{value}%',
+              axisTick: {
+                  alignWithLabel: true
+
+              },
+              axisLabel: {
+                  textStyle: {
+                      fontSize: 14
+                  }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+
+          }],
+          series: [{
+                  name: '结果',
+                  type: 'bar',
+                  barWidth: '100%',
+                  show: false,
+                  data: datas
+              },
+
+          ],
+          label: {
+              normal: {
+                  show: true,
+                  position: 'top',
+                  formatter: '{c}'
+              }
+          },
+          itemStyle: {
+              normal: {
+                  //                color:['#36f8e3', '#f1d937', '#f6166a']
+                  color: function(params) {
+                      var colorList = ['#fec126', '#fc8a8c', '#f96c5e', '#6666ff', '#b699ea', '#51bbe0', '#9fd45b', '#e7f458', '#fec126', '#fc8a8c'];
+                                        //  if (params.data > 0 && params.data <= 60) {
+                                        //      return colorList[0];
+                                        //  } else if (params.data > 60 && params.data <= 80) {
+                                        //      return colorList[1];
+                                        //  }
+                                        //  else if (params.data > 80) {
+                                        //      return colorList[2];
+                                        //  }
+                      return colorList[params.dataIndex]
+                  }
+              }
+          }
+      };
+      xueliChart.setOption(option5);
+    }
+
+    function setJYYQData(titles, datas) {
+
+      var jingyanChart = echarts.init($api.byId('jingyan'));
+      option4 = {
+          //        color: ['#3398DB'],
+          title: {
+              textStyle: {
+                  fontSize: 15
+              }
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              },
+              formatter: "{a} <br/>{b} : {c}%"
+          },
+          grid: {
+              left: '5%',
+              right: '5%',
+              bottom: '8%',
+              containLabel: true
+                  //            y2: 10
+          },
+          xAxis: [{
+              type: 'category',
+              data: titles, // ["人际智能", "自我认知智能", "音乐智能", "身体运动智能", "数学逻辑智能", "空间智能", "语言智能", "自然认知智能", ],
+
+              boundaryGap: [0, 0.01],
+              axisTick: {
+                  alignWithLabel: true,
+                  show: false
+              },
+              axisLabel: {
+                  interval: 0,
+                  rotate: 45,
+                  textStyle: {
+                      fontSize: 14
+                  },
+                  // formatter:function(val){
+                  //     return val.split("").join("\n");
+                  // }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '百分比',
+              min: 0,
+              max: 100,
+              interval: 20,
+              formatter: '{value}%',
+              axisTick: {
+                  alignWithLabel: true
+
+              },
+              axisLabel: {
+                  textStyle: {
+                      fontSize: 14
+                  }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+
+          }],
+          series: [{
+                  name: '结果',
+                  type: 'bar',
+                  barWidth: '100%',
+                  show: false,
+                  data: datas
+              },
+
+          ],
+          label: {
+              normal: {
+                  show: true,
+                  position: 'top',
+                  formatter: '{c}'
+              }
+          },
+          itemStyle: {
+              normal: {
+                  //                color:['#36f8e3', '#f1d937', '#f6166a']
+                  color: function(params) {
+                      var colorList = ['#fec126', '#fc8a8c', '#f96c5e', '#6666ff', '#b699ea', '#51bbe0', '#9fd45b', '#e7f458', '#fec126', '#fc8a8c'];
+                                        //  if (params.data > 0 && params.data <= 60) {
+                                        //      return colorList[0];
+                                        //  } else if (params.data > 60 && params.data <= 80) {
+                                        //      return colorList[1];
+                                        //  }
+                                        //  else if (params.data > 80) {
+                                        //      return colorList[2];
+                                        //  }
+                      return colorList[params.dataIndex]
+                  }
+              }
+          }
+      };
+      jingyanChart.setOption(option4);
+    }
+
+    function setGZQKData(titles, datas) {
+
+      var gongziChart = echarts.init($api.byId('gongzi'));
+      option3 = {
+          //        color: ['#3398DB'],
+          title: {
+              textStyle: {
+                  fontSize: 15
+              }
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              },
+              formatter: "{a} <br/>{b} : {c}%"
+          },
+          grid: {
+              left: '5%',
+              right: '5%',
+              bottom: '12%',
+              containLabel: true
+                  //            y2: 10
+          },
+          xAxis: [{
+              type: 'category',
+              data: titles, // ["人际智能", "自我认知智能", "音乐智能", "身体运动智能", "数学逻辑智能", "空间智能", "语言智能", "自然认知智能", ],
+
+              boundaryGap: [0, 0.01],
+              axisTick: {
+                  alignWithLabel: true,
+                  show: false
+              },
+              axisLabel: {
+                  interval: 0,
+                  rotate: 45,
+                  textStyle: {
+                      fontSize: 14
+                  },
+                  // formatter:function(val){
+                  //     return val.split("").join("\n");
+                  // }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '百分比',
+              min: 0,
+              max: 100,
+              interval: 20,
+              formatter: '{value}%',
+              axisTick: {
+                  alignWithLabel: true
+
+              },
+              axisLabel: {
+                  textStyle: {
+                      fontSize: 14
+                  }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+
+          }],
+          series: [{
+                  name: '结果',
+                  type: 'bar',
+                  barWidth: '100%',
+                  show: false,
+                  data: datas
+              },
+
+          ],
+          label: {
+              normal: {
+                  show: true,
+                  position: 'top',
+                  formatter: '{c}'
+              }
+          },
+          itemStyle: {
+              normal: {
+                  //                color:['#36f8e3', '#f1d937', '#f6166a']
+                  color: function(params) {
+                      var colorList = ['#fec126', '#fc8a8c', '#f96c5e', '#6666ff', '#b699ea', '#51bbe0', '#9fd45b', '#e7f458','#fec126', '#fc8a8c'];
+                                        //  if (params.data > 0 && params.data <= 60) {
+                                        //      return colorList[0];
+                                        //  } else if (params.data > 60 && params.data <= 80) {
+                                        //      return colorList[1];
+                                        //  }
+                                        //  else if (params.data > 80) {
+                                        //      return colorList[2];
+                                        //  }
+                      return colorList[params.dataIndex]
+                  }
+              }
+          }
+      };
+      gongziChart.setOption(option3);
+    }
+
+    function setJYDQData(titles, datas) {
+
+      var diquChart = echarts.init($api.byId('diqu'));
+      option2 = {
+          //        color: ['#3398DB'],
+          title: {
+              textStyle: {
+                  fontSize: 15
+              }
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              },
+              formatter: "{a} <br/>{b} : {c}%"
+          },
+          grid: {
+              left: '5%',
+              right: '5%',
+              bottom: '8%',
+              containLabel: true
+                  //            y2: 10
+          },
+          xAxis: [{
+              type: 'category',
+              data: titles,
+
+              boundaryGap: [0, 0.01],
+              axisTick: {
+                  alignWithLabel: true,
+                  show: false
+              },
+              axisLabel: {
+                  interval: 0,
+                  rotate: 45,
+                  textStyle: {
+                      fontSize: 14
+                  },
+                  // formatter:function(val){
+                  //     return val.split("").join("\n");
+                  // }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '百分比',
+              min: 0,
+              max: 100,
+              interval: 20,
+              formatter: '{value}%',
+              axisTick: {
+                  alignWithLabel: true
+
+              },
+              axisLabel: {
+                  textStyle: {
+                      fontSize: 14
+                  }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+
+          }],
+          series: [{
+                  name: '结果',
+                  type: 'bar',
+                  barWidth: '100%',
+                  show: false,
+                  data:datas
+              },
+
+          ],
+          label: {
+              normal: {
+                  show: true,
+                  position: 'top',
+                  formatter: '{c}'
+              }
+          },
+          itemStyle: {
+              normal: {
+                  //                color:['#36f8e3', '#f1d937', '#f6166a']
+                  color: function(params) {
+                      var colorList = ['#fec126', '#fc8a8c', '#f96c5e', '#6666ff', '#b699ea', '#51bbe0', '#9fd45b', '#e7f458','#fec126', '#fc8a8c'];
+                                        //  if (params.data > 0 && params.data <= 60) {
+                                        //      return colorList[0];
+                                        //  } else if (params.data > 60 && params.data <= 80) {
+                                        //      return colorList[1];
+                                        //  }
+                                        //  else if (params.data > 80) {
+                                        //      return colorList[2];
+                                        //  }
+                      return colorList[params.dataIndex]
+                  }
+              }
+          }
+      };
+      diquChart.setOption(option2);
+    }
+
+    function setJYFBData(titles, datas) {
+      var hangyeChart = echarts.init($api.byId('hangye'));
+      option1 = {
+          //        color: ['#3398DB'],
+          title: {
+              textStyle: {
+                  fontSize: 15
+              }
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+              },
+              formatter: "{a} <br/>{b} : {c}%"
+          },
+          grid: {
+              left: '5%',
+              right: '5%',
+              bottom: '24%',
+              containLabel: true
+                  //            y2: 10
+          },
+          xAxis: [{
+              type: 'category',
+              data: titles,// ["人际智能", "自我认知智能", "音乐智能", "身体运动智能", "数学逻辑智能", "空间智能", "语言智能", "自然认知智能", ],
+
+              boundaryGap: [0, 0.01],
+              axisTick: {
+                  alignWithLabel: true,
+                  show: false
+              },
+              axisLabel: {
+                  interval: 0,
+                  rotate: 45,
+                  textStyle: {
+                      fontSize: 14
+                  },
+                  // formatter:function(val){
+                  //     return val.split("").join("\n");
+                  // }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '百分比',
+              min: 0,
+              max: 100,
+              interval: 20,
+              formatter: '{value}%',
+              axisTick: {
+                  alignWithLabel: true
+
+              },
+              axisLabel: {
+                  textStyle: {
+                      fontSize: 14
+                  }
+              },
+              //                去掉轴线
+              axisLine: {
+                  show: false
+              }
+
+          }],
+          series: [{
+                  name: '结果',
+                  type: 'bar',
+                  barWidth: '100%',
+                  show: false,
+                  data: datas
+              },
+
+          ],
+          label: {
+              normal: {
+                  show: true,
+                  position: 'top',
+                  formatter: '{c}'
+              }
+          },
+          itemStyle: {
+              normal: {
+                  //                color:['#36f8e3', '#f1d937', '#f6166a']
+                  color: function(params) {
+                      var colorList = ['#fec126', '#fc8a8c', '#f96c5e', '#6666ff', '#b699ea', '#51bbe0', '#9fd45b', '#e7f458','#fec126', '#fc8a8c'];
+                                        //  if (params.data > 0 && params.data <= 60) {
+                                        //      return colorList[0];
+                                        //  } else if (params.data > 60 && params.data <= 80) {
+                                        //      return colorList[1];
+                                        //  }
+                                        //  else if (params.data > 80) {
+                                        //      return colorList[2];
+                                        //  }
+                      return colorList[params.dataIndex]
+                  }
+              }
+          }
+      };
+      hangyeChart.setOption(option1);
+    }
+
+    var details;
+
+    var jiuyehangyefenbu = [];
+    var jiuyehangyefenbu_data = [];
+
+    var jiuyediqu = [];
+    var jiuyediqu_data = [];
+
+    var gongziqingkuang = []
+    var gongziqingkuang_data = [];
+
+    var jingyanyaoqiu = [];
+    var jingyanyaoqiu_data = [];
+
+    var xueliyaoqiu = [];
+    var xueliyaoqiu_data = [];
+
+    function getDetails(name) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zhuanyeku/infos.html',
+          method: 'post',
+          data: {
+              values: {
+                  name: name
+              },
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+            data = ret.data;
+            console.log(JSON.stringify(data));
+            details = doT.template(document.getElementById('details_s').innerHTML);
+            document.getElementById('details_div').innerHTML = details(data);
+
+            var jyhyfb = ret.data.jiuyehangyefenbu;
+            for (var i = 0; i < jyhyfb.length; i++) {
+              jiuyehangyefenbu.push(jyhyfb[i].value2);
+              jiuyehangyefenbu_data.push(jyhyfb[i].value3);
+            }
+
+            var jydq = ret.data.jiuyediqufenbu;
+            for (var i = 0; i < jydq.length; i++) {
+              jiuyediqu.push(jydq[i].value2);
+              jiuyediqu_data.push(jydq[i].value3)
+            }
+
+            var gzqk = ret.data.gongziqingkuang;
+            for (var i = 0; i < gzqk.length; i++) {
+              gongziqingkuang.push(gzqk[i].value2);
+              gongziqingkuang_data.push(gzqk[i].value3)
+            }
+
+            var jyyq = ret.data.jingyanyaoqiu;
+            for (var i = 0; i < jyyq.length; i++) {
+              jingyanyaoqiu.push(jyyq[i].value2);
+              jingyanyaoqiu_data.push(jyyq[i].value3)
+            }
+
+            var xlyq = ret.data.xueliyaoqiu;
+            for (var i = 0; i < xlyq.length; i++) {
+              xueliyaoqiu.push(xlyq[i].value2);
+              xueliyaoqiu_data.push(xlyq[i].value3)
+            }
+
+
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+
+    }
+
+
+    function chakan(name) {
+      api.openWin({
+          name: 'school_storage_details_win',
+          url: './school_storage_details_win.html',
+          pageParam: {
+              title: name
+          }
+      });
+    }
+</script>
+
+</html>

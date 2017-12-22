@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+          textarea{
+            width: 90%;
+            margin: auto;
+            background: #fff;
+            margin-top: 1.15rem;
+            height: 10rem;
+            overflow: auto;
+          }
+          .aui-btn-block {
+              display: block;
+              width: 90%;
+              height: 2rem;
+              line-height: 2rem;
+              margin: auto;
+              font-size: 0.9rem;
+              border-radius: 5px;
+              background: #6666ff;
+          }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+
+    <textarea id="feedback_t" name="name" placeholder="说说您的感觉和建议吧"></textarea>
+
+</div>
+<p><div class="aui-btn aui-btn-primary aui-btn-block" tapmode onclick="feedback()">确定</div></p>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+    };
+
+    function feedback() {
+      var feedback = $api.byId('feedback_t').value;
+      if (feedback != null && feedback != '') {
+        // 发送反馈
+        sendFeedBack(feedback);
+      }else {
+        //
+        api.toast({
+            msg: '反馈信息不能为空,请填写您的反馈意见',
+            duration: 2000,
+            location: 'bottom'
+        });
+      }
+    }
+
+    function sendFeedBack(value) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '发送中...',
+          text: '感谢您的反馈...',
+          modal: true
+      });
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Member/feedback.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage("studentid"),
+                  studentname:$api.getStorage("studentname"),
+                  content:value
+              }
+          }
+      },function(ret, err){
+          api.hideProgress();
+          // console.log( JSON.stringify( ret ) );
+          if (ret) {
+            if (ret.status == 100) {
+              $api.byId('feedback_t').value = '';
+              api.toast({
+                  msg: ret.data,
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }else {
+              api.toast({
+                  msg: "提交失败",
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+          } else {
+              // console.log( JSON.stringify( err ) );
+              api.toast({
+                  msg: JSON.stringify( err ),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+    }
+</script>
+</html>

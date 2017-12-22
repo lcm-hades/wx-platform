@@ -1,0 +1,656 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .aui-tab-item {
+        width: 100%;
+        height: 2.2rem;
+        line-height: 2.2rem;
+        position: relative;
+        font-size: 0.7rem;
+        text-align: center;
+        color: #886e91;
+        margin-left: -1px;
+        -webkit-box-flex: 1;
+        box-flex: 1;
+      }
+
+      .tab-other{
+        width: 100%;
+        position: fixed;
+        z-index: 5;
+      }
+
+      .aui-tab-item.aui-active {
+        color: #6666ff;
+        border-bottom: 2px solid #6666ff;
+      }
+
+      section{
+        margin-top: 56px;
+      }
+
+      ul li{
+        height: 56px;
+        background: white;
+        border-bottom: 1px solid #f5f5f5;
+      }
+
+      ul li .title_p{
+        display: inline-block;
+        margin-left: 8px;
+      }
+      .title_p .t_first{
+        display:block;
+        font-size: 18px;
+      }
+      .title_p .t_second{
+        display:block;
+        font-size: 10px;
+        color: #999999;
+        margin-top: 8px;
+      }
+
+      ul li .ic{
+          width: 44px;
+          height: 44px;
+          margin-top: 6px;
+          margin-left: 10px;
+      }
+
+      ul li .right_s{
+        float: right;
+        margin-right: 10px;
+        color: #886e91;
+        line-height: 56px;
+      }
+
+      .add_group{
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        width: 44px;
+        height: 44px;
+      }
+      /*****************************分割线***********************************/
+      ul .t_item{
+        height:55px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      ul li .t_top{
+          display: block;
+          height: 30px;
+      }
+
+      ul li .t_bottom{
+          display: block;
+          height: 25px;
+      }
+
+      ul li .t_top .t_sign{
+        width: 14px;
+        height: 14px;
+        border-radius: 7px;
+        background-color: #886e91;
+        float: left;
+        margin-left: 10px;
+      }
+      ul li .t_top .t_name{
+        color: #666666;
+        float: left;
+        margin-left: 4px;
+      }
+      ul li .t_top .t_time{
+        color: #666666;
+        float: right;
+        margin-right: 10px;
+      }
+
+      ul li .t_bottom .t_r_name{
+        color: #333333;
+        font-size: 18px;
+        margin-left: 10px;
+        float: left;
+      }
+
+      ul li .t_bottom .t_r_op{
+        color: white;
+        background-color: #6666ff;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-right: 10px;
+        float: right;
+        padding: 4px 16px;
+      }
+
+      ul li .t_bottom .t_r_unop{
+        color: white;
+        background-color: #cccccc;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-right: 10px;
+        float: right;
+        padding: 4px 16px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="aui-tab tab-other" id="tab">
+          <div class="aui-tab-item aui-active">学生小组</div>
+          <div class="aui-tab-item">测试结果</div>
+          <div class="aui-tab-item">活动记录</div>
+          <div class="aui-tab-item">陈述报告</div>
+      </div>
+
+      <section id="group_sc">
+        <ul id="group_ul">
+          <script id="group_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li tapmode onclick="onGroupClick({{=i}})">
+                <img src="../../../../image/ic_group.png" class="ic"></img>
+                <div class="title_p">
+                    <span class="t_first">{{=it[i].teamname}}</span>
+                    <span class="t_second">{{=it[i].createtime}}</span>
+                </div>
+                <span class="right_s">{{=it[i].num}}人</span>
+              </li>
+            {{}}}
+          </script>
+        </ul>
+
+      </section>
+
+      <section id="test_sc" style="display:none">
+        <ul id="test_ul">
+          <script id="test_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="t_item" tapmode onclick="onTestItemClick({{=i}});">
+                <div class="t_top">
+                  <div class="t_sign"></div>
+                  <span class="t_name">{{=it[i].studentname}}</span>
+                  <span class="t_time">测试时间：{{=it[i].time}}</span>
+                </div>
+
+                <div class="t_bottom">
+                    <span class="t_r_name">专业倾向报告</span>
+                    {{if (it[i].status == 1) {}}
+                        <div class="t_r_unop">已评价</div>
+                    {{}else {}}
+                        <div class="t_r_op" tapmode onclick="onTestCommentClick(event, {{=i}});">待评价</div>
+                    {{}}}
+                </div>
+              </li>
+              {{}}}
+            </script>
+        </ul>
+      </section>
+
+      <section id="active_sc" style="display:none">
+        <ul id="active_ul">
+          <script id="active_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="t_item" tapmode onclick="onActiveItemClick({{=i}});">
+                <div class="t_top">
+                  <div class="t_sign"></div>
+                  <span class="t_name">{{=it[i].studentname}}</span>
+                  <span class="t_time">活动时间：{{=it[i].time}}</span>
+                </div>
+
+                <div class="t_bottom">
+                    <span class="t_r_name">{{=it[i].handline}}</span>
+                    {{if (it[i].status == 1) {}}
+                        <div class="t_r_unop">已评价</div>
+                    {{}else {}}
+                        <div class="t_r_op" tapmode onclick="onActiveCommentClick(event, {{=i}});">待评价</div>
+                    {{}}}
+                </div>
+              </li>
+              {{}}}
+            </script>
+        </ul>
+      </section>
+
+      <section id="report_sc" style="display:none">
+        <ul id="report_ul">
+          <script id="report_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="t_item" tapmode onclick="onReportItemClick({{=i}});">
+                <div class="t_top">
+                  <div class="t_sign"></div>
+                  <span class="t_name">{{=it[i].studentname}}</span>
+                  <span class="t_time">填写时间：{{=it[i].time}}</span>
+                </div>
+
+                <div class="t_bottom">
+                    <span class="t_r_name">{{=it[i].handline}}</span>
+                    {{if (it[i].status == 1) {}}
+                        <div class="t_r_unop">已评价</div>
+                    {{}else {}}
+                        <div class="t_r_op" tapmode onclick="onReportCommentClick(event, {{=i}});">待评价</div>
+                    {{}}}
+                </div>
+              </li>
+              {{}}}
+            </script>
+        </ul>
+      </section>
+
+      <img id="add_g_id" src="../../../../image/add_g.png" class="add_group" tapmode onclick="onAddGroupClick();"></img>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/aui-tab.js" ></script>
+<script type="text/javascript">
+    var flag_arr = [1, 0, 0, 0];
+    var group_dot, test_dot, active_dot, report_dot;
+    var groupList = [];
+    var testList = [];
+    var activeList = [];
+    var reportList = [];
+    var groupIndex = 0;
+    apiready = function() {
+        group_dot = doT.template(document.getElementById('group_s').innerHTML);
+        test_dot = doT.template(document.getElementById('test_s').innerHTML);
+        active_dot = doT.template(document.getElementById('active_s').innerHTML);
+        report_dot = doT.template(document.getElementById('report_s').innerHTML);
+        getGroupList();
+    };
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+        if (ret.index == 1) {
+          document.getElementById('group_sc').style.display = "block"
+          document.getElementById('test_sc').style.display = "none"
+          document.getElementById('active_sc').style.display = "none"
+          document.getElementById('report_sc').style.display = "none"
+          add_g_id.style.display = "block";
+        }else if (ret.index == 2) {
+          document.getElementById('group_sc').style.display = "none"
+          document.getElementById('test_sc').style.display = "block"
+          document.getElementById('active_sc').style.display = "none"
+          document.getElementById('report_sc').style.display = "none"
+          add_g_id.style.display = "none";
+          if (flag_arr[ret.index - 1] == 0) {
+              getTestList();
+              flag_arr[ret.index - 1] = 1;
+          }
+
+        }else if (ret.index == 3){
+          document.getElementById('group_sc').style.display = "none"
+          document.getElementById('test_sc').style.display = "none"
+          document.getElementById('active_sc').style.display = "block"
+          document.getElementById('report_sc').style.display = "none"
+          add_g_id.style.display = "none";
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getActiveList();
+          }
+        }else {
+          document.getElementById('group_sc').style.display = "none"
+          document.getElementById('test_sc').style.display = "none"
+          document.getElementById('active_sc').style.display = "none"
+          document.getElementById('report_sc').style.display = "block"
+          add_g_id.style.display = "none";
+          if (flag_arr[ret.index - 1] == 0) {
+              flag_arr[ret.index - 1] = 1;
+              getReportList();
+          }
+        }
+    });
+
+    function getReportList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_chenshubaogao.html",
+          parames,function(_data) {
+          reportList = _data;
+          document.getElementById('report_ul').innerHTML = report_dot(reportList);
+      },null, true);
+    }
+
+    function getActiveList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_huodongjilu.html",
+          parames,function(_data) {
+          activeList = _data;
+          document.getElementById('active_ul').innerHTML = active_dot(activeList);
+      },null, true);
+    }
+
+    function getTestList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_parent.html",
+          parames,function(_data) {
+          testList = _data;
+          document.getElementById('test_ul').innerHTML = test_dot(testList);
+      },null, true);
+    }
+
+    function getGroupList() {
+      var parames = {values:{}};
+      parames.values.teacherid = $api.getStorage('teacherid');
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/xiaozulist.html",
+          parames,function(_data) {
+          groupList = _data;
+          document.getElementById('group_ul').innerHTML = group_dot(groupList);
+      },null, true);
+    }
+
+    function onAddGroupClick() {
+        api.openWin({
+            name: 'add_group_win',
+            url: './add_group_win.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+    }
+
+    function onReportCommentClick(e, index) {
+        e.cancelBubble = true;
+        var id = reportList[index].id;
+        api.prompt({
+            title:'请输入评价内容!',
+            buttons:['确定','取消']
+        },function(ret){
+            if(ret.buttonIndex == 1){
+              if (ret.text == '') {
+                api.toast({
+                    msg: '请输入评价内容!',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return;
+              }
+                var parames = {values:{}};
+               parames.values.cid=id;
+               parames.values.teacherid=$api.getStorage('teacherid');
+               parames.values.teachername=$api.getStorage('teachername');
+               parames.values.touxiang=$api.getStorage('touxiang');
+               parames.values.content=ret.text;
+               zhc.post('http://www.yxke12.com/index.php/Ate/Member/chenshupinglun.html',parames,function(_data) {
+                 if (_data == 1) {
+                   api.toast({
+                       msg:'评论成功',
+                       duration: 2000,
+                       location: 'bottom'
+                   });
+                   reportList[index].status = 1;
+                   document.getElementById('report_ul').innerHTML = report_dot(reportList);
+                 }else {
+                   api.toast({
+                       msg:'评论失败',
+                       duration: 2000,
+                       location: 'bottom'
+                   });
+                 }
+               },null,true)
+            }
+        });
+    }
+
+    function onReportItemClick(index) {
+      var report = reportList[index];
+      var parames = {values:{}};
+      parames.values.cid = report.id
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_chenshubaogaocon.html",
+          parames,function(_data) {
+            api.openWin({
+                name: 'huodongjiluXQ_win',
+                url: 'huodongjiluXQ_win.html',
+                pageParam: {
+                    data: _data,
+                    title:"陈述报告",
+                    img1:report.img
+                }
+            });
+      },null, true);
+    }
+
+    function onActiveCommentClick(e, index) {
+        e.cancelBubble = true;
+        var id = activeList[index].id;
+        api.prompt({
+            title:'请输入评价内容!',
+            buttons:['确定','取消']
+        },function(ret){
+            if(ret.buttonIndex == 1){
+              if (ret.text == '') {
+                api.toast({
+                    msg: '请输入评价内容!',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return;
+              }
+              var parames = {values:{}};
+               parames.values.hid=id;
+               parames.values.teacherid=$api.getStorage('teacherid');
+               parames.values.teachername=$api.getStorage('teachername');
+               parames.values.touxiang=$api.getStorage('touxiang');
+               parames.values.content=ret.text;
+               zhc.post('http://www.yxke12.com/index.php/Ate/Member/huodongpinglun.html',parames,function(_data) {
+                 if (_data == 1) {
+                   api.toast({
+                       msg:'评论成功',
+                       duration: 2000,
+                       location: 'bottom'
+                   });
+                   activeList[index].status = 1;
+                   document.getElementById('active_ul').innerHTML = active_dot(activeList);
+                 }else {
+                   api.toast({
+                       msg:'评论失败',
+                       duration: 2000,
+                       location: 'bottom'
+                   });
+                 }
+               },null,true)
+            }
+        });
+    }
+
+    function onActiveItemClick(index) {
+      var active = activeList[index];
+      var parames = {values:{}};
+      parames.values.hid = active.id
+      zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_huodongjilucon.html",
+          parames,function(_data) {
+            openwin(active.url, _data);
+      },null, true);
+    }
+
+    function openwin(url, _data) {
+      if (url == 'huoquzhuanli') {
+          api.openWin({
+              name: 'hqzl_win',
+              url: '../../../huodongjilubiao/hqzl_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'xuekejingsai') {
+          api.openWin({
+              name: 'xkjs_win',
+              url: '../../../huodongjilubiao/xkjs_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'shehui') {
+          api.openWin({
+              name: 'shsj_win',
+              url: '../../../huodongjilubiao/shsj_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'yanjiu') {
+          api.openWin({
+              name: 'gzxs_win',
+              url: '../../../huodongjilubiao/gzxs_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'gongyi') {
+          api.openWin({
+              name: 'gyhd_win',
+              url: '../../../huodongjilubiao/gyhd_win.html',
+              pageParam: {
+                  data:_data
+              }
+          });
+      }else if (url == 'shetuan') {
+          api.openWin({
+              name: 'xsst_win',
+              url: '../../../huodongjilubiao/xsst_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'lunwenfabiao') {
+          api.openWin({
+              name: 'lwfb_win',
+              url: '../../../huodongjilubiao/lwfb_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'kejijingsai') {
+          api.openWin({
+              name: 'kjjs_win',
+              url: '../../../huodongjilubiao/kjjs_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else if (url == 'tiyujingsai') {
+          api.openWin({
+              name: 'tyjs_win',
+              url: '../../../huodongjilubiao/tyjs_win.html',
+              pageParam: {
+                  data: _data
+              }
+          });
+      }else {
+          api.openWin({
+              name: 'huodongjiluXQ_win',
+              url: 'huodongjiluXQ_win.html',
+              pageParam: {
+                  data: _data,
+                  title:"活动记录"
+              }
+          });
+      }
+    }
+
+    function onTestItemClick(index) {
+        var test = testList[index];
+        var parames = {values:{}};
+        parames.values.studentid = test.studentid,
+        parames.values.num = test.numbers,
+        parames.values.zid = test.id
+        zhc.post("http://www.yxke12.com/index.php/Ate/Member/teacher_parentcon.html",
+            parames,function(_data) {
+              api.openWin({
+                  name: 'zhuanye_report_win',
+                  url: './zhuanye_report_win.html',
+                  pageParam: {
+                      data:_data
+                  }
+              });
+        },null, true);
+    }
+
+    // 测试结果 评价
+    function onTestCommentClick(e, index) {
+        e.cancelBubble = true;
+        var id = testList[index].id;
+        api.prompt({
+            title:'请输入评价内容!',
+            buttons:['确定','取消']
+        },function(ret){
+            if(ret.buttonIndex == 1){
+              if (ret.text == '') {
+                api.toast({
+                    msg: '请输入评价内容!',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return;
+              }
+              var parames = {values:{}};
+               parames.values.zid=id;
+               parames.values.teacherid=$api.getStorage('teacherid');
+               parames.values.teachername=$api.getStorage('teachername');
+               parames.values.touxiang=$api.getStorage('touxiang');
+               parames.values.content=ret.text;
+               zhc.post('http://www.yxke12.com/index.php/Ate/Member/resultpinglun.html',parames,function(_data) {
+                 if (_data == 1) {
+                   api.toast({
+                       msg:'评论成功',
+                       duration: 2000,
+                       location: 'bottom'
+                   });
+                   testList[index].status = 1;
+                   document.getElementById('test_ul').innerHTML = test_dot(testList);
+                 }else {
+                   api.toast({
+                       msg:'评论失败',
+                       duration: 2000,
+                       location: 'bottom'
+                   });
+                 }
+
+               },null,true)
+            }
+        });
+    }
+
+    function onGroupClick(index) {
+      groupIndex = index;
+      api.openWin({
+          name: 'edite_group_win',
+          url: './edite_group_win.html',
+          pageParam: {
+              id: groupList[index].id,
+              title: groupList[index].teamname
+          }
+      });
+    }
+
+    // add_group_frm 调用更新分组列表
+    function addResult() {
+        getGroupList();
+    }
+
+    // 分组解散后回调
+    function disGroupCall() {
+        getGroupList();
+    }
+
+    // 编辑界面返回回调
+    function editeGroupCall(_length) {
+        groupList[groupIndex].num = _length;
+        document.getElementById('group_ul').innerHTML = group_dot(groupList);
+    }
+</script>
+</html>

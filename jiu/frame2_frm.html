@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>开发</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        .center{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        }
+        .content_item{
+          background-color:#ff6b00;
+          border-radius:10px;
+          width:90%;
+          height:90px;
+          overflow:hidden;
+          /*display:flex;
+          align-items:center;
+          justify-content:center;*/
+          margin-top:8px;
+        }
+
+        .left{
+          margin-top:23px;
+          float: left;
+        }
+
+        .left_img{
+          width:45px;
+          height:45px;
+          /*max-width: 44px;*/
+          float:left;
+          margin-left: 8px;
+        }
+        .text_pos{
+          width: auto;
+          overflow: hidden;
+          float: left;
+        }
+        .v_line{
+          width: 1px;
+          height: 90px;
+          background-color: white;
+          float: right;
+          margin-right: 20px;
+
+        }
+
+        .title{
+          font-size: 18px;
+          display: inline-block;
+          font-family: "PingFang-SC";
+          color: #ffffff;
+          /*float: left;*/
+        }
+
+        .subtitle{
+          font-size: 12px;
+          font-family: "PingFang-SC";
+          color: #ffffff;
+/*
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 14em;*/
+
+        }
+        .right_arrow{
+          float: right;
+          margin-top: 35px;
+          margin-right: 12px;
+          width: 10px;
+          height: 20px;
+        }
+        .ping_bg{
+          background-color: #ff6b00;
+        }
+        .ping_bg:active{
+          background-color: #ff6652;
+        }
+        .zong_bg{
+            background-color: #ff6652;
+        }
+        .grow_bg{
+          background-color: #76d8ff;
+        }
+        .active_bg{
+          background-color: #f8bd3d;
+        }
+    </style>
+</head>
+<body>
+    <div id="main" class="flex-con flex-vertical center">
+
+        <div class="content_item ping_bg" tapmode="hover" onclick="c()" >
+          <div class="left">
+            <img class="left_img" src="../image/ping_content.png"/>
+            <div class="text_pos">
+              <p class="title">评价内容与方法</p>
+              <p class="subtitle">各地区综合素质评价的内容与方法</p>
+            </div>
+          </div>
+
+          <img src="../image/arrow.png" class="right_arrow">
+          <div class="v_line"></div>
+        </div>
+
+        <div class="content_item zong_bg" tapmode="hover" onclick="c()">
+          <div class="left">
+            <img class="left_img" src="../image/comprehensive.png"/>
+            <div class="text_pos">
+              <p class="title">综合量化评价</p>
+              <p class="subtitle">各种评价表格的填写</p>
+            </div>
+          </div>
+
+          <img src="../image/arrow.png" class="right_arrow">
+          <div class="v_line"></div>
+        </div>
+        <div class="content_item grow_bg" tapmode="hover" onclick="c()">
+          <div class="left">
+            <img class="left_img" src="../image/grow.png"/>
+            <div class="text_pos">
+              <p class="title">成长报告与档案</p>
+              <p class="subtitle">自我陈述报告和综合档案的填写</p>
+            </div>
+          </div>
+
+          <img src="../image/arrow.png" class="right_arrow">
+          <div class="v_line"></div>
+        </div>
+        <div class="content_item active_bg" tapmode="hover" onclick="c()">
+
+          <div class="left">
+            <img class="left_img" src="../image/active.png"/>
+            <div class="text_pos">
+              <p class="title">活动记录与评价</p>
+              <p class="subtitle">活动的记录与评价</p>
+            </div>
+          </div>
+
+            <img src="../image/arrow.png" class="right_arrow">
+            <div class="v_line"></div>
+        </div>
+
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+  function c() {
+      // alert("ddddddddddddddddddd");
+      api.openWin({
+          name: 'pingjianeirong_win',
+          url: './pingjianeirong_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+  }
+</script>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+
+.chakan{
+    width: 2rem;
+    background: #26b0f8;
+    text-align: center;
+    line-height: 0.8rem;
+    color: #fff;
+    margin: 0.5rem 0.5rem;
+    border-radius: 5rem
+}
+td{
+  text-align: center;
+  font-size: 0.5rem
+}
+    </style>
+</head>
+
+<body>
+    <!-- <div class="empty"> -->
+<div id="" class="flex-wrap flex-vertical " style="padding-bottom: 50px;padding-top: 0px;">
+
+  <div class="aui-content aui-margin-b-15" id="jianzhang"  style="display:block;">
+
+        <table id="jianzhang_tb" border="1">
+          <script id="jianzhang_s" type="text/x-dot-template">
+          <tr>
+            <th>填报时间</th>
+            <th>考生信息</th>
+            <th>成绩信息</th>
+            <th>填报批次</th>
+            <th>填报类型</th>
+            <th>评价</th>
+            <th>查看</th>
+          </tr>
+
+              {{for (var i = 0; i < it.length; i++) {}}
+                <tr>
+                  <td>{{=it[i].create_date}}</td>
+                  <td >{{=it[i].studentname}}</td>
+                  <td >{{=it[i].score}}/{{=it[i].rank}}</td>
+                  <td >{{=it[i].batch}}</td>
+                  {{if (it[i].bm_time == null) {}}
+                    <td >真实填报</td>
+                  {{}else{}}
+                    <td >{{=it[i].bm_time}}</td>
+                  {{}}}
+                  {{if (it[i].status == 0) {}}
+                      <td  tapmode onclick="openDialog('textarea',event,{{=it[i].id}},{{=it[i].studentid}})"><span class="chakan">评价</span></td>
+                  {{}else {}}
+                    <td  tapmode onclick="openDialog1(event)"><span class="chakan">已评价</span></td>
+                  {{}}}
+
+                  <td  tapmode onclick="checkJZDetails({{=it[i].id}},{{=it[i].score}})"><span class="chakan">查看</span></td>
+                </tr>
+              {{}}}
+          </script>
+        </table>
+      </ul>
+  </div>
+</div>
+
+
+</div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<!-- <script type="text/javascript" src="../../script/aui-list-swipe.js"></script> -->
+<script type="text/javascript" src="../../../script/aui-list-swipe-backup.js"></script>
+<script type="text/javascript" src="../../../script/aui-dialog.js" ></script>
+<script type="text/javascript" src="../../../script/network.js" ></script>
+<script type="text/javascript">
+var jianzhang = doT.template(document.getElementById('jianzhang_s').innerHTML);
+    apiready = function(){
+        api.parseTapmode();
+        if (api.pageParam.data == null || api.pageParam.data == '') {
+          api.toast({
+              msg: '暂无数据',
+              duration: 2000,
+              location: 'bottom'
+          });
+        }else{
+        document.getElementById('jianzhang_tb').innerHTML = jianzhang(api.pageParam.data);
+      }
+    };
+
+
+
+
+    function checkJZDetails(id,score) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+    api.ajax({
+        url: 'http://www.yxke12.com/index.php/Ate/Member/teacher_monizhiyuancon.html',
+        method: 'post',
+        data: {
+            values: {
+
+                bid :id
+            },
+        }
+    },function(ret, err){
+      api.hideProgress();
+        if (ret) {
+          // console.log(JSON.stringify(ret));
+            if (ret.status == 100) {
+                api.openWin({
+                    name: 'baokaofanganXQ_win',
+                    url: './baokaofanganXQ_win.html',
+                    pageParam: {
+                        data: ret.data,
+                        batch_score:ret.data.planned[0].batch_score
+                    }
+                });
+
+            }
+        } else {
+          api.hideProgress();
+          api.toast({
+              msg: JSON.stringify(err.msg),
+              duration: 2000,
+              location: 'bottom'
+          });
+        }
+    });
+
+    }
+
+
+    var dialog = new auiDialog({})
+      var parames = {values:{}}
+        function openDialog(type,e,id,studentid){
+          e.cancelBubble =true
+            switch (type) {
+                case "textarea":
+                    dialog.prompt({
+                        title:"评价",
+                        text:'请输入评价内容!',
+                        buttons:['取消','确定']
+                    },function(ret){
+                        if(ret.buttonIndex == 2){
+                           parames.values.bid=id;
+                           parames.values.teacherid=$api.getStorage('teacherid');
+                           parames.values.studentid=studentid;
+                           parames.values.teachername=$api.getStorage('teachername');
+                           parames.values.touxiang=$api.getStorage('touxiang');
+                           parames.values.content=ret.text;
+                           zhc.post('http://www.yxke12.com/index.php/Ate/Member/monipinglun.html',parames,function(data) {
+                             api.toast({
+                                 msg:'评论成功',
+                                 duration: 2000,
+                                 location: 'bottom'
+                             });
+                           },null,true)
+                        }
+                    })
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+
+    function openDialog1(e) {
+      e.cancelBubble =true
+    }
+</script>
+</html>

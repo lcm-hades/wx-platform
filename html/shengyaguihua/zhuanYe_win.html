@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <style>
+        header{ background-color: #f2f2f2; }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li.active{ display: block; }
+        .ic-message{
+                background-image: url(../../image/career.png);
+                float: right;}
+        .quality{
+          padding-top: 5px;
+          width: 60pt;
+          height: 37.5pt;
+        }
+
+        .aui-bar-mystyle {
+        	color: #333333;
+          font-family: "PingFang-SC";
+        	background-color: #ffffff;
+        	border-bottom: 1px solid #dddddd;
+        }
+
+        .mystyle{
+          background-image: url(../../image/message.png) !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          width: 42px;
+          height: 42px;
+        }
+
+        .dot-pos{
+          top:0px;
+          right: 2px;
+        }
+      .z-btn{
+        background: #6666ff;
+        height: 33px;
+        margin: 16.5px auto;
+        line-height: 33px;
+        width: 80%;
+         border-radius: 16.5px;
+      }
+      .disable_btn{
+        background: #6a6a6a;
+      }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+  <a class="aui-pull-left aui-btn" tapmode onclick="backClick();">
+      <span class="aui-iconfont aui-icon-left"></span>
+  </a>
+  <div class="aui-title">专业倾向报告</div>
+</header>
+
+<div id="wrap" class="flex-wrap flex-vertical">
+
+
+
+    <div id="main" class="flex-con">
+
+    </div>
+    <div id="footer" class="border-t">
+        <ul class="flex-wrap" >
+             <p><div id="madeReport" class="aui-btn aui-btn-primary aui-btn-block z-btn" tapmode onclick="madeReportFunc()">生成</div></p>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+
+    var data;
+    var body_h;
+    var footerh;
+    var headerh;
+    var source;
+    apiready = function(){
+        api.parseTapmode();
+        source = api.pageParam.source;
+        $api.fixStatusBar($api.byId('aui-header'));
+        // $api.fixTabBar($api.byId('footer'))
+        body_h = $api.offset($api.dom('body')).h;
+        footerh = $api.offset($api.byId('footer')).h;
+        headerh = $api.offset($api.byId('aui-header')).h;
+        getReportData();
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            backClick();
+        });
+    };
+
+    function getReportData() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/App/Zhuanye/zhuanye.html',
+          method: 'post',
+          data: {
+              values: {
+                  studentid: $api.getStorage('studentid')
+              },
+          }
+      },function(ret, err){
+          api.hideProgress();
+          if (ret) {
+            if (ret.status == 100) {
+                data = ret.data;
+                showUI();
+            }else {
+              api.toast({
+              msg: JSON.stringify(ret.message),
+              duration: 2000,
+              location: 'bottom'
+          });
+            }
+              console.log(JSON.stringify( ret ));
+          } else {
+            api.toast({
+            msg: JSON.stringify(err.msg),
+            duration: 2000,
+            location: 'bottom'
+        });
+          }
+      });
+
+    }
+
+    function refreshUI(da) {
+        // data = n_data;
+        // console.log(JSON.stringify(data));
+        // showUI();
+    }
+
+    function showUI() {
+        var max = data.max,
+        huolande_c = data.huolande,
+        mbti_c = data.mbti,
+        zonghebaogao = data.zonghebaogao, // 数组
+        zonghebaogao_c = zonghebaogao.length;
+        var madeReport1 = $api.byId('madeReport');
+        localStorage.zonghebaogao = $api.jsonToStr(zonghebaogao);
+        if (checkReport(huolande_c, mbti_c, zonghebaogao_c, max)) {
+        // if(true){
+            setButtonEnable(madeReport1);
+        }else {
+            setButtonDisable(madeReport1);
+        }
+        api.openFrame({
+            name: 'zhuanYe_frm',
+            url: 'zhuanYe_frm.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: headerh,
+                w: 'auto',
+                h: body_h-footerh-headerh
+            },
+            pageParam:{
+              // data:zonghebaogao,
+              max:max
+            },
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false
+        })
+    }
+
+    function setButtonEnable(el) {
+      el.disabled = false;
+      if($api.hasCls(el, 'disable_btn')){
+          $api.removeCls(el, 'disable_btn');
+      }
+    }
+
+    function setButtonDisable(el) {
+      $api.addCls(el, 'disable_btn');
+      el.disabled = true;
+    }
+
+    function checkReport(huolande_c, mbti_c, zonghebaogao_c, max) {
+      if (zonghebaogao_c <= max &&
+          huolande_c <= max &&
+          mbti_c <= max &&
+          huolande_c > zonghebaogao_c &&
+          mbti_c > zonghebaogao_c) {
+          return true;
+      }
+      return false;
+    }
+
+    function madeReportFunc() {
+
+        // api.openWin({
+        //     name: 'zhiye_test_choose_win',
+        //     url: './zhiye_test_choose_win.html',
+        //     pageParam: {
+        //         data: data.zhiyeinfos,
+        //         numbers: data.zonghe
+        //     }
+        // });
+
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: false
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Zhuanye/result.html',
+            method: 'post',
+            data: {
+                values: {
+                    studentid: $api.getStorage('studentid'),
+                    number: data.zonghe,
+                }
+            }
+        },function(ret, err){
+            api.hideProgress();
+            if (ret) {
+                if (ret.status == 100) {
+                    localStorage.data = $api.jsonToStr(ret.data);
+                    api.openWin({
+                        name: 'zhuanye_report_win',
+                        url: './zhuanye_report_win.html',
+                        pageParam: {
+                            // data: ret.data
+                        }
+                    });
+                }else {
+                  api.toast({
+                      msg: ret.data,
+                      duration: 2000,
+                      location: 'bottom'
+                  });
+
+                }
+            } else {
+              api.toast({
+                  msg: "网络错误",
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+    }
+
+    function backClick() {
+      if (source == null) {
+        api.closeToWin({name:'xingxiang_list_win'});
+      }else if (source == 0) {
+         // 我的测试
+        api.closeWin();
+      }else {
+        api.closeWin();
+      }
+    }
+
+    function reload() {
+        getReportData();
+    }
+</script>
+</html>

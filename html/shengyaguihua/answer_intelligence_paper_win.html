@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <style>
+        header {
+            background-color: #f2f2f2;
+        }
+
+        header ul li {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            display: none;
+            color: #323237;
+            position: relative;
+            font-size: 18px;
+        }
+
+        header ul li.active {
+            display: block;
+        }
+
+        .aui-bar-mystyle {
+            color: #333333;
+            font-family: "PingFang-SC";
+            background-color: #ffffff;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .left_btn_c_b {
+            color: #a1a1a1!important;
+        }
+    </style>
+</head>
+<header id='aui-header' class="aui-bar aui-bar-nav aui-bar-mystyle" style="position: fixed;">
+    <a class="aui-pull-left aui-btn" tapmode onclick="api.closeToWin({
+      name:'intelligence_win'
+    });">
+        <span class="aui-iconfont aui-icon-left left_btn_c_b"></span>
+    </a>
+    <div class="aui-title">多元智能测试</div>
+</header>
+
+<div id="wrap" class="flex-wrap flex-vertical">
+
+    <div id="main" class="flex-con">
+
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    var cur_index = 0;
+    var data;
+    var headerh;
+
+    var answer_obj = {};
+    apiready = function() {
+      api.parseTapmode();
+      $api.fixStatusBar($api.byId('aui-header'));
+      headerh = $api.offset($api.byId('aui-header')).h;
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+
+      var ip = "www.yxke12.com";
+      var MBTI_URL = "http://"+ ip +"/index.php/App/Duoyuan/duoyuan.html";
+      // 获取mbti题目
+      api.ajax({
+          url: MBTI_URL,
+          method: 'post',
+      }, function(ret, err) {
+        if (ret) {
+          api.hideProgress();
+          if (ret.status == 100) {
+              // api.alert({ msg: JSON.stringify(ret) });
+            data = ret.data.infos;
+            nextQus(-1);
+          } else {
+              // api.alert({ msg: JSON.stringify(err) });
+              // 数据异常
+          }
+        }
+
+      });
+
+      api.addEventListener({
+          name: 'keyback'
+      }, function(ret, err) {
+        api.closeToWin({
+            name: 'intelligence_win'
+        });
+      });
+    };
+
+    function nextQus(index){
+      if (index != -1) {
+          // cur_index 第几题
+          // index 选哪个A B
+          var id = data[cur_index - 1].z_id
+          answer_obj[id] = index;
+          // console.log(JSON.stringify(answer_obj));
+      }
+      if (cur_index >= data.length) {
+        api.toast({
+           msg: '最后一题'
+       });
+       finishAnswer();
+          return;
+      }
+      api.openFrame({
+          name: 'answer_intelligence_paper_frm',
+          url: './answer_intelligence_paper_frm.html',
+          rect: {
+              x: 0,
+              y: headerh,
+              w: 'auto',
+              h: 'auto'
+          },
+          pageParam: {
+              data:data[cur_index],
+              total_c:data.length,
+              cur_c:cur_index
+          },
+          bounces: false,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: false,
+          hScrollBarEnabled: false
+      });
+
+      // 索引+1
+      cur_index++;
+    }
+
+    function finishAnswer() {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: true
+      });
+
+      var ip = "www.yxke12.com";
+      var RESULT_URL = "http://"+ip+"/index.php/App/Duoyuan/result.html";
+      api.ajax({
+          url: RESULT_URL,
+          method: 'post',
+          data:{
+            values:{
+              studentid:$api.getStorage('studentid'),
+              data:answer_obj
+            }
+          }
+      }, function(ret, err) {
+        if (ret) {
+          api.hideProgress();
+          if (ret.status == 100) {
+              // api.alert({ msg: JSON.stringify(ret) });
+
+
+            var data = $api.jsonToStr(ret.data);
+            // console.log("ddddddddddddddddd   "+data);
+            api.openWin({
+                name: 'intelligence_report_win',
+                url: './intelligence_report_win.html',
+                pageParam: {
+                    data: data
+                }
+            });
+          } else {
+              api.alert({ msg: JSON.stringify(err) });
+              // 数据异常
+          }
+        }
+      });
+    }
+
+</script>
+
+</html>

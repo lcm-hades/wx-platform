@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>文档</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css"/>
+    <style>
+        .empty{ text-align: center; padding: 120px 0; }
+        .top_bg{
+          height: 190px;
+          width: 100%;
+          background-color: #6666ff;
+          text-align: center;
+        }
+        .gaokao_day{
+          height: 55px;
+          width: 90%;
+          background-image: url("../image/gaokao_time.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          margin: 0 auto;
+          margin-top: -28px;
+          line-height: 1.2;
+        }
+        .gaokao_white_text{
+          font-family: "PingFang-SC";
+          font-size: 18px;
+          color: white;
+          font-weight:bold;
+        }
+        .gaokao_s_red_text{
+          font-family: "PingFang-SC";
+          font-size: 18px;
+          color:red;font-weight:bold;
+        }
+
+        .gaokao_red_text{
+          font-family: "PingFang-SC";
+          font-size: 26px;
+          color:red;
+          font-weight:bold;
+          text-shadow: 0 0 8px white;
+        }
+        .geyan_text{
+          font-size: 14px;
+          font-weight:normal;
+        }
+        .text_pos{
+          text-align: center;
+        }
+        .my_icon_bg{
+          margin-top:44px;
+          height: 70px;
+          width: 70px;
+          background-image: url("../image/icon_bg.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          /*text-align: center;*/
+          display:inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .name_panel{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 10px;
+          /*color: #ffffff;*/
+        }
+        .my_name{
+          color: white;
+          margin-right: 4px;
+        }
+        .my_sex{
+          width:12px;
+          height:12px;
+          margin-right:4px;
+        }
+
+        .mid_padding_8{
+          margin-top: 10px!important;
+          margin-bottom: 10px!important;
+          padding-top: 0px!important;
+          padding-bottom: 0px!important;
+          line-height: 1.0;
+        }
+
+        .mid_img{
+          width: 45px;
+          height: 45px;
+        }
+
+        .left_line{
+          box-sizing:border-box;
+          border-left: 1px solid #d2d2d2;
+        }
+
+        .item_image{
+          -webkit-align-self: center;
+                  align-self: center;
+          font-size: 0.8rem;
+          width: 35px;
+          height: 32px;
+        }
+
+    </style>
+</head>
+<body>
+  <div id="main" class="flex-con flex-vertical center">
+
+      <div class="top_bg">
+        <div style="width:auto;" id="geren">
+        <script id="evaluationtmpl" type="text/x-dot-template">
+
+        <div class="my_icon_bg"><img src="{{=it.img}}" style="width:60px;height:60px;border-radius: 50%;"/></div>
+        {{if (it.sex=="男") {}}
+            <div class="name_panel"><img class="my_sex"src="../image/man.png"/><span class="my_name" id="my_name">{{=it.studentname}}</span><i class="aui-iconfont aui-icon-edit aui-text-white"></i></div>
+        {{}else{}}
+            <div class="name_panel"><img class="my_sex"src="../image/woman.png"/><span class="my_name" id="my_name">{{=it.studentname}}</span><i class="aui-iconfont aui-icon-edit aui-text-white"></i></div>
+        {{}}}
+
+
+
+      </script>
+        </div>
+      </div>
+      <div class="gaokao_day">
+        <!-- <img style="position:absolute;width:100%;height:55px;" src="../image/gaokao_time.png"> -->
+        <div class="text_pos">
+          <span class="gaokao_white_text">距离&nbsp;</span>
+          <span class="gaokao_s_red_text">高考&nbsp;</span>
+          <span class="gaokao_white_text">还有&nbsp;</span>
+          <span class="gaokao_red_text" id="gaokao_days">704</span>
+          <span class="gaokao_white_text">&nbsp;天</span>
+        </div>
+        <div class="text_pos"><span class="gaokao_white_text geyan_text">将来的你，会感谢现在努力的自己！</span></div>
+      </div>
+
+
+      <section class="aui-grid">
+        <div class="aui-row">
+            <div class="aui-col-xs-3 mid_padding_8" >
+                <!-- <i class="aui-iconfont aui-icon-home"></i> -->
+                <img class="mid_img" src="../image/my_grow.png" alt="">
+                <div><span class="mid_text">我的成长</span></div>
+            </div>
+            <div class="aui-col-xs-3 mid_padding_8 left_line">
+                <!-- <i class="aui-iconfont aui-icon-gear"></i> -->
+                <img class="mid_img" src="../image/my_test.png" alt="">
+                <div><span class="mid_text">我的测评</span></div>
+            </div>
+            <div class="aui-col-xs-3 mid_padding_8 left_line">
+                <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                <img class="mid_img" src="../image/my_dang.png" alt="">
+                <div><span class="mid_text">成长档案</span></div>
+            </div>
+            <div class="aui-col-xs-3 mid_padding_8 left_line">
+                <!-- <i class="aui-iconfont aui-icon-map"></i> -->
+                <img class="mid_img" src="../image/my_kao.png" alt="">
+                <div><span class="mid_text">报考方案</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="aui-content">
+        <ul class="aui-list aui-list-in aui-margin-b-15 aui-margin-t-15">
+            <li class="aui-list-item">
+                <div class="aui-list-item-label-icon">
+                    <!-- <i class="aui-iconfont aui-icon-location aui-text-info"></i> -->
+                    <img src="../image/my_school.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">关注院校</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-label-icon">
+                    <!-- <i class="aui-iconfont aui-icon-like aui-text-danger"></i> -->
+                    <img src="../image/my_exam.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">收藏试题</div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-label-icon">
+                    <!-- <i class="aui-iconfont aui-icon-image aui-text-info"></i> -->
+                    <img src="../image/my_note.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">课堂笔记</div>
+                </div>
+            </li>
+        </ul>
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-item">
+                <div class="aui-list-item-label-icon">
+                    <!-- <i class="aui-iconfont aui-icon-cart aui-text-info"></i> -->
+                    <img src="../image/my_help.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">帮助中心</div>
+                    <!-- <div class="aui-list-item-right">0元好物在这里</div> -->
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-label-icon">
+                    <!-- <i class="aui-iconfont aui-icon-cert aui-text-warning"></i> -->
+                    <img src="../image/my_setting.png" class="item_image"/>
+                </div>
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">设置</div>
+                    <!-- <div class="aui-list-item-right">未开通</div> -->
+                </div>
+            </li>
+        </ul>
+    </section>
+
+  </div>
+</body>
+</html>
+<!-- <script type="text/javascript" src="../script/aui-slide.js"></script> -->
+<script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript" src="../script/doT.js"></script>
+<!-- <script src="../script/swiper.min.js"></script> -->
+<script type="text/javascript">
+var geRenShuJu={}
+  apiready=function() {
+
+    geRenShuJu['studentname']=localStorage.studentname
+    geRenShuJu['sex']=localStorage.sex
+    geRenShuJu['img']="http://www.yxke12.com/Public/Home/images/touxiang/"+localStorage.img
+      var evalText = doT.template(document.getElementById('evaluationtmpl').innerHTML);
+      document.getElementById('geren').innerHTML =evalText(geRenShuJu);
+    console.log(JSON.stringify(geRenShuJu))
+  //   api.ajax({
+  //       url: 'http://www.yxke12.com/index.php/Home/Student/login.html',
+  //       method: 'post',
+  //       data: {
+  //           values: {
+  //               username: 'lichengming',
+  //               password: '123456'
+  //           }
+  //       }
+  //   },function(ret, err){
+  //       if (ret) {
+  //           alert( JSON.stringify( ret ) );
+  //       } else {
+  //           alert( JSON.stringify( err ) );
+  //       }
+  //   });
+  //
+  // }
+  // var a = $api.byId('gaokao_days');
+  // a.innerHTML = "10";
+  // document.getElementById("gaokao_days").innerHTML = "10";
+
+// var a = document.getElementById("gaokao_days");
+  // var a = document.getElementById('a');
+  // var a = $api.byId('gaokao_days');
+  // var days = a.innerHTML;
+  // $api.html(a, parseInt(days) + 10); // => text
+  // var a = $api.byId('my_name');
+  // a.innerHTML = "<span style='color:red;'>富兰克林</span>";
+}
+</script>

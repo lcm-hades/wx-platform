@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
+    <style>
+      .center{
+        text-align: center;
+      }
+      #title{
+        margin-top: 10px;
+        margin-left: 10px;
+      }
+      #content{
+        text-align: left;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 20px;
+        font-size: 16px;
+
+      }
+      p{
+        text-indent: 1.5rem;
+      }
+
+      strong,span{
+        display: block;
+        text-indent: 1.5rem
+      }
+      h2{
+        text-align: center;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical" style="background:#f5f5f5">
+      <h2 id="title"></h2>
+      <div id="content"></div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        var data = JSON.parse(localStorage.data);
+        console.log(JSON.stringify(api.pageParam.data));
+        $api.byId('title').innerHTML = data.name;
+        $api.byId('content').innerHTML = data.content;
+
+    };
+</script>
+
+</html>

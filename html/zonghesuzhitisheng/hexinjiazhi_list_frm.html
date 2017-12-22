@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/demo.css" />
+    <script type="text/javascript" src="../../script/aui-tab.js"></script>
+    <style>
+      .aui-icon-star:before {
+          content: "\e6e0";
+          font-weight: bold;
+      }
+      .f-s-14{
+        font-size: 12px!important;
+      }
+      .icon{
+        margin-top: 8px;
+        border-radius:4px;
+        width: 120px!important;
+        height: 70px;
+      }
+      .aui-list .aui-list-item-media {
+        width: 6rem;
+        position: relative;
+        padding: 0.5rem 0;
+        padding-right: 0rem;
+        display: inherit;
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+    .aui-list .aui-list-item-inner {
+    position: relative;
+    min-height: 2.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /*display: -webkit-box;*/
+    /*display: -webkit-flex;*/
+    /*display: flex;*/
+    -webkit-box-flex: 1;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+    .m-t-10{
+      margin-top: 8px;
+    }
+    .zcText {
+      font-family: 'PingFang-SC';
+      font-size: 14px;
+      font-weight: 500;
+      /*color: #666666;*/
+    }
+    .xiahuaxian{
+      border-bottom: 1px solid #6666ff;
+    }
+    .aui-tab-item.aui-active {
+      color: #6666ff;
+      border-bottom: none;
+      }
+      .shuliang{
+        margin:auto 0.5rem ;
+      }
+      .shijian{
+        object-fit: 'contain';
+        font-size: 0.7rem;
+        text-align: left;
+        color: #999999;
+        margin-right: 10px;
+        }
+        .bofangtu{
+          width: 1.5rem!important;
+          height: 1.5rem;
+          position: absolute;
+          margin: auto;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="flex-wrap flex-vertical">
+
+      <div >
+          <div class="aui-tab" id="tab" style=" position: fixed;width: 100%;z-index: 99;top:0px">
+              <div class="aui-tab-item "><span class="zcText xiahuaxian" id="gzc">传统文化讲座</span></div>
+              <div style="height:1.5rem;border-right: 1px solid #000000;opacity: 0.1;position: relative;margin: auto;top: 0;">
+              </div>
+              <div class="aui-tab-item"><span class='zcText' id="szc">知书明理</span></div>
+          </div>
+      </div>
+      <div class="aui-content aui-margin-b-15" style="display:block;padding-top: 45px;" id="guozhengce">
+
+        <ul class="aui-list aui-media-list"  id="video_ul">
+          <script id="video_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+              <li class="aui-list-item" tapmode onclick="videoItemClick({{=i}})">
+                  <div class="aui-media-list-item-inner">
+                      <div class="aui-list-item-media">
+                          <img src="http://www.yxke12.com/Public/Home/images/student/{{=it[i].image}}" style="width: 94px;height: 83px;border-radius: 5px;">
+                          <img src="../../image/bofangtu.png" class="bofangtu">
+                      </div>
+                      <div class="aui-list-item-inner">
+                          <div class="aui-list-item-text">
+                              <div class="aui-list-item-title">{{=it[i].videoname}}</div>
+
+                          </div>
+                          <div class="aui-info aui-margin-t-5" >
+                              <div class="aui-info-item">
+
+                                  </div>
+                              <div class="aui-info-item"></div>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+          {{}}}
+          </script>
+        </ul>
+    </div>
+
+
+    <div style="margin-top: 10px;display:none" id="shengzhengce">
+      <div class="aui-content aui-margin-b-15" style="position: relative;top: 35px;">
+
+        <ul class="aui-list aui-media-list" id="books_ul" >
+          <script id="books_s" type="text/x-dot-template">
+            {{for (var i = 0; i < it.length; i++) {}}
+                <li class="aui-list-item"  tapmode onclick="bookDetails({{=i}});">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-media">
+                            <img src="http://www.yxke12.com/Public/Home/images/books/{{=it[i].thumb}}" style="width: 6rem;height: 4.2rem;border-radius: 5px;">
+                        </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title">{{=it[i].name}}</div>
+
+                            </div>
+                            <div class="aui-info aui-margin-t-5"  style="position: absolute;bottom: 0;width: 95%;">
+
+                                <div class="aui-info-item">
+                                  <img src="../../image/zan.png" alt="" style="width:0.6rem;height:0.6rem">
+                                  <span class="shuliang">{{=it[i].likes}}</span>
+                                  <img src="../../image/pinglun.png" alt="" style="width:0.6rem;height:0.6rem">
+                                  <span class="shuliang">{{=it[i].comments}}</span>
+                                </div>
+                                <div class="aui-info-item shijian">{{=it[i].time}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+              {{}}}
+            </script>
+        </ul>
+    </div>
+  </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.js"></script>
+<script type="text/javascript" src="../../script/network.js"></script>
+<!-- <script type="text/javascript" src="../../script/jquery-1.8.3.min.js"></script> -->
+<script type="text/javascript">
+    var arr_flag = [1,0];
+    var books_dot, video_dot;
+    var booksList = [];
+    apiready = function() {
+        books_dot = doT.template(document.getElementById('books_s').innerHTML);
+        video_dot = doT.template(document.getElementById('video_s').innerHTML);
+
+        getChuanTongData();
+    };
+    function getChuanTongData() {
+      zhc.post('http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/chuantonglist.html',
+          {},function(data) {
+            videoList = data;
+            localStorage.list = JSON.stringify(videoList)
+            document.getElementById('video_ul').innerHTML = video_dot(videoList);
+            api.parseTapmode();
+          },null, true);
+    }
+
+    function videoItemClick(index){
+      // if (!$api.getStorage("isbuy") || $api.getStorage("isbuy") == 0) {
+      //   api.toast({
+      //       msg: "该功能付费用户才能使用",
+      //       duration: 2000,
+      //       location: 'bottom'
+      //   });
+      //   return;
+      // }
+      api.openWin({
+          name: 'chuantong_win',
+          url: './chuantong_win.html',
+          pageParam: {
+              index: index,
+              // list:videoList
+          }
+      });
+
+    }
+
+    var tab = new auiTab({
+        element:document.getElementById("tab"),
+    },function(ret){
+      var gzc = document. getElementById('gzc');
+        var szc = document. getElementById('szc');
+        if (ret.index ==1) {
+          gzc.className="zcText xiahuaxian";
+          szc.className="zcText";
+           document. getElementById('guozhengce').style.display = "block";
+           document. getElementById('shengzhengce').style.display = "none";
+        }else {
+
+          szc.className="zcText xiahuaxian";
+          gzc.className="zcText";
+          document. getElementById('guozhengce').style.display = "none";
+          document. getElementById('shengzhengce').style.display = "block";
+          if (arr_flag[1] == 0) {
+              arr_flag[1] = 1;
+              getZSMLList();
+          }
+        }
+    });
+
+    function getZSMLList() {
+      zhc.post('http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/zsmllists.html',
+          {},function(data) {
+            booksList = data;
+            document.getElementById('books_ul').innerHTML = books_dot(booksList);
+            api.parseTapmode();
+          },null, true);
+    }
+
+  function bookDetails(index) {
+    var id = booksList[index].id;
+    var studentid = $api.getStorage('studentid');
+    api.openWin({
+        name: 'book_details_win',
+        url: './book_details_win.html',
+        pageParam: {
+            id: id,
+            studentid: studentid,
+            url: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/zsmlinfos.html",
+            faurl: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/message.html",
+            hurl: "",
+            hqurl: "",
+            durl: "http://www.yxke12.com/index.php/App/Zonghesuyangtisheng/zansnum.html"
+        }
+    });
+  }
+</script>
+
+</html>

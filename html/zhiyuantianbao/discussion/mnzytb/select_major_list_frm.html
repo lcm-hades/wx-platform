@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <style>
+      .con {
+          width: 100%;
+          margin: auto;
+          position: relative;
+          background: #ffdada;
+      }
+      .tishi{
+        font-family: 'PingFang-SC';
+        font-size: 0.5rem;
+        color: #de3f3f;
+        margin-left: 1rem;
+      }
+
+      .top{
+        background-color: white;
+        padding: 10px;
+        text-align: center;
+        width: 90%;
+        margin: auto;
+        border:1px solid #e5e5e5;
+        border-radius: 4px;
+        margin-top: 8px;
+      }
+
+      .top img{
+        width: 22px;
+        height: 21px;
+        display: inline;
+        vertical-align:bottom;
+        vertical-align:middle;
+        vertical-align:top;
+      }
+
+      .top span{
+        display: inline;
+        margin-left: 10px;
+        font-size: 16px;
+        line-height: 21px;
+        color: #222222;
+      }
+
+      .item{
+        border-radius:4px;
+        background:white;
+        width:95%;
+        margin:auto;
+        border:1px solid #e5e5e5;
+        margin-top: 10px;
+      }
+
+      .mid span{
+        color: #222222;
+        font-size: 18px;
+        margin-top: 10px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+        width: 50%;
+      }
+
+      .mid{
+        /*background-color: white;*/
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .mid div{
+        padding: 2px 8px;
+        color: white;
+        margin-left: 4px;
+        border-radius: 4px;
+        display: inline;
+        font-size: 12px;
+      }
+
+      .bottom{
+        /*background: white;*/
+        padding: 16px 0px;
+        text-align: center;
+      }
+
+      .bottom div{
+        display: inline-block;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-left: 1px solid #e5e5e5;
+      }
+
+      .bottom span{
+        text-align: center;
+        display: block;
+        font-size: 12px;
+      }
+
+      .b-color{
+        color: #34b3fd;
+      }
+      .y-color{
+        color: #ffbc10;
+      }
+      .g-color{
+        color: #666666;
+        margin-top: 4px;
+      }
+
+    </style>
+</head>
+
+<body>
+    <div class="flex-wrap flex-vertical">
+      <div class="con" style="display:none">
+        <div style="width:80%;margin:auto">
+          <!-- <img src="../../../../image/tishi.png" alt=""> -->
+          <span class="tishi">选择专业时请务必阅读《2017年山东大学招生章程》</span>
+        </div>
+      </div>
+      <div class="top"  tapmode onclick="wn()">
+        <img src="../../../../image/last_y.png"></img>
+        <span>往年专业录取信息</span>
+      </div>
+      <ul id="major_ul">
+        <script id="major_s" type="text/x-dot-template">
+        {{for (var i = 0; i < it.length; i++) {}}
+          <div class="item" tapmode onclick="onItemClick({{=i}})">
+            <div class="mid">
+                <span>{{=it[i].major_name}}</span>
+            </div>
+
+            <div class="bottom">
+                <div style="border-left: none">
+                  <span class="b-color">{{=it[i].plan}}</span>
+                  <span class="g-color">招生人数</span>
+                </div>
+                <div>
+                  <span class="y-color">{{=it[i].cost}}</span>
+                  <span class="g-color">学费</span>
+                </div>
+                <div>
+                  <span class="b-color">{{=it[i].schoolyear}}</span>
+                  <span class="g-color">学年</span>
+                </div>
+            </div>
+          </div>
+        {{}}}
+        </script>
+      </ul>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/doT.js"></script>
+<script type="text/javascript" src="../../../../script/network.js"></script>
+<script type="text/javascript">
+    var major_dot;
+    var majorList = [];
+    apiready = function() {
+        api.parseTapmode();
+        major_dot = doT.template(document.getElementById('major_s').innerHTML);
+        getMajorList();
+    };
+
+    function getMajorList() {
+      var parames = {values:{}};
+      parames.values.univname = api.pageParam.univname;
+      parames.values.type = $api.getStorage('type');
+      parames.values.provinceid = $api.getStorage('provinceid');
+      parames.values.batchid = api.pageParam.batchid;
+      parames.values.score = api.pageParam.score;
+      parames.values.studentid = $api.getStorage('studentid');
+      parames.values.planid = api.pageParam.planid;
+      zhc.post("http://www.yxke12.com/index.php/App/Zhiyuantianbao/getzhuanye.html",
+          parames,function(_data) {
+            console.log(JSON.stringify(_data));
+            majorList = _data;
+            document.getElementById('major_ul').innerHTML = major_dot(_data);
+          },null, true);
+    }
+    function wn() {
+      api.openWin({
+          name: 'last_major_list_win',
+          url: './last_major_list_win.html',
+          pageParam: {
+              univ_name: api.pageParam.univname,
+              batchid: api.pageParam.batchid,
+              rank: api.pageParam.rank
+          }
+      });
+    }
+
+    function onItemClick(index) {
+        localStorage.re_major_data= $api.jsonToStr(majorList[index]);
+        api.execScript({
+            name: 'select_major_win',
+            frameName: 'select_major_frm',
+            script: 'winBackResult();'
+        });
+        api.closeWin();
+    }
+</script>
+
+</html>

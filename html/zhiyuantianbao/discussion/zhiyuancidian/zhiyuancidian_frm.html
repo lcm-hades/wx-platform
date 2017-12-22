@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/z.css" />
+    <script type="text/javascript" src="../../../../script/aui-tab.js"></script>
+    <script src="../../../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../../../script/doT.js"></script>
+    <script src="../../../../script/demo.js"></script>
+    <style>
+        span{
+          width:0.45rem;
+          height:0.45rem;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+        .aui-list .aui-list-item {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 1rem;
+    color: #212121;
+    border-bottom: 1px solid #dddddd;
+    position: relative;
+    min-height: 2.2rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+    </style>
+</head>
+
+<body>
+    <div id="main" class="flex-con">
+        <div class="aui-content aui-margin-b-15">
+            <ul class="aui-list aui-list-in">
+
+                <li class="aui-list-item aui-list-item-middle"  tapmode onclick="jieshi()">
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-title"><span style="background:#8ac349;"></span>名词解释</div>
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="jieshi()">
+                    <div class="aui-list-item-inner aui-list-item-arrow" >
+                        <div class="aui-list-item-title"><span style="background:#ff6b00;"></span>关于提前批</div>
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="jieshi()">
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        <div class="aui-list-item-title"><span style="background:#9c27b0;"></span>院校问题</div>
+                    </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+
+    function jieshi() {
+      api.openWin({
+          name: 'mingcijieshi_win',
+          url: './mingcijieshi_win.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+</script>
+
+</html>

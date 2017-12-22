@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+      <script src="../../script/doT.js"></script>
+
+    <style>
+      .flex-con h2{
+        margin-top: 20px;
+        font-weight: bold;
+      }
+      .flex-con p{
+        text-indent: 2em;
+        font-size: 18px;
+      }
+    </style>
+</head>
+
+<body style="background:#fff">
+    <!-- <div class="empty"> -->
+      <div id="main" class="flex-con" style="width:90%;margin:auto;">
+        <script id="evaluationtmpl1" type="text/x-dot-template">
+          <h2>{{=it.name}}</h2>
+          <div style="display:inline;color:#999999;margin-top:10px;">
+            {{if(it.source != null){}}
+              <div style="display:inline;">来源:{{=it.source}}</div>
+            {{}}}
+            <div style="display:inline;margin-left:8px;">{{=it.time}}</div>
+          </div>
+          <div style="background-color:#e5e5e5;width:100%;height:1px;margin-bottom:10px;"></div>
+          <p>{{=it.content}}</p>
+        </script>
+
+      </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        var id = api.pageParam.id;
+        // var evalText = doT.template(document.getElementById('evaluationtmpl1').innerHTML);
+        // document.getElementById('main').innerHTML = evalText(data);
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '努力加载中...',
+            text: '先喝杯茶...',
+            modal: true
+        });
+
+        api.ajax({
+            url: 'http://www.yxke12.com/index.php/App/Gaokaoxinxi/infos.html',
+            method: 'post',
+            data: {
+                values: {
+                    id: id
+                }
+            }
+        },function(ret, err){
+          api.hideProgress();
+console.log( JSON.stringify( ret ) );
+            if (ret) {
+              var evalText = doT.template(document.getElementById('evaluationtmpl1').innerHTML);
+              document.getElementById('main').innerHTML = evalText(ret.data);
+            } else {
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+            }
+        });
+
+
+    };
+
+</script>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>端API</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css"/>
+    <style>
+    .titleDiv{
+        width:90%;
+        margin: auto;
+        font-family: 'PingFang-SC';
+        font-size: 21px;
+        font-weight: bold;
+        line-height: 1.24;
+        text-align: left;
+        color: #333333;
+        padding-top: 16px;
+      }
+      .fuTitleDiv{
+        width: 90%;
+        font-family: 'PingFang-SC';
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 2;
+        text-align: left;
+        color: #999999;
+        margin: auto;
+        margin-top: 14px
+      }
+      .fuXian{
+        width: 95%;
+        height: 1px;
+        opacity: 0.1;
+        background-color: #333333;
+        margin: auto;
+      }
+    </style>
+</head>
+
+<body style="background:#fff" id="details_b">
+    <!-- <div class="empty"> -->
+
+    <script id="details_s" type="text/x-dot-template">
+      <div id="main" class="flex-con" >
+          <div class="titleDiv">{{=it.name}}</div>
+          <div class="fuTitleDiv">
+          <span>{{=it.time}}</span>
+          </div>
+      </div>
+      <div class="fuXian"></div>
+      <div style="width:90%;margin:auto">
+        {{=it.content}}
+      </div>
+    </script>
+    <!-- <p style="color:#333;text-align: right;">教 育 部</p>
+    <p style="color:#333;text-align: right;">2014年12月10日</p> -->
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/doT.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        getDetailsByID(api.pageParam.id);
+    };
+
+    function getDetailsByID(id) {
+      api.showProgress({
+          style: 'default',
+          animationType: 'fade',
+          title: '努力加载中...',
+          text: '先喝杯茶...',
+          modal: false
+      });
+
+      api.ajax({
+          url: 'http://www.yxke12.com/index.php/Apa/Gaokaogaozhao/detail.html',
+          method: 'post',
+          data: {
+              values: {
+                  id: id
+              },
+
+          }
+      },function(ret, err){
+        api.hideProgress();
+          if (ret) {
+              console.log( JSON.stringify( ret ) );
+              var details = doT.template(document.getElementById('details_s').innerHTML);
+              document.getElementById('details_b').innerHTML = details(ret.data);
+          } else {
+            api.hideProgress();
+              api.toast({
+                  msg: JSON.stringify(err.msg),
+                  duration: 2000,
+                  location: 'bottom'
+              });
+          }
+      });
+    }
+
+
+
+
+</script>
+</html>

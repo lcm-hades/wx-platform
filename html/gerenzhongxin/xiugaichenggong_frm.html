@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>底部导航</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css"/>
+    <script type="text/javascript" src="../../script/api.js"></script>
+
+
+    <style>
+
+
+.aui-btn-block {
+    display: block;
+    width: 90%;
+    height: 2rem;
+    line-height: 2rem;
+    margin: auto;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    background: #6666ff;
+}
+    img{
+      width: 4.5rem;
+      height: 4.5rem
+    }
+    .xiugaichenggong{
+      text-align: center;
+      padding-top: 3.3rem;
+    }
+    p{
+      margin: 1.5rem
+    }
+    </style>
+</head>
+<body style="background: #dddddd">
+  <div class="xiugaichenggong">
+      <img src="../../image/xiugaichenggong.png" alt="">
+      <p>恭喜密码修改成功</p>
+  </div>
+
+  <p><div class="aui-btn aui-btn-primary aui-btn-block" tapmode onclick="denglu()">返回首页重新登陆</div></p>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+
+    apiready = function () {
+    $api.fixStatusBar($api.byId('he'));
+
+    if(document.readyState == 'complete'){
+        // alert("加载完成");
+        api.removeLaunchView()
+    }
+
+  }
+
+function denglu() {
+
+  api.ajax({
+      url: 'http://www.yxke12.com/index.php/App/Student/login.html',
+      method: 'post',
+      data: {
+        values:{
+          username:$api.byId('username').value,
+          password:$api.byId('password').value,
+          }
+      }
+  },function(ret, err){
+      if (ret) {
+console.log(JSON.stringify(ret));
+          if (ret.status==100) {
+            localStorage.studentid = ret.data.studentid
+            localStorage.sex = ret.data.sex
+            localStorage.studentname = ret.data.studentname
+            localStorage.img = ret.data.img
+            // alert( localStorage.studentid );
+            api.openWin({
+                name: 'index',
+                url: 'index.html',
+                pageParam: {
+                    name: 'test'
+                },
+                // animation:{
+                //    type:"fade",
+                //    duration:1500
+                // },
+                slidBackEnabled:false
+
+            });
+            api.startPlay({
+                    path: 'rdio/lingsheng.mp3'
+            }, function(ret, err) {
+               if (ret) {
+              //  alert('播放完成');
+            } else {
+              //  alert(JSON.stringify(err));
+          }
+          });
+          return
+
+          }
+
+          api.toast({
+              msg: JSON.stringify(ret.data.status),
+              duration: 2000,
+              location: 'bottom'
+          });
+
+      }
+  });
+
+
+
+
+
+
+}
+
+</script>
