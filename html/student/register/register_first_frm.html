@@ -6,16 +6,18 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>底部导航</title>
-    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
     <style>
     body{
       font-family: "PingFang-SC";
     }
     .linear{
         width:100%;
-        background:#13133f;
+        /*background:#13133f;*/
+        background: url(../../../image/xzbj.png);
+        background-size: 100% 100%;
     }
 
     .img_stu{
@@ -45,22 +47,11 @@
       margin-left: 5%;
       margin-top: -33%;
     }
-    .stu_pos{
-
-    }
-    .teach_pos{
-
-    }
-    .master{
-
-    }
-    .parent{
-
-    }
     .logo{
       width: 13.05rem;
-      margin: auto;
-      /*margin-top: 4.1rem*/
+      margin: 35% auto 3.5rem;
+      /*margin-top: 14.8%;*/
+
     }
     .xzsf{
         font-family: 'PingFang-SC';
@@ -109,22 +100,58 @@ line-height: 3.9rem;
   text-align: left;
   color: #ffffff;
 }
+.xfxxT{
+  width: 6rem;
+  height: 5.7rem;
+  position: relative;
+    left: 50%;
+    margin-left: -3.4rem;
+}
+.xfxxCtL{
+  width: 6rem;
+  height: 5.7rem;
+  /*position: relative;*/
+    /*left: 50%;*/
+    margin-right: 0.5rem;
+}
+.xfxxCtR{
+  width: 6rem;
+  height: 5.7rem;
+  /*position: relative;*/
+    /*left: 50%;*/
+    margin-left: -0.3rem;
+}
+.xxfzC{
+  width: 50%;
+  float: left;
+}
     </style>
 </head>
 
 <body class="linear">
     <div class="flex-wrap flex-vertical " style="height:100%">
-        <img src="../../image/zhclogo.png" alt="" class="logo">
-        <div style="margin-bottom: 2.25rem;">
+        <img src="../../../image/logo1.png" alt="" class="logo">
+
+        <div class="">
+          <img src="../../../image/xspd.png" alt="" class="xfxxT" tapmode="hover" onclick="itemClick(1)">
+        </div>
+        <div style="margin-top:-2.3rem">
+          <div class="xxfzC" style="text-align:-webkit-right"><img src="../../../image/jspd.png" alt=""  class="xfxxCtL" tapmode="hover" onclick="itemClick(2)"></div>
+          <div class="xxfzC"><img src="../../../image/jzpd.png" alt=""  class="xfxxCtR" tapmode="hover" onclick="itemClick(4)"></div>
+        </div>
+       <!--  <div class="" style="margin-top:-2.3rem">
+          <img src="../../image/xzpd.png" alt="" class="xfxxT" tapmode="hover" onclick="itemClick(3)">
+        </div> -->
+        <!-- <div style="margin-bottom: 2.25rem;">
           <div class="xzsf" >
             选择身份
           </div>
           <div class="xzsf">
             开启你的智慧之旅
           </div>
-        </div>
+        </div> -->
 
-        <div class="xs">
+        <!-- <div class="xs">
           <div style="position: relative" tapmode="hover" onclick="itemClick(1)">
             <img src="../../image/gang.png" alt="" class="gang">
             <img src="../../image/xs.png" alt="" class="fenlei">
@@ -159,18 +186,28 @@ line-height: 3.9rem;
             </div>
           </div>
 
-        </div>
+        </div> -->
     </div>
 </body>
-<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/zhc-route.js"></script>
+<script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
 <script type="text/javascript">
-    apiready = function() {
-        api.parseTapmode();
+    window.onload = function() {
         // 1 学生 2老师 3校长 4家长
+        // $api.setStorage('zhc_source', 1);
+        console.log(rt.getPageParame("name"));
         var zhc_source = $api.getStorage('zhc_source');
+        if (typeof zhc_source == "string") {
+          zhc_source = parseInt(zhc_source);
+        }
+        
         if (zhc_source == 1) {
           var username = $api.getStorage('loginname');
           var password = $api.getStorage('password');
+          username = "lichengming"
+          password = "666666"
           if (username != null && password != null) {
               var params = {};
               params.username = username;
@@ -201,41 +238,19 @@ line-height: 3.9rem;
 
         }
 
-
     };
 
     function itemClick(index) {
         $api.setStorage('zhc_source', index);
         switch (index) {
           case 1:
-              api.openWin({
-                  name: 'login_win',
-                  url: './login_win.html',
-                  pageParam: {
-                      name: 'test'
-                  },
-                  slidBackEnabled:false
-              });
+              rt.openPage("./login_frm.html", {})
             break;
           case 2:
-            api.openWin({
-                name: 'login_win',
-                url: '../jiaoshi/register/login_win.html',
-                pageParam: {
-                    name: 'test'
-                },
-                slidBackEnabled:false
-            });
+            rt.openPage("../../jiaoshi/register/login_frm.html", {})
               break;
           case 4:
-            api.openWin({
-                name: 'login_win',
-                url: '../jiazhang/register/login_win.html',
-                pageParam: {
-                    name: 'test'
-                },
-                slidBackEnabled:false
-            });
+            rt.openPage("../../jiazhang/register/login_frm.html", {})
           break;
 
           default:
@@ -244,53 +259,19 @@ line-height: 3.9rem;
     }
 
     function login(params, url, index) {
-      api.showProgress({
-          style: 'default',
-          animationType: 'fade',
-          title: '正在登录...',
-          text: '先喝杯茶...',
-          modal: true
-      });
-
-      api.ajax({
-          url: url,
-          method: 'post',
-          data: {
-              values: params
-          }
-      },function(ret, err){
-          api.hideProgress();
-          if (ret) {
-              if (ret.status == 100) {
-                var infos = ret.data;
-                if (infos != null) {
-                  for (var key in infos) {
-                    if (infos.hasOwnProperty(key)) {
-                      console.log(key + "-------" + infos[key]);
-                        $api.setStorage(key, infos[key]);
-                    }
-                  }
-                  $api.setStorage('password', params.password);
-                  comeToSY(index);
-                }
-              }else {
-                $api.clearStorage();
-                api.toast({
-                    msg: '登录失败',
-                    duration: 2000,
-                    location: 'bottom'
-                });
+      zhc.post(url, params, function(_data) {
+          var infos = _data;
+          if (infos != null) {
+            for (var key in infos) {
+              if (infos.hasOwnProperty(key)) {
+                console.log(key + "-------" + infos[key]);
+                $api.setStorage(key, infos[key]);
               }
-          } else {
-              $api.clearStorage();
-              api.toast({
-                  msg: 'err.msg',
-                  duration: 2000,
-                  location: 'bottom'
-              });
-              // console.log( JSON.stringify( err.msg ) );
+            }
+            $api.setStorage('password', params.password);
+            comeToSY(index);
           }
-      });
+      }, null, true);
     }
 
     function comeToSY(index){
@@ -300,34 +281,13 @@ line-height: 3.9rem;
       }
       switch (index) {
         case 1:
-          api.openWin({
-              name: 'index',
-              url: '../../index.html',
-              pageParam: {
-                  name: 'test'
-              },
-              slidBackEnabled:false
-          });
+          rt.openPage("../shouye/frame0_frm.html", {})
           break;
         case 2:
-          api.openWin({
-              name: 'frame1_win',
-              url: '../jiaoshi/shouye/frame1_win.html',
-              pageParam: {
-                  name: 'test'
-              },
-              slidBackEnabled:false
-          });
+          rt.openPage("../../jiaoshi/shouye/frame1_win.html", {})
           break;
         case 4:
-          api.openWin({
-              name: 'frame1_win',
-              url: '../jiazhang/shouye/frame1_win.html',
-              pageParam: {
-                  name: 'test'
-              },
-              slidBackEnabled:false
-          });
+          rt.openPage("../../jiazhang/shouye/frame1_win.html", {})
           break;
         default:
       }

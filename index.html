@@ -11,40 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/aui.css" />
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
     <style>
-        header {
-            background-color: #f2f2f2;
-        }
-
-        header ul li {
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            display: none;
-            color: #323237;
-            position: relative;
-            font-size: 18px;
-        }
-
-        header ul li.active {
-            display: block;
-        }
-
-        .aui-bar-mystyle {
-            color: #333333;
-            font-family: "PingFang-SC-Medium";
-            background-color: #ffffff;
-            border-bottom: 1px solid #dddddd;
-        }
-
-        .left_btn_c_b {
-            color: #a1a1a1!important;
-        }
-
-        .linear{
-            width:100%!important;
-            height:100%!important;
-            background:-webkit-gradient(linear, top, bottom, from(#6666ff), to(#66aaff));
-        }
         .swiper-container-autoheight, .swiper-container-autoheight .swiper-slide {
             height: 100%;
         }
@@ -67,66 +33,29 @@
     <div class="swiper-slide"><img src="image/yindao2.png" style="width:100%;"/></div>
     <div class="swiper-slide">
       <img src="image/yindao1.png" style="width:100%;" / >
-      <div class="tiyan" tapmode onclick="lijitiyan()">立即体验</div>
+      <div class="tiyan" tapmode onclick="nextStep()">立即体验</div>
     </div>
   </div>
 </div>
 </body>
 <script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript" src="script/zhc-route.js"></script>
 <script type="text/javascript" src="script/swiper.min.js"></script>
 <script type="text/javascript">
-    apiready = function() {
-        for (var i = 0; i < $api.domAll("img").length; i++) {
-          $api.domAll("img")[i].style.height= api.frameHeight+'px'
-        }
+window.onload = function() {
+  if ($api.getStorage("tiyan")) {
+    rt.openPage("./html/student/register/register_first_frm.html", {name:"test"})
+  }
+};
 
-        if ($api.getStorage("tiyan")) {
-          api.openFrame({
-              name: 'register_first_win',
-              url: './html/register/register_first_win.html',
-              rect: {
-                  x: 0,
-                  y: 0,
-                  w: 'auto',
-                  h: 'auto'
-              },
-              pageParam: {
-                  name: 'test'
-              },
-              bounces: false,
-              bgColor: 'rgba(0,0,0,0)',
-              vScrollBarEnabled: false,
-              hScrollBarEnabled: false,
-              slidBackEnabled:false
-          });
-        }
-    };
-    var mySwiper = new Swiper('.swiper-container',{
-    // autoHeight: true,
-    })
+var mySwiper = new Swiper('.swiper-container',{
+// autoHeight: true,
+})
 
-function lijitiyan() {
+function nextStep() {
   $api.setStorage('tiyan', '1');
-  api.openFrame({
-      name: 'register_first_frm',
-      url: './html/register/register_first_frm.html',
-      rect: {
-          x: 0,
-          y: 0,
-          w: 'auto',
-          h: 'auto'
-      },
-      pageParam: {
-          name: 'test'
-      },
-      bounces: false,
-      bgColor: 'rgba(0,0,0,0)',
-      vScrollBarEnabled: false,
-      hScrollBarEnabled: false,
-      slidBackEnabled:false
-  });
+  rt.openPage("./html/student/register/register_first_frm.html", {name:"test"})
 }
 
 </script>
-
 </html>

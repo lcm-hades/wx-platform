@@ -1,50 +1,27 @@
 (function(window){
   var h = {};
   h.post = function(url, parames, suc, err_fun, isLoad) {
-      if (isLoad) {
-        api.showProgress({
-            style: 'default',
-            animationType: 'fade',
-            title: '努力加载中...',
-            text: '先喝杯茶...',
-            modal: true
-        });
-      }
-      api.ajax({
-          url: url,
-          method: 'post',
-          data: parames
-      },function(ret, err){
-        api.hideProgress();
-        if (ret) {
-          if (ret.status == 100) {
-            if (suc != null) {
-                suc(ret.data);
-            }
-          } else {
-            api.toast({
-                msg: JSON.stringify(ret.data),
-                duration: 2000,
-                location: 'bottom'
-            });
-            if (err_fun!= null) {
-                err_fun(ret.data);
-            }
-          }
-        }else {
-          console.log(JSON.stringify(err));
-          if (err_fun!= null) {
-              err_fun(err);
-          }
-          api.toast({
-              msg: "网络错误",
-              duration: 2000,
-              location: 'bottom'
-          });
+    // var xmlhttp;
+    // if (window.XMLHttpRequest){
+    //   // code for IE7+, Firefox, Chrome, Opera, Safari
+    //   xmlhttp=new XMLHttpRequest();
+    // } else {// code for IE6, IE5
+    //   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    // }
+    // xmlhttp.onreadystatechange=function(){
+    //   if (xmlhttp.readyState==4 && xmlhttp.status==200){
+    //     suc(xmlhttp.responseText);
+    //   }else{
+    //     err_fun(xmlhttp.responseText);
+    //   }
+    // }
+    // xmlhttp.open("POST",url,true);
+    // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    // xmlhttp.send();
 
-        }
-      });
-
+    $.post(url, parames, function(result){
+      suc(result.data);
+    });
   }
 
   h.download = function(url, path, suc) {

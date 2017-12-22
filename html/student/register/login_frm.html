@@ -6,9 +6,9 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>底部导航</title>
-    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/aui.css" />
     <style>
     body{
 
@@ -109,7 +109,7 @@
 
 <body class="linear">
     <div class="flex-wrap flex-vertical " >
-      <img class="img_c" src="../../image/login_kouhao.png"></img>
+      <img class="img_c" src="../../../image/login_kouhao.png"></img>
       <div class="input_pos">
           <div class="aui-searchbar-input my_input">
               <i class="aui-iconfont aui-icon-my left_img"></i>
@@ -130,11 +130,16 @@
     </div>
 
 </body>
-<script type="text/javascript" src="../../script/api.js"></script>
-<script type="text/javascript">
-    apiready = function() {
-        api.parseTapmode();
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/zhc-route.js"></script>
+<script type="text/javascript" src="../../../script/aui-toast.js"></script>
+<script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../script/network.js"></script>
 
+<script type="text/javascript">
+    var toast = null
+    window.onload = function() {
+      toast = new auiToast({})
     };
     var password;
     function loginClick() {
@@ -145,111 +150,48 @@
       username.blur();
       password.blur();
       if (username.value == '') {
-        api.toast({
-           msg: '请输入用户名'
-       });
+        toast({
+          msg: '请输入用户名'
+        });
         return;
       }
       if (password.value == '') {
-        api.toast({
+        toast({
            msg: '请输入密码'
        });
         return;
       }
-      api.showProgress({
-          style: 'default',
-          animationType: 'fade',
-          title: '努力加载中...',
-          text: '先喝杯茶...',
-          modal: true
-      });
-
-      api.ajax({
-          url: 'http://www.yxke12.com/index.php/App/Student/login.html',
-          method: 'post',
-          data: {
-              values: {
-                  username: username.value, // 'lichengming1',
-                  password: password.value // "123456"
+      var params = {values:{}};
+      params.username = username.value;
+      params.password = password.value;
+      zhc.post("http://www.yxke12.com/index.php/App/Student/login.html", params, function(_data) {
+          console.log(_data)
+          var infos = _data;
+          if (infos != null) {
+            for (var key in infos) {
+              if (infos.hasOwnProperty(key)) {
+                console.log(key + "-------" + infos[key]);
+                $api.setStorage(key, infos[key]);
               }
-          }
-      },function(ret, err){
-        api.hideProgress();
-          if (ret) {
-            console.log( JSON.stringify(ret));
-            if (ret.status == 100) {
-
-              var infos = ret.data;
-              if (infos != null) {
-                for (var key in infos) {
-                  if (infos.hasOwnProperty(key)) {
-                    // console.log(key + "-------" + JSON.stringify(infos[key]));
-                      $api.setStorage(key, infos[key]);
-                  }
-                }
-                $api.setStorage('password', password);
-                api.openWin({
-                    name: 'index',
-                    url: './../../index.html',
-                    pageParam: {
-                        name: 'test'
-                    },
-                    slidBackEnabled:false
-                });
-              }
-
-            }else {
-              // console.log( JSON.stringify( ret ) );
-              $api.clearStorage ();
-              api.toast({
-                  msg: ret.data.error,
-                  duration: 2000,
-                  location: 'bottom'
-              });
             }
+            $api.setStorage('password', params.password);
+            rt.openPage("../shouye/frame0_frm.html", {})
 
-          } else {
-            $api.clearStorage();
-            api.toast({
-                msg: JSON.stringify(err.msg),
-                duration: 2000,
-                location: 'bottom'
-            });
           }
-      });
+      }, null, true);
     }
 
     function registerClick() {
-      api.openWin({
-          name: 'register_second_win',
-          url: './register_second_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
+      rt.openPage("./register_second_frm.html", {})
     }
 
     function forgetPWD() {
-      api.openWin({
-          name: 'forget_pwd_win',
-          url: './forget_pwd_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
+      rt.openPage("./forget_pwd_frm.html", {})
     }
-
-
 
     //注册
     function zhuce(argument) {
-      api.openWin({
-          name: 'register_phone1_win',
-          url: './register_phone1_win.html',
-          pageParam: {
-              name: 'test'
-          }
-      });
+      rt.openPage("./register_phone1_frm.html", {})
     }
 </script>
 
