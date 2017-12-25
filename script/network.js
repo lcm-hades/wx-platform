@@ -1,5 +1,6 @@
 (function(window){
   var h = {};
+  var toast = new auiToast({});
   h.post = function(url, parames, suc, err_fun, isLoad) {
     // var xmlhttp;
     // if (window.XMLHttpRequest){
@@ -20,7 +21,18 @@
     // xmlhttp.send();
 
     $.post(url, parames, function(result){
-      suc(result.data);
+      if (result.status == 100) {
+        suc(result.data);
+
+      }else{
+        toast.fail({
+          title: result.message,
+          duration:2000
+        });
+        if (err_fun != null) {
+          err_fun(result);
+        }  
+      }
     });
   }
 

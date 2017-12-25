@@ -150,8 +150,8 @@
       username.blur();
       password.blur();
       if (username.value == '') {
-        toast({
-          msg: '请输入用户名'
+        toast.fail({
+          title: '请输入用户名'
         });
         return;
       }

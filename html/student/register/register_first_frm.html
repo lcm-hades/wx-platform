@@ -192,6 +192,7 @@ line-height: 3.9rem;
 <script type="text/javascript" src="../../../script/api.js"></script>
 <script type="text/javascript" src="../../../script/zhc-route.js"></script>
 <script type="text/javascript" src="../../../script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../../script/aui-toast.js"></script>
 <script type="text/javascript" src="../../../script/network.js"></script>
 <script type="text/javascript">
     window.onload = function() {
@@ -206,8 +207,6 @@ line-height: 3.9rem;
         if (zhc_source == 1) {
           var username = $api.getStorage('loginname');
           var password = $api.getStorage('password');
-          username = "lichengming"
-          password = "666666"
           if (username != null && password != null) {
               var params = {};
               params.username = username;
